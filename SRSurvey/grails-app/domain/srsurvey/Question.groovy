@@ -4,7 +4,7 @@ class Question {
 
     Double result
     Date lastUpdated
-    Integer question_number
+    Integer questionNumber
     Interest interest1
     Interest interest2
 

@@ -3,8 +3,8 @@ package srsurvey
 class Person {
 
     String email
-    String first_name
-    String last_name
+    String firstName
+    String lastName
     String title
     Boolean isRegistered
 
