@@ -6,4 +6,9 @@ class PersonToInterest {
 
     static constraints = {
     }
+
+    PersonToInterest(Person person, Interest interest) {
+        this.person = person
+        this.interest = interest
+    }
 }

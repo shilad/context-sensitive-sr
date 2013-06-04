@@ -6,4 +6,9 @@ class InterestToGroup {
 
     static constraints = {
     }
+
+    InterestToGroup(Interest interest, ExperimentalGroup group) {
+        this.interest = interest
+        this.group = group
+    }
 }
