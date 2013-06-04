@@ -19,10 +19,9 @@
             margin:5px;
         }
         #main-container{
-            font-family: Verdana, Geneva, sans-serif;
-            margin: 2em 1em 1.25em 18em;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: auto auto auto auto;
             width: 900px;
-            height: 800px;
             background: -moz-linear-gradient(top,  rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(132,211,239,1)), color-stop(40%,rgba(145,232,239,1)), color-stop(50%,rgba(148,237,239,0.98)), color-stop(60%,rgba(145,232,239,1)), color-stop(100%,rgba(132,211,239,1))); /* Chrome,Safari4+ */
             background: -webkit-linear-gradient(top,  rgba(132,211,239,1) 0%,rgba(145,232,239,1) 40%,rgba(148,237,239,0.98) 50%,rgba(145,232,239,1) 60%,rgba(132,211,239,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -35,7 +34,7 @@
             right: 0%;
             width: 500px;
             float: right;
-            margin-right: 20px;
+            margin-right: 50px;
             clear: left;
             background: rgb(255,255,255); /* Old browsers */
             background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(5,206,38,1) 100%); /* FF3.6+ */
@@ -49,27 +48,78 @@
         h5{
             font-size: 16px;
             line-height: 15px;
-            letter-spacing: 68%;
-            clear: right;
-            display: inline;
+            margin: 0px auto;
+        }
+         tr.main > td{
 
 
+
+            padding-bottom: 1.5em;
+        }
+
+        tr.even{
+            background: rgb(124,213,237);
+        }
+        tr.odd{
+            background: rgb(43,205,249);
+        }
+        h1{
+            font-size: 45px;
+            padding-left: 1em;
+        }
+        .no-assoc{
+            float: left;
+            padding-left: 15px;
+            font-size: 12;
+        }
+        .str-assoc{
+            float: right;
+            padding-right: 55px;
+            font-size: 12;
+        }
+        #blanket {
+            background-color:#111;
+            opacity: 0.65;
+            *background:none;
+            position:absolute;
+            z-index: 9001;
+            top:0px;
+            left:0px;
+            width:100%;
+        }
+
+        #popUpDiv {
+            position:absolute;
+            background:#fff no-repeat;
+            width:400px;
+            height:400px;
+            border:5px solid #000;
+            z-index: 9002;
         }
     </style>
+    <g:javascript src="jquery.fancybox.js" ></g:javascript>
+    <link media="screen" href="<g:resource dir="css" file="jquery.fancybox.css"></g:resource>"/>
+
 </head>
 <body>
     <div class="rounded-corners" id="main-container">
-        <table style="width: 100%;">
-            <tr>
-                <td style="">
-                    <input type="checkbox" name="term1" value="term1">
-                    <br/>
-                    <input type="checkbox" name="term2" value="term2">
-                </td>
-                <td style="text-align: right !important;width: 25%">
+        <br/><h1>Similarity Ratings</h1>
+        <table style="width: 100%;border-collapse: collapse;">
+            <tr class="main">
+                <td style="text-align: right !important;width: 30%;">&nbsp;</td>
+                <td style="text-align: center;width: 8%;font-size: 13px;">I don't know<br/>this term</td>
+                <td style="width: 62%;">&nbsp;</td>
+            </tr>
+            <tr class="main odd">
+                <td style="text-align: right !important;width: 30%;">
                     <h5>Experimental Methodology</h5>
                     <br/>
                     <h5>Scientific Methods</h5>
+                </td>
+                <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
+                    <input type="checkbox" name="term1" value="term1">
+                    <br/><br/>
+                    <input type="checkbox" name="term2" value="term2">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
@@ -93,7 +143,193 @@
                             </tr>
                         </table>
                     </div>
+                    <br/>
+                    <div class="no-assoc">
+                        No Association
+                    </div>
+                    <div class="str-assoc">
+                        Strong Association
+                    </div>
                 </td>
+            </tr>
+            <tr class="main even">
+                <td style="text-align: right !important;width: 30%;">
+                    <h5>Experimental Methodology</h5>
+                    <br/>
+                    <h5>Scientific Methods</h5>
+                </td>
+                <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
+                    <input type="checkbox" name="term1" value="term1">
+                    <br/><br/>
+                    <input type="checkbox" name="term2" value="term2">
+                </td>
+                <td style="width: 62%;">
+                    <div class="rounded-corners" id="rating-bars">
+                        <table style="width: 100%;text-align: center;">
+                            <tr>
+                                <td>
+                                    1 <input type="radio" name="field1" value="1"/>
+                                </td>
+                                <td>
+                                    2 <input type="radio" name="field1" value="2"/>
+                                </td>
+                                <td>
+                                    3 <input type="radio" name="field1" value="3"/>
+                                </td>
+                                <td>
+                                    4 <input type="radio" name="field1" value="4"/>
+                                </td>
+                                <td>
+                                    5 <input type="radio" name="field1" value="5"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <div class="no-assoc">
+                        No Association
+                    </div>
+                    <div class="str-assoc">
+                        Strong Association
+                    </div>
+                </td>
+            </tr>
+            <tr class="main odd">
+                <td style="text-align: right !important;width: 30%;">
+                    <h5>Experimental Methodology</h5>
+                    <br/>
+                    <h5>Scientific Methods</h5>
+                </td>
+                <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
+                    <input type="checkbox" name="term1" value="term1">
+                    <br/><br/>
+                    <input type="checkbox" name="term2" value="term2">
+                </td>
+                <td style="width: 62%;">
+                    <div class="rounded-corners" id="rating-bars">
+                        <table style="width: 100%;text-align: center;">
+                            <tr>
+                                <td>
+                                    1 <input type="radio" name="field1" value="1"/>
+                                </td>
+                                <td>
+                                    2 <input type="radio" name="field1" value="2"/>
+                                </td>
+                                <td>
+                                    3 <input type="radio" name="field1" value="3"/>
+                                </td>
+                                <td>
+                                    4 <input type="radio" name="field1" value="4"/>
+                                </td>
+                                <td>
+                                    5 <input type="radio" name="field1" value="5"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <div class="no-assoc">
+                        No Association
+                    </div>
+                    <div class="str-assoc">
+                        Strong Association
+                    </div>
+                </td>
+            </tr>
+            <tr class="main even">
+                <td style="text-align: right !important;width: 30%;">
+                    <h5>Experimental Methodology</h5>
+                    <br/>
+                    <h5>Scientific Methods</h5>
+                </td>
+                <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
+                    <input type="checkbox" name="term1" value="term1">
+                    <br/><br/>
+                    <input type="checkbox" name="term2" value="term2">
+                </td>
+                <td style="width: 62%;">
+                    <div class="rounded-corners" id="rating-bars">
+                        <table style="width: 100%;text-align: center;">
+                            <tr>
+                                <td>
+                                    1 <input type="radio" name="field1" value="1"/>
+                                </td>
+                                <td>
+                                    2 <input type="radio" name="field1" value="2"/>
+                                </td>
+                                <td>
+                                    3 <input type="radio" name="field1" value="3"/>
+                                </td>
+                                <td>
+                                    4 <input type="radio" name="field1" value="4"/>
+                                </td>
+                                <td>
+                                    5 <input type="radio" name="field1" value="5"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <div class="no-assoc">
+                        No Association
+                    </div>
+                    <div class="str-assoc">
+                        Strong Association
+                    </div>
+                </td>
+            </tr>
+            <tr class="main odd">
+                <td style="text-align: right !important;width: 30%;">
+                    <h5>Experimental Methodology</h5>
+                    <br/>
+                    <h5>Scientific Methods</h5>
+                </td>
+                <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
+                    <input type="checkbox" name="term1" value="term1">
+                    <br/><br/>
+                    <input type="checkbox" name="term2" value="term2">
+                </td>
+                <td style="width: 62%;">
+                    <div class="rounded-corners" id="rating-bars">
+                        <table style="width: 100%;text-align: center;">
+                            <tr>
+                                <td>
+                                    1 <input type="radio" name="field1" value="1"/>
+                                </td>
+                                <td>
+                                    2 <input type="radio" name="field1" value="2"/>
+                                </td>
+                                <td>
+                                    3 <input type="radio" name="field1" value="3"/>
+                                </td>
+                                <td>
+                                    4 <input type="radio" name="field1" value="4"/>
+                                </td>
+                                <td>
+                                    5 <input type="radio" name="field1" value="5"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
+                    <div class="no-assoc">
+                        No Association
+                    </div>
+                    <div class="str-assoc">
+                        Strong Association
+                    </div>
+                </td>
+            </tr>
+            <tr class="main">
+                <td style="width: 30%;">&nbsp;</td>
+                <td style="width: 8%;">&nbsp;</td>
+                <td style="width: 62%;text-align: right; padding-right: 1em;">
+                    <div id="blanket" style="display:none"></div>
+                    <div id="popUpDiv" style="display:none">
+
+                        <a href="#" onclick="popup('popUpDiv')" >Click to Close CSS Pop Up</a>
+                    </div>
+                    <a href="#" onclick="popup('popUpDiv')"><button>Next</button></a></td>
             </tr>
         </table>
 
@@ -102,3 +338,9 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#popUpDiv").fancybox();
+    });
+</script>
