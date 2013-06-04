@@ -59,6 +59,9 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+// ask GORM to display failure message on default whenever you save
+grails.gorm.failOnError=true
+
 environments {
     development {
         grails.logging.jul.usebridge = true
