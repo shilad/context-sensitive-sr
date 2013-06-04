@@ -8,4 +8,9 @@ class ExperimentalGroup {
 
     static constraints = {
     }
+
+    ExperimentalGroup(String name){
+        this.name = name
+    }
+
 }
