@@ -20,9 +20,9 @@ class InterestTests {
         assertNotSame("Bio", i.text)
 
         //Test for Interest many-to-many interaction with ExperimentalGroup via InterestToGroup
-        ExperimentalGroup g1 = new ExperimentalGroup()
-        ExperimentalGroup g2 = new ExperimentalGroup()
-        ExperimentalGroup g3 = new ExperimentalGroup()
+        ExperimentalGroup g1 = new ExperimentalGroup("Tree")
+        ExperimentalGroup g2 = new ExperimentalGroup("Flower")
+        ExperimentalGroup g3 = new ExperimentalGroup("Animal")
 
         InterestToGroup ig1 = new InterestToGroup(i, g1)
         InterestToGroup ig2 = new InterestToGroup(i, g2)
@@ -47,7 +47,7 @@ class InterestTests {
 
         //Test for bidirectional mapping and the many-to-one relationship with Question
         Interest i2 = new Interest("Hydrology")
-        i2.save(flush : true, failOnError: true)
+        i2.save(flush: true, failOnError: true)
 
         Survey s = new Survey()
 
@@ -57,7 +57,7 @@ class InterestTests {
         q1.setInterest1(i)
         q1.setInterest2(i2)
         q1.setSurvey(s)
-        q1.save(flush : true, failOnError: true)
+        q1.save(flush: true, failOnError: true)
 
         assertTrue(q1.interest1.text == "Biology" && q1.interest2.text == "Hydrology")
 
@@ -67,14 +67,9 @@ class InterestTests {
         q2.setInterest1(i2)
         q2.setInterest2(i)
         q2.setSurvey(s)
-        q2.save(flush : true, failOnError: true)
+        q2.save(flush: true, failOnError: true)
 
         assertTrue(q2.interest1.text == "Hydrology" && q2.interest2.text == "Biology")
-
-
-        //Check what happens if you remove something
-        i.delete(flush : true)
-
 
     }
 }
