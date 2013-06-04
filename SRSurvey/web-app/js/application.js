@@ -7,3 +7,5 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+$(".fancybox").fancybox();

@@ -9,7 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title></title>
+  <meta name="layout" content="main"/>
+   <r:require modules="core" />
+  <title>Similarity Ratings</title>
     <style>
         .rounded-corners {
             -moz-border-radius: 20px;
@@ -70,35 +72,15 @@
         .no-assoc{
             float: left;
             padding-left: 15px;
-            font-size: 12;
+            font-size: 12px;
         }
         .str-assoc{
             float: right;
             padding-right: 55px;
-            font-size: 12;
-        }
-        #blanket {
-            background-color:#111;
-            opacity: 0.65;
-            *background:none;
-            position:absolute;
-            z-index: 9001;
-            top:0px;
-            left:0px;
-            width:100%;
+            font-size: 12px;
         }
 
-        #popUpDiv {
-            position:absolute;
-            background:#fff no-repeat;
-            width:400px;
-            height:400px;
-            border:5px solid #000;
-            z-index: 9002;
-        }
     </style>
-    <g:javascript src="jquery.fancybox.js" ></g:javascript>
-    <link media="screen" href="<g:resource dir="css" file="jquery.fancybox.css"></g:resource>"/>
 
 </head>
 <body>
@@ -324,23 +306,25 @@
                 <td style="width: 30%;">&nbsp;</td>
                 <td style="width: 8%;">&nbsp;</td>
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
-                    <div id="blanket" style="display:none"></div>
-                    <div id="popUpDiv" style="display:none">
 
-                        <a href="#" onclick="popup('popUpDiv')" >Click to Close CSS Pop Up</a>
-                    </div>
-                    <a href="#" onclick="popup('popUpDiv')"><button>Next</button></a></td>
+
+                    <a href="#continue" class="fancybox" ><button>Next</button></a></td>
             </tr>
         </table>
 
+    <div style="display:none; margin: auto auto auto auto;" id="continue">
+        <h5>Would you like to continue rating?</h5>
+        <p style="text-align: center;">
+            <a href="reload_this_page"><button>Yes, I would like to rate some more</button></a>
+            <br/><br/>
+            or
+            <br/>  <br/>
+            <a href="comments"><button>No, I'd like to finish the survey</button></a>
+        </p>
 
+    </div>
     </div>
 
 </body>
 </html>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#popUpDiv").fancybox();
-    });
-</script>
