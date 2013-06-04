@@ -13,7 +13,7 @@ class Person {
 
     static constraints = {
         survey nullable: true
-        personToInterest nullable: true
+        survey unique: true
     }
 
     Person(String email, String firstName, String lastName, String title, String isRegistered){
