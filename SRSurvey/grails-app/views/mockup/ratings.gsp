@@ -61,17 +61,17 @@
     <div class="rounded-corners" id="main-container">
         <table style="width: 100%;">
             <tr>
-                <td>
+                <td style="">
                     <input type="checkbox" name="term1" value="term1">
                     <br/>
                     <input type="checkbox" name="term2" value="term2">
                 </td>
-                <td style="text-align: right !important;">
+                <td style="text-align: right !important;width: 25%">
                     <h5>Experimental Methodology</h5>
                     <br/>
                     <h5>Scientific Methods</h5>
                 </td>
-                <td style="width: 530px;">
+                <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
