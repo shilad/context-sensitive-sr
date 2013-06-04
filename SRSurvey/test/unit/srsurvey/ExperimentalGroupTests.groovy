@@ -21,7 +21,7 @@ class ExperimentalGroupTests {
         assertEquals(g.name,"Biology")
         assertNotSame(g.name,"Bio")
 
-        //Testing relations
+        //Testing InterestToGroup
         Interest interest = new Interest()
         interest.setText("Computer Science")
         interest.save(flush: true)
@@ -36,8 +36,13 @@ class ExperimentalGroupTests {
         assertEquals(Interest.count(),1)
         assertEquals(ExperimentalGroup.count(),1)
 
+        //Testing Survey
+        Survey s1 = new Survey()
+        Survey s2 = new Survey()
+        Survey s3 = new Survey()
 
+        g.setSurvey([s1,s2,s3])
 
-
+        assertEquals(Survey.count,3)
     }
 }
