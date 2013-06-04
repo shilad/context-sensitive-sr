@@ -11,10 +11,10 @@ class Interest {
                 question2:Question]
     static mappedBy = [question1: 'interest1',question2: 'interest2']
 
-
-    //question1:Question, question2: Question
-
-
     static constraints = {
+    }
+
+    Interest(String text) {
+        this.text = text
     }
 }
