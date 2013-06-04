@@ -12,6 +12,8 @@ class Person {
     static hasMany = [personToInterest:PersonToInterest]
 
     static constraints = {
+        survey nullable: true
+        personToInterest nullable: true
     }
 
     Person(String email, String firstName, String lastName, String title, String isRegistered){
