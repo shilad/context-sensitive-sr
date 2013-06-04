@@ -51,6 +51,7 @@
             font-size: 16px;
             line-height: 15px;
             margin: 0px auto;
+            font-family: Arial, Helvetica, sans-serif;
         }
          tr.main > td{
 
@@ -79,7 +80,55 @@
             padding-right: 55px;
             font-size: 12px;
         }
+        .myButton {
 
+            -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+            background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+            background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+
+            background-color:#ededed;
+
+            -moz-border-radius:15px;
+            -webkit-border-radius:15px;
+            border-radius:15px;
+
+            border:1px solid #666563;
+
+            display:inline-block;
+            color:#2b2926;
+            font-family:arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 14px;
+            text-decoration:none;
+
+            text-shadow:0px 1px 0px #ffffff;
+
+        }
+        .myButton:hover {
+
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+            background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background:-o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background:-ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+            background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+
+            background-color:#dfdfdf;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
     </style>
 
 </head>
@@ -308,18 +357,19 @@
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
 
 
-                    <a href="#continue" class="fancybox" ><button>Next</button></a></td>
+                    <a href="#continue" class="fancybox myButton" >Next</a></td>
             </tr>
         </table>
 
     <div style="display:none; margin: auto auto auto auto;" id="continue">
         <h5>Would you like to continue rating?</h5>
-        <p style="text-align: center;">
+        <p style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
             <a href="reload_this_page"><button>Yes, I would like to rate some more</button></a>
             <br/><br/>
             or
             <br/>  <br/>
             <a href="comments"><button>No, I'd like to finish the survey</button></a>
+
         </p>
 
     </div>
