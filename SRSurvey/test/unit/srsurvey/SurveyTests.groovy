@@ -14,7 +14,7 @@ class SurveyTests {
 
     void testSurvey() {
 
-        //Setting up question
+        //Setting up question 1
         Question q1 = new Question(0.2,1)
 
         Interest interest1 = new Interest()
@@ -36,7 +36,9 @@ class SurveyTests {
         assertEquals(Interest.count,2)
         assertEquals(Question.count,1)
 
-        Question q2 = new Question(0.2,1)
+
+        //Setting up question 2
+        Question q2 = new Question(0.5,2)
 
         Interest interest3 = new Interest()
         interest3.text = "interest1"
@@ -66,5 +68,15 @@ class SurveyTests {
         s.setPerson(p)
         s.setExperimentalGroup(g)
         s.save(failOnError: true, flush: true)
+
+        //Testing delete
+        //Question resultQ = Question.findByQuestionNumber(2) //find question 2
+        //resultQ.delete()
+
+        Survey.findAll()[0].delete()
+        assertEquals(Survey.count,0)
+
+        assertEquals(Question.count,0)
+
     }
 }
