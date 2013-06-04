@@ -22,6 +22,7 @@ class ExperimentalGroupTests {
         assertNotSame(g.name,"Bio")
 
         //Testing relations
+        //interest to group
         Interest interest = new Interest()
         interest.setText("Computer Science")
         interest.save(flush: true)
