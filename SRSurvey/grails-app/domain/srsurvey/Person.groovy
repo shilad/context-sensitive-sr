@@ -13,4 +13,12 @@ class Person {
 
     static constraints = {
     }
+
+    Person(String email, String firstName, String lastName, String title, String isRegistered){
+        this.email = email
+        this.firstName = firstName
+        this.lastName = lastName
+        this.title = title
+        this.isRegistered = isRegistered
+    }
 }
