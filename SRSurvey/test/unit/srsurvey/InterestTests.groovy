@@ -31,7 +31,6 @@ class InterestTests {
         assertTrue(ig1.interest == i && ig1.group == g1)
         assertTrue(ig2.interest == i && ig2.group == g2)
         assertTrue(ig3.interest == i && ig3.group == g3)
-        //Check what happens if you remove something
 
         //Test for Interest many-to-many interaction with Person via PersonToInterest
         Person p1 = new Person()
@@ -45,7 +44,6 @@ class InterestTests {
         assertTrue(pi1.person == p1 && pi1.interest == i)
         assertTrue(pi2.person == p2 && pi2.interest == i)
         assertTrue(pi3.person == p3 && pi3.interest == i)
-        //Check what happens if you remove something
 
         //Test for bidirectional mapping and the many-to-one relationship with Question
         Interest i2 = new Interest("Hydrology")
@@ -74,9 +72,9 @@ class InterestTests {
         assertTrue(q2.interest1.text == "Hydrology" && q2.interest2.text == "Biology")
 
 
-
-
         //Check what happens if you remove something
+        i.delete(flush : true)
+
 
     }
 }
