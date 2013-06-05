@@ -4,7 +4,7 @@ class ExperimentalGroup {
 
     String name
 
-    static hasMany = [interestToGroup:InterestToGroup, survey:Survey]
+    static hasMany = [interestToGroup:InterestToGroup, person:Person]
 
     static constraints = {
     }
