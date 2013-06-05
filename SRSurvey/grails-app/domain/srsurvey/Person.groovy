@@ -19,6 +19,7 @@ class Person {
         lastName nullable: true
         title nullable: true
         isRegistered nullable: true
+
     }
 
     Person(String email, String firstName, String lastName, String title, String isRegistered){
