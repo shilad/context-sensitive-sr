@@ -141,52 +141,52 @@
     <h1> Interests </h1>
     <br>
     <br>
-    <form action= "unnamed" name = "interest-form" id= "interest-form" method="post">
-        <table>
-            <tr>
-                <td>
+    <form action= "unnamed" name = "interest-form" id= "rating-form" method="post">
+    <table>
+        <tr>
+            <td>
 
-                    <table>
-                        <tr>
-                            <input type="text" name="box1">
-                            <br>
-                        </tr>
-                        <tr>
-                            <input type="text" name="box2">
-                            <br>
-                        </tr>
-                        <tr>
-                            <input type="text" name="box3">
-                            <br>
-                        </tr>
-                        <tr>
-                            <input type="text" name="box4">
-                            <br>
-                        </tr>
-                        <tr>
-                            <input type="text" name="box5">
-                            <br>
-                        </tr>
-                        <tr>
-                            <br>
-                            <div id="indent-click">
-                                Click to add more interests
-                                <a href="#" class="myButton" >+</a>
+                <table>
+                    <tr>
+                        <input type="text" name="box1">
+                        <br>
+                    </tr>
+                    <tr>
+                        <input type="text" name="box2">
+                        <br>
+                    </tr>
+                    <tr>
+                        <input type="text" name="box3">
+                        <br>
+                    </tr>
+                    <tr>
+                        <input type="text" name="box4">
+                        <br>
+                    </tr>
+                    <tr>
+                        <input type="text" name="box5">
+                        <br>
+                    </tr>
+                    <tr>
+                        <br>
+                        <div id="indent-click">
+                        Click to add more interests
+                        <a href="#" class="myButton" >+</a>
                             </div>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <br>
-                    <p class= "margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: right;">
-                    <a id= "next" href="#" class="myButton">Next</a>
-                </td>
-            </tr>
-        </table>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <br>
+                <p class= "margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">
+            <a id= "next" href="#" class="myButton">Next</a>
+            </td>
+        </tr>
+    </table>
     </form>
 </div>
 </body>
