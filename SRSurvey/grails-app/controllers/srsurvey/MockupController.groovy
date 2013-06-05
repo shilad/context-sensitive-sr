@@ -7,4 +7,13 @@ class MockupController {
     def ratings() {
         render(view : 'ratings')
     }
+    def comments() {
+         render(view : 'comments')
+    }
+    def disclaimer() {
+        render(view : 'disclaimer')
+    }
+    def interest() {
+        render(view : 'interest')
+    }
 }
