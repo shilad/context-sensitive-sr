@@ -135,6 +135,7 @@
 <body>
     <div class="rounded-corners" id="main-container">
         <br/><h1>Similarity Ratings</h1>
+        <form action="" name="rating-form" id="rating-form" method="post">
         <table style="width: 100%;border-collapse: collapse;">
             <tr class="main">
                 <td style="text-align: right !important;width: 30%;">&nbsp;</td>
@@ -148,28 +149,28 @@
                     <h5>Scientific Methods</h5>
                 </td>
                 <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                    <input type="checkbox" name="term1" value="term1">
+                    <input type="checkbox" name="term1" id="term1" value="term1">
                     <br/><br/>
-                    <input type="checkbox" name="term2" value="term2">
+                    <input type="checkbox" name="term2" id="term2" value="term2">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>
-                                    1 <input type="radio" name="field1" value="1"/>
+                                    1 <input type="radio" id="field1" name="field1" value="1"/>
                                 </td>
                                 <td>
-                                    2 <input type="radio" name="field1" value="2"/>
+                                    2 <input type="radio" id="field1" name="field1" value="2"/>
                                 </td>
                                 <td>
-                                    3 <input type="radio" name="field1" value="3"/>
+                                    3 <input type="radio" id="field1" name="field1" value="3"/>
                                 </td>
                                 <td>
-                                    4 <input type="radio" name="field1" value="4"/>
+                                    4 <input type="radio" id="field1" name="field1" value="4"/>
                                 </td>
                                 <td>
-                                    5 <input type="radio" name="field1" value="5"/>
+                                    5 <input type="radio" id="field1" name="field1" value="5"/>
                                 </td>
                             </tr>
                         </table>
@@ -190,28 +191,28 @@
                     <h5>Scientific Methods</h5>
                 </td>
                 <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                    <input type="checkbox" name="term1" value="term1">
+                    <input type="checkbox" name="term3" value="term3">
                     <br/><br/>
-                    <input type="checkbox" name="term2" value="term2">
+                    <input type="checkbox" name="term4" value="term4">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>
-                                    1 <input type="radio" name="field1" value="1"/>
+                                    1 <input type="radio" name="field2" value="1"/>
                                 </td>
                                 <td>
-                                    2 <input type="radio" name="field1" value="2"/>
+                                    2 <input type="radio" name="field2" value="2"/>
                                 </td>
                                 <td>
-                                    3 <input type="radio" name="field1" value="3"/>
+                                    3 <input type="radio" name="field2" value="3"/>
                                 </td>
                                 <td>
-                                    4 <input type="radio" name="field1" value="4"/>
+                                    4 <input type="radio" name="field2" value="4"/>
                                 </td>
                                 <td>
-                                    5 <input type="radio" name="field1" value="5"/>
+                                    5 <input type="radio" name="field2" value="5"/>
                                 </td>
                             </tr>
                         </table>
@@ -232,28 +233,28 @@
                     <h5>Scientific Methods</h5>
                 </td>
                 <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                    <input type="checkbox" name="term1" value="term1">
+                    <input type="checkbox" name="term5" value="term5">
                     <br/><br/>
-                    <input type="checkbox" name="term2" value="term2">
+                    <input type="checkbox" name="term6" value="term6">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>
-                                    1 <input type="radio" name="field1" value="1"/>
+                                    1 <input type="radio" name="field3" value="1"/>
                                 </td>
                                 <td>
-                                    2 <input type="radio" name="field1" value="2"/>
+                                    2 <input type="radio" name="field3" value="2"/>
                                 </td>
                                 <td>
-                                    3 <input type="radio" name="field1" value="3"/>
+                                    3 <input type="radio" name="field3" value="3"/>
                                 </td>
                                 <td>
-                                    4 <input type="radio" name="field1" value="4"/>
+                                    4 <input type="radio" name="field3" value="4"/>
                                 </td>
                                 <td>
-                                    5 <input type="radio" name="field1" value="5"/>
+                                    5 <input type="radio" name="field3" value="5"/>
                                 </td>
                             </tr>
                         </table>
@@ -274,28 +275,28 @@
                     <h5>Scientific Methods</h5>
                 </td>
                 <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                    <input type="checkbox" name="term1" value="term1">
+                    <input type="checkbox" name="term7" value="term7">
                     <br/><br/>
-                    <input type="checkbox" name="term2" value="term2">
+                    <input type="checkbox" name="term8" value="term8">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>
-                                    1 <input type="radio" name="field1" value="1"/>
+                                    1 <input type="radio" name="field4" value="1"/>
                                 </td>
                                 <td>
-                                    2 <input type="radio" name="field1" value="2"/>
+                                    2 <input type="radio" name="field4" value="2"/>
                                 </td>
                                 <td>
-                                    3 <input type="radio" name="field1" value="3"/>
+                                    3 <input type="radio" name="field4" value="3"/>
                                 </td>
                                 <td>
-                                    4 <input type="radio" name="field1" value="4"/>
+                                    4 <input type="radio" name="field4" value="4"/>
                                 </td>
                                 <td>
-                                    5 <input type="radio" name="field1" value="5"/>
+                                    5 <input type="radio" name="field4" value="5"/>
                                 </td>
                             </tr>
                         </table>
@@ -316,28 +317,28 @@
                     <h5>Scientific Methods</h5>
                 </td>
                 <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                    <input type="checkbox" name="term1" value="term1">
+                    <input type="checkbox" name="term9" value="term9">
                     <br/><br/>
-                    <input type="checkbox" name="term2" value="term2">
+                    <input type="checkbox" name="term10" value="term10">
                 </td>
                 <td style="width: 62%;">
                     <div class="rounded-corners" id="rating-bars">
                         <table style="width: 100%;text-align: center;">
                             <tr>
                                 <td>
-                                    1 <input type="radio" name="field1" value="1"/>
+                                    1 <input type="radio" name="field5" value="1"/>
                                 </td>
                                 <td>
-                                    2 <input type="radio" name="field1" value="2"/>
+                                    2 <input type="radio" name="field5" value="2"/>
                                 </td>
                                 <td>
-                                    3 <input type="radio" name="field1" value="3"/>
+                                    3 <input type="radio" name="field5" value="3"/>
                                 </td>
                                 <td>
-                                    4 <input type="radio" name="field1" value="4"/>
+                                    4 <input type="radio" name="field5" value="4"/>
                                 </td>
                                 <td>
-                                    5 <input type="radio" name="field1" value="5"/>
+                                    5 <input type="radio" name="field5" value="5"/>
                                 </td>
                             </tr>
                         </table>
@@ -357,10 +358,12 @@
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
 
 
-                    <a href="#continue" class="fancybox myButton" >Next</a></td>
+                    <a href="#continue" class="fancybox myButton" id="continue-button">Next</a>
+
+                </td>
             </tr>
         </table>
-
+        </form>
     <div style="display:none; margin: auto auto auto auto;" id="continue">
         <h5>Would you like to continue rating?</h5>
         <p style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
