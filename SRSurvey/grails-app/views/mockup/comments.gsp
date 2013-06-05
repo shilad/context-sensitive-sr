@@ -38,14 +38,9 @@
               border-radius: 20px;
               margin:5px;
           }
-          .lower-right-button{
-              position:absolute;
-              bottom: 0;
-              right: 0;
-          }
           #main-container{
               font-family: Arial, Helvetica, sans-serif;
-              margin: auto auto auto auto;
+              margin: 20px auto auto auto;
               width: 750px;
               height: 500px;
               background: -moz-linear-gradient(top, rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
@@ -129,8 +124,6 @@
     </style>
 
 
-
-
 </head>
 <body>
       <div class= "rounded-corners" id="main-container">
@@ -141,7 +134,7 @@
           <table>
           <tr>
             <td>
-                <textarea rows="4" cols="50" class = "rounded-corners"  id = "text-area">
+                <textarea rows="4" cols="50" class = "rounded-corners"  id = "text-area" name="text">
                 </textarea>
             </td>
           </tr>

@@ -43,7 +43,7 @@
 
     #main-container{
         font-family: Arial, Helvetica, sans-serif;
-        margin: auto auto auto auto;
+        margin: 20px auto auto auto;
         width: 750px;
         height: 500px;
         background: -moz-linear-gradient(top, rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
@@ -144,23 +144,23 @@
 
                 <table>
                     <tr>
-                        <input type="text" name="box1" >
+                        <input type="text" name="box1">
                         <br>
                     </tr>
                     <tr>
-                        <input type="text" name="box2" id= "input-box">
+                        <input type="text" name="box2">
                         <br>
                     </tr>
                     <tr>
-                        <input type="text" name="box3"  >
+                        <input type="text" name="box3">
                         <br>
                     </tr>
                     <tr>
-                        <input type="text" name="box4" >
+                        <input type="text" name="box4">
                         <br>
                     </tr>
                     <tr>
-                        <input type="text" name="box5" >
+                        <input type="text" name="box5">
                         <br>
                     </tr>
                     <tr>

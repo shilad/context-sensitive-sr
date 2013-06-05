@@ -41,7 +41,7 @@
 
     #main-container{
         font-family: Arial, Helvetica, sans-serif;
-        margin: auto auto auto auto;
+        margin: 20px auto auto auto;
         width: 750px;
         height: 500px;
         background: -moz-linear-gradient(top, rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
