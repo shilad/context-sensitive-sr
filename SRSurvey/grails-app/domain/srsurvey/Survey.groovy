@@ -2,7 +2,7 @@ package srsurvey
 
 class Survey {
 
-    static belongsTo = [person: Person, experimentalGroup:ExperimentalGroup]
+    static belongsTo = [person: Person]
     static hasMany = [question:Question]
 
     Date dateCreated
