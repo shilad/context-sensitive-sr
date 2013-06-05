@@ -10,8 +10,8 @@
 <html>
 <head>
     <title></title>
-<head>
-    <title></title>
+    <meta name="layout" content="main"/>
+    <r:require modules="core" />
     <style>
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -101,9 +101,9 @@
         display:inline-block;
         color:#2b2926;
         font-family:arial;
-        font-size:15px;
+        font-size:100%;
         font-weight:bold;
-        padding:6px 9px;
+        padding:4px 9px;
         text-decoration:none;
 
         text-shadow:0px 1px 0px #ffffff;
@@ -128,6 +128,9 @@
     #indent-click{
         margin: 4px 0px 0px 70px
     }
+    #next{
+        margin: 4px 45px 0px 30px
+    }
 
     </style>
 </head>
@@ -138,6 +141,7 @@
     <h1> Interests </h1>
     <br>
     <br>
+    <form action= "unnamed" name = "interest-form" id= "rating-form" method="post">
     <table>
         <tr>
             <td>
@@ -167,7 +171,7 @@
                         <br>
                         <div id="indent-click">
                         Click to add more interests
-                        <a href="#" class="myButton">+</a>
+                        <a href="#" class="myButton" >+</a>
                             </div>
                     </tr>
                 </table>
@@ -177,7 +181,13 @@
                 <p class= "margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
             </td>
         </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">
+            <a id= "next" href="#" class="myButton">Next</a>
+            </td>
+        </tr>
     </table>
+    </form>
 </div>
 </body>
 </html>
