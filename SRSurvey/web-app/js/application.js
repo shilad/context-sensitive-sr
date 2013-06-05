@@ -7,3 +7,25 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+$(document).ready(function() {
+    $("#continue-button").hide();
+    $('form#rating-form').click( function( e ) {
+           //alert($('input[name=field1]:checked', '#rating-form').val());
+        if($('input[name=field1]:checked', '#rating-form').val()==null&&($("#term1:checkbox").length!= $("#term1:checkbox:checked").length
+            &&$("#term2:checkbox").length!= $("#term2:checkbox:checked").length)){
+
+
+        }
+        else{
+            $("#continue-button").show();
+        }
+
+
+    });
+
+    $(".fancybox").fancybox();
+
+
+});
+
