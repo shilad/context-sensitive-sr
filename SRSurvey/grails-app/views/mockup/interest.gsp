@@ -141,7 +141,7 @@
     <h1> Interests </h1>
     <br>
     <br>
-    <form action= "unnamed" name = "interest-form" id= "rating-form" method="post">
+    <form action= "unnamed" name = "interest-form" id= "interest-form" method="post">
         <table>
             <tr>
                 <td>
