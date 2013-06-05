@@ -1,4 +1,4 @@
-import srsurvey.Person
+import srsurvey.*
 
 class BootStrap {
 
@@ -34,6 +34,15 @@ class BootStrap {
         Person yulun = new Person()
         yulun.setEmail("yli2@macalester.edu")
         yulun.save(flush: true)
+
+        ExperimentalGroup fire = new ExperimentalGroup("Fire")
+        fire.save(flush: true)
+
+        ExperimentalGroup water = new ExperimentalGroup("Water")
+        water.save(flush: true)
+
+        ExperimentalGroup grass = new ExperimentalGroup("Grass")
+        grass.save(flush: true)
 
     }
     def destroy = {
