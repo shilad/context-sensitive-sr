@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title></title>
+    <title></title>
     <style>
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -41,7 +41,7 @@
 
     #main-container{
         font-family: Arial, Helvetica, sans-serif;
-        margin: auto auto auto auto;
+        margin: 20px auto auto auto;
         width: 750px;
         height: 500px;
         background: -moz-linear-gradient(top, rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
@@ -116,25 +116,25 @@
     </style>
 </head>
 <body>
-    <div class= "rounded-corners" id="main-container">
+<div class= "rounded-corners" id="main-container">
     <br>
     <br>
-        <h1>Disclaimer  </h1>
+    <h1>Disclaimer  </h1>
     <br>
     <br>
-     <table>
+    <table>
         <tr>
-         <td>
-         <p class= "margin">Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
-         </td>
-         </tr>
-         <tr>
-         <td style= "text-align: right; padding-right: 40;">
-             <br>
-             <a href="#" class="myButton">Yes, I consent</a>
-         </td>
-         </tr>
-     </table>
-    </div>
+            <td>
+                <p class= "margin">Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
+            </td>
+        </tr>
+        <tr>
+            <td style= "text-align: right; padding-right: 40;">
+                <br>
+                <a href="#" class="myButton">Yes, I consent</a>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
