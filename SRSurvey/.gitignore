@@ -18,5 +18,5 @@ stacktrace.log
 
 # Intellij
 .idea/
-*.iml
+SRSurvey.iml
 *.iws
