@@ -15,6 +15,7 @@ $(document).ready(function() {
         if($('input[name=field1]:checked', '#rating-form').val()==null&&($("#term1:checkbox").length!= $("#term1:checkbox:checked").length
             &&$("#term2:checkbox").length!= $("#term2:checkbox:checked").length)){
 
+            $("#continue-button").hide();
 
         }
         else{
