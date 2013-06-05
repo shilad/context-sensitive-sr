@@ -27,6 +27,24 @@ $(document).ready(function() {
 
     $(".fancybox").fancybox();
 
+    $("#next").hide();
+    $('form#interest-form').click( function( e ) {
+        //alert($('input[name=box1]', '#interest-form').val());
+        if($('input[name=box1]', '#interest-form').val()==""&&
+            $('input[name=box2]', '#interest-form').val()==""&&
+            $('input[name=box3]', '#interest-form').val()==""&&
+            $('input[name=box4]', '#interest-form').val()==""&&
+            $('input[name=box5]', '#interest-form').val()==""){
+
+            $("#next").hide();
+
+        }
+        else{
+            $("#next").show();
+        }
+
+
+    });
 
 });
 
