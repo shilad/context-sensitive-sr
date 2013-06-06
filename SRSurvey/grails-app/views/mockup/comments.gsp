@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
+    <title>Comments</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <style type="text/css">
