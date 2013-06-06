@@ -103,7 +103,9 @@
         }
 
     </style>
+   <r:script>
 
+   </r:script>
 </head>
 <body>
     <div class="rounded-corners" id="main-container">
