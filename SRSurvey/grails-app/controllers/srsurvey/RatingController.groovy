@@ -25,6 +25,10 @@ class RatingController {
         render(view:'ratings', model:[questions:questions])
     }
 
+    def process(){
+        print(params)
+    }
+
     def index() {
         render(view:'ratings')
     }
