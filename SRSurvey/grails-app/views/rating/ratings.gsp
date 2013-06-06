@@ -158,7 +158,9 @@
 <body>
     <div class="rounded-corners" id="main-container">
         <br/><h1>Similarity Ratings</h1>
-        <form action="" name="rating-form" id="rating-form" method="post">
+        %{--<form action="" name="rating-form" id="rating-form" method="post">--}%
+        <g:form action="process" controller="Rating" name="rating-form" id="rating-form" method="post">
+
         <table style="width: 100%;border-collapse: collapse;">
             <tr class="main">
                 <td style="text-align: right !important;width: 30%;">&nbsp;</td>
@@ -225,7 +227,7 @@
                 </td>
             </tr>
         </table>
-        </form>
+        </g:form>
     <div style="display:none; margin: auto auto auto auto;" id="continue">
         <h5>Would you like to continue rating?</h5>
         <p style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
