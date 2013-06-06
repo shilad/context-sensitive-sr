@@ -72,7 +72,7 @@
         line-height: 15px;
         margin: 0px auto;
         font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
+        font-weight: bold !important;
     }
     tr.main > td{
         padding-bottom: 1.5em;
