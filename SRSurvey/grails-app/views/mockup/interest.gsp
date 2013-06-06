@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
+    <title>Interest</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <style>
@@ -61,7 +61,8 @@
     h1{
         padding-left: 1em;
         font-size: 45px;
-        line-height: 15px;
+        font-weight: bold;
+        margin-bottom: 25px;
     }
     input{
         margin: 19px 1px 0px 47px;
