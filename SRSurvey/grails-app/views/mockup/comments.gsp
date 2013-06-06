@@ -9,10 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <title>Comments_TEST</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
-    <title>Comments</title>
-
     <style type="text/css">
     #text-area{
 
