@@ -2,14 +2,10 @@ package srsurvey
 
 class PersonService {
 
-     Person person
+    Person person
 
     PersonService(Person person){
         this.person = person
-    }
-
-    def serviceMethod() {
-
     }
 
     def create(String email) {

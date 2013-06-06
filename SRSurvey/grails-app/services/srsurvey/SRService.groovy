@@ -18,7 +18,7 @@ class SRService {
         int max = 2
         int num = rand.nextInt(max)
 
-        person.setExperimentalGroup(ExperimentalGroup.findAll().get(num))
+        person.setGroup(ExperimentalGroup.findAll().get(num))
         person.save(flush: true)
 
     }
