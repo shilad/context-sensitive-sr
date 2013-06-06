@@ -87,6 +87,9 @@
         tr.odd{
             background: rgb(43,205,249);
         }
+        .error{
+            background: rgb(255,0,0);
+        }
         h1{
             font-size: 45px;
             padding-left: 1em;
@@ -165,7 +168,7 @@
                 <td style="text-align: center;width: 8%;font-size: 13px;">I don't know<br/>this term</td>
                 <td style="width: 62%;">&nbsp;</td>
             </tr>
-            <tr class="main odd">
+            <tr class="main odd" id="field1">
                 <td style="text-align: right !important;width: 30%;">
                     <h5>Experimental Methodology</h5>
                     <br/>
@@ -381,7 +384,7 @@
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
 
 
-                    <a href="#continue" class="fancybox myButton" id="continue-button">Next</a>
+                    <a class="fancybox myButton" id="continue-button">Next</a>
 
                 </td>
             </tr>
