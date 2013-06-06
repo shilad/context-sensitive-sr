@@ -88,7 +88,7 @@
             background: rgb(43,205,249);
         }
         .error{
-            background: rgb(255,0,0);
+            background: rgb(255,0,0) !important;
         }
         h1{
             font-size: 45px;
@@ -407,3 +407,41 @@
 </body>
 </html>
 
+<r:script>
+    if (typeof jQuery !== 'undefined') {
+        (function($) {
+            $('#spinner').ajaxStart(function() {
+                $(this).fadeIn();
+            }).ajaxStop(function() {
+                        $(this).fadeOut();
+                    });
+        })(jQuery);
+    }
+    $(document).ready(function() {
+        //$("#continue-button").hide();
+
+        $(".fancybox").fancybox();
+        $('#continue-button').click(function(e) {
+            if($('input[name=field1]:checked', '#rating-form').val()==null&&($("#term1:checkbox").length!= $("#term1:checkbox:checked").length
+                    &&$("#term2:checkbox").length!= $("#term2:checkbox:checked").length)){
+
+                $("#field1").addClass("error");
+
+                return false;
+            }
+            else{
+                $.fancybox({
+                    content: $('#continue')
+                });
+                return false;
+            }
+        });
+
+        $("tr").live('click', function( e ) {
+            if ( $(this).hasClass('error') ) {
+                $(this).removeClass('error');
+            }
+
+        });
+    });
+</r:script>
