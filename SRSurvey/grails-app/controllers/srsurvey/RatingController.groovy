@@ -13,19 +13,21 @@ class RatingController {
 //        q.setInterest2(interest2)
 //        q.setQuestionNumber(1)
 //        q.save(flush: true)
-//        questions.add(q)
+//        questions.add
+
+        print(params)
 
         Person p = Person.findByEmail("bhillman@macalester.edu")
-        print(p)
+        //print(p)
         Survey s = Survey.findByPerson(p)
-        print(s)
+        //print(s)
         List<Question> questions = Question.findAllBySurvey(s)
-        print(questions)
+        //print(questions)
 
         render(view:'ratings', model:[questions:questions])
     }
 
-    def process(){
+    def processForm(){
         print(params)
     }
 
