@@ -51,8 +51,11 @@
         text-decoration:none;
 
         text-shadow:0px 1px 0px #ffffff;
-
     }
+      #main-container {
+      height:500px !important;
+      }
+
 
     </style>
 </head>
