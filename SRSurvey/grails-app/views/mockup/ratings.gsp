@@ -87,6 +87,9 @@
         tr.odd{
             background: rgb(43,205,249);
         }
+        .error{
+            background: rgb(255,0,0) !important;
+        }
         h1{
             font-size: 45px;
             padding-left: 1em;
@@ -167,7 +170,7 @@
                 <td style="text-align: center;width: 8%;font-size: 13px;">I don't know<br/>this term</td>
                 <td style="width: 62%;">&nbsp;</td>
             </tr>
-            <tr class="main odd">
+            <tr class="main odd" id="field1">
                 <td style="text-align: right !important;width: 30%;">
                     <h5>Experimental Methodology</h5>
                     <br/>
@@ -383,7 +386,7 @@
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
 
 
-                    <a href="#continue" class="fancybox myButton" id="continue-button">Next</a>
+                    <a class="fancybox myButton" id="continue-button">Next</a>
 
                 </td>
             </tr>
@@ -406,3 +409,41 @@
 </body>
 </html>
 
+<r:script>
+    if (typeof jQuery !== 'undefined') {
+        (function($) {
+            $('#spinner').ajaxStart(function() {
+                $(this).fadeIn();
+            }).ajaxStop(function() {
+                        $(this).fadeOut();
+                    });
+        })(jQuery);
+    }
+    $(document).ready(function() {
+        //$("#continue-button").hide();
+
+        $(".fancybox").fancybox();
+        $('#continue-button').click(function(e) {
+            if($('input[name=field1]:checked', '#rating-form').val()==null&&($("#term1:checkbox").length!= $("#term1:checkbox:checked").length
+                    &&$("#term2:checkbox").length!= $("#term2:checkbox:checked").length)){
+
+                $("#field1").addClass("error");
+
+                return false;
+            }
+            else{
+                $.fancybox({
+                    content: $('#continue')
+                });
+                return false;
+            }
+        });
+
+        $("tr").live('click', function( e ) {
+            if ( $(this).hasClass('error') ) {
+                $(this).removeClass('error');
+            }
+
+        });
+    });
+</r:script>
