@@ -2,17 +2,23 @@ package srsurvey
 
 class InterestController {
     def create() {
-        String email = params.emails
-        print(email)
-        Person p = Person.findByEmail(email)
-        print(p)
 
-        //put the person into session
-        if(session.person==null){
-            session.person = p.id
+        if(params.emails!=null) {
+            String email = params.emails
+            print(email)
+            Person p = Person.findByEmail(email)
+            print(p)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            render(view:'create')
+        } else {
+            redirect(url: "/")
         }
 
-        render(view:'create')
     }
 
     def process() {
@@ -35,6 +41,19 @@ class InterestController {
 
     def index() {
 
+        if(params.emails!=null){
+            String email = params.emails
 
+            Person p = Person.findByEmail(email)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            redirect(action: "create", params: [emails:params.emails])
+        } else {
+            redirect(url: "/")
+        }
     }
 }
