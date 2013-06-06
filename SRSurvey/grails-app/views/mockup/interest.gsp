@@ -135,6 +135,11 @@
     .error{
         background: rgb(255,0,0);
     }
+    #error{
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 35px;
+        color:#FF0000;
+    }
     </style>
 </head>
 <body>
@@ -238,6 +243,7 @@
             </tr>
         </table>
     </form>
+    <div id="error" style="display: none;">You must enter at least one interest.</div>
 </div>
 </body>
 </html>
