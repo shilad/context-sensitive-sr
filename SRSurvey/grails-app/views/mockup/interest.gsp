@@ -45,7 +45,7 @@
         font-family: Arial, Helvetica, sans-serif;
         margin: 20px auto auto auto;
         width: 750px;
-        height: 500px;
+
         background: -moz-linear-gradient(top, rgba(132,211,239,1) 0%, rgba(145,232,239,1) 40%, rgba(148,237,239,0.98) 50%, rgba(145,232,239,1) 60%, rgba(132,211,239,1) 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(132,211,239,1)), color-stop(40%,rgba(145,232,239,1)), color-stop(50%,rgba(148,237,239,0.98)), color-stop(60%,rgba(145,232,239,1)), color-stop(100%,rgba(132,211,239,1))); /* Chrome,Safari4+ */
         background: -webkit-linear-gradient(top, rgba(132,211,239,1) 0%,rgba(145,232,239,1) 40%,rgba(148,237,239,0.98) 50%,rgba(145,232,239,1) 60%,rgba(132,211,239,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -55,7 +55,7 @@
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#84d3ef', endColorstr='#84d3ef',GradientType=0 ); /* IE6-9 */
     }
     p.margin{
-        margin: 16px 60px 0px 95px;
+        margin: 16px 30px 0px 45px;
     }
     p {text-indent:45px;}
     h1{
@@ -125,13 +125,21 @@
         position:relative;
         top:1px;
     }
-    #indent-click{
+    .indent-click{
         margin: 4px 0px 0px 70px
     }
     #next{
         margin: 4px 45px 0px 30px
     }
 
+    .error{
+        background: rgb(255,0,0);
+    }
+    #error{
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 35px;
+        color:#FF0000;
+    }
     </style>
 </head>
 <body>
@@ -148,46 +156,169 @@
 
                     <table>
                         <tr>
-                            <input type="text" name="box1">
-                            <br>
+                            <td>
+                                <input type="text" name="box1">
+                                <br>
+                            </td>
                         </tr>
                         <tr>
-                            <input type="text" name="box2">
-                            <br>
+                            <td>
+                                <input type="text" name="box2">
+                                <br>
+                            </td>
                         </tr>
                         <tr>
-                            <input type="text" name="box3">
-                            <br>
+                            <td>
+                                <input type="text" name="box3">
+                                <br>
+                            </td>
                         </tr>
                         <tr>
-                            <input type="text" name="box4">
-                            <br>
+                            <td>
+                                <input type="text" name="box4">
+                                <br>
+                            </td>
                         </tr>
                         <tr>
-                            <input type="text" name="box5">
-                            <br>
+                            <td>
+                                <input type="text" name="box5">
+                                <br>
+                            </td>
+                        </tr>
+
+                        <tr class="extra">
+                            <td>
+                                <input type="text" name="box6">
+                                <br>
+                            </td>
+                        </tr>
+                        <tr class="extra">
+                            <td>
+                                <input type="text" name="box7">
+                                <br>
+                            </td>
+                        </tr>
+                        <tr class="extra">
+                            <td>
+                                <input type="text" name="box8">
+                                <br>
+                            </td>
+                        </tr>
+                        <tr class="extra">
+                            <td>
+                                <input type="text" name="box9">
+                                <br>
+                            </td>
+                        </tr>
+                        <tr class="extra">
+                            <td>
+                                <input type="text" name="box10">
+                                <br>
+                            </td>
                         </tr>
                         <tr>
-                            <br>
-                            <div id="indent-click">
-                                Click to add more interests
-                                <a href="#" class="myButton" >+</a>
-                            </div>
+                            <td>
+                                <br>
+                                <div class="indent-click" id="add">
+                                    Click to add more interests
+                                    <a id="add-boxes" class="myButton" >+</a>
+                                </div>
+                                <div class="indent-click" id="minus" style="display: none;">
+                                    Click to remove extra boxes
+                                    <a id="minus-boxes" class="myButton" >-</a>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </td>
                 <td>
                     <br>
-                    <p class= "margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+                    <p class="margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: right;">
-                    <a id= "next" href="#" class="myButton">Next</a>
+                    <a id="next" class="myButton">Next</a>
                 </td>
             </tr>
         </table>
     </form>
+    <div id="error" style="display: none;">You must enter at least one interest.</div>
 </div>
 </body>
 </html>
+<r:script>
+    if (typeof jQuery !== 'undefined') {
+        (function($) {
+            $('#spinner').ajaxStart(function() {
+                $(this).fadeIn();
+            }).ajaxStop(function() {
+                        $(this).fadeOut();
+                    });
+        })(jQuery);
+    }
+    $(document).ready(function() {
+
+
+        $(".extra").hide();
+        $("#add-boxes").click(function( e ) {
+            $(".extra").toggle();
+            $(".indent-click").toggle();
+
+        });
+        $("#minus-boxes").click(function( e ) {
+            $(".extra").toggle();
+            $(".indent-click").toggle();
+
+        });
+
+        $('form#interest-form input[name=box1]').bind('click keyup', function( e ) {
+            if ( $('input[name=box1]', '#interest-form').hasClass('error') ) {
+                $('input[name=box1]', '#interest-form').removeClass('error');
+            }
+        });
+
+        $('form#interest-form').bind('keyup', function( e ) {
+
+            if($('input[name=box1]', '#interest-form').val()==""&&
+                    $('input[name=box2]', '#interest-form').val()==""&&
+                    $('input[name=box3]', '#interest-form').val()==""&&
+                    $('input[name=box4]', '#interest-form').val()==""&&
+                    $('input[name=box5]', '#interest-form').val()==""&&
+                    $('input[name=box6]', '#interest-form').val()==""&&
+                    $('input[name=box7]', '#interest-form').val()==""&&
+                    $('input[name=box8]', '#interest-form').val()==""&&
+                    $('input[name=box9]', '#interest-form').val()==""&&
+                    $('input[name=box10]', '#interest-form').val()==""){
+
+                $('input[name=box1]', '#interest-form').addClass("error");
+
+            }
+
+        });
+        $('#next').bind('click', function( e ) {
+
+            if($('input[name=box1]', '#interest-form').val()==""&&
+                    $('input[name=box2]', '#interest-form').val()==""&&
+                    $('input[name=box3]', '#interest-form').val()==""&&
+                    $('input[name=box4]', '#interest-form').val()==""&&
+                    $('input[name=box5]', '#interest-form').val()==""&&
+                    $('input[name=box6]', '#interest-form').val()==""&&
+                    $('input[name=box7]', '#interest-form').val()==""&&
+                    $('input[name=box8]', '#interest-form').val()==""&&
+                    $('input[name=box9]', '#interest-form').val()==""&&
+                    $('input[name=box10]', '#interest-form').val()==""){
+
+                $("input[name=box1]", "#interest-form").addClass("error");
+                $.fancybox({
+                    content: $('#error')
+                });
+            }
+            else{       alert("what?");
+                //submit form and move to rating page
+            }
+
+        });
+
+    });
+</r:script>
