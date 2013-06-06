@@ -11,6 +11,8 @@ class Question {
     static belongsTo = [survey:Survey]
 
     static constraints = {
+        result nullable: true
+        survey nullable: true
     }
 
     Question(Double result, Integer questionNumber){
