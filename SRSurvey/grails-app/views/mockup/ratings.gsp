@@ -31,11 +31,11 @@
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#05ce26',GradientType=1 ); /* IE6-9 */
         }
         h5{
-            font-size: 16px;
-            line-height: 15px;
-            margin: 0px auto;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
+            font-size: 16px !important;
+            line-height: 15px !important;
+            margin: 0px auto !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-weight: bold !important;
         }
          tr.main > td{
 
@@ -95,6 +95,11 @@
 
             text-shadow:0px 1px 0px #ffffff;
 
+        }
+        #main-container{
+
+
+            width: 900px !important;
         }
 
     </style>
