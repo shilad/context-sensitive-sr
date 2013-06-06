@@ -10,6 +10,7 @@ class Survey {
     Date dateCreated
 
     static constraints = {
+        comment nullable: true
     }
 
     public Survey(Person person){
