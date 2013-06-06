@@ -184,7 +184,7 @@
         <tr>
             <td colspan="2" style="text-align: right;">
             %{--<a id= "next" href="#" class="myButton">Next</a>--}%
-                <g:submitButton name="next" class="myButton" title="next"></g:submitButton>
+                <g:submitButton name="Next" class="myButton" title="next"></g:submitButton>
             </td>
         </tr>
     </table>
