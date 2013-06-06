@@ -493,7 +493,7 @@
 			}
 		},
 
-		// Navigate to gallery item by index
+		// Navigate to gallery item by show
 		jumpto: function ( index, direction, router ) {
 			var current = F.current;
 
@@ -834,7 +834,7 @@
 			/*
 			 * Add reference to the group, so it`s possible to access from callbacks, example:
 			 * afterLoad : function() {
-			 *     this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+			 *     this.title = 'Image ' + (this.show + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
 			 * }
 			 */
 

@@ -15,9 +15,13 @@ class BootStrap {
         jesse.setEmail("jrussel1@macalester.edu")
         jesse.save(flush: true)
 
-        Person mat = new Person()
-        mat.setEmail("mgiesel@macalester.edu")
-        mat.save(flush: true)
+        Person margaret = new Person()
+        margaret.setEmail("mgiesel@macalester.edu")
+        margaret.save(flush: true)
+
+        Person mlesicko = new Person()
+        margaret.setEmail("mlesicko@macalester.edu")
+        margaret.save(flush: true)
 
         Person rebecca = new Person()
         rebecca.setEmail("rgold1@macalester.edu")
@@ -91,6 +95,36 @@ class BootStrap {
 
         Question grassWater = new Question(5, sceptile, psyduck, pokemon)
         grassWater.save(flush: true)
+
+        InterestToGroup ig1 = new InterestToGroup(blaziken, fire)
+        ig1.save(flush: true)
+
+        InterestToGroup ig2 = new InterestToGroup(typhlosion, fire)
+        ig2.save(flush: true)
+
+        InterestToGroup ig3 = new InterestToGroup(charizard, fire)
+        ig3.save(flush: true)
+
+        InterestToGroup ig4 = new InterestToGroup(feraligatr, water)
+        ig4.save(flush: true)
+
+        InterestToGroup ig5 = new InterestToGroup(blastoise, water)
+        ig5.save(flush: true)
+
+        InterestToGroup ig6 = new InterestToGroup(swampert, water)
+        ig6.save(flush: true)
+
+        InterestToGroup ig7 = new InterestToGroup(meganium, grass)
+        ig7.save(flush: true)
+
+        InterestToGroup ig8 = new InterestToGroup(sceptile, grass)
+        ig8.save(flush: true)
+
+        InterestToGroup ig9 = new InterestToGroup(venasaur, grass)
+        ig9.save(flush: true)
+
+        InterestToGroup ig10 = new InterestToGroup(psyduck, water)
+        ig10.save(flush: true)
     }
     def destroy = {
     }
