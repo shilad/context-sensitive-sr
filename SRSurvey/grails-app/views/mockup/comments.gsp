@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Comments_TEST</title>
+    <title>Comments</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <style type="text/css">
@@ -61,6 +61,10 @@
 
         text-shadow:0px 1px 0px #ffffff;
 
+    }
+
+    #main-container {
+        height:500px !important;
     }
 
     </style>
