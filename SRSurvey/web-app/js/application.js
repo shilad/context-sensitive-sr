@@ -85,7 +85,9 @@ $(document).ready(function() {
             $('input[name=box10]', '#interest-form').val()==""){
 
             $("input[name=box1]", "#interest-form").addClass("error");
-
+            $.fancybox({
+                content: $('#error')
+            });
         }
         else{       alert("what?");
             //submit form and move to rating page
