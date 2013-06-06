@@ -60,7 +60,7 @@ class SurveyTests {
         assertEquals(Question.count,2)
 
 
-        //Testing survey, each survey can have many questions
+        //Testing survey.css, each survey.css can have many questions
         Survey s =  new Survey()
         Person p = new Person()
         ExperimentalGroup g = new ExperimentalGroup()
