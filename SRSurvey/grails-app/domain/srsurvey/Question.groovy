@@ -26,4 +26,11 @@ class Question {
         this.interest1 = interest1
         this.interest2 = interest2
     }
+
+    Question(Integer questionNumber, Interest interest1, Interest interest2, Survey survey) {
+        this.questionNumber = questionNumber
+        this.interest1 = interest1
+        this.interest2 = interest2
+        this.survey = survey
+    }
 }
