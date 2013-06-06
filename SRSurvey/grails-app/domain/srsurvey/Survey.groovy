@@ -2,6 +2,8 @@ package srsurvey
 
 class Survey {
 
+    String comment
+
     static belongsTo = [person: Person]
     static hasMany = [question:Question]
 
