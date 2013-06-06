@@ -10,8 +10,7 @@ class Survey {
     static constraints = {
     }
 
-    public Survey(Person person, ExperimentalGroup experimentalGroup){
+    public Survey(Person person){
         this.person = person
-        this.experimentalGroup = experimentalGroup
     }
 }
