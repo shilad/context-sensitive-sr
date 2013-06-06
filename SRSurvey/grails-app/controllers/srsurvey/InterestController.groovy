@@ -4,7 +4,7 @@ class InterestController {
 
     //TODO: alter create to link from consent interest
     def create() {
-
+        if(params.emails!=null) {
 
             render(view:'create')
         } else {
