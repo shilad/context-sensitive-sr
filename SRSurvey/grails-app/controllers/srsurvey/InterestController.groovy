@@ -1,18 +1,10 @@
 package srsurvey
 
 class InterestController {
+
+    //TODO: alter create to link from consent interest
     def create() {
 
-        if(params.emails!=null) {
-            String email = params.emails
-            print(email)
-            Person p = Person.findByEmail(email)
-            print(p)
-
-            //put the person into session
-            if(session.person==null){
-                session.person = p.id
-            }
 
             render(view:'create')
         } else {
@@ -56,4 +48,27 @@ class InterestController {
             redirect(url: "/")
         }
     }
+
+    //links email to Consent.gsp
+    def consent() {
+
+        if(params.emails!=null) {
+            String email = params.emails
+            print(email)
+            Person p = Person.findByEmail(email)
+            print(p)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            render(view:'consent')
+        } else {
+            redirect(url: "/")
+        }
+
+    }
+
+
 }
