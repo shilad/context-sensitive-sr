@@ -56,4 +56,26 @@ class InterestController {
             redirect(url: "/")
         }
     }
+
+    //TODO: Create connect from email to consent should be like create
+    def consent() {
+
+        if(params.emails!=null) {
+            String email = params.emails
+            print(email)
+            Person p = Person.findByEmail(email)
+            print(p)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            render(view:'consent')
+        } else {
+            redirect(url: "/")
+        }
+
+    }
+    //TODO: alter create to link from consent interest
 }
