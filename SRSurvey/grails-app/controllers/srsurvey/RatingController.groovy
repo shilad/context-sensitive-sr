@@ -3,26 +3,16 @@ package srsurvey
 class RatingController {
 
     def ratings(){
-        //List<Question> questions = new ArrayList<Question>()
-//        Question q = new Question()
-//        Interest interest1 = new Interest("Experiment")
-//        interest1.save(flush: true)
-//        Interest interest2 = new Interest("Computer Science")
-//        interest2.save(flush: true)
-//        q.setInterest1(interest1)
-//        q.setInterest2(interest2)
-//        q.setQuestionNumber(1)
-//        q.save(flush: true)
-//        questions.add
 
-        print(params)
+        //TODO: Get the person from the session
 
-        Person p = Person.findByEmail("bhillman@macalester.edu")
-        //print(p)
-        Survey s = Survey.findByPerson(p)
-        //print(s)
-        List<Question> questions = Question.findAllBySurvey(s)
-        //print(questions)
+        Person p = Person.findByEmail("zwang@macalester.edu")
+        print(p)
+
+        SRService srService = new SRService()
+        srService.assignGroup(p, new ArrayList<Interest>())
+
+        List<Question> questions = new SRService().getQuestions(p.group)
 
         render(view:'ratings', model:[questions:questions])
     }
