@@ -41,7 +41,7 @@ class InterestController {
 
     def index() {
 
-        if(params.emails!=null){
+        if(params.emails!= null){
             String email = params.emails
 
             Person p = Person.findByEmail(email)
