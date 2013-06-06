@@ -75,8 +75,8 @@
 <div class= "rounded-corners" id="main-container">
     <br>
     <h1>Comments</h1>
-    <g:form controller="Comment" >
     <p class= "margin">Please enter any comments or concerns:</p>
+    <g:form controller="Comment" action="process" name = "comment-form" method="post">
     <table>
         <tr>
             <td>
@@ -89,7 +89,6 @@
                 <g:submitButton name="Submit" class="myButton" title="submit"></g:submitButton>
             </td>
         </tr>
-
     </table>
     </g:form>
 </div>
