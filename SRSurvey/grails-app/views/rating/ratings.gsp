@@ -156,7 +156,6 @@
 
 </head>
 <body>
-    ${questions.size()}
     <div class="rounded-corners" id="main-container">
         <br/><h1>Similarity Ratings</h1>
         <form action="" name="rating-form" id="rating-form" method="post">
