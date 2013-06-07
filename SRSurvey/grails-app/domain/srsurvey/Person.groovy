@@ -13,7 +13,6 @@ class Person {
 
     static constraints = {
         survey nullable: true
-        survey unique: true
         group nullable: true
         firstName nullable: true
         lastName nullable: true
