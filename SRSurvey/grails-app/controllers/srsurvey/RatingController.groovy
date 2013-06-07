@@ -18,7 +18,6 @@ class RatingController {
     }
 
     def processForm(){
-        print(params)
         for(i in params['checks']){
             //"add this into database for 'I don't know' checkbox"
             //i is the id for interest
