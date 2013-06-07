@@ -18,6 +18,7 @@ class RatingController {
     }
 
     def processForm(){
+        print(params)
         for(i in params['checks']){
             //"add this into database for 'I don't know' checkbox"
             //i is the id for interest
@@ -33,6 +34,9 @@ class RatingController {
 //                Question question = Question.get(Integer.parseInt(q.key))
 //                question.result = q.value
 //                question.save(flush: true)
+            print(q.key[0..4])
+            if(q.key[0..4]=="radio"){
+                print("This is the question number "+q.key+" and this is the score "+q.value+". Put these into the database.")
             }
         }
     }
