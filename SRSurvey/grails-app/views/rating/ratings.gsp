@@ -140,14 +140,15 @@
         <div style="display:none; margin: auto auto auto auto;" id="continue">
             <h5>Would you like to continue rating?</h5>
             <p style="text-align: center;font-family: Arial, Helvetica, sans-serif;">
-                <a href="reload_this_page"><button>Yes, I would like to rate some more</button></a>
-                <br/><br/>
-                or
-                <br/>  <br/>
                 <form action="" method="post"/>
-                <input id="comments" type="submit" name="submit" value="No, I'd like to finish the survey"/>
+                    <input id="more" type="submit" name="submit" value="Yes, I would like to rate some more"/>
+                    <br/><br/>
+                or
+                    <br/>  <br/>
+                    <input id="comments" type="submit" name="submit" value="No, I'd like to finish the survey"/>
 
-                    </form></p>
+                </form>
+            </p>
 
         </div>
     </g:form>
