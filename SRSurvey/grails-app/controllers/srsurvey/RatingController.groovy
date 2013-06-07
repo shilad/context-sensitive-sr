@@ -9,8 +9,10 @@ class RatingController {
         if(session.person==null){
             Person p = Person.findByEmail("zwang@macalester.edu")
             session.person = p.id
-            Survey s = new Survey(p)
-            s.save(flush: true)
+            Survey s = new Survey()
+            p.survey = s
+            p.save(flush: true)
+            print(s.id)
             session.survey = s.id
             SRService srService = new SRService()
             srService.assignGroup(p, new ArrayList<Interest>())
@@ -44,12 +46,10 @@ class RatingController {
             if(qparam.key[0..4]=="radio"){
                 //"This is the question id "+q.key+" and
                 // this is the score "+q.value+". Put these into the database."
-                print(qparam)
                 String id = qparam.key[6..-1]
-                print(id)
-//                Question question = Question.get(Integer.parseInt(id))
-//                question.result = qparam.value
-//                question.save(flush: true)
+                Question question = Question.get(Integer.parseInt(id))
+                question.result = qparam.value
+                question.save(flush: true)
             }
         }
     }
