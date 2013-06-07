@@ -39,7 +39,7 @@ class EmailController {
 
     def test = {
         if (params.email == null) {
-            Person p = Person.findByEmail("bhillman@macalester.edu")
+            Person p = Person.findByEmail("jrussel1@macalester.edu")
             params.email = p.email
             params.baseUrl = ""
             params.subject = "It works!"
