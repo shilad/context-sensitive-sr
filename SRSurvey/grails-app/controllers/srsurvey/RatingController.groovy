@@ -52,6 +52,7 @@ class RatingController {
                 question.save(flush: true)
             }
         }
+        redirect(controller: 'comment', action: 'show')
     }
 
     def index() {

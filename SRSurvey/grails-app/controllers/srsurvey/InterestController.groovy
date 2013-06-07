@@ -16,6 +16,7 @@ class InterestController {
 
     def process() {
         List<String> inputs = params.get("interest_inputs")
+        print(inputs)
 
         //Find the person
         Person p = Person.findById(session.person)
@@ -29,6 +30,8 @@ class InterestController {
         //Assign Group
         SRService sr = new SRService()
         sr.assignGroup(p, inputs)
+
+        redirect(controller: 'rating', action: 'ratings')
 
     }
 
