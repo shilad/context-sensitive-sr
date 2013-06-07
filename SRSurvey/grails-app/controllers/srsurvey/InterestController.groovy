@@ -1,7 +1,7 @@
 package srsurvey
 
 class InterestController {
-    def create() {
+    def interest() {
 
         if(params.emails!=null) {
             String email = params.emails
@@ -13,7 +13,7 @@ class InterestController {
                 session.person = p.id
             }
 
-            render(view:'create')
+            render(view:'interest')
         } else {
             redirect(url: "/")
         }
@@ -50,7 +50,7 @@ class InterestController {
                 session.person= p.id
             }
 
-            redirect(action: "create", params: [emails:params.emails])
+            redirect(action: "interest", params: [emails:params.emails])
         } else {
             redirect(url: "/")
         }
