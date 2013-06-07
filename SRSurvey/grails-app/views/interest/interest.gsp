@@ -217,44 +217,30 @@
         });
 
         $('form#interest-form').bind('keyup', function( e ) {
+            $("tr").each(function () {
+                if ($(this).find('input[type=text]').val() == "") {
 
-            if($('input[name=box1]', '#interest-form').val()==""&&
-                    $('input[name=box2]', '#interest-form').val()==""&&
-                    $('input[name=box3]', '#interest-form').val()==""&&
-                    $('input[name=box4]', '#interest-form').val()==""&&
-                    $('input[name=box5]', '#interest-form').val()==""&&
-                    $('input[name=box6]', '#interest-form').val()==""&&
-                    $('input[name=box7]', '#interest-form').val()==""&&
-                    $('input[name=box8]', '#interest-form').val()==""&&
-                    $('input[name=box9]', '#interest-form').val()==""&&
-                    $('input[name=box10]', '#interest-form').val()==""){
 
-                $('input[name=box1]', '#interest-form').addClass("error");
-
-            }
+                    $('input[name=box1]', '#interest-form').addClass("error");
+                }
+            });
 
         });
         $('#next').bind('click', function( e ) {
+            $("tr").each(function () {
+                if ($(this).find('input[type=text]').val() == "") {
 
-            if($('input[name=box1]', '#interest-form').val()==""&&
-                    $('input[name=box2]', '#interest-form').val()==""&&
-                    $('input[name=box3]', '#interest-form').val()==""&&
-                    $('input[name=box4]', '#interest-form').val()==""&&
-                    $('input[name=box5]', '#interest-form').val()==""&&
-                    $('input[name=box6]', '#interest-form').val()==""&&
-                    $('input[name=box7]', '#interest-form').val()==""&&
-                    $('input[name=box8]', '#interest-form').val()==""&&
-                    $('input[name=box9]', '#interest-form').val()==""&&
-                    $('input[name=box10]', '#interest-form').val()==""){
+                    $('input[name=box1]', '#interest-form').addClass("error");
 
-                $("input[name=box1]", "#interest-form").addClass("error");
-                $.fancybox({
-                    content: $('#error')
-                });
-            }
-            else{       alert("what?");
-                //submit form and move to rating page
-            }
+                    $.fancybox({
+                        content: $('#error')
+                    });
+                }
+                else{       alert("what?");
+                    //submit form and move to rating page
+                }
+            });
+
 
         });
 
