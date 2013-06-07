@@ -1,5 +1,7 @@
 package srsurvey
 
+import com.sun.xml.internal.bind.v2.TODO
+
 class RatingController {
 
     def ratings(){
@@ -19,6 +21,7 @@ class RatingController {
         }
         Person p = Person.findById(session.person)
 
+        //TODO: We assume that new questions will be asked each time
         List<Question> questions = new SRService().getQuestions(p.group)
 
         //Saving the questions
@@ -52,7 +55,14 @@ class RatingController {
                 question.save(flush: true)
             }
         }
-        redirect(controller: 'comment', action: 'show')
+
+        if(params['nextLocation']=="comments"){
+            redirect(controller: 'comment', action: 'show')            
+        }
+        else if(params['nextLocation']=="reload"){
+            //TODO: Add randomization for question grabbing and ensure that questions are not asked twice
+            redirect(action:'ratings')
+        }
     }
 
     def index() {
