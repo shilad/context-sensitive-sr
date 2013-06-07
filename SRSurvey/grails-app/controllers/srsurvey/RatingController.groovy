@@ -27,9 +27,16 @@ class RatingController {
             interest.save(flush: true)
         }
         for(q in params){
-            print(q.key[0..4])
+            print(q)
             if(q.key[0..4]=="radio"){
-                print("This is the question number "+q.key+" and this is the score "+q.value+". Put these into the database.")
+                //"This is the question id "+q.key+" and
+                // this is the score "+q.value+". Put these into the database."
+                Question question = Question.get(Integer.parseInt(q.key))
+                question.result = q.value
+                question.save(flush: true)
+                print(q.key[0..4])
+
+                //print("This is the question number "+q.key+" and this is the score "+q.value+". Put these into the database.")
             }
         }
     }
