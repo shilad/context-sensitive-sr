@@ -18,6 +18,9 @@ class SRService {
         int max = 2
         int num = rand.nextInt(max)
 
+        print ExperimentalGroup.findAll().get(num).name
+        print person.group
+
         person.setGroup(ExperimentalGroup.findAll().get(num))
         person.save(flush: true)
 
