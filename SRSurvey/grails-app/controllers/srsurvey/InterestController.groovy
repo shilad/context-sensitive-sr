@@ -2,14 +2,11 @@ package srsurvey
 
 class InterestController {
 
-    //TODO: alter create to link from consent interest
+
+    //links to the interest page
     def create() {
 
-
-            render(view:'create')
-        } else {
-            redirect(url: "/")
-        }
+        render(view: "create")
 
     }
 
@@ -49,7 +46,8 @@ class InterestController {
         }
     }
 
-    //links email to Consent.gsp
+
+    // Create connect from email to consent should be like create
     def consent() {
 
         if(params.emails!=null) {
@@ -68,6 +66,15 @@ class InterestController {
             redirect(url: "/")
         }
 
+    }
+
+        //Links Consent to Interest
+    def update(){
+
+        //Find the survey based off the person in session
+        Survey s = Survey.findByPerson(Person.findById(session.person))
+
+        render(view: "create")
     }
 
 

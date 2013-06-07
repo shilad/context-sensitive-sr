@@ -66,6 +66,7 @@
     <h1>Disclaimer  </h1>
     <br>
     <br>
+<g:form controller="Interest" action="update" name = "consent-form" method="post">
     <table>
         <tr>
             <td>
@@ -75,10 +76,11 @@
         <tr>
             <td style= "text-align: right; padding-right: 40;">
                 <br>
-                <a href="#" class="myButton">Yes, I consent</a>
+                <g:submitButton name="Yes, I consent" class="myButton" title="submit"></g:submitButton>
             </td>
         </tr>
     </table>
+</g:form>
 </div>
 </body>
 </html>
