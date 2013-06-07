@@ -2,7 +2,7 @@ package srsurvey
 
 class EmailController {
 
-    PersonService ps = new PersonService()
+
 
     def invite = {
 
@@ -12,18 +12,28 @@ class EmailController {
         String baseUrl = params.baseUrl
         String subj = params.subject
 
-        //Add person to our database
-        ps.create(email)
 
-        //Create the person object after the person has been created
-        Person p = Person.findByEmail(email)
+        try {
 
-        sendMail {
-            to email
-            subject subj
-            body (view:"http://localhost:8080/SRSurvey/email/inviteTemplate", model:[name:"Chris"])
+            //Create the person object after the person has been created
+            Person p = Person.findByEmail(email)
+
+            //To view the documentation for the plugin go here
+            //http://gpc.github.io/grails-mail/docs/guide/index.html
+            sendMail {
+                to email
+                subject subj
+                html view: "invite"
+            }
+
+            //Add person to our database
+            PersonService ps = new PersonService()
+            ps.create(email)
+
+            render('okay')
+
         }
-        render('okay')
+
 
     }
 
