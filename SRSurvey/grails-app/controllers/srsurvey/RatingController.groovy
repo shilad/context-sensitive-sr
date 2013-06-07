@@ -33,7 +33,8 @@ class RatingController {
             print("add this into database for 'I don't know' checkbox")
         }
         for(q in params){
-            if(q.key!="action"&&q.key!="controller"){
+            print(q.key[0..4])
+            if(q.key[0..4]=="radio"){
                 print("This is the question number "+q.key+" and this is the score "+q.value+". Put these into the database.")
             }
         }
