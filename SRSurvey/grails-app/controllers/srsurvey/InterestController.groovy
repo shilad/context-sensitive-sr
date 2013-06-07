@@ -1,22 +1,12 @@
 package srsurvey
 
 class InterestController {
+
+
+    //links to the interest page
     def interest() {
 
-        if(params.emails!=null) {
-            String email = params.emails
-
-            Person p = Person.findByEmail(email)
-
-            //put the person into session
-            if(session.person==null){
-                session.person = p.id
-            }
-
-            render(view:'interest')
-        } else {
-            redirect(url: "/")
-        }
+        render(view: 'interest')
 
     }
 
@@ -47,21 +37,44 @@ class InterestController {
 
             //put the person into session
             if(session.person==null){
-                session.person= p.id
+                session.person = p.id
             }
 
-            redirect(action: "interest", params: [emails:params.emails])
+            redirect(action: "create", params: [emails:params.emails])
         } else {
             redirect(url: "/")
         }
     }
 
-    def test() {
-        if (params.email == null) {
-            Person p = Person.findByEmail("bhillman@macalester.edu")
-            params.email = p.email
+
+    // Create connect from email to consent should be like create
+    def consent() {
+
+        if(params.emails!=null) {
+            String email = params.emails
+            print(email)
+            Person p = Person.findByEmail(email)
+            print(p)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            render(view:'consent')
+        } else {
+            redirect(url: "/")
         }
-        redirect(action: 'create', params: [emails:params.email])
+
+    }
+
+    //Links Consent to Interest
+    def update(){
+
+        //Find the survey based off the person in session
+        Survey s = Survey.findByPerson(Person.findById(session.person))
+
+        render(view: "interest")
     }
 
 
