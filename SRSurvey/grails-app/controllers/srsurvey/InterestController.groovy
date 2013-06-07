@@ -61,7 +61,7 @@ class InterestController {
             Person p = Person.findByEmail("bhillman@macalester.edu")
             params.email = p.email
         }
-        redirect(action: 'create', params: [emails:params.email])
+        redirect(action: 'interest', params: [emails:params.email])
     }
 
 
