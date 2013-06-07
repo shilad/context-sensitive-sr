@@ -62,8 +62,6 @@ class SRService {
             num1 = rand.nextInt(personInterests.size())
             num2 = rand.nextInt(personInterests.size())
 
-            if (Question.findBy)
-
             Question q = new Question(i, personInterests.get(num1).interest, personInterests.get(num2).interest, s)
             questions.add(q)
             }
