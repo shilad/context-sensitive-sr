@@ -34,35 +34,8 @@
     }
     .myButton {
 
-        -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        box-shadow:inset 0px 1px 0px 0px #ffffff;
-
-        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
-        background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
-
-        background-color:#ededed;
-
-        -moz-border-radius:15px;
-        -webkit-border-radius:15px;
-        border-radius:15px;
-
-        border:1px solid #666563;
-
-        display:inline-block;
-        color:#2b2926;
-        font-family:arial;
-        font-size:100%;
-        font-weight:bold;
-        padding:4px 9px;
-        text-decoration:none;
-
-        text-shadow:0px 1px 0px #ffffff;
+        font-size:100%!important;
+        padding:4px 9px!important;
 
     }
     .main-boxes{
