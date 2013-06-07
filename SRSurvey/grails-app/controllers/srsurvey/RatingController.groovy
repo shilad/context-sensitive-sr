@@ -28,11 +28,15 @@ class RatingController {
         }
         for(q in params){
             print(q)
-            if(q.key!="action"&&q.key!="controller"){
-                //"This is the question id "+q.key+" and this is the score "+q.value+". Put these into the database."
-//                Question question = Question.get(Integer.parseInt(q.key))
-//                question.result = q.value
-//                question.save(flush: true)
+            if(q.key[0..4]=="radio"){
+                //"This is the question id "+q.key+" and
+                // this is the score "+q.value+". Put these into the database."
+                Question question = Question.get(Integer.parseInt(q.key))
+                question.result = q.value
+                question.save(flush: true)
+                print(q.key[0..4])
+
+                //print("This is the question number "+q.key+" and this is the score "+q.value+". Put these into the database.")
             }
         }
     }

@@ -190,19 +190,19 @@
                             <table style="width: 100%;text-align: center;">
                                 <tr>
                                     <td>
-                                        1 <input type="radio" name="${q.id}" value="1"/>
+                                        1 <input type="radio" name="radio_${q.id}" value="1"/>
                                     </td>
                                     <td>
-                                        2 <input type="radio" name="${q.id}" value="2"/>
+                                        2 <input type="radio" name="radio_${q.id}" value="2"/>
                                     </td>
                                     <td>
-                                        3 <input type="radio" name="${q.id}" value="3"/>
+                                        3 <input type="radio" name="radio_${q.id}" value="3"/>
                                     </td>
                                     <td>
-                                        4 <input type="radio" name="${q.id}" value="4"/>
+                                        4 <input type="radio" name="radio_${q.id}" value="4"/>
                                     </td>
                                     <td>
-                                        5 <input type="radio" name="${q.id}" value="5"/>
+                                        5 <input type="radio" name="radio_${q.id}" value="5"/>
                                     </td>
                                 </tr>
                             </table>
@@ -251,32 +251,24 @@
 </html>
 
 <r:script>
-    if (typeof jQuery !== 'undefined') {
-        (function($) {
-            $('#spinner').ajaxStart(function() {
-                $(this).fadeIn();
-            }).ajaxStop(function() {
-                        $(this).fadeOut();
-                    });
-        })(jQuery);
-    }
+
     $(document).ready(function() {
 
 
         $(".fancybox").fancybox();
         $('#continue-button').click(function(e) {
-            var bool=true;
+            var isValidated=true;
             $("tr.main").each(function () {
                 //console.log($(this).find('input:checked'));
                 if ($(this).find('input:checked').length == 0) {
                     $(this).addClass("error");
-                    bool= false;
-                    //console.log(bool)
+                    isValidated= false;
+                    //console.log(isValidated)
 
                 }
 
             });
-            if(bool==true){
+            if(isValidated==true){
                 //alert(bool);
                 $('#continue-button').addClass("fancybox");
                 $.fancybox({
