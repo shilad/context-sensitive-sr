@@ -14,7 +14,7 @@
     <title>Similarity Ratings</title>
     <style>
 
-    #rating-bars{
+    .rating-bars{
         right: 0%;
         width: 500px;
         float: right;
