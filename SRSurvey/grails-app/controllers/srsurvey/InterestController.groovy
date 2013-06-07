@@ -66,6 +66,8 @@ class InterestController {
             print(email)
             Person p = Person.findByEmail(email)
             print(p)
+            Survey s = new Survey(p)
+            s.save(flush: true)
 
             //put the person into session
             if(session.person==null)
