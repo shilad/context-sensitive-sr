@@ -93,3 +93,14 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+grails {
+    mail {
+        host = "smtp.live.com"
+        port = 587
+        username = "shiladresearch@outlook.com"
+        password = "P@ssword!"
+        props = ["mail.smtp.starttls.enable":"true",
+                "mail.smtp.port":"587"]
+    }
+}
+
