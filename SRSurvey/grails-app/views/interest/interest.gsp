@@ -66,7 +66,7 @@
     <h1> Interests </h1>
     <br>
     <br>
-    <form action= "unnamed" name = "interest-form" id= "interest-form" method="post">
+    <form action= "/SRSurvey/interest/process" name = "interest-form" id= "interest-form" method="post">
         <table>
             <tr>
                 <td>
@@ -74,62 +74,62 @@
                     <table>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box1">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box2">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box3">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box4">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box5">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
 
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box6">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box7">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box8">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box9">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box10">
+                                <input type="text" name="interest_inputs">
                                 <br>
                             </td>
                         </tr>
