@@ -1,7 +1,7 @@
 package srsurvey
 
 class InterestController {
-    def create() {
+    def interest() {
 
         if(params.emails!=null) {
             String email = params.emails
