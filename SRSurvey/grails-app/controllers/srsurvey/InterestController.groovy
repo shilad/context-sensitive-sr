@@ -16,15 +16,18 @@ class InterestController {
 
     def process() {
         List<String> inputs = params.get("interest_inputs")
-        print(inputs)
+        //print(inputs)
 
         //Find the person
         Person p = Person.findById(session.person)
 
         //Associate the person with the interest
         PersonService ps = new PersonService(p)
+        //print(inputs+"here")
         for (interest in inputs){
-            ps.addInterest(interest)
+            if(interest!=""){
+                ps.addInterest(interest)
+            }
         }
 
         //Assign Group
