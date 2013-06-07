@@ -8,42 +8,35 @@ package srsurvey
  *
  * It is crucial that all actions call checkAuth() first.
  */
-class AdministratorController {
-    private static int AUTH_KEY = newKey()
+class EmailController {
+
     def personService
 
-    def resetKey = {
-        AUTH_KEY = newKey()
-        println("AUTH_KEY is " + AUTH_KEY)
-        render("key reset... new key will appear in log file.  Grep for AUTH_KEY")
-    }
-
-    def ping = {
-        render("pong")
-    }
-
-    private static int newKey() {
-        return new Random().nextInt()
-//        return 1
-    }
-
     def invite = {
-        checkAuth()
         ['template', 'email', 'baseUrl', 'subject'].each({
             if (!params[it]) {
                 throw new IllegalArgumentException("missing ${it} parameter")
             }
         })
+
+        //TODO: Presumably the parameters we need to send emails, needs verification
         String template = params.template
         String email = params.email
         String baseUrl = params.baseUrl
         String subj = params.subject
-        Person p = personService.findByEmail(params.email)
+
+        //Add person to our database
+        personService.create(email)
+
+        //Create the person object after the person has been created
+        Person p = Person.findByEmail(email)
+
+
         if (p) {
-            String password = p.resetPasswd()
             String body = g.render(
                         template: "${template}",
                         model : [person : p, password : password, baseUrl : baseUrl]
+
                 )
             sendMail {
                 to "${email}"
@@ -57,9 +50,4 @@ class AdministratorController {
 
     }
 
-    private def checkAuth() {
-        if ((params.key as int) != AUTH_KEY) {
-            throw new IllegalArgumentException("invalid authorization key")
-        }
-    }
 }

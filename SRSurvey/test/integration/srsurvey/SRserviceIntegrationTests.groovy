@@ -25,5 +25,7 @@ class SRserviceIntegrationTests {
             print i.interest2.text
             print i.questionNumber
         }
+        Person p = Person.findByEmail("bhillman@macalester.edu")
+        srService.assignGroup(p, new ArrayList<Interest>())
     }
 }
