@@ -19,8 +19,7 @@ class ExperimentalGroupIntegrationTests {
     void testRelations() {
         ExperimentalGroup g = ExperimentalGroup.findAll().get(0)
         Person p = Person.get(0)
-        g.setPerson(p)
-        g.save(flush: true)
-
+        g.person = p
+        g.save()
     }
 }
