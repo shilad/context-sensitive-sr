@@ -257,18 +257,18 @@
 
         $(".fancybox").fancybox();
         $('#continue-button').click(function(e) {
-            var bool=true;
+            var isValidated=true;
             $("tr.main").each(function () {
                 //console.log($(this).find('input:checked'));
                 if ($(this).find('input:checked').length == 0) {
                     $(this).addClass("error");
-                    bool= false;
-                    //console.log(bool)
+                    isValidated= false;
+                    //console.log(isValidated)
 
                 }
 
             });
-            if(bool==true){
+            if(isValidated==true){
                 //alert(bool);
                 $('#continue-button').addClass("fancybox");
                 $.fancybox({
