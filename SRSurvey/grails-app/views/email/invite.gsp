@@ -4,9 +4,9 @@
 <head><title>Macademia</title></head>
 <body>
 
-<b>It works Jesse quite screwing around</b>
-
 <h1>Hello</h1> World!
+
+<a href="${baseUrl}?emails=${email}">Click here or else</a>
 
 </body>
 </html>
