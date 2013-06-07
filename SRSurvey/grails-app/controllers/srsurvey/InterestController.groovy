@@ -5,9 +5,8 @@ class InterestController {
 
         if(params.emails!=null) {
             String email = params.emails
-            print(email)
+
             Person p = Person.findByEmail(email)
-            print(p)
 
             //put the person into session
             if(session.person==null){
@@ -48,7 +47,7 @@ class InterestController {
 
             //put the person into session
             if(session.person==null){
-                session.person = p.id
+                session.person= p.id
             }
 
             redirect(action: "interest", params: [emails:params.emails])
@@ -56,4 +55,14 @@ class InterestController {
             redirect(url: "/")
         }
     }
+
+    def test() {
+        if (params.email == null) {
+            Person p = Person.findByEmail("bhillman@macalester.edu")
+            params.email = p.email
+        }
+        redirect(action: 'create', params: [emails:params.email])
+    }
+
+
 }
