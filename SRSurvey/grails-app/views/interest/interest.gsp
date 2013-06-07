@@ -205,6 +205,7 @@
             $("tr.main-boxes").each(function () {
                 if ($(this).find('input').val() != "") {
                     validated=true;
+
                 }
 
             });
