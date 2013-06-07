@@ -5,18 +5,31 @@ class RatingController {
     def ratings(){
 
         //TODO: Get the person from the session, delete this part! Testing only!
-        if(session.person==null){
-            Person p = Person.findByEmail("zwang@macalester.edu")
-            session.person = p
-            SRService srService = new SRService()
-            srService.assignGroup(p, new ArrayList<Interest>())
-        }
-        Person p = session.person
-
-        List<Question> questions = new SRService().getQuestions(p.group)
-
-        //TODO: Change here to send in all questions
-        render(view:'ratings', model:[questions:questions[0..5]])
+        session.person = null
+        print(person)
+//        if(session.person==null){
+//            Person p = Person.findByEmail("zwang@macalester.edu")
+//            session.person = p.id
+//            Survey s = new Survey(p)
+//            s.save(flush: true)
+//            session.survey = s.id
+//            SRService srService = new SRService()
+//            srService.assignGroup(p, new ArrayList<Interest>())
+//        }
+//        Person p = Person.findById(session.person)
+//
+//        List<Question> questions = new SRService().getQuestions(p.group)
+//
+//        //Saving the questions
+//        for (q in questions){
+//            if (q.id == null){
+//                q.survey = p.survey
+//                q.save(flush: true)
+//            }
+//        }
+//
+//        //TODO: Change here to send in all questions
+//        render(view:'ratings', model:[questions:questions[0..5]])
     }
 
     def processForm(){
