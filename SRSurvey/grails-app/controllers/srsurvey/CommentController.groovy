@@ -13,7 +13,7 @@ class CommentController {
 
 
         //Set the comment for a particular survey
-        s.setComment(params.get("text-area"))
+        s.setComment(params["text-area"])
         s.save(flush: true)
 
         //TODO: change this to the final view when created
