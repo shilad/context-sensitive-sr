@@ -65,7 +65,7 @@ class InterestController {
         } else {
             redirect(url: "/")
         }
-        redirect(action: 'interest', params: [emails:params.email])
+
     }
 
     //Links Consent to Interest
