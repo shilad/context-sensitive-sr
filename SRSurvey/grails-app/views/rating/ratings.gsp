@@ -131,7 +131,7 @@
                 <td style="width: 62%;text-align: right; padding-right: 1em;">
 
 
-                    <a href="#continue" class="myButton" id="continue-button">Next</a>
+                    <a href="#" class="myButton" id="continue-button">Next</a>
 
                 </td>
             </tr>
@@ -177,7 +177,7 @@
 
             });
             if(isValidated==true){
-                //alert(bool);
+                //alert(isValidated);
                 $('#continue-button').addClass("fancybox");
                 $.fancybox({
                     content: $('#continue')
@@ -194,6 +194,13 @@
 
         });
         $("#comments").click(function(e) {
+            var input = $("<input>").attr("type", "hidden").attr("name", "nextLocation").val("comments");
+            $('#rating-form').append($(input));
+            $("#rating-form").submit();
+        });
+        $("#more").click(function(e) {
+            var input = $("<input>").attr("type", "hidden").attr("name", "nextLocation").val("reload");
+            $('#rating-form').append($(input));
             $("#rating-form").submit();
         });
     });

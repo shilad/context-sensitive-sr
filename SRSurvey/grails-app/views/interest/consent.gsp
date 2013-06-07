@@ -44,7 +44,7 @@
         <tr>
             <td style= "text-align: right; padding-right: 40;">
                 <br>
-                <g:submitButton name="Yes, I consent" class="myButton" title="submit"></g:submitButton>
+                <button name="nextpage" class="myButton">Yes, I consent</button>
             </td>
         </tr>
     </table>

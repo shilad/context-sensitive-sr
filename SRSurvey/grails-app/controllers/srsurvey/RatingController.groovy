@@ -1,5 +1,7 @@
 package srsurvey
 
+import com.sun.xml.internal.bind.v2.TODO
+
 class RatingController {
 
     def ratings(){
@@ -19,6 +21,7 @@ class RatingController {
         }
         Person p = Person.findById(session.person)
 
+        //TODO: We assume that new questions will be asked each time
         List<Question> questions = new SRService().getQuestions(p.group)
 
         //Saving the questions
@@ -34,6 +37,9 @@ class RatingController {
     }
 
     def processForm(){
+        print(params)
+
+
         for(i in params['checks']){
             //"add this into database for 'I don't know' checkbox"
             //i is the id for interest
@@ -51,6 +57,14 @@ class RatingController {
                 question.result = qparam.value
                 question.save(flush: true)
             }
+        }
+
+        if(params['nextLocation']=="comments"){
+            redirect(action: "comment", params: [emails:params.emails])
+        }
+        else if(params['nextLocation']=="reload"){
+            //TODO: Add randomization for question grabbing and ensure that questions are not asked twice
+            redirect(action:'ratings')
         }
     }
 
