@@ -1,27 +1,22 @@
 package srsurvey
 
 class InterestController {
+
+
+    //Links Consent to Interest page
+
     def interest() {
 
-        if(params.emails!=null) {
-            String email = params.emails
+        //Find the survey based off the person in session
+        Survey s = Survey.findByPerson(Person.findById(session.person))
 
-            Person p = Person.findByEmail(email)
-
-            //put the person into session
-            if(session.person==null){
-                session.person = p.id
-            }
-
-            render(view:'interest')
-        } else {
-            redirect(url: "/")
-        }
+        render(view: 'interest')
 
     }
 
     def process() {
         List<String> inputs = params.get("interest_inputs")
+        print(inputs)
 
         //Find the person
         Person p = Person.findById(session.person)
@@ -36,6 +31,8 @@ class InterestController {
         SRService sr = new SRService()
         sr.assignGroup(p, inputs)
 
+        redirect(controller: 'rating', action: 'ratings')
+
     }
 
     def index() {
@@ -47,7 +44,7 @@ class InterestController {
 
             //put the person into session
             if(session.person==null){
-                session.person= p.id
+                session.person = p.id
             }
 
             redirect(action: "interest", params: [emails:params.emails])
@@ -56,13 +53,30 @@ class InterestController {
         }
     }
 
-    def test() {
-        if (params.email == null) {
-            Person p = Person.findByEmail("bhillman@macalester.edu")
-            params.email = p.email
+    // Create connect from email to consent should be like create
+    def consent()
+    {
+
+        if(params.emails!=null)
+        {
+            String email = params.emails
+            print(email)
+            Person p = Person.findByEmail(email)
+            print(p)
+
+            //put the person into session
+            if(session.person==null)
+            {
+                session.person = p.id
+            }
+
+            render(view:'consent')
+        } else
+        {
+            redirect(url: "/")
         }
-        redirect(action: 'interest', params: [emails:params.email])
     }
+
 
 
 }
