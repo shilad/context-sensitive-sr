@@ -13,26 +13,23 @@ class EmailController {
         String subj = params.subject
 
 
-        try {
 
-            //Create the person object after the person has been created
-            Person p = Person.findByEmail(email)
+        //Create the person object after the person has been created
+        Person p = Person.findByEmail(email)
 
-            //To view the documentation for the plugin go here
-            //http://gpc.github.io/grails-mail/docs/guide/index.html
-            sendMail {
-                to email
-                subject subj
-                html view: "invite"
-            }
-
-            //Add person to our database
-            PersonService ps = new PersonService()
-            ps.create(email)
-
-            render('okay')
-
+        //To view the documentation for the plugin go here
+        //http://gpc.github.io/grails-mail/docs/guide/index.html
+        sendMail {
+            to email
+            subject subj
+            html view: "invite", model: [email:params.email, baseUrl: params.baseUrl]
         }
+
+        //Add person to our database
+        PersonService ps = new PersonService()
+        ps.create(email)
+
+        render('Okay')
 
 
     }
@@ -41,7 +38,7 @@ class EmailController {
         if (params.email == null) {
             Person p = Person.findByEmail("bhillman@macalester.edu")
             params.email = p.email
-            params.baseUrl = ""
+            params.baseUrl = "http://localhost:8080/SRSurvey/interest/consent"
             params.subject = "It works!"
 
         }
