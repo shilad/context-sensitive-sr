@@ -4,7 +4,7 @@ function urlencode() {
 
 EMAIL_FILE=$1
 APP_URL="http://localhost:8080/SRSurvey"
-SUB_RAW="Tesing From The Survey Team!"
+SUB_RAW="TestingFromtheSurveyTeam!!!!!"
 SUBJECT=`urlencode $SUB_RAW`
 BASE_URL_RAW="http://localhost:8080/SRSurvey/interest/consent"
 BASE_URL=`urlencode $BASE_URL_RAW`
