@@ -38,8 +38,8 @@ class SRService {
         List<Question> questions = new ArrayList<Question>()
 
         //Find the survey the questions belong to
-        Survey s = new Survey(Survey.findByPerson(Person.findByGroup(g)))
-
+        //Survey s = new Survey(Person.findByGroup(g))
+        Survey s = Survey.findByPerson(Person.findByGroup(g))
 
         List<InterestToGroup> personInterests = InterestToGroup.findAllByGroup(g)
 
@@ -79,7 +79,7 @@ class SRService {
             questions.add(q)
         }
 
-    return questions
+         return questions
     }
 
 }
