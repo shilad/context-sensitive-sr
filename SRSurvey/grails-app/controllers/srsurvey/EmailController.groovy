@@ -13,7 +13,7 @@ class EmailController {
         String subj = params.subject
 
 
-        try {
+
 
             //Create the person object after the person has been created
             Person p = Person.findByEmail(email)
@@ -32,7 +32,7 @@ class EmailController {
 
             render('okay')
 
-        }
+
 
 
     }
