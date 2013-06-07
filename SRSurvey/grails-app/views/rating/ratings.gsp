@@ -99,16 +99,16 @@
                             <table style="width: 100%;text-align: center;">
                                 <tr>
                                     <td>
-                                        1 <input type="radio" name="${'radio'+q.getId()}" value="1"/>
+                                        1 <input type="radio" name="${"radio_"+q.id}" value="1"/>
                                     </td>
                                     <td>
-                                        2 <input type="radio" name="radio_+${q.id.toString()}" value="2"/>
+                                        2 <input type="radio" name="${"radio_"+q.id}" value="2"/>
                                     </td>
                                     <td>
-                                        3 <input type="radio" name="${q.getQuestionNumber()}" value="3"/>
+                                        3 <input type="radio" name="${"radio_"+q.id}" value="3"/>
                                     </td>
                                     <td>
-                                        4 <input type="radio" name = "${q.id}" value="4"/>
+                                        4 <input type="radio" name ="${"radio_"+q.id}" value="4"/>
                                     </td>
                                     <td>
                                         5 <input type="radio" name="${"radio_"+q.id}" value="5"/>
