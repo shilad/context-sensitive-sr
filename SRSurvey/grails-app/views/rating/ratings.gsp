@@ -60,9 +60,7 @@
         font-size: 12px;
     }
 
-    #main-container{
-        width: 900px !important;
-    }
+
     </style>
 
 </head>
