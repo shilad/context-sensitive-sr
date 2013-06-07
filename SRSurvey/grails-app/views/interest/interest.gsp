@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: research
-  Date: 6/4/13
-  Time: 4:31 PM
+  User: zixiao
+  Date: 6/5/13
+  Time: 2:12 PM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -65,7 +65,9 @@
         text-shadow:0px 1px 0px #ffffff;
 
     }
-
+    .main-boxes{
+        padding:5px;
+    }
 
     .indent-click{
         margin: 4px 0px 0px 70px
@@ -97,62 +99,62 @@
                 <td>
 
                     <table>
-                        <tr>
+                        <tr class="main-boxes">
                             <td>
                                 <input type="text" name="box1">
                                 <br>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="main-boxes">
                             <td>
                                 <input type="text" name="box2">
                                 <br>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="main-boxes">
                             <td>
                                 <input type="text" name="box3">
                                 <br>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="main-boxes">
                             <td>
                                 <input type="text" name="box4">
                                 <br>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="main-boxes">
                             <td>
                                 <input type="text" name="box5">
                                 <br>
                             </td>
                         </tr>
 
-                        <tr class="extra">
+                        <tr class="extra main-boxes">
                             <td>
                                 <input type="text" name="box6">
                                 <br>
                             </td>
                         </tr>
-                        <tr class="extra">
+                        <tr class="extra main-boxes">
                             <td>
                                 <input type="text" name="box7">
                                 <br>
                             </td>
                         </tr>
-                        <tr class="extra">
+                        <tr class="extra main-boxes">
                             <td>
                                 <input type="text" name="box8">
                                 <br>
                             </td>
                         </tr>
-                        <tr class="extra">
+                        <tr class="extra main-boxes">
                             <td>
                                 <input type="text" name="box9">
                                 <br>
                             </td>
                         </tr>
-                        <tr class="extra">
+                        <tr class="extra main-boxes">
                             <td>
                                 <input type="text" name="box10">
                                 <br>
@@ -206,50 +208,43 @@
 
         });
 
-        $('form#interest-form input[name=box1]').bind('click keyup', function( e ) {
-            if ( $('input[name=box1]', '#interest-form').hasClass('error') ) {
-                $('input[name=box1]', '#interest-form').removeClass('error');
-            }
-        });
 
-        $('form#interest-form').bind('keyup', function( e ) {
+        $('form#interest-form').bind('click keyup', function( e ) {
+            var noError = false;
+            $("tr.main-boxes").each(function () {
+                if ($(this).find('input[type=text]').val() != "") {
 
-            if($('input[name=box1]', '#interest-form').val()==""&&
-                    $('input[name=box2]', '#interest-form').val()==""&&
-                    $('input[name=box3]', '#interest-form').val()==""&&
-                    $('input[name=box4]', '#interest-form').val()==""&&
-                    $('input[name=box5]', '#interest-form').val()==""&&
-                    $('input[name=box6]', '#interest-form').val()==""&&
-                    $('input[name=box7]', '#interest-form').val()==""&&
-                    $('input[name=box8]', '#interest-form').val()==""&&
-                    $('input[name=box9]', '#interest-form').val()==""&&
-                    $('input[name=box10]', '#interest-form').val()==""){
+                    noError=true
 
+
+                }
+            });
+            if(noError==false){
                 $('input[name=box1]', '#interest-form').addClass("error");
-
+            }
+            else{
+                $('input[name=box1]', '#interest-form').removeClass('error');
             }
 
         });
         $('#next').bind('click', function( e ) {
+            var validated = false;
+            $("tr.main-boxes").each(function () {
+                if ($(this).find('input').val() != "") {
+                    validated=true;
+                    alert($(this).find('input').val());
+                }
 
-            if($('input[name=box1]', '#interest-form').val()==""&&
-                    $('input[name=box2]', '#interest-form').val()==""&&
-                    $('input[name=box3]', '#interest-form').val()==""&&
-                    $('input[name=box4]', '#interest-form').val()==""&&
-                    $('input[name=box5]', '#interest-form').val()==""&&
-                    $('input[name=box6]', '#interest-form').val()==""&&
-                    $('input[name=box7]', '#interest-form').val()==""&&
-                    $('input[name=box8]', '#interest-form').val()==""&&
-                    $('input[name=box9]', '#interest-form').val()==""&&
-                    $('input[name=box10]', '#interest-form').val()==""){
+            });
+            if(validated==true){       alert("what?");
+                //submit form and move to rating page
+            }
+            else{
+                $('input[name=box1]', '#interest-form').addClass("error");
 
-                $("input[name=box1]", "#interest-form").addClass("error");
                 $.fancybox({
                     content: $('#error')
                 });
-            }
-            else{       alert("what?");
-                //submit form and move to rating page
             }
 
         });
