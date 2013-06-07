@@ -209,7 +209,8 @@
                 }
 
             });
-            if(validated==true){       alert("what?");
+            if(validated==true){
+                $("#interest-form").submit();
                 //submit form and move to rating page
             }
             else{
