@@ -2,6 +2,10 @@ package srsurvey
 
 class InterestController {
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 04723f8d3d4a4d536a8b45775a137b5add2229be
     //links to the interest page
     def interest() {
 
@@ -45,6 +49,7 @@ class InterestController {
         }
     }
 
+<<<<<<< HEAD
     def test()
     {
         if (params.email == null)
@@ -56,6 +61,8 @@ class InterestController {
     }
 
 
+=======
+>>>>>>> 04723f8d3d4a4d536a8b45775a137b5add2229be
 
     // Create connect from email to consent should be like create
     def consent()
@@ -79,7 +86,7 @@ class InterestController {
         {
             redirect(url: "/")
         }
-
+        redirect(action: 'interest', params: [emails:params.email])
     }
 
     //Links Consent to Interest
