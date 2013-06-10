@@ -33,6 +33,7 @@ class RatingController {
         }
 
         //TODO: Change here to send in all questions
+        //TODO: On the javascript page we need to disable the rating radios if the user checked the checkbox
         render(view:'ratings', model:[questions:questions[0..5]])
     }
 

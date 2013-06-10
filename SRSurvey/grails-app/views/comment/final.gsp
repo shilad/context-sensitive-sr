@@ -1,17 +1,39 @@
 <%--
   Created by IntelliJ IDEA.
-  User: research
-  Date: 6/6/13
-  Time: 2:11 PM
+  User: Jesse
+  Date: 6/4/13
+  Time: 10:46 AM
   To change this template use File | Settings | File Templates.
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title></title>
+    <title>Thank you</title>
+    <meta name="layout" content="main"/>
+    <r:require modules="core" />
+    <style type="text/css">
+
+    p.margin
+    {
+        margin: 60px 20px 0px 95px;
+    }
+
+    #main-container{
+        height: 500px;
+    }
+
+    </style>
+
+
 </head>
 <body>
-    Your survey has been processed!
+<div class= "rounded-corners" id="main-container">
+    <br>
+    <h1>Thank You!</h1>
+    <br><br><br><br>
+    <p class= "margin">Thanks for answering our survey. Your responses are being processed.</p>
+
+</div>
 </body>
 </html>
