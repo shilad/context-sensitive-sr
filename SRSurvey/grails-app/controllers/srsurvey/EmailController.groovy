@@ -22,16 +22,14 @@ class EmailController {
         sendMail {
             to email
             subject subj
-            html view: "invite"
+            html view: "invite", model: [email:params.email, baseUrl: params.baseUrl]
         }
 
         //Add person to our database
         PersonService ps = new PersonService()
         ps.create(email)
 
-        render('okay')
-
-
+        render('Okay')
 
 
     }
@@ -40,7 +38,7 @@ class EmailController {
         if (params.email == null) {
             Person p = Person.findByEmail("bhillman@macalester.edu")
             params.email = p.email
-            params.baseUrl = ""
+            params.baseUrl = "http://localhost:8080/SRSurvey/interest/consent"
             params.subject = "It works!"
 
         }
