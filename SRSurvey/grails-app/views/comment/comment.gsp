@@ -45,8 +45,7 @@
     <table>
         <tr>
             <td>
-                <textarea rows="4" cols="50" class = "rounded-corners"  id = "text-area" name="text-area">
-                </textarea>
+                <textarea rows="4" cols="50" class = "rounded-corners"  id = "text-area" name="text-area"></textarea>
             </td>
         </tr>
         <tr>
