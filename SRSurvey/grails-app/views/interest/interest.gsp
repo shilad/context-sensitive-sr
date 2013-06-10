@@ -162,7 +162,7 @@
             </tr>
         </table>
     </form>
-    <div id="error" style="display: none;">You must enter at least three interest.</div>
+    <div id="error" style="display: none;">You must enter at least three interests.</div>
 </div>
 </body>
 </html>
@@ -186,19 +186,31 @@
 
         $('form#interest-form').bind('click keyup', function( e ) {
             var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
                 if ($(this).find('input[type=text]').val() != "") {
-
+                    if(i==2){
                     noError=true
-
-
+                    }
+                    i++;
                 }
             });
             if(noError==false){
-                $('input[name=box1]', '#interest-form').addClass("error");
+                var i=0;
+                $("tr.main-boxes").each(function () {
+                    if(i<3){
+                        $(this).find('input[type=text]').addClass("error");
+                        i++;
+                    }
+                });
             }
             else{
-                $('input[name=box1]', '#interest-form').removeClass('error');
+                $("tr.main-boxes").each(function () {
+
+                   $(this).find('input[type=text]').removeClass("error");
+
+                });
+
             }
 
         });
@@ -216,7 +228,13 @@
                 //submit form and move to rating page
             }
             else{
-                $('input[name=box1]', '#interest-form').addClass("error");
+                var i=0;
+                $("tr.main-boxes").each(function () {
+                    if(i<3){
+                        $(this).find('input[type=text]').addClass("error");
+                        i++;
+                    }
+                });
 
                 $.fancybox({
                     content: $('#error')
