@@ -19,6 +19,8 @@
     }
     p {text-indent:45px;}
 
+    strong {font-weight: bold !important}
+
     input{
         margin: 19px 1px 0px 47px;
         width: 266px;
@@ -150,7 +152,7 @@
                 </td>
                 <td>
                     <br>
-                    <p class="margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+                    <p class="margin"> Please enter at least <strong>three</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
                 </td>
             </tr>
             <tr>
