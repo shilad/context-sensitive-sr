@@ -152,7 +152,7 @@
                 </td>
                 <td>
                     <br>
-                    <p class="margin"> Please enter at least <strong>three</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+                    <p class="margin"> Please enter at least <strong>THREE</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter up to ten interests.  These can be broad or specific. </p>
                 </td>
             </tr>
             <tr>
@@ -162,7 +162,7 @@
             </tr>
         </table>
     </form>
-    <div id="error" style="display: none;">You must enter at least one interest.</div>
+    <div id="error" style="display: none;">You must enter at least three interest.</div>
 </div>
 </body>
 </html>
