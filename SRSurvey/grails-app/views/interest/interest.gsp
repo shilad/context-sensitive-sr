@@ -74,62 +74,62 @@
                     <table>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
 
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="interest_inputs">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
