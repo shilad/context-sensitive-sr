@@ -87,9 +87,9 @@
                     </td>
 
                     <td style="width: 8%;padding-left: 3%;padding-right: 3%;" >
-                        <input type="checkbox" name="checks" id="${q.interest1.id}" value="${q.interest1.id}">
+                        <input type="checkbox" name="checks" class="checks" id="${q.interest1.id}" value="${q.interest1.id}">
                         <br/><br/>
-                        <input type="checkbox" name="checks" id="${q.interest2.id}" value="${q.interest2.id}">
+                        <input type="checkbox" name="checks" class="checks" id="${q.interest2.id}" value="${q.interest2.id}">
                     </td>
 
                     <td style="width: 62%;">
@@ -186,7 +186,27 @@
             }
 
         });
+        $(".checks").live('click', function( e ) {
+            $("tr.main").each(function () {
 
+                if ($(this).find('input[type=checkbox]:checked').length > 0) {
+
+                    $(this).find(".rating-bars").fadeTo(500,.5);
+                    $(this).find("input[type=radio]").attr('disabled','disabled');
+                    $(this).find("input[type=radio]").prop('checked',false);
+                    //console.log($(this).find("input[type=radio]"));
+
+
+                }
+                else{
+                    $(this).find(".rating-bars").fadeTo(500,1);
+                    $(this).find("input[type=radio]").removeAttr('disabled','disabled');
+                    //console.log($(this).find("input[type=radio]"));
+                }
+
+            });
+
+        });
         $("tr").live('click', function( e ) {
             if ( $(this).hasClass('error') ) {
                 $(this).removeClass('error');
