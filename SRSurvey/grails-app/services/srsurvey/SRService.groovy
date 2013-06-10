@@ -18,6 +18,9 @@ class SRService {
         int max = 2
         int num = rand.nextInt(max)
 
+        print ExperimentalGroup.findAll().get(num).name
+        print person.group
+
         person.setGroup(ExperimentalGroup.findAll().get(num))
         person.save(flush: true)
 
@@ -35,8 +38,8 @@ class SRService {
         List<Question> questions = new ArrayList<Question>()
 
         //Find the survey the questions belong to
-        Survey s = new Survey(Survey.findByPerson(Person.findByGroup(g)))
-
+        //Survey s = new Survey(Person.findByGroup(g))
+        Survey s = Survey.findByPerson(Person.findByGroup(g))
 
         List<InterestToGroup> personInterests = InterestToGroup.findAllByGroup(g)
 
@@ -58,6 +61,7 @@ class SRService {
         while (i++ <= 20) {
             num1 = rand.nextInt(personInterests.size())
             num2 = rand.nextInt(personInterests.size())
+
             Question q = new Question(i, personInterests.get(num1).interest, personInterests.get(num2).interest, s)
             questions.add(q)
             }
@@ -76,7 +80,7 @@ class SRService {
             questions.add(q)
         }
 
-    return questions
+         return questions
     }
 
 }
