@@ -18,6 +18,7 @@
         margin: 10px 1px 0px 81px;
         width: 500px;
         height: 250px;
+        padding: 5;
         background-color: whitesmoke;
         resize: none;
         border: 2.4px solid #000000;
