@@ -14,7 +14,7 @@
     <r:require modules="core" />
     <style type="text/css">
     #text-area{
-
+        padding: 5px;
         margin: 10px 1px 0px 81px;
         width: 500px;
         height: 250px;
