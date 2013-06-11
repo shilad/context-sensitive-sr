@@ -12,16 +12,13 @@ import java.util.ArrayList;
 public class People {
     private static String email="";
     private static String id="";
-    private static ArrayList<Interest> Interest=new ArrayList<Interest>();
+    private static ArrayList<Interest> interest=new ArrayList<Interest>();
 
-    public People(String id, String email, ArrayList<Interest> Interest){
-        id=this.id;
-        email=this.email;
-        Interest=this.Interest;
-    }
+
     public People(String id, String email){
-        id=this.id;
-        email=this.email;
+        this.id=id;
+        this.email=email;
+
     }
     public String getID(){
 
@@ -29,7 +26,7 @@ public class People {
     }
     public void setID(String id){
 
-        id=this.id;
+        this.id=id;
     }
     public String getEmail(){
 
@@ -37,14 +34,14 @@ public class People {
     }
     public void setEmail(String email){
 
-        email=this.email;
+        this.email=email;
     }
     public ArrayList<Interest> getInterest(){
 
-        return Interest;
+        return interest;
     }
-    public void setInterest(ArrayList<Interest> Interest){
+    public void setInterest(ArrayList<Interest> interest){
 
-        Interest=this.Interest;
+        this.interest=interest;
     }
 }

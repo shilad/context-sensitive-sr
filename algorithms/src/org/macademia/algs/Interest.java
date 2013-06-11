@@ -5,9 +5,9 @@ package org.macademia.algs;
 public class Interest {
 
     String name;
-    int id;
+    String id;
 
-    Interest(String name, int id){
+    Interest(String name, String id){
         this.name=name;
         this.id=id;
     }
@@ -16,7 +16,7 @@ public class Interest {
         this.name=name;
     }
 
-    public void setID(int id){
+    public void setID(String id){
         this.id=id;
     }
 
@@ -24,7 +24,7 @@ public class Interest {
         return this.name;
     }
 
-    public int getID(){
+    public String getID(){
         return this.id;
     }
 }
