@@ -195,16 +195,8 @@
                     i++;
                 }
             });
-            if(noError==false){
-                var i=0;
-                $("tr.main-boxes").each(function () {
-                    if(i<3){
-                        $(this).find('input[type=text]').addClass("error");
-                        i++;
-                    }
-                });
-            }
-            else{
+            if(noError==true){
+
                 $("tr.main-boxes").each(function () {
 
                    $(this).find('input[type=text]').removeClass("error");
@@ -215,15 +207,17 @@
 
         });
         $('#next').bind('click', function( e ) {
-            var validated = false;
+            var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
-                if ($(this).find('input').val() != "") {
-                    validated=true;
-
+                if ($(this).find('input[type=text]').val() != "") {
+                    if(i==2){
+                        noError=true
+                    }
+                    i++;
                 }
-
             });
-            if(validated==true){
+            if(noError==true){
                 $("#interest-form").submit();
                 //submit form and move to rating page
             }
