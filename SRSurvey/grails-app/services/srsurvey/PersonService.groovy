@@ -16,7 +16,7 @@ class PersonService {
 
     def addInterest(String text) {
         def interest = Interest.findByText(text)
-        if (interest == null)
+        if (interest == null && !text.equals(""))
         {
             interest = new Interest(text)
             interest.save(flush: true)

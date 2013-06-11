@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-import edu.macalester.wpsemsim.matrix.DenseMatrix;
+//import edu.macalester.wpsemsim.matrix.DenseMatrix;
 
 public class Test {
 

@@ -19,6 +19,8 @@
     }
     p {text-indent:45px;}
 
+    strong {font-weight: bold !important}
+
     input{
         margin: 19px 1px 0px 47px;
         width: 266px;
@@ -34,35 +36,8 @@
     }
     .myButton {
 
-        -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        box-shadow:inset 0px 1px 0px 0px #ffffff;
-
-        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
-        background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
-        background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
-
-        background-color:#ededed;
-
-        -moz-border-radius:15px;
-        -webkit-border-radius:15px;
-        border-radius:15px;
-
-        border:1px solid #666563;
-
-        display:inline-block;
-        color:#2b2926;
-        font-family:arial;
-        font-size:100%;
-        font-weight:bold;
-        padding:4px 9px;
-        text-decoration:none;
-
-        text-shadow:0px 1px 0px #ffffff;
+        font-size:100%!important;
+        padding:4px 9px!important;
 
     }
     .main-boxes{
@@ -93,7 +68,7 @@
     <h1> Interests </h1>
     <br>
     <br>
-    <form action= "unnamed" name = "interest-form" id= "interest-form" method="post">
+    <form action= "/SRSurvey/interest/process" name = "interest-form" id= "interest-form" method="post">
         <table>
             <tr>
                 <td>
@@ -101,62 +76,62 @@
                     <table>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box1">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box2">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box3">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box4">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="main-boxes">
                             <td>
-                                <input type="text" name="box5">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
 
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box6">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box7">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box8">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box9">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
                         <tr class="extra main-boxes">
                             <td>
-                                <input type="text" name="box10">
+                                <input type="text" name="interest_inputs" maxlength="100">
                                 <br>
                             </td>
                         </tr>
@@ -177,7 +152,7 @@
                 </td>
                 <td>
                     <br>
-                    <p class="margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+                    <p class="margin"> Please enter at least <strong>THREE</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter up to ten interests.  These can be broad or specific. </p>
                 </td>
             </tr>
             <tr>
@@ -187,7 +162,7 @@
             </tr>
         </table>
     </form>
-    <div id="error" style="display: none;">You must enter at least one interest.</div>
+    <div id="error" style="display: none;">You must enter at least three interests.</div>
 </div>
 </body>
 </html>
@@ -211,36 +186,49 @@
 
         $('form#interest-form').bind('click keyup', function( e ) {
             var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
                 if ($(this).find('input[type=text]').val() != "") {
-
+                    if(i==2){
                     noError=true
-
-
+                    }
+                    i++;
                 }
             });
-            if(noError==false){
-                $('input[name=box1]', '#interest-form').addClass("error");
-            }
-            else{
-                $('input[name=box1]', '#interest-form').removeClass('error');
+            if(noError==true){
+
+                $("tr.main-boxes").each(function () {
+
+                   $(this).find('input[type=text]').removeClass("error");
+
+                });
+
             }
 
         });
         $('#next').bind('click', function( e ) {
-            var validated = false;
+            var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
-                if ($(this).find('input').val() != "") {
-                    validated=true;
-                    alert($(this).find('input').val());
+                if ($(this).find('input[type=text]').val() != "") {
+                    if(i==2){
+                        noError=true
+                    }
+                    i++;
                 }
-
             });
-            if(validated==true){       alert("what?");
+            if(noError==true){
+                $("#interest-form").submit();
                 //submit form and move to rating page
             }
             else{
-                $('input[name=box1]', '#interest-form').addClass("error");
+                var i=0;
+                $("tr.main-boxes").each(function () {
+                    if(i<3){
+                        $(this).find('input[type=text]').addClass("error");
+                        i++;
+                    }
+                });
 
                 $.fancybox({
                     content: $('#error')

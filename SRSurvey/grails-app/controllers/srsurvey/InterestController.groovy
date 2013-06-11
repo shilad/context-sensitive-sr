@@ -1,41 +1,40 @@
 package srsurvey
 
 class InterestController {
+
+
+    //Links Consent to Interest page
+
     def interest() {
 
-        if(params.emails!=null) {
-            String email = params.emails
-            print(email)
-            Person p = Person.findByEmail(email)
-            print(p)
+        //Find the survey based off the person in session
+        Survey s = Survey.findByPerson(Person.findById(session.person))
 
-            //put the person into session
-            if(session.person==null){
-                session.person = p.id
-            }
-
-            render(view:'interest')
-        } else {
-            redirect(url: "/")
-        }
+        render(view: 'interest')
 
     }
 
     def process() {
         List<String> inputs = params.get("interest_inputs")
+        //print(inputs)
 
         //Find the person
         Person p = Person.findById(session.person)
 
         //Associate the person with the interest
         PersonService ps = new PersonService(p)
+        //print(inputs+"here")
         for (interest in inputs){
-            ps.addInterest(interest)
+            if(interest!=""){
+                ps.addInterest(interest)
+            }
         }
 
         //Assign Group
         SRService sr = new SRService()
         sr.assignGroup(p, inputs)
+
+        redirect(controller: 'rating', action: 'ratings')
 
     }
 
@@ -56,4 +55,43 @@ class InterestController {
             redirect(url: "/")
         }
     }
+
+    // Create connect from email to consent should be like create
+    def consent()
+    {
+
+        if(params.emails!=null)
+        {
+            String email = params.emails
+            //print(email)
+            Person p = Person.findByEmail(email)
+            //print(p)
+
+            if(Survey.findByPerson(p) == null) {
+                Survey s = new Survey()
+                p.setSurvey(s)
+                p.save(flush: true)
+            }
+
+
+            //put the person into session
+            if(session.person==null)
+            {
+                session.person = p.id
+            }
+
+            if(session.survey==null){
+                Survey s = Survey.findByPerson(p)
+                session.survey = s.id
+            }
+
+            render(view:'consent')
+        } else
+        {
+            redirect(url: "/")
+        }
+    }
+
+
+
 }

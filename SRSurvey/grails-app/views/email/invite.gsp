@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Thank you</title>
+    <title>Survey Invite</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <style type="text/css">
@@ -30,9 +30,9 @@
 <body>
 <div class= "rounded-corners" id="main-container">
     <br>
-    <h1>Thank You!</h1>
+    <h1>Survey</h1>
     <br><br><br><br>
-    <p class= "margin">Thanks for answering our survey. Your responses are being processed.</p>
+    <p class= "margin"><a href="${baseUrl}?emails=${email}">Click here or else</a></p>
 
 </div>
 </body>
