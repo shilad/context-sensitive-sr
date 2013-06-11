@@ -19,7 +19,10 @@ public class People {
         email=this.email;
         Interest=this.Interest;
     }
-
+    public People(String id, String email){
+        id=this.id;
+        email=this.email;
+    }
     public String getID(){
 
         return id;
