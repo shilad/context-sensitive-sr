@@ -10,11 +10,8 @@ package org.macademia.algs;
 
 import edu.macalester.wpsemsim.matrix.DenseMatrix;
 import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
-import edu.macalester.wpsemsim.matrix.MemoryMappedMatrix;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -61,38 +58,47 @@ public class SimilarityMatrix extends DenseMatrix{
 
     /**
      * Output a CSV file based on the similarity matrix
-     * The headers are the column ids of the similarity matrix
+     * By default, the header of the CSV file is 1 to num_of_row
      * @param path the output path for the CSV file
      */
     public void matrixToCSV(String path){
-
-        try {
-            FileWriter writer = new FileWriter(path);
-
             //Writing headers using the interest id
-            StringBuffer header = new StringBuffer();
-
-            int[] ids = this.getColIds();
-            for (int id:ids){
-                header.append(id+"");
-                header.append(" , ");
-            }
-            header.delete(header.length()-3,header.length()-1);
-            header.append('\n');
-            writer.append(header.toString());
-
-            System.out.println(header.toString());
-
-            //Writing headers 0 to length-1
 //            StringBuffer header = new StringBuffer();
 //
-//            for(int i=0;i<this.getNumRows();i++){
-//                header.append(i+"");
+//            int[] ids = this.getRowIds();
+//            for (int id:ids){
+//                header.append(id+"");
 //                header.append(" , ");
 //            }
 //            header.delete(header.length()-3,header.length()-1);
 //            header.append('\n');
 //            writer.append(header.toString());
+//
+//            System.out.println(header.toString());
+
+            //Writing headers 1 to length
+            StringBuffer header = new StringBuffer();
+
+            for(int i=1;i<=this.getNumRows();i++){
+                header.append(i+"");
+                header.append(" , ");
+            }
+            header.delete(header.length()-3,header.length()-1);
+            header.append('\n');
+            matrixToCSV(path,header.toString());
+    }
+
+    /**
+     * Output a CSV file based on the similarity matrix
+     * @param path the output path for the CSV file
+     * @param header is the first line of the CSV file
+     */
+    public void matrixToCSV(String path, String header){
+
+        try {
+            FileWriter writer = new FileWriter(path);
+
+            writer.append(header);
 
             for(DenseMatrixRow row:this){
                 LinkedHashMap<Integer,Float> rowMap = row.asMap();
@@ -114,7 +120,6 @@ public class SimilarityMatrix extends DenseMatrix{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String args[]){
