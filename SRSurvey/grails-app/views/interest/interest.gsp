@@ -19,6 +19,8 @@
     }
     p {text-indent:45px;}
 
+    strong {font-weight: bold !important}
+
     input{
         margin: 19px 1px 0px 47px;
         width: 266px;
@@ -150,7 +152,7 @@
                 </td>
                 <td>
                     <br>
-                    <p class="margin"> Please enter your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter as many as you like.  These can be broad or specific. </p>
+                    <p class="margin"> Please enter at least <strong>THREE</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter up to ten interests.  These can be broad or specific. </p>
                 </td>
             </tr>
             <tr>
@@ -160,7 +162,7 @@
             </tr>
         </table>
     </form>
-    <div id="error" style="display: none;">You must enter at least one interest.</div>
+    <div id="error" style="display: none;">You must enter at least three interests.</div>
 </div>
 </body>
 </html>
@@ -184,37 +186,49 @@
 
         $('form#interest-form').bind('click keyup', function( e ) {
             var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
                 if ($(this).find('input[type=text]').val() != "") {
-
+                    if(i==2){
                     noError=true
-
-
+                    }
+                    i++;
                 }
             });
-            if(noError==false){
-                $('input[name=box1]', '#interest-form').addClass("error");
-            }
-            else{
-                $('input[name=box1]', '#interest-form').removeClass('error');
+            if(noError==true){
+
+                $("tr.main-boxes").each(function () {
+
+                   $(this).find('input[type=text]').removeClass("error");
+
+                });
+
             }
 
         });
         $('#next').bind('click', function( e ) {
-            var validated = false;
+            var noError = false;
+            var i=0;
             $("tr.main-boxes").each(function () {
-                if ($(this).find('input').val() != "") {
-                    validated=true;
-
+                if ($(this).find('input[type=text]').val() != "") {
+                    if(i==2){
+                        noError=true
+                    }
+                    i++;
                 }
-
             });
-            if(validated==true){
+            if(noError==true){
                 $("#interest-form").submit();
                 //submit form and move to rating page
             }
             else{
-                $('input[name=box1]', '#interest-form').addClass("error");
+                var i=0;
+                $("tr.main-boxes").each(function () {
+                    if(i<3){
+                        $(this).find('input[type=text]').addClass("error");
+                        i++;
+                    }
+                });
 
                 $.fancybox({
                     content: $('#error')
