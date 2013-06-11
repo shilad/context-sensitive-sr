@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class People {
-    private static String email="";
-    private static String id="";
-    private static ArrayList<Interest> interest=new ArrayList<Interest>();
+    private  String email="";
+    private  String id="";
+    private  ArrayList<Interest> interest=new ArrayList<Interest>();
 
 
     public People(String id, String email){
