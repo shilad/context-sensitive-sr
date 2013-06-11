@@ -62,43 +62,19 @@ public class SimilarityMatrix extends DenseMatrix{
      * @param path the output path for the CSV file
      */
     public void matrixToCSV(String path){
-            //Writing headers using the interest id
-//            StringBuffer header = new StringBuffer();
-//
-//            int[] ids = this.getRowIds();
-//            for (int id:ids){
-//                header.append(id+"");
-//                header.append(" , ");
-//            }
-//            header.delete(header.length()-3,header.length()-1);
-//            header.append('\n');
-//            writer.append(header.toString());
-//
-//            System.out.println(header.toString());
+        StringBuffer header = new StringBuffer();
 
-            //Writing headers 1 to length
-            StringBuffer header = new StringBuffer();
-
-            for(int i=1;i<=this.getNumRows();i++){
-                header.append(i+"");
-                header.append(" , ");
-            }
-            header.delete(header.length()-3,header.length()-1);
-            header.append('\n');
-            matrixToCSV(path,header.toString());
-    }
-
-    /**
-     * Output a CSV file based on the similarity matrix
-     * @param path the output path for the CSV file
-     * @param header is the first line of the CSV file
-     */
-    public void matrixToCSV(String path, String header){
+        for(int i=1;i<=this.getNumRows();i++){
+            header.append(i+"");
+            header.append(" , ");
+        }
+        header.delete(header.length()-3,header.length()-1);
+        header.append('\n');
 
         try {
             FileWriter writer = new FileWriter(path);
 
-            writer.append(header);
+            writer.append(header.toString());
 
             for(DenseMatrixRow row:this){
                 LinkedHashMap<Integer,Float> rowMap = row.asMap();
