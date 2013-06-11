@@ -10,31 +10,26 @@ package org.macademia.algs;
 public class Interest {
 
     String name;
-    int idNum;
+    int id;
 
-    Interest(String name, int idNum){
+    Interest(String name, int id){
         this.name=name;
-        this.idNum=idNum;
+        this.id=id;
     }
 
     public void setName(String name){
         this.name=name;
     }
 
-    public void setidNum(int idNum){
-        this.idNum=idNum;
+    public void setID(int id){
+        this.id=id;
     }
 
     public String getName(){
         return this.name;
     }
 
-    public int getidNum(){
-        return this.idNum;
+    public int getID(){
+        return this.id;
     }
-
-
-
-
-
 }
