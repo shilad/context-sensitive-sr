@@ -42,6 +42,23 @@ public class SimilarityMatrix extends DenseMatrix{
     }
 
     /**
+     *
+     * @return a 2-D array that has all the scores in the similarity matrix
+     */
+    public Float[][] getFloatMatrix(){
+        int row_num = this.getNumRows();
+        Float[][] scores = new Float[row_num][row_num];
+
+        int i = 0;
+        for (DenseMatrixRow row:this){
+            scores[i] = row.asMap().values().toArray(new Float[row_num]);
+            i++;
+        }
+
+        return scores;
+    }
+
+    /**
      * Output a CSV file based on the similarity matrix
      * The headers are 0 to getNumRows - 1
      * @param path the output path for the CSV file
