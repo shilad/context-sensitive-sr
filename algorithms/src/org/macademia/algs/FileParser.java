@@ -1,7 +1,6 @@
 package org.macademia.algs;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -37,7 +36,7 @@ public class FileParser {
             if(len!=null){
                 for(int j = 0; j < len.size();j++){
                     if(people.get(a2[i])!=null&&phrases.get( len.get(j) )!=null)
-                        System.out.println( people.get(a2[i]) +"---"+i+"--"+ phrases.get( len.get(j) ) );
+                        System.out.println( people.get(a2[i]) +"--"+ phrases.get( len.get(j) ) );
                 }
             }
 
