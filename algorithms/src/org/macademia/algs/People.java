@@ -19,4 +19,29 @@ public class People {
         email=this.email;
         interests=this.interests;
     }
+
+    public String getID(){
+
+        return id;
+    }
+    public void setID(String id){
+
+        id=this.id;
+    }
+    public String getEmail(){
+
+        return email;
+    }
+    public void setEmail(String email){
+
+        email=this.email;
+    }
+    public ArrayList<Interests> getInterests(){
+
+        return interests;
+    }
+    public void setInterests(ArrayList<Interests> interests){
+
+        interests=this.interests;
+    }
 }
