@@ -18,17 +18,18 @@ public class FileParser {
     public static void main(String args[]) throws IOException {
         HashMap phrases=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/phrases.tsv",1,3,"\t");
         Set s = phrases.keySet();
-        Object[] a=s.toArray();
+        Object[] a=s.toArray();        //Creates HashMap and array of keys for phrase list
 
         HashMap people=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/people.txt",0,1,"\t");
         Set s2 = people.keySet();
-        Object[] a2=s2.toArray();
+        Object[] a2=s2.toArray();      //Creates HashMap and array of keys for people list
 
         HashMap peopleInterests=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/people_interests.txt",0,1,"\t");
-        Set s3 = peopleInterests.keySet();
-        Object[] a3=s3.toArray();
-        ArrayList<String> len = new ArrayList<String>();
-        System.out.println(peopleInterests.get("32"));
+        Set s3 = peopleInterests.keySet();       //Creates HashMap of People IDs to a list of Interest IDs
+        Object[] a3=s3.toArray();              // along with a list of the People IDs with interests attached to them
+
+
+        ArrayList<String> len = new ArrayList<String>();    //Prints each person's email
         for(int i = 0; i < s2.size(); i++){
             if(peopleInterests.get(a2[i])!=null){
                 len = (ArrayList<String>) peopleInterests.get(a2[i]);
@@ -51,7 +52,7 @@ public class FileParser {
         try {
             reader = new BufferedReader(new FileReader(path));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         String line = null;
         ArrayList<String> ar;
