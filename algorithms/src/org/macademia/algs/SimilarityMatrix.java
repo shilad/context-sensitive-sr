@@ -61,7 +61,7 @@ public class SimilarityMatrix extends DenseMatrix{
 
     /**
      * Output a CSV file based on the similarity matrix
-     * The headers are 0 to getNumRows - 1
+     * The headers are the column ids of the similarity matrix
      * @param path the output path for the CSV file
      */
     public void matrixToCSV(String path){
@@ -70,28 +70,29 @@ public class SimilarityMatrix extends DenseMatrix{
             FileWriter writer = new FileWriter(path);
 
             //Writing headers using the interest id
-//            StringBuffer header = new StringBuffer();
-//
-//            DenseMatrixRow row1 = matrix.getRow(matrix.getRowIds()[0]);
-//            for(Integer interest:row1.asMap().keySet()){
-//                header.append(interest.toString());
-//                header.append(" , ");
-//            }
-//            header.delete(header.length()-3,header.length()-1);
-//            header.append('\n');
-//            writer.append(header.toString());
-//            //System.out.print(header.toString());
-
-            //Writing headers 0 to length-1
             StringBuffer header = new StringBuffer();
 
-            for(int i=0;i<this.getNumRows();i++){
-                header.append(i+"");
+            int[] ids = this.getColIds();
+            for (int id:ids){
+                header.append(id+"");
                 header.append(" , ");
             }
             header.delete(header.length()-3,header.length()-1);
             header.append('\n');
             writer.append(header.toString());
+
+            System.out.println(header.toString());
+
+            //Writing headers 0 to length-1
+//            StringBuffer header = new StringBuffer();
+//
+//            for(int i=0;i<this.getNumRows();i++){
+//                header.append(i+"");
+//                header.append(" , ");
+//            }
+//            header.delete(header.length()-3,header.length()-1);
+//            header.append('\n');
+//            writer.append(header.toString());
 
             for(DenseMatrixRow row:this){
                 LinkedHashMap<Integer,Float> rowMap = row.asMap();
@@ -117,10 +118,13 @@ public class SimilarityMatrix extends DenseMatrix{
     }
 
     public static void main(String args[]){
+
         try{
             SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+
+            //Testing getFloatMatrix()
             float[][] matrix = sm.getFloatMatrix();
-            System.out.print("This lenghth of the matrix is "+matrix.length);
+            System.out.println("This length of the matrix is "+matrix.length);
 
             //print out results
             //System.out.print(Arrays.deepToString(matrix));
@@ -134,6 +138,14 @@ public class SimilarityMatrix extends DenseMatrix{
                if(testRow[i] != matrix[0][i])
                    System.out.println("Wrong!");
             }
+
+            System.out.println("The row ids are ");
+            int[] ids = sm.getRowIds();
+            Arrays.sort(ids);
+            System.out.println(Arrays.toString(ids));
+
+            //Testing matrixToCSV
+            sm.matrixToCSV("dat/similarity.csv");
 
         }catch (IOException ex){
             ex.printStackTrace();
