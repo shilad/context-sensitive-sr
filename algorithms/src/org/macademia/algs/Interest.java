@@ -1,11 +1,6 @@
 package org.macademia.algs;
 
 /**
- * Created with IntelliJ IDEA.
- * User: research
- * Date: 6/11/13
- * Time: 2:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Interest {
 
