@@ -7,5 +7,6 @@ modules = {
         resource 'js/jquery.fancybox.js'
         resource 'css/jquery.fancybox.css'
         resource 'css/survey.css'
+        resource 'css/email.css'
     }
 }

@@ -30,9 +30,12 @@
 <body>
 <div class= "rounded-corners" id="main-container">
     <br>
+
     <h1>Survey</h1>
     <br><br><br><br>
     <p class= "margin"><a href="${baseUrl}?emails=${email}">Click here or else</a></p>
+
+    <h2>This tests the external css in core</h2>
 
 </div>
 </body>
