@@ -14,6 +14,8 @@ stacktrace.log
 /web-app/WEB-INF/classes
 /.link_to_grails_plugins/
 /target-eclipse/
+dat/
+.idea/lib.xml
 
 
 # Intellij
