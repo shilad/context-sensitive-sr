@@ -16,15 +16,15 @@ import java.util.*;
  */
 public class FileParser {
     public static void main(String args[]) throws IOException {
-        HashMap phrases=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/phrases.tsv",1,3,"\t");
+        HashMap phrases=reader("dat/phrases.tsv",1,3,"\t");
         Set s = phrases.keySet();
         Object[] a=s.toArray();        //Creates HashMap and array of keys for phrase list
 
-        HashMap people=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/people.txt",0,1,"\t");
+        HashMap people=reader("dat/people.txt",0,1,"\t");
         Set s2 = people.keySet();
         Object[] a2=s2.toArray();      //Creates HashMap and array of keys for people list
 
-        HashMap peopleInterests=reader("/Users/jesse/IdeaProjects/context-sensitive-sr/algorithms/dat/people_interests.txt",0,1,"\t");
+        HashMap peopleInterests=reader("dat/people_interests.txt",0,1,"\t");
         Set s3 = peopleInterests.keySet();       //Creates HashMap of People IDs to a list of Interest IDs
         Object[] a3=s3.toArray();              // along with a list of the People IDs with interests attached to them
 
