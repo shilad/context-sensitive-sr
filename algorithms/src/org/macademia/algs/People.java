@@ -1,5 +1,7 @@
 package org.macademia.algs;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jesse
@@ -8,4 +10,13 @@ package org.macademia.algs;
  * To change this template use File | Settings | File Templates.
  */
 public class People {
+    private static String email="";
+    private static String id="";
+    private static ArrayList<Interests> interests=new ArrayList<Interests>();
+
+    public People(String id, String email, ArrayList<Interests> interests){
+        id=this.id;
+        email=this.email;
+        interests=this.interests;
+    }
 }
