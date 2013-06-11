@@ -15,6 +15,8 @@ stacktrace.log
 /.link_to_grails_plugins/
 /target-eclipse/
 dat/
+.idea/lib.xml
+
 
 # Intellij
 .idea/
