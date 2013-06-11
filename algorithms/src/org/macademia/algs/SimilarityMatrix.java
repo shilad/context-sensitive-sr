@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class SimilarityMatrix extends DenseMatrix{
@@ -38,20 +39,20 @@ public class SimilarityMatrix extends DenseMatrix{
      * @throws IOException
      */
     public SimilarityMatrix(File path, int maxOpenPages, int maxPageSize) throws IOException {
-        super(path,maxOpenPages,maxPageSize);
+        super(path, maxOpenPages, maxPageSize);
     }
 
     /**
      *
      * @return a 2-D array that has all the scores in the similarity matrix
      */
-    public Float[][] getFloatMatrix(){
+    public float[][] getFloatMatrix(){
         int row_num = this.getNumRows();
-        Float[][] scores = new Float[row_num][row_num];
+        float[][] scores = new float[row_num][row_num];
 
         int i = 0;
         for (DenseMatrixRow row:this){
-            scores[i] = row.asMap().values().toArray(new Float[row_num]);
+            scores[i] = row.getValues();
             i++;
         }
 
@@ -112,6 +113,19 @@ public class SimilarityMatrix extends DenseMatrix{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void main(String args[]){
+        try{
+            SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+            float[][] matrix = sm.getFloatMatrix();
+            System.out.print("This lenghth of the matrix is "+matrix.length);
+            System.out.print(Arrays.deepToString(matrix));
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
 
     }
 
