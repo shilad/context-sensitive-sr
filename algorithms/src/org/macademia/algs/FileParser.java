@@ -29,8 +29,8 @@ public class FileParser {
         Object[] a3=s3.toArray();              // along with a list of the People IDs with interests attached to them
 
 
-        ArrayList<String> len = new ArrayList<String>();    //Prints each person's email
-        for(int i = 0; i < s2.size(); i++){
+        ArrayList<String> len = new ArrayList<String>();  //Prints each person's email and interests that
+        for(int i = 0; i < s2.size(); i++){                        // correspond with those people
             if(peopleInterests.get(a2[i])!=null){
                 len = (ArrayList<String>) peopleInterests.get(a2[i]);
             }
@@ -46,8 +46,8 @@ public class FileParser {
 
     }
     public static HashMap reader(String path, int keyCol, int valCol, String splitOn) throws IOException {
-
-        HashMap temp= new HashMap();
+                                         //Splits lines from given path on splitOn string and then inserts
+        HashMap temp= new HashMap();     //the key column and value column into a HashMap with string keys and [] values
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(path));
