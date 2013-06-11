@@ -10,3 +10,4 @@ public class Test {
         DenseMatrix matrix = new DenseMatrix(new File("dat/similarity.matrix"));
     }
 }
+
