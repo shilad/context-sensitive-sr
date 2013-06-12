@@ -93,17 +93,20 @@ public class Kmeans {
 
     /**
      *
-     * @param p1
-     * @param p2
-     * @return
+     * @param p1 the Point object for the first point
+     * @param p2 the Point object for the second point
+     * @return the distance between the two points
      */
     public double getDistance(Point p1, Point p2) {
 
-//        double sum = 0;
-//        for (int i=0; i < point.length; i++) {
-//            sum += Math.pow(data[i] - point[i], 2);
-//        }
-//        return Math.sqrt(sum);
+        float [] coordinates1 = p1.data;
+        float [] coordinates2 = p2.data;
+
+        double sum = 0;
+        for (int i=0; i < point.length; i++) {
+            sum += Math.pow(Math.abs(coordinates1[i]-coordinates2[i]), 2);
+        }
+        return Math.sqrt(sum);
     }
 
     /**
