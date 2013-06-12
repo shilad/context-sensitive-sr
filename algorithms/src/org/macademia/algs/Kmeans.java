@@ -19,7 +19,7 @@ public class Kmeans {
         this.data = data;
     }
 
-    class Cluster {
+    private static class Cluster {
         private int id;
 
         private Point[] points;
@@ -27,7 +27,6 @@ public class Kmeans {
         private Cluster() {
 
         }
-
 
         private Cluster(int id, Point[] points) {
             this.id = id;
@@ -51,19 +50,20 @@ public class Kmeans {
         }
     }
 
-    class Point {
+    private static class Point {
+
         private float [] data;
         private int id;
-        private int mCluster;
+        private int cluster;
 
-        public Point() {
+        private Point() {
             return;
         }
 
-        private Point(float[] data, int id, int mCluster) {
+        private Point(int cluster, float[] data, int id) {
+            this.cluster = cluster;
             this.data = data;
             this.id = id;
-            this.mCluster = mCluster;
         }
 
         private float[] getData() {
@@ -82,12 +82,12 @@ public class Kmeans {
             this.id = id;
         }
 
-        private int getmCluster() {
-            return mCluster;
+        private int getCluster() {
+            return cluster;
         }
 
-        private void setmCluster(int mCluster) {
-            this.mCluster = mCluster;
+        private void setCluster(int cluster) {
+            this.cluster = cluster;
         }
     }
 
