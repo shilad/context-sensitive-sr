@@ -1,4 +1,7 @@
-package org.macademia.algs;  import java.util.ArrayList;  /** * Created with IntelliJ IDEA. * User: research * Date: 6/11/13 * Time: 4:55 PM
+package org.macademia.algs;  import java.util.ArrayList;
+import java.util.Random;
+
+/** * Created with IntelliJ IDEA. * User: research * Date: 6/11/13 * Time: 4:55 PM
  * To change this template use File | Settings | File Templates.
  */
 public class Kmeans {
@@ -111,19 +114,38 @@ public class Kmeans {
      * @param k the desired number of clusters
      * @return an array of k cluster ids
      */
-    public int[] getClusters(float[][] data, int k){
+    public int[] getClusters(float[][] data, int k) {
 
     }
 
     /**
-     * returns k points, where the value of each dimension of the points is
-     * bounded by the minimum and maximum of that dimension over all points
+     * returns k random points from within the data
      * @param data
      * @param k
      * @return an array of k points
      */
-    public Point[] getKRandomPoints(float[][] data, int k){
+    public Point[] getKRandomPoints(float[][] data, int k) {
 
+        int MAX = data.length;
+
+        //Generating random numbers
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        Random rand = new Random();
+        while (numbers.size() < k) {
+            int number = rand .nextInt(MAX);
+            if (!numbers.contains(number)) {
+                numbers.add(number);
+            }
+        }
+
+        Point[] centroids = new Point[k];
+
+        //Placing the points in the return array
+        for (int i = 0; i < k; i++) {
+            centroids[i] = new Point(i, data[numbers.get(i)], numbers.get(i));
+        }
+
+        return centroids;
     }
 
     /**
