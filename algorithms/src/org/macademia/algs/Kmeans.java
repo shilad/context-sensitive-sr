@@ -95,15 +95,19 @@ public class Kmeans {
     }
 
     /**
-     * Given two points, generate the euclidean distance between them
-     * @param p1 the first point
-     * @param p2 the second point
-     * @return the distance between them
+     *
+     * @param p1 the Point object for the first point
+     * @param p2 the Point object for the second point
+     * @return the distance between the two points
      */
     public double getDistance(Point p1, Point p2) {
+
+        float [] coordinates1 = p1.data;
+        float [] coordinates2 = p2.data;
+
         double sum = 0;
-        for (int i=0; i < p1.getData().length; i++) {
-            sum += Math.pow(p1.getData()[i] - p2.getData()[i], 2);
+        for (int i=0; i < coordinates1.length; i++) {
+            sum += Math.pow(Math.abs(coordinates1[i]-coordinates2[i]), 2);
         }
         return Math.sqrt(sum);
     }
