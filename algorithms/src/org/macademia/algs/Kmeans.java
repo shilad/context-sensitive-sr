@@ -28,7 +28,6 @@ public class Kmeans {
 
         }
 
-
         private Cluster(int id, Point[] points) {
             this.id = id;
             this.points = points;
