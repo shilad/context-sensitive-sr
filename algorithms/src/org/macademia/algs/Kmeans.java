@@ -23,7 +23,6 @@ public class Kmeans {
     }
 
     private class Cluster {
-        private int id;
 
         private Point[] points;
 
@@ -31,17 +30,8 @@ public class Kmeans {
 
         }
 
-        private Cluster(int id, Point[] points) {
-            this.id = id;
+        private Cluster(Point[] points) {
             this.points = points;
-        }
-
-        private int getId() {
-            return id;
-        }
-
-        private void setId(int id) {
-            this.id = id;
         }
 
         private Point[] getPoints() {
@@ -56,17 +46,13 @@ public class Kmeans {
     private class Point {
 
         private float [] data;
-        private int id;
-        private int cluster;
 
         private Point() {
             return;
         }
 
-        private Point(int cluster, float[] data, int id) {
-            this.cluster = cluster;
+        private Point(float[] data) {
             this.data = data;
-            this.id = id;
         }
 
         private float[] getData() {
@@ -77,21 +63,6 @@ public class Kmeans {
             this.data = data;
         }
 
-        private int getId() {
-            return id;
-        }
-
-        private void setId(int id) {
-            this.id = id;
-        }
-
-        private int getCluster() {
-            return cluster;
-        }
-
-        private void setCluster(int cluster) {
-            this.cluster = cluster;
-        }
     }
 
     /**
@@ -125,8 +96,8 @@ public class Kmeans {
 
     /**
      * Calculate the sum of squares of the two points
-     * @param coordinate1 the coordinate for the first point
-     * @param coordinate2 the coordinate for the second point
+     * @param coordinate1 the coordinate for the first Point
+     * @param coordinate2 the coordinate for the second Point
      * @return the sum of squares between the two points
      */
     public double getSumOfSquares(float[] coordinate1, float[] coordinate2){
@@ -158,13 +129,13 @@ public class Kmeans {
      */
     public Point[] getKRandomPoints(float[][] data, int k) {
 
-        int MAX = data.length;
+        int max = data.length;
 
         //Generating random numbers
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         Random rand = new Random();
         while (numbers.size() < k) {
-            int number = rand.nextInt(MAX);
+            int number = rand.nextInt(max);
             if (!numbers.contains(number)) {
                 numbers.add(number);
             }
@@ -174,21 +145,32 @@ public class Kmeans {
 
         //Placing the points in the return array
         for (int i = 0; i < k; i++) {
-            centroids[i] = new Point(i, data[numbers.get(i)], numbers.get(i));
+            centroids[i] = new Point(data[numbers.get(i)]);
         }
 
         return centroids;
     }
 
     /**
-     *
-     * returns the id of the center that is closest to the given point
+     * Returns the index of the centroid nearest to a given point
      * @param point
      * @param centroids
-     * @return the id of the cluster
+     * @return the index of the cluster
      */
-    public int getBestClusterForPoint(Point point, Point[] centroids){
-        return 0;
+    public int getBestClusterForPoint(Point point, Point[] centroids) {
+
+        double min = 0;
+        int index = 0;
+
+        for (int i=0; i < centroids.length; i++) {
+            double temp = getDistance(centroids[i], point);
+            if (min > temp) {
+                min = temp;
+                index = i;
+            }
+        }
+
+        return index;
     }
 
     /**
@@ -222,8 +204,6 @@ public class Kmeans {
     public Point[] computeCentroids(Cluster[] clusters){
 
         return new Point[0];
-
-
     }
 
 }
