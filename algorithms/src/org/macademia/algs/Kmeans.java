@@ -19,7 +19,7 @@ public class Kmeans {
         this.data = data;
     }
 
-    private static class Cluster {
+    private class Cluster {
         private int id;
 
         private Point[] points;
@@ -50,7 +50,7 @@ public class Kmeans {
         }
     }
 
-    private static class Point {
+    private class Point {
 
         private float [] data;
         private int id;
@@ -92,24 +92,23 @@ public class Kmeans {
     }
 
     /**
-     *
-     * @param p1
-     * @param p2
-     * @return
+     * Given two points, generate the euclidean distance between them
+     * @param p1 the first point
+     * @param p2 the second point
+     * @return the distance between them
      */
     public double getDistance(Point p1, Point p2) {
-
-//        double sum = 0;
-//        for (int i=0; i < point.length; i++) {
-//            sum += Math.pow(data[i] - point[i], 2);
-//        }
-//        return Math.sqrt(sum);
+        double sum = 0;
+        for (int i=0; i < p1.getData().length; i++) {
+            sum += Math.pow(p1.getData()[i] - p2.getData()[i], 2);
+        }
+        return Math.sqrt(sum);
     }
 
     /**
-     *
-     * @param data
-     * @param k
+     * Return the clusters computed using Lloyd's algorithm
+     * @param data a matrix of floats
+     * @param k the desired number of clusters
      * @return an array of k cluster ids
      */
     public int[] getClusters(float[][] data, int k){
