@@ -146,6 +146,8 @@ public class Kmeans {
      */
     public int[] getClusters(float[][] data, int k) {
 
+        return new int[0];
+
     }
 
     /**
@@ -188,7 +190,7 @@ public class Kmeans {
      * @return the id of the cluster
      */
     public int getBestClusterForPoint(Point point, Point[] centroids){
-
+        return 0;
     }
 
     /**
@@ -220,6 +222,8 @@ public class Kmeans {
      * @return an array of centroid points corresponding to the array of clusters
      */
     public Point[] computeCentroids(Cluster[] clusters){
+
+        return new Point[0];
 
 
     }
