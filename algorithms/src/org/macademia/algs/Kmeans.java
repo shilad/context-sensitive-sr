@@ -1,4 +1,7 @@
-package org.macademia.algs;  import java.util.ArrayList;
+package org.macademia.algs;  import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /** * Created with IntelliJ IDEA. * User: research * Date: 6/11/13 * Time: 4:55 PM
@@ -7,11 +10,26 @@ import java.util.Random;
 public class Kmeans {
 
     private Cluster[] clusters;
-    private float[][] data;
     private Point[] centroids;
+    private int k;
+    private float[][] data;
 
-    public Kmeans(float[][] data) {
+    public Kmeans(float[][] data, int k) {
         this.data = data;
+        this.k = k;
+        this.clusters = new Cluster[k];
+        this.centroids = new Point[k];
+        for(int i=0;i<k;i++){
+            this.centroids[i] = new Point();
+            this.clusters[i] = new Cluster();
+        }
+//        for(Cluster c:this.clusters){
+//            c = new Cluster();
+//        }
+//        this.centroids = new Point[k];
+//        for(Point p:this.centroids){
+//            p = new Point();
+//        }
     }
 
     public float[][] getData() {
@@ -22,30 +40,38 @@ public class Kmeans {
         this.data = data;
     }
 
+    public int getK() {
+        return k;
+    }
+
+    public void setK(int k) {
+        this.k = k;
+    }
+
     private class Cluster {
 
-        private Point[] points;
+        private ArrayList<Point> points = new ArrayList<Point>();
 
         private Cluster() {
 
         }
 
-        private Cluster(Point[] points) {
+        private Cluster(ArrayList<Point> points) {
             this.points = points;
         }
 
-        private Point[] getPoints() {
+        private ArrayList<Point> getPoints() {
             return points;
         }
 
-        private void setPoints(Point[] points) {
+        private void setPoints(ArrayList<Point> points) {
             this.points = points;
         }
     }
 
-    private class Point {
+    private static class Point {
 
-        private float [] data;
+        private float[] data;
 
         private Point() {
             return;
@@ -83,8 +109,8 @@ public class Kmeans {
      * @return the sum of squares between the two points
      */
     public double getSumOfSquares(Point p1, Point p2){
-        float [] coordinates1 = p1.data;
-        float [] coordinates2 = p2.data;
+        float[] coordinates1 = p1.data;
+        float[] coordinates2 = p2.data;
 
         double sum = 0;
         for (int i=0; i < coordinates1.length; i++) {
@@ -111,11 +137,9 @@ public class Kmeans {
 
     /**
      * Return the clusters computed using Lloyd's algorithm
-     * @param data a matrix of floats
-     * @param k the desired number of clusters
      * @return an array of k cluster ids
      */
-    public int[] getClusters(float[][] data, int k) {
+    public int[] getClusters() {
 
         return new int[0];
 
@@ -159,7 +183,7 @@ public class Kmeans {
      */
     public int getBestClusterForPoint(Point point, Point[] centroids) {
 
-        double min = 0;
+        double min = Double.POSITIVE_INFINITY;
         int index = 0;
 
         for (int i=0; i < centroids.length; i++) {
@@ -184,7 +208,7 @@ public class Kmeans {
         double [] vars = new double [k];
         for(int i=0; i<k; i++){ //for each clusters
             double sum = 0;
-            Point[] points = clusters[i].points;
+            ArrayList<Point> points = clusters[i].points;
             Point center = centroids[i];
             for(Point p:points){ //for each point inside the cluster
                 double sumSquare = getSumOfSquares(p, center);
@@ -203,7 +227,109 @@ public class Kmeans {
      */
     public Point[] computeCentroids(Cluster[] clusters){
 
-        return new Point[0];
+        Point[] centroids = new Point[clusters.length];
+
+
+
+
+        //Loops through all of the clusters
+        for (int i = 0; i < clusters.length; i++) {
+
+            Point temp = new Point();
+
+            //Initialize temp for each new cluster
+            temp.setData(new float[clusters[0].points.get(0).data.length]);
+
+            //Loops through all of the points inside of a cluster
+            for (int j = 0; j < clusters[i].points.size(); j++) {
+
+                //Sums all of the points
+                for (int k = 0; k < clusters[i].points.get(j).data.length; k++) {
+                    temp.data[k] += clusters[i].points.get(j).getData()[k];
+                }
+
+            }
+
+            //Divide each entry by number of points in the cluster to calculate the mean
+            for (int l = 0; l < temp.data.length; l++) {
+                temp.data[l] /= clusters[i].points.size();
+            }
+
+            centroids[i] = temp;
+
+        }
+
+        return centroids;
     }
+
+    public static void main(String rgs[]) throws IOException {
+
+        int NUM_CLUSTERS = 5;
+
+//        double SAMPLES[][] = new double[][] {{1.0, 1.0},
+//                {1.5, 2.0},
+//                {3.0, 4.0},
+//                {5.0, 7.0},
+//                {3.5, 5.0},
+//                {4.5, 5.0},
+//                {3.5, 4.5}};
+        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+        float SAMPLES[][] = sm.getFloatMatrix();
+
+
+        Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
+
+        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
+
+        for (Point point: test.centroids) {
+            System.out.println(Arrays.toString(point.data));
+        }
+
+        for (int i = 0; i < test.data.length; i++) {
+
+//            System.out.println(Arrays.toString(test.data[i]));
+
+            Point p = new Point(test.data[i]);
+            test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
+        }
+
+
+
+        for (int z = 0; z< 100; z++) {
+
+            test.centroids = test.computeCentroids(test.clusters);
+
+            System.out.println("New Clusters");
+
+            //Print current centroids
+            for (Point point: test.centroids) {
+
+
+                System.out.println(Arrays.toString(point.data));
+            }
+
+
+            //Redefine Centroids
+
+            for (Cluster cluster:test.clusters) {
+                cluster.points.clear();
+            }
+
+
+            for (int i = 0; i < test.data.length; i++) {
+
+                Point p = new Point(test.data[i]);
+                test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
+            }
+
+            //calculate variance
+            double[] vars = test.getVariance(test.clusters,test.centroids);
+            System.out.println("Variance:");
+            System.out.println(Arrays.toString(vars));
+        }
+
+
+    }
+
 
 }
