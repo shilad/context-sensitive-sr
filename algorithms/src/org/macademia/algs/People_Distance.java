@@ -67,7 +67,6 @@ public class People_Distance {
             map=row.asMap();
             for(int j=0;j<p2IDs.size();j++){
                 distances.add(map.get(p2IDs.get(j)));
-                //System.out.println(map.get(p2IDs.get(j)));
             }
 
         }
