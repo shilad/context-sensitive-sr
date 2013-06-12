@@ -152,6 +152,8 @@ public class Kmeans {
         return centroids;
     }
 
+
+
     /**
      *
      * returns the id of the center that is closest to the given point
