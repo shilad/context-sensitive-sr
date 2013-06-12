@@ -5,26 +5,33 @@ package org.macademia.algs;
 public class Interest {
 
     String name;
-    String id;
+    String macademiaID;
+    String denseID;
 
-    Interest(String name, String id){
+    Interest(String name, String macademiaID, String denseID){
         this.name=name;
-        this.id=id;
+        this.macademiaID=macademiaID;
+        this.denseID=denseID;
     }
 
     public void setName(String name){
         this.name=name;
     }
 
-    public void setID(String id){
-        this.id=id;
+    public void setMacademiaID(String macademiaID){
+        this.macademiaID=macademiaID;
     }
-
+    public void setDenseID(String denseID){
+        this.denseID=denseID;
+    }
     public String getName(){
         return this.name;
     }
 
-    public String getID(){
-        return this.id;
+    public String getMacademiaID(){
+        return this.macademiaID;
+    }
+    public String getDenseID(){
+        return this.denseID;
     }
 }

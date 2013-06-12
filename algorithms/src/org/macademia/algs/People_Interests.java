@@ -60,7 +60,7 @@ public class People_Interests {
         Interest i;
         while ((line = interestFile.readLine()) != null) {
             String[] lineSplit=line.split("\t");
-            i = new Interest(lineSplit[3], lineSplit[1]);
+            i = new Interest(lineSplit[3], lineSplit[1],lineSplit[0]);
             temp.put(lineSplit[1], i);
 
         }
