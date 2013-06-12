@@ -92,13 +92,23 @@ public class Kmeans {
     }
 
     /**
-     *
+     * Calculate the distance between the two points
      * @param p1 the Point object for the first point
      * @param p2 the Point object for the second point
      * @return the distance between the two points
      */
     public double getDistance(Point p1, Point p2) {
+        double sum = getSumOfSquares(p1,p2);
+        return Math.sqrt(sum);
+    }
 
+    /**
+     * Calculate the sum of squares of the two points
+     * @param p1 the Point object for the first point
+     * @param p2 the Point object for the second point
+     * @return the sum of squares between the two points
+     */
+    public double getSumOfSquares(Point p1, Point p2){
         float [] coordinates1 = p1.data;
         float [] coordinates2 = p2.data;
 
@@ -106,7 +116,23 @@ public class Kmeans {
         for (int i=0; i < coordinates1.length; i++) {
             sum += Math.pow(Math.abs(coordinates1[i]-coordinates2[i]), 2);
         }
-        return Math.sqrt(sum);
+        return sum;
+
+    }
+
+    /**
+     * Calculate the sum of squares of the two points
+     * @param coordinate1 the coordinate for the first point
+     * @param coordinate2 the coordinate for the second point
+     * @return the sum of squares between the two points
+     */
+    public double getSumOfSquares(float[] coordinate1, float[] coordinate2){
+        double sum = 0;
+        for (int i=0; i < coordinate1.length; i++) {
+            sum += Math.pow(Math.abs(coordinate1[i]-coordinate2[i]), 2);
+        }
+        return sum;
+
     }
 
     /**
@@ -145,10 +171,23 @@ public class Kmeans {
      * Computes the intra-cluster variance over all clusters
      * @param clusters
      * @param centroids
-     * @return
+     * @return an array of variances
      */
-    public double getVariance(Cluster[] clusters, Point[] centroids){
+    public double[] getVariance(Cluster[] clusters, Point[] centroids){
+        int k = clusters.length;
+        double [] vars = new double [k];
+        for(int i=0; i<k; i++){ //for each clusters
+            double sum = 0;
+            Point[] points = clusters[i].points;
+            Point center = centroids[i];
+            for(Point p:points){ //for each point inside the cluster
+                double sumSquare = getSumOfSquares(p, center);
+                sum +=sumSquare;
+            }
+            vars[i] = sum;
+        }
 
+        return vars;
     }
 
     /**
