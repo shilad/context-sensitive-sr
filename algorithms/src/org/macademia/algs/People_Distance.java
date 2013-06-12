@@ -32,6 +32,7 @@ public class People_Distance {
         ArrayList<Interest> interests=p.getInterest();
         for(int i=0;i<interests.size();i++){
             ids.add(Integer.parseInt(interests.get(i).getDenseID()));
+             //System.out.println(interests.get(i).getDenseID());
         }
         return ids;
     }
@@ -43,14 +44,23 @@ public class People_Distance {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+        int count=0;
         for(int i=0;i<p1IDs.size();i++){
             for(int j=0;j<p2IDs.size();j++){
                 //distances.add(matrix.getRow(p1IDs.get(i)).getColValue(p2IDs.get(j)));//get value from matrix
-                //System.out.println(matrix.iterator().next().getValueForId(p1IDs.get(i)));
+                if (matrix.getRow(p1IDs.get(i)) != null) {
+                    System.out.println(p1IDs.get(i)+"--"+p2IDs.get(j)+"---"+matrix.getRow(p1IDs.get(i)));
 
-                System.out.println("ID 1:"+p1IDs.get(i)+" ID 2:"+p2IDs.get(j)+" Matrix value:"+matrix.getRow(p1IDs.get(i)).getValueForId(p2IDs.get(j)));
+                System.out.println(matrix.getRow(p1IDs.get(i)).getValues()[p2IDs.get(j)]+"--"+p2IDs.get(j));
+                }
+                else{
+                    count++;                                //WHY ARE 39 ROWS NULL??????
+                }
+//                    System.out.println("ID 1:\t"+p1IDs.get(i)+"\tID 2:\t"+p2IDs.get(j)+
+//                        "\t\tMatrix value:\t"+matrix.getRow(p1IDs.get(i)).getIndexForId(p2IDs.get(j)));
             }
         }
+        System.out.println(count);
         return distances;
     }
 }
