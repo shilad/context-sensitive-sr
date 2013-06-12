@@ -152,6 +152,7 @@ public class Kmeans {
             clusters[getBestClusterForPoint(p, centroids)].points.add(p);
         }
 
+
         double prevVariance = Double.POSITIVE_INFINITY;
         int c = 0;
 
@@ -161,17 +162,13 @@ public class Kmeans {
             for (Cluster cluster:clusters) {
                 cluster.points.clear();
             }
-
             //Place in clusters
             for (int i = 0; i < data.length; i++) {
                 Point p = new Point(data[i]);
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
-
             //Redefine centroids
-            for (int i = 0; i < data.length; i++) {
-                centroids = computeCentroids(clusters);
-            }
+            centroids = computeCentroids(clusters);
 
             //Calculate variance
             double curVariance = getVariance(clusters, centroids);
@@ -188,11 +185,11 @@ public class Kmeans {
             System.out.println("New Clusters");
 
             //Print current centroids
-            for (Point point: centroids) {
-
-
-                System.out.println(Arrays.toString(point.data));
-            }
+//            for (Point point: centroids) {
+//
+//
+//                System.out.println(Arrays.toString(point.data));
+//            }
 
             c++;
         }
@@ -286,30 +283,29 @@ public class Kmeans {
 
         Point[] centroids = new Point[clusters.length];
 
-
-
-
         //Loops through all of the clusters
         for (int i = 0; i < clusters.length; i++) {
+            Cluster c = clusters[i];
+            int m = clusters[0].points.get(0).data.length;
 
             Point temp = new Point();
 
             //Initialize temp for each new cluster
-            temp.setData(new float[clusters[0].points.get(0).data.length]);
+            temp.setData(new float[m]);
 
             //Loops through all of the points inside of a cluster
-            for (int j = 0; j < clusters[i].points.size(); j++) {
+            for (Point row : c.points) {
 
                 //Sums all of the points
-                for (int k = 0; k < clusters[i].points.get(j).data.length; k++) {
-                    temp.data[k] += clusters[i].points.get(j).getData()[k];
+                for (int k = 0; k < m; k++) {
+                    temp.data[k] += row.getData()[k];
                 }
 
             }
 
             //Divide each entry by number of points in the cluster to calculate the mean
-            for (int l = 0; l < temp.data.length; l++) {
-                temp.data[l] /= clusters[i].points.size();
+            for (int l = 0; l < m; l++) {
+                temp.data[l] /= c.points.size();
             }
 
             centroids[i] = temp;
@@ -321,7 +317,7 @@ public class Kmeans {
 
     public static void main(String rgs[]) throws IOException {
 
-        int NUM_CLUSTERS = 5;
+        int NUM_CLUSTERS = 10;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
