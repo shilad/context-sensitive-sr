@@ -103,7 +103,7 @@ public class Kmeans {
         float [] coordinates2 = p2.data;
 
         double sum = 0;
-        for (int i=0; i < point.length; i++) {
+        for (int i=0; i < coordinates1.length; i++) {
             sum += Math.pow(Math.abs(coordinates1[i]-coordinates2[i]), 2);
         }
         return Math.sqrt(sum);
