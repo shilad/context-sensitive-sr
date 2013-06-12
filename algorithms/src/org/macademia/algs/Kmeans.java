@@ -1,4 +1,5 @@
-package org.macademia.algs;  import java.io.File;
+package org.macademia.algs;  import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,6 +135,8 @@ public class Kmeans {
         return sum;
 
     }
+
+
 
     /**
      * Return the clusters computed using Lloyd's algorithm
@@ -315,6 +318,30 @@ public class Kmeans {
         return centroids;
     }
 
+    public int[] bestPointsForCluster(Point[] centroids) {
+        int[] indexes = new int[k];
+        double min = Double.POSITIVE_INFINITY;
+        int index = 0;
+
+
+        for (int i = 0; i < k; i++) {
+            Point c = centroids[i];
+
+            for(int j = 0; j < data.length; k++) {
+                Point p = new Point(data[j]);
+                double temp = getDistance(p, c);
+
+                if (temp < min) {
+                   min = temp;
+                   index = i;
+                }
+            }
+            indexes[i] = index;
+
+        }
+        return indexes;
+    }
+
     public static void main(String rgs[]) throws IOException {
 
         int NUM_CLUSTERS = 10;
@@ -332,7 +359,9 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
 
-        test.getClusters(10, 1);
+        Point[] c = test.getClusters(10, 1);
+
+        System.out.println(Arrays.toString(test.bestPointsForCluster(c)));
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
 //
