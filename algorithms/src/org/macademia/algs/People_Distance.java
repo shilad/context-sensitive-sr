@@ -1,5 +1,4 @@
 package org.macademia.algs;
-import edu.macalester.wpsemsim.matrix.DenseMatrix;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,45 +21,47 @@ public class People_Distance {
         try {
             distances = getAllDistances(p1IDs,p2IDs);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
+        distance=combineDistances(distances);
 
         return distance;
     }
+
     private static ArrayList<Integer> getInterestIDs(People p){
         ArrayList<Integer> ids = new ArrayList<Integer>();
         ArrayList<Interest> interests=p.getInterest();
         for(int i=0;i<interests.size();i++){
             ids.add(Integer.parseInt(interests.get(i).getDenseID()));
-             //System.out.println(interests.get(i).getDenseID());
         }
         return ids;
     }
+
     private static ArrayList<Float> getAllDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
         ArrayList<Float> distances = new ArrayList<Float>();
-        DenseMatrix matrix = null;
-        try {
-            matrix = new DenseMatrix(new File("dat/similarity.matrix"));
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        int count=0;
+
+        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+
+        float[][] matrix = sm.getFloatMatrix();
         for(int i=0;i<p1IDs.size();i++){
             for(int j=0;j<p2IDs.size();j++){
-                //distances.add(matrix.getRow(p1IDs.get(i)).getColValue(p2IDs.get(j)));//get value from matrix
-                if (matrix.getRow(p1IDs.get(i)) != null) {
-                    System.out.println(p1IDs.get(i)+"--"+p2IDs.get(j)+"---"+matrix.getRow(p1IDs.get(i)));
-
-                System.out.println(matrix.getRow(p1IDs.get(i)).getValues()[p2IDs.get(j)]+"--"+p2IDs.get(j));
-                }
-                else{
-                    count++;                                //WHY ARE 39 ROWS NULL??????
-                }
-//                    System.out.println("ID 1:\t"+p1IDs.get(i)+"\tID 2:\t"+p2IDs.get(j)+
-//                        "\t\tMatrix value:\t"+matrix.getRow(p1IDs.get(i)).getIndexForId(p2IDs.get(j)));
+                distances.add(matrix[p1IDs.get(i)][p2IDs.get(j)]);
             }
         }
-        System.out.println(count);
+
+
         return distances;
     }
+
+    private static float combineDistances(ArrayList<Float> list){
+        float distance=0;
+
+        //Maybe do something fancier, but for now, return the average.
+
+        for(int i=0;i<list.size();i++){
+            distance+=list.get(i);
+        }
+        return (distance/list.size());
+    }
+
 }
