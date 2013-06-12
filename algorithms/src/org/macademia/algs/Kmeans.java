@@ -169,9 +169,7 @@ public class Kmeans {
             }
 
             //Redefine centroids
-            for (int i = 0; i < data.length; i++) {
-                centroids = computeCentroids(clusters);
-            }
+            centroids = computeCentroids(clusters);
 
             //Calculate variance
             double curVariance = getVariance(clusters, centroids);
@@ -188,11 +186,9 @@ public class Kmeans {
             System.out.println("New Clusters");
 
             //Print current centroids
-            for (Point point: centroids) {
-
-
-                System.out.println(Arrays.toString(point.data));
-            }
+//            for (Point point: centroids) {
+//                System.out.println(Arrays.toString(point.data));
+//            }
 
             c++;
         }
@@ -336,7 +332,7 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
 
-        test.getClusters(10, 1);
+        test.getClusters(1000, 0.001);
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
 //
