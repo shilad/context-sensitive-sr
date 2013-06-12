@@ -193,8 +193,10 @@ public class Kmeans {
     /**
      * Computes the centroids of each cluster
      * @param clusters
+     * @return an array of centroid points corresponding to the array of clusters
      */
-    public void computeCentroids(Cluster[] clusters){
+    public Point[] computeCentroids(Cluster[] clusters){
+
 
     }
 
