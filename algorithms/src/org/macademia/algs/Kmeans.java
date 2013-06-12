@@ -264,7 +264,7 @@ public class Kmeans {
 
     public static void main(String rgs[]) throws IOException {
 
-        int NUM_CLUSTERS = 5;
+        int NUM_CLUSTERS = 20;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -281,9 +281,9 @@ public class Kmeans {
 
         test.centroids = test.getKRandomPoints(test.getData(), test.getK());
 
-        for (Point point: test.centroids) {
-            System.out.println(Arrays.toString(point.data));
-        }
+//        for (Point point: test.centroids) {
+//            System.out.println(Arrays.toString(point.data));
+//        }
 
         for (int i = 0; i < test.data.length; i++) {
 
@@ -305,7 +305,7 @@ public class Kmeans {
             for (Point point: test.centroids) {
 
 
-                System.out.println(Arrays.toString(point.data));
+                //System.out.println(Arrays.toString(point.data));
             }
 
 
