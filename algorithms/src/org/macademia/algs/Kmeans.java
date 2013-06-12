@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-/** * Created with IntelliJ IDEA. * User: research * Date: 6/11/13 * Time: 4:55 PM
- * To change this template use File | Settings | File Templates.
+/**
+ * Created with IntelliJ IDEA.
+ * User: research
+ * Date: 6/11/13
+ * Time: 4:55 PM
  */
 public class Kmeans {
 
@@ -19,17 +22,11 @@ public class Kmeans {
         this.k = k;
         this.clusters = new Cluster[k];
         this.centroids = new Point[k];
+
         for(int i=0;i<k;i++){
             this.centroids[i] = new Point();
             this.clusters[i] = new Cluster();
         }
-//        for(Cluster c:this.clusters){
-//            c = new Cluster();
-//        }
-//        this.centroids = new Point[k];
-//        for(Point p:this.centroids){
-//            p = new Point();
-//        }
     }
 
     public float[][] getData() {
@@ -67,6 +64,9 @@ public class Kmeans {
         private void setPoints(ArrayList<Point> points) {
             this.points = points;
         }
+
+
+
     }
 
     private static class Point {
@@ -137,11 +137,67 @@ public class Kmeans {
 
     /**
      * Return the clusters computed using Lloyd's algorithm
-     * @return an array of k cluster ids
+     * @param iterations
+     * @param tolerance
+     * @return centroids
      */
-    public int[] getClusters() {
+    public Point[] getClusters(int iterations, double tolerance) {
 
-        return new int[0];
+        //Initialize the centers
+        centroids = getKRandomPoints(data, k);
+
+        //Place Points into clusters
+        for (int i = 0; i < data.length; i++) {
+            Point p = new Point(data[i]);
+            clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+        }
+
+        double prevVariance = Double.POSITIVE_INFINITY;
+        int c = 0;
+
+        while (c < iterations) {
+
+            //Clear the clusters
+            for (Cluster cluster:clusters) {
+                cluster.points.clear();
+            }
+
+            //Place in clusters
+            for (int i = 0; i < data.length; i++) {
+                Point p = new Point(data[i]);
+                clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+            }
+
+            //Redefine centroids
+            for (int i = 0; i < data.length; i++) {
+                centroids = computeCentroids(clusters);
+            }
+
+            //Calculate variance
+            double curVariance = getVariance(clusters, centroids);
+
+            if (Math.abs(curVariance-prevVariance) < tolerance) {
+                return centroids;
+
+            }
+
+            prevVariance = curVariance;
+
+            System.out.println("Variance:");
+            System.out.println(curVariance);
+            System.out.println("New Clusters");
+
+            //Print current centroids
+            for (Point point: centroids) {
+
+
+                System.out.println(Arrays.toString(point.data));
+            }
+
+            c++;
+        }
+
+        return centroids;
 
     }
 
@@ -201,11 +257,12 @@ public class Kmeans {
      * Computes the intra-cluster variance over all clusters
      * @param clusters
      * @param centroids
-     * @return an array of variances
+     * @return the intra-cluster variance over all clusters
      */
-    public double[] getVariance(Cluster[] clusters, Point[] centroids){
+    public double getVariance(Cluster[] clusters, Point[] centroids){
         int k = clusters.length;
-        double [] vars = new double [k];
+        double result = 0;
+
         for(int i=0; i<k; i++){ //for each clusters
             double sum = 0;
             ArrayList<Point> points = clusters[i].points;
@@ -214,10 +271,10 @@ public class Kmeans {
                 double sumSquare = getSumOfSquares(p, center);
                 sum +=sumSquare;
             }
-            vars[i] = sum;
+            result+=sum;
         }
 
-        return vars;
+        return result;
     }
 
     /**
@@ -279,54 +336,52 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
 
-        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
+        test.getClusters(10, 1);
 
-        for (Point point: test.centroids) {
-            System.out.println(Arrays.toString(point.data));
-        }
-
-        for (int i = 0; i < test.data.length; i++) {
-
-//            System.out.println(Arrays.toString(test.data[i]));
-
-            Point p = new Point(test.data[i]);
-            test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
-        }
-
-
-
-        for (int z = 0; z< 100; z++) {
-
-            test.centroids = test.computeCentroids(test.clusters);
-
-            System.out.println("New Clusters");
-
-            //Print current centroids
-            for (Point point: test.centroids) {
-
-
-                System.out.println(Arrays.toString(point.data));
-            }
-
-
-            //Redefine Centroids
-
-            for (Cluster cluster:test.clusters) {
-                cluster.points.clear();
-            }
-
-
-            for (int i = 0; i < test.data.length; i++) {
-
-                Point p = new Point(test.data[i]);
-                test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
-            }
-
-            //calculate variance
-            double[] vars = test.getVariance(test.clusters,test.centroids);
-            System.out.println("Variance:");
-            System.out.println(Arrays.toString(vars));
-        }
+//        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
+//
+//        for (Point point: test.centroids) {
+//            System.out.println(Arrays.toString(point.data));
+//        }
+//
+//        for (int i = 0; i < test.data.length; i++) {
+//
+////            System.out.println(Arrays.toString(test.data[i]));
+//
+//            Point p = new Kmeans.Point(test.data[i]);
+//            test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
+//        }
+//
+//
+//
+//        for (int z = 0; z< 100; z++) {
+//
+//            test.centroids = test.computeCentroids(test.clusters);
+//
+//            System.out.println("New Clusters");
+//
+//            //Print current centroids
+//            for (Point point: test.centroids) {
+//
+//
+//                System.out.println(Arrays.toString(point.data));
+//            }
+//
+//
+//            //Redefine Centroids
+//
+//            for (Cluster cluster:test.clusters) {
+//                cluster.points.clear();
+//            }
+//
+//
+//            for (int i = 0; i < test.data.length; i++) {
+//
+//                Point p = new Point(test.data[i]);
+//                test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
+//            }
+//
+//        }
 
 
     }
