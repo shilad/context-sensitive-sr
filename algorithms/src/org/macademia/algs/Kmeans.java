@@ -19,7 +19,7 @@ public class Kmeans {
         this.data = data;
     }
 
-    private static class Cluster {
+    class Cluster {
         private int id;
 
         private Point[] points;
@@ -51,7 +51,7 @@ public class Kmeans {
         }
     }
 
-    private static class Point {
+    class Point {
         private float [] data;
         private int id;
         private int mCluster;
