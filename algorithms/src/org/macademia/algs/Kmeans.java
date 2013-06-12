@@ -19,7 +19,7 @@ public class Kmeans {
         this.data = data;
     }
 
-    private static class Cluster {
+    private class Cluster {
         private int id;
 
         private Point[] points;
@@ -50,7 +50,7 @@ public class Kmeans {
         }
     }
 
-    private static class Point {
+    private class Point {
 
         private float [] data;
         private int id;
@@ -110,9 +110,9 @@ public class Kmeans {
     }
 
     /**
-     *
-     * @param data
-     * @param k
+     * Return the clusters computed using Lloyd's algorithm
+     * @param data a matrix of floats
+     * @param k the desired number of clusters
      * @return an array of k cluster ids
      */
     public int[] getClusters(float[][] data, int k){

@@ -193,6 +193,7 @@ public class KMeans_Ex4a
         private double mX = 0.0;
         private double mY = 0.0;
 
+
         public Centroid()
         {
             return;
