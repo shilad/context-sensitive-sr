@@ -1,8 +1,12 @@
 package org.macademia.algs;
 
+import edu.macalester.wpsemsim.matrix.DenseMatrix;
+import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,26 +36,11 @@ public class People_Distance {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         ArrayList<Interest> interests=p.getInterest();
         for(int i=0;i<interests.size();i++){
-            ids.add(Integer.parseInt(interests.get(i).getDenseID()));
+            ids.add(Integer.parseInt(interests.get(i).getMacademiaID()));
         }
         return ids;
     }
 
-    private static ArrayList<Float> getAllDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
-        ArrayList<Float> distances = new ArrayList<Float>();
-
-        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
-
-        float[][] matrix = sm.getFloatMatrix();
-        for(int i=0;i<p1IDs.size();i++){
-            for(int j=0;j<p2IDs.size();j++){
-                distances.add(matrix[p1IDs.get(i)][p2IDs.get(j)]);
-            }
-        }
-
-
-        return distances;
-    }
 
     private static float combineDistances(ArrayList<Float> list){
         float distance=0;
@@ -63,5 +52,26 @@ public class People_Distance {
         }
         return (distance/list.size());
     }
+    private static ArrayList<Float> getAllDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
+        ArrayList<Float> distances = new ArrayList<Float>();
+        DenseMatrix matrix = null;
+        try {
+            matrix = new DenseMatrix(new File("dat/similarity.matrix"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DenseMatrixRow row;
+        LinkedHashMap<Integer,Float> map=null;
+        for(int i=0;i<p1IDs.size();i++){
+            row=matrix.getRow(p1IDs.get(i));
+            map=row.asMap();
+            for(int j=0;j<p2IDs.size();j++){
+                distances.add(map.get(p2IDs.get(j)));
+                //System.out.println(map.get(p2IDs.get(j)));
+            }
 
+        }
+
+        return distances;
+    }
 }
