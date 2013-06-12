@@ -136,7 +136,7 @@ public class Kmeans {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         Random rand = new Random();
         while (numbers.size() < k) {
-            int number = rand .nextInt(MAX);
+            int number = rand.nextInt(MAX);
             if (!numbers.contains(number)) {
                 numbers.add(number);
             }
@@ -151,8 +151,6 @@ public class Kmeans {
 
         return centroids;
     }
-
-
 
     /**
      *
@@ -182,11 +180,5 @@ public class Kmeans {
     public void computeCentroids(Cluster[] clusters){
 
     }
-
-
-
-
-
-
 
 }
