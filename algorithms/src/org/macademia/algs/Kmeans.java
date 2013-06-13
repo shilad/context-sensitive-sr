@@ -327,14 +327,12 @@ public class Kmeans {
 //                {3.5, 5.0},
 //                {4.5, 5.0},
 //                {3.5, 4.5}};
+
         SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
         float SAMPLES[][] = sm.getFloatMatrix();
 
-
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-
         Point[] points = test.getClusters(10, 1);
-
         Point center1 = points[0];
 
 
