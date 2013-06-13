@@ -14,11 +14,12 @@ public class Kmeans {
 
     private Cluster[] clusters;
     private Point[] centroids;
+    private ArrayList<Point> data;
     private int k;
-    private float[][] data;
+
 
     public Kmeans(float[][] data, int k) {
-        this.data = data;
+        this.data = new ArrayList<Point>();
         this.k = k;
         this.clusters = new Cluster[k];
         this.centroids = new Point[k];
@@ -27,14 +28,20 @@ public class Kmeans {
             this.centroids[i] = new Point();
             this.clusters[i] = new Cluster();
         }
+
+        for(int i=0;i<data.length;i++) {
+            this.data.add(new Point(i, data[i]));
+        }
     }
 
-    public float[][] getData() {
+    public ArrayList<Point> getData() {
         return data;
     }
 
     public void setData(float[][] data) {
-        this.data = data;
+        for(int i=0;i<data.length;i++) {
+            this.data.add(new Point(i, data[i]));
+        }
     }
 
     public int getK() {
@@ -102,9 +109,9 @@ public class Kmeans {
         }
 
         public String toString(){
-            String result = "The data in point with id "+id+":\n";
-            result+=Arrays.toString(data);
-            result+="\n";
+            String result = "" + id;
+//            result+=Arrays.toString(data);
+//            result+="\n";
             return result;
         }
 
@@ -160,14 +167,13 @@ public class Kmeans {
      * @param tolerance
      * @return centroids
      */
-    public Point[] getClusters(int iterations, double tolerance) {
+    public Point[] getCentroids(int iterations, double tolerance) {
 
         //Initialize the centers
         centroids = getKRandomPoints(data, k);
 
         //Place Points into clusters
-        for (int i = 0; i < data.length; i++) {
-            Point p = new Point(data[i]);
+        for (Point p: data) {
             clusters[getBestClusterForPoint(p, centroids)].points.add(p);
         }
 
@@ -182,8 +188,7 @@ public class Kmeans {
                 cluster.points.clear();
             }
             //Place in clusters
-            for (int i = 0; i < data.length; i++) {
-                Point p = new Point(data[i]);
+            for (Point p: data) {
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
             //Redefine centroids
@@ -223,9 +228,9 @@ public class Kmeans {
      * @param k
      * @return an array of k points
      */
-    public Point[] getKRandomPoints(float[][] data, int k) {
+    public Point[] getKRandomPoints(ArrayList<Point> data, int k) {
 
-        int max = data.length;
+        int max = data.size();
 
         //Generating random numbers
         ArrayList<Integer> numbers = new ArrayList<Integer>();
@@ -241,7 +246,7 @@ public class Kmeans {
 
         //Placing the points in the return array
         for (int i = 0; i < k; i++) {
-            centroids[i] = new Point(data[numbers.get(i)]);
+            centroids[i] = new Point(data.get(numbers.get(i)).getData());
         }
 
         return centroids;
@@ -335,34 +340,34 @@ public class Kmeans {
         return centroids;
     }
 
-    public int[] bestPointsForCluster(Point[] centroids) {
-        int[] indexes = new int[k];
-        double min = Double.POSITIVE_INFINITY;
-        int index = 0;
-
-
-        for (int i = 0; i < k; i++) {
-            Point c = centroids[i];
-
-            for(int j = 0; j < data.length; k++) {
-                Point p = new Point(data[j]);
-                double temp = getDistance(p, c);
-
-                if (temp < min) {
-                    min = temp;
-                    index = i;
-                }
-            }
-            indexes[i] = index;
-
-        }
-        return indexes;
-    }
+//    public int[] bestPointsForCluster(Point[] centroids) {
+//        int[] indexes = new int[k];
+//        double min = Double.POSITIVE_INFINITY;
+//        int index = 0;
+//
+//
+//        for (int i = 0; i < k; i++) {
+//            Point c = centroids[i];
+//
+//            for(int j = 0; j < data.length; k++) {
+//                Point p = new Point(data[j]);
+//                double temp = getDistance(p, c);
+//
+//                if (temp < min) {
+//                    min = temp;
+//                    index = i;
+//                }
+//            }
+//            indexes[i] = index;
+//
+//        }
+//        return indexes;
+//    }
 
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 10;
+        int NUM_CLUSTERS = 15;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -376,7 +381,18 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] points = test.getClusters(10, 1);
+        Point[] centroids = test.getCentroids(100, 0.01);
+
+        int i = 1;
+
+        for (Cluster c: test.clusters) {
+            System.out.println("Cluster " + i);
+            for (int j = 0; j < 10; j++) {
+                Point p = c.points.get(j);
+                System.out.println(p.toString());
+            }
+            i++;
+        }
 
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
