@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -22,6 +23,7 @@ public class Parse_Clusters {
         while ((line = interestFile.readLine()) != null) {
             String[] lineSplit=line.split("\t");
             i = new Interest(lineSplit[3], lineSplit[1],lineSplit[0]);
+            //System.out.println(Arrays.toString(lineSplit));
             temp.put(lineSplit[0], i);
 
         }
@@ -46,6 +48,24 @@ public class Parse_Clusters {
             else{
                 if(map.get(line)!=null)
                     System.out.println(map.get(line).getName());
+            }
+
+        }
+    }
+    public static void printClustersFromList(String pathPhrases, int[] list) throws IOException {
+        BufferedReader interestFile=null;
+        interestFile = new BufferedReader(new FileReader(pathPhrases));
+        HashMap<String,Interest> map = new HashMap();
+        try {
+            map=makeInterestMap(interestFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(int i=0;i<list.length;i++){
+
+            if(map.get(""+list[i])!=null){
+                System.out.println(map.get(""+list[i]).getName());
             }
 
         }

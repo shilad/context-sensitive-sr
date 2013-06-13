@@ -367,7 +367,7 @@ public class Kmeans {
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 15;
+        int NUM_CLUSTERS = 5;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -416,7 +416,7 @@ public class Kmeans {
 
         }
 
-        System.out.println(Arrays.toString(centers));
+        Parse_Clusters.printClustersFromList("dat/phrases.tsv",centers);
 
 
 
