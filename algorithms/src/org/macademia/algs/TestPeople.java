@@ -61,7 +61,6 @@ public class TestPeople {
 //
 //        }
 
-<<<<<<< HEAD
             //PRINT OUT EVERY EMAIL WITH INTERESTS
 //        for(int i=0;i<people.size();i++){
 //            for (int j=0;j<people.get(i).getInterest().size();j++){
@@ -70,9 +69,7 @@ public class TestPeople {
 //            }
 //
 //        }
-=======
 
 
->>>>>>> upstream/clusterAlgorithms
     }
 }
