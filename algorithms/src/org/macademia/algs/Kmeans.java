@@ -147,22 +147,7 @@ public class Kmeans {
     }
 
     /**
-     * Calculate the sum of squares of the two points
-     * @param coordinate1 the coordinate for the first Point
-     * @param coordinate2 the coordinate for the second Point
-     * @return the sum of squares between the two points
-     */
-    public double getSumOfSquares(float[] coordinate1, float[] coordinate2){
-        double sum = 0;
-        for (int i=0; i < coordinate1.length; i++) {
-            sum += Math.pow(Math.abs(coordinate1[i]-coordinate2[i]), 2);
-        }
-        return sum;
-
-    }
-
-    /**
-     * Return the clusters computed using Lloyd's algorithm
+     * Return the centroids of the clusters computed using Lloyd's algorithm
      * @param iterations
      * @param tolerance
      * @return centroids
@@ -210,8 +195,6 @@ public class Kmeans {
 
             //Print current centroids
 //            for (Point point: centroids) {
-//
-//
 //                System.out.println(Arrays.toString(point.data));
 //            }
 
@@ -311,7 +294,7 @@ public class Kmeans {
         //Loops through all of the clusters
         for (int i = 0; i < clusters.length; i++) {
             Cluster c = clusters[i];
-            int m = clusters[0].points.get(0).data.length;
+            int m = clusters[0].points.get(0).data.length; //number of entries in a point
 
             Point temp = new Point();
 
@@ -339,31 +322,6 @@ public class Kmeans {
 
         return centroids;
     }
-
-//    public int[] bestPointsForCluster(Point[] centroids) {
-//        int[] indexes = new int[k];
-//        double min = Double.POSITIVE_INFINITY;
-//        int index = 0;
-//
-//
-//        for (int i = 0; i < k; i++) {
-//            Point c = centroids[i];
-//
-//            for(int j = 0; j < data.length; k++) {
-//                Point p = new Point(data[j]);
-//                double temp = getDistance(p, c);
-//
-//                if (temp < min) {
-//                    min = temp;
-//                    index = i;
-//                }
-//            }
-//            indexes[i] = index;
-//
-//        }
-//        return indexes;
-//    }
-
 
     public static void main(String args[]) throws IOException {
 
