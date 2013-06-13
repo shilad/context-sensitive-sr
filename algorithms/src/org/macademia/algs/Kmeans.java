@@ -340,6 +340,7 @@ public class Kmeans {
         return indexes;
     }
 
+
     public static void main(String args[]) throws IOException {
 
         int NUM_CLUSTERS = 10;
