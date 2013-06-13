@@ -35,12 +35,11 @@ public class Parse_Clusters {
         try {
             map=makeInterestMap(interestFile);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         String line="";
         interestFile= new BufferedReader(new FileReader(pathClusters));
         while ((line = interestFile.readLine()) != null) {
-            //String[] lineSplit=line.split("\t");
             if(line.contains("Cluster")){
                 System.out.println("\n"+line);
             }
