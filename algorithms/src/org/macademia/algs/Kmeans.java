@@ -383,16 +383,42 @@ public class Kmeans {
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
         Point[] centroids = test.getCentroids(100, 0.01);
 
-        int i = 1;
+//        int i = 1;
+//
+//        for (Cluster c: test.clusters) {
+//            System.out.println("Cluster " + i);
+//            for (int j = 0; j < 10; j++) {
+//                Point p = c.points.get(j);
+//                System.out.println(p.toString());
+//            }
+//            i++;
+//        }
 
-        for (Cluster c: test.clusters) {
-            System.out.println("Cluster " + i);
-            for (int j = 0; j < 10; j++) {
-                Point p = c.points.get(j);
-                System.out.println(p.toString());
+
+        double min = Double.POSITIVE_INFINITY;
+        double dist;
+        int[] centers = new int[NUM_CLUSTERS];
+
+        for (int j = 0; j < NUM_CLUSTERS; j++) {
+
+            Cluster cluster = test.clusters[j];
+            min = Double.POSITIVE_INFINITY;
+
+            for (Point p:  cluster.getPoints()) {
+
+                dist = test.getDistance(p, test.centroids[j]);
+
+                if (dist < min) {
+                    min = dist;
+                    centers[j] = p.id;
+                }
             }
-            i++;
+
         }
+
+        System.out.println(Arrays.toString(centers));
+
+
 
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
