@@ -19,20 +19,23 @@ public class People_Interests {
     private static ArrayList<People> peopleList = new ArrayList<People>();
     private static HashMap interestMap = new HashMap();
 
-    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath){
+    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath,String departmentPath){
         BufferedReader peopleFile=null;
         BufferedReader interestFile=null;
         BufferedReader people_interestFile=null;
+        BufferedReader departmentFile=null;
         try {
             peopleFile = new BufferedReader(new FileReader(peoplePath));
             interestFile = new BufferedReader(new FileReader(interestPath));
             people_interestFile = new BufferedReader(new FileReader(people_interestPath));
+            departmentFile = new BufferedReader(new FileReader(departmentPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
             peopleList=makePeopleList(peopleFile);
+            peopleList=addDepartments(departmentFile,peopleList);
             interestMap=makeInterestMap(interestFile);
             peopleList=addInterests(peopleList,people_interestFile);
         } catch (IOException e) {
@@ -50,6 +53,31 @@ public class People_Interests {
             String[] lineSplit=line.split("\t");
             p=new People(lineSplit[0], lineSplit[1]);
             temp.add(p);
+
+        }
+        return temp;
+    }
+    private static ArrayList<People> addDepartments(BufferedReader departmentFile,ArrayList<People> people) throws IOException{
+        ArrayList<People> temp = people;
+        String line = null;
+        String dept="";
+        while ((line = departmentFile.readLine()) != null) {
+            String[] lineSplit=line.split(",");
+            for(int i=0;i<temp.size();i++){
+                if(temp.get(i).getID().equals(lineSplit[1])){
+                    if(lineSplit.length>2)
+                        if(lineSplit[2].charAt(0)=='"'){
+                            for(int j=2;j<lineSplit.length;j++){
+                                dept+=lineSplit[j];
+                            }
+                            dept=dept.substring(1,dept.length()-1);
+                            temp.get(i).setDepartment(dept);
+                            dept="";
+                        }
+                        else
+                            temp.get(i).setDepartment(lineSplit[2]);
+                }
+            }
 
         }
         return temp;

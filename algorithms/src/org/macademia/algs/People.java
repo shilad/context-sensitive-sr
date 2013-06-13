@@ -50,4 +50,10 @@ public class People {
 
         this.interest=interest;
     }
+    public void setDepartment(String dept){
+        this.department=dept;
+    }
+    public String getDepartment(){
+        return department;
+    }
 }

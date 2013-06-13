@@ -13,12 +13,13 @@ public class Test {
 
     //@SuppressWarnings("all")
     public static void main(String args[]) throws IOException {
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         People target = people.get(107);
         People candidate = people.get(1822);                   //0 is Shilad and 107 is Danny Kaplan
                                                                //Lepczyk is 1961 and Eric Palmer is 1822
-        Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
 
+        //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
+        System.out.println(target.getDepartment());
             //SINGLE PERSON TEST
 //        float dis = People_Distance.findDistance(target,candidate);
 //        System.out.println("The distance between "+target.getEmail()+" and "+candidate.getEmail()+" is "+dis);
