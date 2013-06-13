@@ -358,12 +358,9 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
 
-        Point[] points = test.getClusters(10, 1);
+        Point[] centroids = test.getClusters(10, 1);
 
-        Point center1 = points[0];
-
-
-
+        Point center1 = centroids[0];
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
 //
