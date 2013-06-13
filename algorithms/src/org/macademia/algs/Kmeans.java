@@ -360,7 +360,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.getCentroids(5, 1);
+        Point[] centroids = test.getCentroids(100, 0.01);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 
 //        int i = 1;
