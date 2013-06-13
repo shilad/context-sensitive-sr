@@ -230,6 +230,7 @@ public class Kmeans {
 
     /**
      * Returns the index of the centroid nearest to a given point
+     * Noted that the index of the centroid is the same as the index of the cluster
      * @param point
      * @param centroids
      * @return the index of the cluster
@@ -335,6 +336,8 @@ public class Kmeans {
         Point[] points = test.getClusters(10, 1);
 
         Point center1 = points[0];
+
+
 
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
