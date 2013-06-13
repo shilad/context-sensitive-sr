@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Test {
+public class TestPeople {
 
     //@SuppressWarnings("all")
     public static void main(String args[]) throws IOException {
@@ -61,6 +61,7 @@ public class Test {
 //
 //        }
 
+<<<<<<< HEAD
             //PRINT OUT EVERY EMAIL WITH INTERESTS
 //        for(int i=0;i<people.size();i++){
 //            for (int j=0;j<people.get(i).getInterest().size();j++){
@@ -69,5 +70,9 @@ public class Test {
 //            }
 //
 //        }
+=======
+
+
+>>>>>>> upstream/clusterAlgorithms
     }
 }

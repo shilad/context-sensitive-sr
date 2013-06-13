@@ -98,5 +98,42 @@ public class SimilarityMatrix extends DenseMatrix{
         }
     }
 
+    public static void main(String args[]){
+
+        try{
+            SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+
+            //Testing getFloatMatrix()
+            float[][] matrix = sm.getFloatMatrix();
+            System.out.println("This length of the matrix is "+matrix.length);
+
+            //print out results
+            //System.out.print(Arrays.deepToString(matrix));
+//            for(float[] items:matrix){
+//                System.out.println(Arrays.toString(items));
+//            }
+
+            float[] testRow = sm.getRow(sm.getRowIds()[0]).getValues();
+
+            for (int i=0;i<testRow.length;i++){
+               if(testRow[i] != matrix[0][i])
+                   System.out.println("Wrong!");
+            }
+
+            System.out.println("The row ids are ");
+            int[] ids = sm.getRowIds();
+            Arrays.sort(ids);
+            System.out.println(Arrays.toString(ids));
+
+            //Testing matrixToCSV
+            sm.matrixToCSV("dat/similarity.csv");
+
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+
+    }
+
 
 }
