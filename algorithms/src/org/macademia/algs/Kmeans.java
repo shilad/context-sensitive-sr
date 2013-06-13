@@ -316,7 +316,31 @@ public class Kmeans {
         return centroids;
     }
 
-    public static void main(String rgs[]) throws IOException {
+    public int[] bestPointsForCluster(Point[] centroids) {
+        int[] indexes = new int[k];
+        double min = Double.POSITIVE_INFINITY;
+        int index = 0;
+
+
+        for (int i = 0; i < k; i++) {
+            Point c = centroids[i];
+
+            for(int j = 0; j < data.length; k++) {
+                Point p = new Point(data[j]);
+                double temp = getDistance(p, c);
+
+                if (temp < min) {
+                    min = temp;
+                    index = i;
+                }
+            }
+            indexes[i] = index;
+
+        }
+        return indexes;
+    }
+
+    public static void main(String args[]) throws IOException {
 
         int NUM_CLUSTERS = 10;
 
