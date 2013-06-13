@@ -65,13 +65,20 @@ public class Kmeans {
             this.points = points;
         }
 
-
+        public String toString(){
+            String result = "The cluster has the following points: \n";
+            result+=points;
+            result+="\n";
+            return result;
+        }
 
     }
 
     private static class Point {
 
         private float[] data;
+
+        private int id;
 
         private Point() {
             return;
@@ -81,12 +88,24 @@ public class Kmeans {
             this.data = data;
         }
 
+        private Point(int id, float[] data){
+            this.id = id;
+            this.data = data;
+        }
+
         private float[] getData() {
             return data;
         }
 
         private void setData(float[] data) {
             this.data = data;
+        }
+
+        public String toString(){
+            String result = "The data in point with id "+id+":\n";
+            result+=Arrays.toString(data);
+            result+="\n";
+            return result;
         }
 
     }
@@ -358,9 +377,6 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
         Point[] points = test.getClusters(10, 1);
-        Point center1 = points[0];
-
-
 
 
 //        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
