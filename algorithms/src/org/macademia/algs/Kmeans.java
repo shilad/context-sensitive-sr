@@ -371,6 +371,7 @@ public class Kmeans {
 
         SortedSet<Map.Entry<Integer, Double>> sortedset = new TreeSet<Map.Entry<Integer, Double>>(
                 new Comparator<Map.Entry<Integer, Double>>() {
+                    @Override
                     public int compare(Map.Entry<Integer, Double> e1,
                                        Map.Entry<Integer, Double> e2) {
                         return e1.getValue().compareTo(e2.getValue());
@@ -386,26 +387,29 @@ public class Kmeans {
 
         sortedset.addAll(myMap.entrySet());
 
-        Point[] points = new Point[n];
+        Point[] bestPoints = new Point[n];
 
         // Example for Integers
         Iterator<Map.Entry<Integer, Double>> it = sortedset.iterator();
-        Map.Entry<Integer, Double> current = null;
+        Map.Entry<Integer, Double> current;
 
-        for(int i=0;i<n;i++){
+        int i = 0;
+
+        while (i < n && it.hasNext()) {
            current = it.next();
-           points[i] = data.get(current.getKey());
+           bestPoints[i] = data.get(current.getKey());
+           i++;
         }
 
 
-        System.out.println("points:" + Arrays.toString(points));
+        System.out.println("points:" + Arrays.toString(bestPoints));
 
-        return points;
+        return bestPoints;
     }
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 5;
+        int NUM_CLUSTERS = 50;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -419,7 +423,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(10, 1);
+        Point[] centroids = test.compute(5, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
         test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
