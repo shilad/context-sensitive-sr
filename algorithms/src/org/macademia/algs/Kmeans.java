@@ -356,7 +356,7 @@ public class Kmeans {
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 20;
+        int NUM_CLUSTERS = 50;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -370,8 +370,8 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        //Point[] centroids = test.compute(1000, 0.01);
-        //test.clusterToFile(test.clusters,"dat/clusters.txt");
+        Point[] centroids = test.compute(1000, 0.01);
+        test.clusterToFile(test.clusters,"dat/clusters.txt");
 
         Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
 
