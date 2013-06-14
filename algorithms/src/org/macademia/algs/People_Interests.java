@@ -28,14 +28,14 @@ public class People_Interests {
             peopleFile = new BufferedReader(new FileReader(peoplePath));
             interestFile = new BufferedReader(new FileReader(interestPath));
             people_interestFile = new BufferedReader(new FileReader(people_interestPath));
-            departmentFile = new BufferedReader(new FileReader(departmentPath));
+            //departmentFile = new BufferedReader(new FileReader(departmentPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
             peopleList=makePeopleList(peopleFile);
-            peopleList=addDepartments(departmentFile,peopleList);
+            //peopleList=addDepartments(departmentFile,peopleList);
             interestMap=makeInterestMap(interestFile);
             peopleList=addInterests(peopleList,people_interestFile);
         } catch (IOException e) {
