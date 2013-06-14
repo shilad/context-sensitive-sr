@@ -55,7 +55,24 @@ public class SimilarityMatrix extends DenseMatrix{
 
         return scores;
     }
+    public double[][] getDoubleMatrix(){
+        int row_num = this.getNumRows();
+        double[][] scores = new double[row_num][row_num];
+        double[] r = new double[row_num];
+        int i = 0;
+        int j=0;
+        for (DenseMatrixRow row:this){
+            for(float val:row.getValues()){
+                r[j]=(double) val;
+                j++;
+            }
+            scores[i] = r;
+            i++;
+            j=0;
+        }
 
+        return scores;
+    }
     /**
      * Output a CSV file based on the similarity matrix
      * By default, the header of the CSV file is 1 to num_of_row
