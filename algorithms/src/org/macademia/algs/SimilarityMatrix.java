@@ -58,10 +58,11 @@ public class SimilarityMatrix extends DenseMatrix{
     public double[][] getDoubleMatrix(){
         int row_num = this.getNumRows();
         double[][] scores = new double[row_num][row_num];
-        double[] r = new double[row_num];
+        double[] r = null;
         int i = 0;
         int j=0;
         for (DenseMatrixRow row:this){
+            r=new double[row_num];
             for(float val:row.getValues()){
                 r[j]=(double) val;
                 j++;
@@ -69,6 +70,7 @@ public class SimilarityMatrix extends DenseMatrix{
             scores[i] = r;
             i++;
             j=0;
+
         }
 
         return scores;

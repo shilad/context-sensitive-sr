@@ -15,7 +15,7 @@ public class TestPeople {
         People target = people.get(0);
         People candidate = people.get(107);                   //0 is Shilad and 107 is Danny Kaplan
         scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
-
+        //System.out.println(findPersonByID(people,"3435").getEmail());
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
         //Parse_Clusters.printClustersFromList("dat/phrases.tsv",list);
         //System.out.println(target.getDepartment());
@@ -30,15 +30,23 @@ public class TestPeople {
     public static People findPersonByEmail(ArrayList<People> people,String email){
         People peep = null;
         for(int i=1;i<people.size();i++){
-            if(people.get(i).getEmail().equals("epalmer@allegheny.edu"))
+            if(people.get(i).getEmail().equals(email))
+                peep=people.get(i);
+        }
+        return peep;
+    }
+    //Find a person
+    public static People findPersonByID(ArrayList<People> people,String id){
+        People peep = null;
+        for(int i=1;i<people.size();i++){
+            if(people.get(i).getID().equals(id))
                 peep=people.get(i);
         }
         return peep;
     }
 
 
-
-    //FIND TOP FIVE PEOPLE
+    //Finds scores for all candidates
     public static void scoresForAllCandidate(ArrayList<People> people,People target){
         double d = 0;
         double a = 0;
