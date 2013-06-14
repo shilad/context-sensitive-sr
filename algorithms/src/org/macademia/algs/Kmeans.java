@@ -387,21 +387,24 @@ public class Kmeans {
 
         sortedset.addAll(myMap.entrySet());
 
-        Point[] points = new Point[n];
+        Point[] bestPoints = new Point[n];
 
         // Example for Integers
         Iterator<Map.Entry<Integer, Double>> it = sortedset.iterator();
-        Map.Entry<Integer, Double> current = null;
+        Map.Entry<Integer, Double> current;
 
-        for(int i=0;i<n;i++){
+        int i = 0;
+
+        while (i < n && it.hasNext()) {
            current = it.next();
-           points[i] = data.get(current.getKey());
+           bestPoints[i] = data.get(current.getKey());
+           i++;
         }
 
 
-        System.out.println("points:" + Arrays.toString(points));
+        System.out.println("points:" + Arrays.toString(bestPoints));
 
-        return points;
+        return bestPoints;
     }
 
     public static void main(String args[]) throws IOException {
@@ -420,7 +423,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(10000, .001);
+        Point[] centroids = test.compute(5, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
         test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
