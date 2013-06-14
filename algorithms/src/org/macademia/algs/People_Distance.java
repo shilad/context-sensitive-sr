@@ -6,6 +6,7 @@ import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -21,7 +22,7 @@ public class People_Distance {
         float distance = 0;
         ArrayList<Integer> p1IDs = getInterestIDs(p1);
         ArrayList<Integer> p2IDs = getInterestIDs(p2);
-        ArrayList<Float> distances=null;
+        ArrayList<float[]> distances=null;
         try {
             distances = getBestAdjustedDistances(p1IDs,p2IDs);
         } catch (IOException e) {
@@ -53,35 +54,48 @@ public class People_Distance {
         }
         return (distance/list.size());
     }
-    private static float combineBestAdjustedDistances(ArrayList<Float> list){
+    private static float combineBestAdjustedDistances(ArrayList<float[]> list){
         float distance=0;
         float best=0;
         float score=0;
         int cur=-1;
+        HashMap<Float,Integer> used = new HashMap();
         double total=list.size();
         while(list.size()>0){
             for(int i=0;i<list.size();i++){
-                score=list.get(i);
+                score=list.get(i)[1];
 
                 if(score>best){
                     best=score;
                     cur=i;
+
                 }
 
             }
-            if(list.get(cur)>.7){                           //list.size()>(total*.5)
-                //System.out.println(list.get(cur));
-                distance+=list.get(cur)*((list.size())/total);
-                //System.out.println(list.get(cur)*((list.size())/total)+"\t"+list.size());
+
+            if(used.containsKey(list.get(cur)[0])){
+                used.put(list.get(cur)[0],used.get(list.get(cur)[0])+1);
+                System.out.println((1/used.get(list.get(cur)[0]))*list.get(cur)[1]);
+                distance+=(1/used.get(list.get(cur)[0]))*list.get(cur)[1];
             }
-            if(list.get(cur)<=.7&&list.get(cur)>.5){
-                distance+=(list.get(cur)*.4)*(list.size()/total);
-                //System.out.println(-list.get(cur)*((list.size())/total)+"\t"+list.size());
+            else{
+                distance+=list.get(cur)[1]*(list.size()/total);
+                used.put(list.get(cur)[0],1);
+
             }
-            if(list.get(cur)<=.5){
-                distance-=list.get(cur);
-                //System.out.println(-list.get(cur)*((list.size())/total)+"\t"+list.size());
-            }
+//            if(list.get(cur)>.7){                           //list.size()>(total*.5)
+//                //System.out.println(list.get(cur));
+//                distance+=list.get(cur)*((list.size())/total);
+//                //System.out.println(list.get(cur)*((list.size())/total)+"\t"+list.size());
+//            }
+//            if(list.get(cur)<=.7&&list.get(cur)>.5){
+//                distance+=(list.get(cur)*.4)*(list.size()/total);
+//                //System.out.println(-list.get(cur)*((list.size())/total)+"\t"+list.size());
+//            }
+//            if(list.get(cur)<=.5){
+//                distance-=list.get(cur);
+//                //System.out.println(-list.get(cur)*((list.size())/total)+"\t"+list.size());
+//            }
             //distance+=list.get(cur)*(list.size()-(total/5.0))/total;
             //System.out.println(distance);
             best=0;
@@ -153,8 +167,8 @@ public class People_Distance {
 
         return distances;
     }
-    private static ArrayList<Float> getBestAdjustedDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
-        ArrayList<Float[]> distances = new ArrayList<Float[]>();
+    private static ArrayList<float[]> getBestAdjustedDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
+        ArrayList<float[]> distances = new ArrayList<float[]>();
         DenseMatrix matrix = null;
         try {
             matrix = new DenseMatrix(new File("dat/similarity.matrix"));
@@ -165,7 +179,7 @@ public class People_Distance {
         LinkedHashMap<Integer,Float> map=null;
         float score=0;
         float best=0;
-        float[] b= new float[2];
+        float[] b= {};
         for(int i=0;i<p2IDs.size();i++){
             row=matrix.getRow(p2IDs.get(i));
             map=row.asMap();
@@ -179,8 +193,8 @@ public class People_Distance {
                     //distances.add(penalty);
                 }
             }
-            b=[p2IDs.get(i),best];
-            distances.add();
+            b= new float[]{p2IDs.get(i), best};
+            distances.add(b);
             best=0;
         }
 
