@@ -14,8 +14,8 @@ public class TestPeople {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         People target = people.get(0);
         People candidate = people.get(107);                   //0 is Shilad and 107 is Danny Kaplan
-        getTopFive(people, target, candidate);                  //Lepczyk is 1961 and Eric Palmer is 1822
-        int[] list = {614, 4974, 7089, 3697, 3242, 5937, 1545, 1389, 677, 4716, 6796, 637, 4111, 565, 5606};
+        scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
+
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
         //Parse_Clusters.printClustersFromList("dat/phrases.tsv",list);
         //System.out.println(target.getDepartment());
@@ -39,7 +39,7 @@ public class TestPeople {
 
 
     //FIND TOP FIVE PEOPLE
-    public static void getTopFive(ArrayList<People> people,People target, People candidate){
+    public static void scoresForAllCandidate(ArrayList<People> people,People target){
         double d = 0;
         double a = 0;
         int count = 0;
