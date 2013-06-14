@@ -2,7 +2,6 @@ package org.macademia.algs;  import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -150,7 +149,7 @@ public class Kmeans {
      * @param tolerance
      * @return centroids
      */
-    public Point[] getCentroids(int iterations, double tolerance) {
+    public Point[] compute(int iterations, double tolerance) {
 
         //Initialize the centers
         centroids = getKRandomPoints(data, k);
@@ -175,7 +174,7 @@ public class Kmeans {
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
             //Redefine centroids
-            centroids = computeCentroids(clusters);
+            centroids = getCentroids(clusters);
 
             //Calculate variance
             double curVariance = getVariance(clusters, centroids);
@@ -285,7 +284,7 @@ public class Kmeans {
      * @param clusters
      * @return an array of centroid points corresponding to the array of clusters
      */
-    public Point[] computeCentroids(Cluster[] clusters){
+    public Point[] getCentroids(Cluster[] clusters){
 
         Point[] centroids = new Point[clusters.length];
 
@@ -344,6 +343,17 @@ public class Kmeans {
         }
     }
 
+    /**
+     * Get k best points from a given cluster
+     * @param cluster
+     * @param k
+     * @return an array of points with length k
+     */
+    public Point[] getBestSamplePointsFromCluster(Cluster cluster, int k){
+
+        return new Point[0];
+    }
+
     public static void main(String args[]) throws IOException {
 
         int NUM_CLUSTERS = 20;
@@ -360,7 +370,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        //Point[] centroids = test.getCentroids(1000, 0.01);
+        //Point[] centroids = test.compute(1000, 0.01);
         //test.clusterToFile(test.clusters,"dat/clusters.txt");
 
         Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
@@ -421,7 +431,7 @@ public class Kmeans {
 //
 //        for (int z = 0; z< 100; z++) {
 //
-//            test.centroids = test.computeCentroids(test.clusters);
+//            test.centroids = test.getCentroids(test.clusters);
 //
 //            System.out.println("New Clusters");
 //
