@@ -219,6 +219,9 @@ public class People_Distance {
 
 
         double[][] row = new double[matrix.getNumRows()][1];
+        for(int i=0;i<matrix.getNumRows();i++){
+            row[i][0]=0;
+        }
         for(int i=0;i<personIDs.size();i++){
             row[personIDs.get(i)][0]=1;
         }
@@ -226,13 +229,13 @@ public class People_Distance {
 
         Matrix personVector = new Matrix(row);
         personVector=jamaMatrix.times(personVector);
-
+        //System.out.println(personVector);
 
         return personVector;
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
-        double dotProduct = person1.arrayTimes(person2).norm1();
+        double dotProduct = person1.arrayTimes(person2).normInf();
         double eucledianDist = person1.normF() * person2.normF();
         return dotProduct / eucledianDist;
     }
