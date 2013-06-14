@@ -2,7 +2,7 @@ package org.macademia.algs;
 
 import edu.macalester.wpsemsim.matrix.DenseMatrix;
 import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
-
+import Jama.Matrix;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,18 +17,31 @@ import java.util.LinkedHashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class People_Distance {
-
-    public static Float findDistance(People p1, People p2){
-        float distance = 0;
+    private static SimilarityMatrix matrix = null;
+    private static Matrix jamaMatrix=null;
+    public static double findDistance(People p1, People p2){
+        if(matrix==null){
+            try {
+                matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(jamaMatrix==null){
+            jamaMatrix= new Matrix(matrix.getDoubleMatrix());
+        }
+        double distance = 0;
         ArrayList<Integer> p1IDs = getInterestIDs(p1);
         ArrayList<Integer> p2IDs = getInterestIDs(p2);
-        ArrayList<float[]> distances=null;
+        Matrix p1Distances=null;
+        Matrix p2Distances=null;
         try {
-            distances = getBestAdjustedDistances(p1IDs,p2IDs);
+            p1Distances = getPersonVector(p1IDs);
+            p2Distances = getPersonVector(p2IDs);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        distance=combineBestAdjustedDistances(distances);
+        distance=cosineSimilarity(p1Distances, p2Distances);
 
         return distance;
     }
@@ -38,7 +51,7 @@ public class People_Distance {
         ArrayList<Interest> interests=p.getInterest();
         for(int i=0;i<interests.size();i++){
             if(interests.get(i)!=null)
-                ids.add(Integer.parseInt(interests.get(i).getMacademiaID()));
+                ids.add(Integer.parseInt(interests.get(i).getDenseID()));
         }
         return ids;
     }
@@ -199,5 +212,28 @@ public class People_Distance {
         }
 
         return distances;
+    }
+
+    private static Matrix getPersonVector(ArrayList<Integer> personIDs) throws IOException {
+
+
+
+        double[][] row = new double[matrix.getNumRows()][1];
+        for(int i=0;i<personIDs.size();i++){
+            row[personIDs.get(i)][0]=1;
+        }
+
+
+        Matrix personVector = new Matrix(row);
+        personVector=jamaMatrix.times(personVector);
+
+
+        return personVector;
+    }
+
+    private static double cosineSimilarity(Matrix person1, Matrix person2) {
+        double dotProduct = person1.arrayTimes(person2).norm1();
+        double eucledianDist = person1.normF() * person2.normF();
+        return dotProduct / eucledianDist;
     }
 }

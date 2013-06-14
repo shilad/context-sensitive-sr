@@ -1,6 +1,7 @@
 package org.macademia.algs;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -8,10 +9,12 @@ public class TestPeople {
 
     //@SuppressWarnings("all")
     public static void main(String args[]) throws IOException {
+
+
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         People target = people.get(107);
-        People candidate = people.get(1822);                   //0 is Shilad and 107 is Danny Kaplan
-        singleTestDistance(target,candidate);                                                        //Lepczyk is 1961 and Eric Palmer is 1822
+        People candidate = people.get(0);                   //0 is Shilad and 107 is Danny Kaplan
+        getTopFive(people, target, candidate);                  //Lepczyk is 1961 and Eric Palmer is 1822
         int[] list = {614, 4974, 7089, 3697, 3242, 5937, 1545, 1389, 677, 4716, 6796, 637, 4111, 565, 5606};
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
         //Parse_Clusters.printClustersFromList("dat/phrases.tsv",list);
@@ -19,7 +22,7 @@ public class TestPeople {
     }
     //SINGLE PERSON TEST
     public static void singleTestDistance(People target, People candidate){
-        float dis = People_Distance.findDistance(target,candidate);
+        double dis = People_Distance.findDistance(target,candidate);
         System.out.println("The distance between "+target.getEmail()+" and "+candidate.getEmail()+" is "+dis);
     }
 
@@ -37,12 +40,12 @@ public class TestPeople {
 
     //FIND TOP FIVE PEOPLE
     public static void getTopFive(ArrayList<People> people,People target, People candidate){
-        float d = 0;
-        float a = 0;
+        double d = 0;
+        double a = 0;
         int count = 0;
         int index=0;
         ArrayList<People> peeps=new ArrayList<People>();
-        ArrayList<Float> peepScores=new ArrayList<Float>();
+        ArrayList<Double> peepScores=new ArrayList<Double>();
 
         while(count<5){
             for(int i=1;i<people.size();i++){
@@ -55,6 +58,7 @@ public class TestPeople {
                 }
             }
             peeps.add(candidate);
+            System.out.println(candidate.getEmail());
             peepScores.add(d);
             people.remove(index);
             count++;
