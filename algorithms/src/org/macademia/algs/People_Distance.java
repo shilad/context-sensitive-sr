@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 public class People_Distance {
     private static SimilarityMatrix matrix = null;
     private static Matrix jamaMatrix=null;
+    private static HashMap<String,Matrix> vectorMap = new HashMap<String, Matrix>();
     public static double findDistance(People p1, People p2){
         if(matrix==null){
             try {
@@ -33,14 +34,28 @@ public class People_Distance {
         }
 
 
+
         double distance = 0;
         ArrayList<Integer> p1IDs = getInterestIDs(p1);
         ArrayList<Integer> p2IDs = getInterestIDs(p2);
         Matrix p1Distances=null;
         Matrix p2Distances=null;
         try {
-            p1Distances = getPersonVector(p1IDs);
-            p2Distances = getPersonVector(p2IDs);
+            if(!vectorMap.containsKey(p1.getID())){
+                p1Distances = getPersonVector(p1IDs);
+                vectorMap.put(p1.getID(),p1Distances);
+            }
+            else{
+                p1Distances=vectorMap.get(p1.getID());
+            }
+            if(!vectorMap.containsKey(p2.getID())){
+                p2Distances = getPersonVector(p2IDs);
+                vectorMap.put(p2.getID(),p2Distances);
+            }
+            else{
+                p2Distances=vectorMap.get(p2.getID());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -229,6 +244,7 @@ public class People_Distance {
             row[personIDs.get(i)][0]=1;
         }
 
+
         Matrix personVector = new Matrix(row);
 
         Matrix resultVector=jamaMatrix.times(personVector);
@@ -239,35 +255,13 @@ public class People_Distance {
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
-////        System.out.println(Arrays.deepToString(person1.getArrayCopy()));
-////        System.out.println(Arrays.deepToString(person2.getArrayCopy()));
-//        //double sum = person1.arrayTimes(person2).norm2();
-//        double eucledianDist = person1.norm2() * person2.norm2();
-//
-//        double dotProduct = 0;
-//
-//        //double[][] array = person1.arrayTimes(person2).getArrayCopy();
-//        //System.out.println(Arrays.deepToString(array));
-//
-//        for(double[] s: person1.arrayTimes(person2).getArrayCopy()){
-//            dotProduct+=s[0];
-//        }
-//
-//        return dotProduct / eucledianDist;
-
-        double[][] p1 = person1.getArray();
-        double[][] p2 = person2.getArray();
-
-        //Get length of person1
-        double scale1 = person1.norm2();
-
-        //Get length of person2
-        double scale2 = person2.norm2();
-
-        //Normalize person1
-
-
-        //Normalize person2
-        return 0;
+        //double dotProduct = person1.arrayTimes(person2).norm2();
+        double[][] dotProduct = person1.arrayTimes(person2).getArray();
+        double total=0;
+        for(int i =0;i<dotProduct.length;i++){
+            total+=dotProduct[i][0];
+        }
+        double eucledianDist = person1.normF() * person2.normF();
+        return total / eucledianDist;
     }
 }
