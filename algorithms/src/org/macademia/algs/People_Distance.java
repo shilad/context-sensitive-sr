@@ -154,36 +154,37 @@ public class People_Distance {
         return distances;
     }
     private static ArrayList<Float> getBestAdjustedDistances(ArrayList<Integer> p1IDs,ArrayList<Integer> p2IDs) throws IOException {
-        ArrayList<Float[]> distances = new ArrayList<Float[]>();
-        DenseMatrix matrix = null;
-        try {
-            matrix = new DenseMatrix(new File("dat/similarity.matrix"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        DenseMatrixRow row;
-        LinkedHashMap<Integer,Float> map=null;
-        float score=0;
-        float best=0;
-        float[] b= new float[2];
-        for(int i=0;i<p2IDs.size();i++){
-            row=matrix.getRow(p2IDs.get(i));
-            map=row.asMap();
-            for(int j=0;j<p1IDs.size();j++){
-                score=map.get(p1IDs.get(j));
-                if(score>best){
-                    best=score;
-                }
-                else{
-
-                    //distances.add(penalty);
-                }
-            }
-            b=[p2IDs.get(i),best];
-            distances.add();
-            best=0;
-        }
-
-        return distances;
+//        ArrayList<Float[]> distances = new ArrayList<Float[]>();
+//        DenseMatrix matrix = null;
+//        try {
+//            matrix = new DenseMatrix(new File("dat/similarity.matrix"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        DenseMatrixRow row;
+//        LinkedHashMap<Integer,Float> map=null;
+//        float score=0;
+//        float best=0;
+//        float[] b= new float[2];
+//        for(int i=0;i<p2IDs.size();i++){
+//            row=matrix.getRow(p2IDs.get(i));
+//            map=row.asMap();
+//            for(int j=0;j<p1IDs.size();j++){
+//                score=map.get(p1IDs.get(j));
+//                if(score>best){
+//                    best=score;
+//                }
+//                else{
+//
+//                    //distances.add(penalty);
+//                }
+//            }
+//            b=[p2IDs.get(i),best];
+//            distances.add();
+//            best=0;
+//        }
+//
+//        return distances;
+        return new ArrayList<Float>();
     }
 }
