@@ -371,7 +371,6 @@ public class Kmeans {
 
         SortedSet<Map.Entry<Integer, Double>> sortedset = new TreeSet<Map.Entry<Integer, Double>>(
                 new Comparator<Map.Entry<Integer, Double>>() {
-                    @Override
                     public int compare(Map.Entry<Integer, Double> e1,
                                        Map.Entry<Integer, Double> e2) {
                         return e1.getValue().compareTo(e2.getValue());
