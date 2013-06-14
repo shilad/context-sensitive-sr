@@ -224,7 +224,6 @@ public class People_Distance {
             row[personIDs.get(i)][0]=1;
         }
 
-
         Matrix personVector = new Matrix(row);
         personVector=jamaMatrix.times(personVector);
 
