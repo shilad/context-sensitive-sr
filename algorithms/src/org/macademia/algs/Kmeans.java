@@ -348,7 +348,7 @@ public class Kmeans {
             FileWriter out = new FileWriter(path);
 
             for (int i = 0; i<k; i++) {
-                Point[] points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
+                ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
                 out.append("Cluster "+i+"\n");
                 for(Point point: points) {
                     out.append(point.id+"\n");
@@ -367,11 +367,10 @@ public class Kmeans {
      * @param n
      * @return an array of points with length k
      */
-    public Point[] getBestSamplePointsFromCluster(Cluster cluster, int n, Point centroid) {
+    public ArrayList<Point> getBestSamplePointsFromCluster(Cluster cluster, int n, Point centroid) {
 
         SortedSet<Map.Entry<Integer, Double>> sortedset = new TreeSet<Map.Entry<Integer, Double>>(
                 new Comparator<Map.Entry<Integer, Double>>() {
-                    @Override
                     public int compare(Map.Entry<Integer, Double> e1,
                                        Map.Entry<Integer, Double> e2) {
                         return e1.getValue().compareTo(e2.getValue());
@@ -387,7 +386,7 @@ public class Kmeans {
 
         sortedset.addAll(myMap.entrySet());
 
-        Point[] bestPoints = new Point[n];
+        ArrayList<Point> points = new ArrayList<Point>();
 
         // Example for Integers
         Iterator<Map.Entry<Integer, Double>> it = sortedset.iterator();
@@ -397,14 +396,14 @@ public class Kmeans {
 
         while (i < n && it.hasNext()) {
            current = it.next();
-           bestPoints[i] = data.get(current.getKey());
+           points.add(data.get(current.getKey()));
            i++;
         }
 
 
-        System.out.println("points:" + Arrays.toString(bestPoints));
+        System.out.println("points:" + points);
 
-        return bestPoints;
+        return points;
     }
 
     public static void main(String args[]) throws IOException {
@@ -423,7 +422,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(5, .001);
+        Point[] centroids = test.compute(1000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
         test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
