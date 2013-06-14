@@ -2,6 +2,7 @@ package org.macademia.algs;
 
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -9,14 +10,24 @@ public class TestPeople {
 
     //@SuppressWarnings("all")
     public static void main(String args[]) throws IOException {
-
+        FileWriter out=null;
+        try{
+            out = new FileWriter("dat/personMatrix.txt");
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         People target = people.get(0);
         People candidate = people.get(107);
         //System.out.print(target.getEmail());                  //0 is Shilad and 107 is Danny Kaplan
         //scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
-        scoresForAllCandidate(people,people.get(0));              //findPersonByEmail(people,"shoop@macalester.edu")
+        for(int i=1;i<people.size();i++){
+            scoresForAllCandidate(people, out, people.get(i));         //findPersonByEmail(people,"shoop@macalester.edu")
+        }
+        out.flush();
+        out.close();
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
         //Parse_Clusters.printClustersFromList("dat/phrases.tsv",list);
         //System.out.println(target.getDepartment());
@@ -48,7 +59,7 @@ public class TestPeople {
 
 
     //Finds scores for all candidates
-    public static void scoresForAllCandidate(ArrayList<People> people,People target){
+    public static void scoresForAllCandidate(ArrayList<People> people,FileWriter out, People target){
         double d = 0;
         double a = 0;
         int count = 0;
@@ -74,7 +85,16 @@ public class TestPeople {
 
         sortedset.addAll(scoreMap.entrySet());
 
-        System.out.println(sortedset);
+
+        try{
+
+            out.append(sortedset.toString());
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        };
+
 
 //        for(int i=0;i<peeps.size();i++){
 //            System.out.println("The distance between "+target.getEmail()+" and "+peeps.get(i).getEmail()+" is "+peepScores.get(i));

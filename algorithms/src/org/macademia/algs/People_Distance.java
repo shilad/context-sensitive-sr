@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 public class People_Distance {
     private static SimilarityMatrix matrix = null;
     private static Matrix jamaMatrix=null;
+    private static HashMap<String,Matrix> vectorMap = new HashMap<String, Matrix>();
     public static double findDistance(People p1, People p2){
         if(matrix==null){
             try {
@@ -33,14 +34,28 @@ public class People_Distance {
         }
 
 
+
         double distance = 0;
         ArrayList<Integer> p1IDs = getInterestIDs(p1);
         ArrayList<Integer> p2IDs = getInterestIDs(p2);
         Matrix p1Distances=null;
         Matrix p2Distances=null;
         try {
-            p1Distances = getPersonVector(p1IDs);
-            p2Distances = getPersonVector(p2IDs);
+            if(!vectorMap.containsKey(p1.getID())){
+                p1Distances = getPersonVector(p1IDs);
+                vectorMap.put(p1.getID(),p1Distances);
+            }
+            else{
+                p1Distances=vectorMap.get(p1.getID());
+            }
+            if(!vectorMap.containsKey(p2.getID())){
+                p2Distances = getPersonVector(p2IDs);
+                vectorMap.put(p2.getID(),p2Distances);
+            }
+            else{
+                p2Distances=vectorMap.get(p2.getID());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
