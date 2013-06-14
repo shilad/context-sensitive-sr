@@ -1,4 +1,5 @@
 package org.macademia.algs;  import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,9 +74,8 @@ public class Kmeans {
         }
 
         public String toString(){
-            String result = "The cluster has the following points: \n";
-            result+=points;
-            result+="\n";
+            String result = "Cluster \n";
+            result+=points.toString();
             return result;
         }
 
@@ -110,8 +110,6 @@ public class Kmeans {
 
         public String toString(){
             String result = "" + id;
-//            result+=Arrays.toString(data);
-//            result+="\n";
             return result;
         }
 
@@ -147,22 +145,7 @@ public class Kmeans {
     }
 
     /**
-     * Calculate the sum of squares of the two points
-     * @param coordinate1 the coordinate for the first Point
-     * @param coordinate2 the coordinate for the second Point
-     * @return the sum of squares between the two points
-     */
-    public double getSumOfSquares(float[] coordinate1, float[] coordinate2){
-        double sum = 0;
-        for (int i=0; i < coordinate1.length; i++) {
-            sum += Math.pow(Math.abs(coordinate1[i]-coordinate2[i]), 2);
-        }
-        return sum;
-
-    }
-
-    /**
-     * Return the clusters computed using Lloyd's algorithm
+     * Return the centroids of the clusters computed using Lloyd's algorithm
      * @param iterations
      * @param tolerance
      * @return centroids
@@ -210,8 +193,6 @@ public class Kmeans {
 
             //Print current centroids
 //            for (Point point: centroids) {
-//
-//
 //                System.out.println(Arrays.toString(point.data));
 //            }
 
@@ -311,7 +292,7 @@ public class Kmeans {
         //Loops through all of the clusters
         for (int i = 0; i < clusters.length; i++) {
             Cluster c = clusters[i];
-            int m = clusters[0].points.get(0).data.length;
+            int m = clusters[0].points.get(0).data.length; //number of entries in a point
 
             Point temp = new Point();
 
@@ -340,34 +321,32 @@ public class Kmeans {
         return centroids;
     }
 
-//    public int[] bestPointsForCluster(Point[] centroids) {
-//        int[] indexes = new int[k];
-//        double min = Double.POSITIVE_INFINITY;
-//        int index = 0;
-//
-//
-//        for (int i = 0; i < k; i++) {
-//            Point c = centroids[i];
-//
-//            for(int j = 0; j < data.length; k++) {
-//                Point p = new Point(data[j]);
-//                double temp = getDistance(p, c);
-//
-//                if (temp < min) {
-//                    min = temp;
-//                    index = i;
-//                }
-//            }
-//            indexes[i] = index;
-//
-//        }
-//        return indexes;
-//    }
+    /**
+     * Create file containing the calculation result of the algorithm
+     * @param clusters an array of clusters after our calculation
+     */
+    public void clusterToFile(Cluster[] clusters, String path){
 
+        try{
+            FileWriter out = new FileWriter(path);
+
+            for(int i=0;i<clusters.length;i++){
+                out.append("Cluster "+i+"\n");
+                for(Point point: clusters[i].points){
+                    out.append(point.id+"\n");
+                }
+            }
+
+            out.flush();
+            out.close();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 15;
+        int NUM_CLUSTERS = 5;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -382,6 +361,7 @@ public class Kmeans {
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
         Point[] centroids = test.getCentroids(100, 0.01);
+        test.clusterToFile(test.clusters,"dat/clusters.txt");
 
 //        int i = 1;
 //
@@ -395,28 +375,28 @@ public class Kmeans {
 //        }
 
 
-        double min = Double.POSITIVE_INFINITY;
-        double dist;
-        int[] centers = new int[NUM_CLUSTERS];
-
-        for (int j = 0; j < NUM_CLUSTERS; j++) {
-
-            Cluster cluster = test.clusters[j];
-            min = Double.POSITIVE_INFINITY;
-
-            for (Point p:  cluster.getPoints()) {
-
-                dist = test.getDistance(p, test.centroids[j]);
-
-                if (dist < min) {
-                    min = dist;
-                    centers[j] = p.id;
-                }
-            }
-
-        }
-
-        System.out.println(Arrays.toString(centers));
+//        double min = Double.POSITIVE_INFINITY;
+//        double dist;
+//        int[] centers = new int[NUM_CLUSTERS];
+//
+//        for (int j = 0; j < NUM_CLUSTERS; j++) {
+//
+//            Cluster cluster = test.clusters[j];
+//            min = Double.POSITIVE_INFINITY;
+//
+//            for (Point p:  cluster.getPoints()) {
+//
+//                dist = test.getDistance(p, test.centroids[j]);
+//
+//                if (dist < min) {
+//                    min = dist;
+//                    centers[j] = p.id;
+//                }
+//            }
+//
+//        }
+//
+//        System.out.println(Arrays.toString(centers));
 
 
 
