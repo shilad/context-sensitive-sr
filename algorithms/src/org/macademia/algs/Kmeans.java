@@ -1,8 +1,7 @@
 package org.macademia.algs;  import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -330,7 +329,7 @@ public class Kmeans {
             FileWriter out = new FileWriter(path);
 
             for(int i=0;i<clusters.length;i++){
-                out.append("Cluster "+i+"\n");
+                    out.append("Cluster "+i+"\n");
                 for(Point point: clusters[i].points){
                     out.append(point.id+"\n");
                 }
@@ -343,15 +342,66 @@ public class Kmeans {
         }
     }
 
+    public void bestSamplePointsFromClusterToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
+
+        try{
+            FileWriter out = new FileWriter(path);
+
+            for (int i = 0; i<k; i++) {
+                Point[] points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
+                out.append("Cluster "+i+"\n");
+                for(Point point: points) {
+                    out.append(point.id+"\n");
+                }
+            }
+            out.flush();
+            out.close();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
     /**
-     * Get k best points from a given cluster
+     * Get i best points from a given cluster
      * @param cluster
-     * @param k
+     * @param n
      * @return an array of points with length k
      */
-    public Point[] getBestSamplePointsFromCluster(Cluster cluster, int k){
+    public Point[] getBestSamplePointsFromCluster(Cluster cluster, int n, Point centroid) {
 
-        return new Point[0];
+        SortedSet<Map.Entry<Integer, Double>> sortedset = new TreeSet<Map.Entry<Integer, Double>>(
+                new Comparator<Map.Entry<Integer, Double>>() {
+                    @Override
+                    public int compare(Map.Entry<Integer, Double> e1,
+                                       Map.Entry<Integer, Double> e2) {
+                        return e1.getValue().compareTo(e2.getValue());
+                    }
+                });
+
+
+        SortedMap<Integer, Double> myMap = new TreeMap<Integer, Double>();
+
+        for (Point p: cluster.points) {
+            myMap.put(p.id, getDistance(p, centroid));
+        }
+
+        sortedset.addAll(myMap.entrySet());
+
+        Point[] points = new Point[n];
+
+        // Example for Integers
+        Iterator<Map.Entry<Integer, Double>> it = sortedset.iterator();
+        Map.Entry<Integer, Double> current = null;
+
+        for(int i=0;i<n;i++){
+           current = it.next();
+           points[i] = data.get(current.getKey());
+        }
+
+
+        System.out.println("points:" + Arrays.toString(points));
+
+        return points;
     }
 
     public static void main(String args[]) throws IOException {
@@ -370,10 +420,16 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(1000, 0.01);
+        Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
+//        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
+        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
+
+
 
         Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
+
+
 
 //        int i = 1;
 //
