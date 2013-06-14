@@ -239,10 +239,35 @@ public class People_Distance {
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
-//        System.out.println(Arrays.deepToString(person1.getArrayCopy()));
-//        System.out.println(Arrays.deepToString(person2.getArrayCopy()));
-        double dotProduct = person1.arrayTimes(person2).normInf();
-        double eucledianDist = person1.normF() * person2.normF();
-        return dotProduct / eucledianDist;
+////        System.out.println(Arrays.deepToString(person1.getArrayCopy()));
+////        System.out.println(Arrays.deepToString(person2.getArrayCopy()));
+//        //double sum = person1.arrayTimes(person2).norm2();
+//        double eucledianDist = person1.norm2() * person2.norm2();
+//
+//        double dotProduct = 0;
+//
+//        //double[][] array = person1.arrayTimes(person2).getArrayCopy();
+//        //System.out.println(Arrays.deepToString(array));
+//
+//        for(double[] s: person1.arrayTimes(person2).getArrayCopy()){
+//            dotProduct+=s[0];
+//        }
+//
+//        return dotProduct / eucledianDist;
+
+        double[][] p1 = person1.getArray();
+        double[][] p2 = person2.getArray();
+
+        //Get length of person1
+        double scale1 = person1.norm2();
+
+        //Get length of person2
+        double scale2 = person2.norm2();
+
+        //Normalize person1
+
+
+        //Normalize person2
+        return 0;
     }
 }

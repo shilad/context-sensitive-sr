@@ -12,7 +12,7 @@ public class TestPeople {
 
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
-        People target = people.get(0);
+        People target = people.get(981);
         People candidate = people.get(107);                   //0 is Shilad and 107 is Danny Kaplan
         scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
         //System.out.println(findPersonByID(people,"3435").getEmail());
@@ -63,11 +63,13 @@ public class TestPeople {
             scoreMap.put(people.get(i).getID(),a);
         }
 
+        System.out.println("Start Sorting Scores");
+
         SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
                 new Comparator<Map.Entry<String, Double>>() {
                     public int compare(Map.Entry<String, Double> e1,
                                        Map.Entry<String, Double> e2) {
-                        return e1.getValue().compareTo(e2.getValue());
+                        return e2.getValue().compareTo(e1.getValue());
                     }
                 });
 
