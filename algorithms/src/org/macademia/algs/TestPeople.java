@@ -13,9 +13,10 @@ public class TestPeople {
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         People target = people.get(0);
-        People candidate = people.get(107);                   //0 is Shilad and 107 is Danny Kaplan
-        scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
-        //System.out.println(findPersonByID(people,"3435").getEmail());
+        People candidate = people.get(107);
+        //System.out.print(target.getEmail());                  //0 is Shilad and 107 is Danny Kaplan
+        //scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
+        scoresForAllCandidate(people,people.get(0));              //findPersonByEmail(people,"shoop@macalester.edu")
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
         //Parse_Clusters.printClustersFromList("dat/phrases.tsv",list);
         //System.out.println(target.getDepartment());

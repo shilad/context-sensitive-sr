@@ -240,10 +240,13 @@ public class People_Distance {
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
-//        System.out.println(Arrays.deepToString(person1.getArrayCopy()));
-//        System.out.println(Arrays.deepToString(person2.getArrayCopy()));
-        double dotProduct = person1.arrayTimes(person2).normInf();
+        //double dotProduct = person1.arrayTimes(person2).norm2();
+        double[][] dotProduct = person1.arrayTimes(person2).getArray();
+        double total=0;
+        for(int i =0;i<dotProduct.length;i++){
+            total+=dotProduct[i][0];
+        }
         double eucledianDist = person1.normF() * person2.normF();
-        return dotProduct / eucledianDist;
+        return total / eucledianDist;
     }
 }
