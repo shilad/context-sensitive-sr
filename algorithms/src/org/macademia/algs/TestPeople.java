@@ -3,7 +3,7 @@ package org.macademia.algs;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 public class TestPeople {
 
@@ -12,8 +12,8 @@ public class TestPeople {
 
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
-        People target = people.get(107);
-        People candidate = people.get(0);                   //0 is Shilad and 107 is Danny Kaplan
+        People target = people.get(0);
+        People candidate = people.get(107);                   //0 is Shilad and 107 is Danny Kaplan
         getTopFive(people, target, candidate);                  //Lepczyk is 1961 and Eric Palmer is 1822
         int[] list = {614, 4974, 7089, 3697, 3242, 5937, 1545, 1389, 677, 4716, 6796, 637, 4111, 565, 5606};
         //Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
@@ -44,31 +44,33 @@ public class TestPeople {
         double a = 0;
         int count = 0;
         int index=0;
+
+        SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
+
         ArrayList<People> peeps=new ArrayList<People>();
-        ArrayList<Double> peepScores=new ArrayList<Double>();
+        //ArrayList<Double> peepScores=new ArrayList<Double>();
 
-        while(count<5){
-            for(int i=1;i<people.size();i++){
-
-                a=People_Distance.findDistance(target,people.get(i));
-                if(a>d){
-                    d=a;
-                    candidate=people.get(i);
-                    index=i;
-                }
-            }
-            peeps.add(candidate);
-            System.out.println(candidate.getEmail());
-            peepScores.add(d);
-            people.remove(index);
-            count++;
-            d=0;
-            a=0;
+        for(int i=0;i<people.size();i++){
+            a = People_Distance.findDistance(target,people.get(i));
+            scoreMap.put(people.get(i).getID(),a);
         }
-        for(int i=0;i<peeps.size();i++){
-            System.out.println("The distance between "+target.getEmail()+" and "+peeps.get(i).getEmail()+" is "+peepScores.get(i));
 
-        }
+        SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
+                new Comparator<Map.Entry<String, Double>>() {
+                    public int compare(Map.Entry<String, Double> e1,
+                                       Map.Entry<String, Double> e2) {
+                        return e1.getValue().compareTo(e2.getValue());
+                    }
+                });
+
+        sortedset.addAll(scoreMap.entrySet());
+
+        System.out.println(sortedset);
+
+//        for(int i=0;i<peeps.size();i++){
+//            System.out.println("The distance between "+target.getEmail()+" and "+peeps.get(i).getEmail()+" is "+peepScores.get(i));
+//
+//        }
     }
     //PRINT OUT EVERY EMAIL WITH INTERESTS
     public static void printAllList(ArrayList<People> people){
