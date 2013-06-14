@@ -6,6 +6,7 @@ import Jama.Matrix;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -232,7 +233,9 @@ public class People_Distance {
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
-        double dotProduct = person1.arrayTimes(person2).norm1();
+//        System.out.println(Arrays.deepToString(person1.getArrayCopy()));
+//        System.out.println(Arrays.deepToString(person2.getArrayCopy()));
+        double dotProduct = person1.arrayTimes(person2).normInf();
         double eucledianDist = person1.normF() * person2.normF();
         return dotProduct / eucledianDist;
     }
