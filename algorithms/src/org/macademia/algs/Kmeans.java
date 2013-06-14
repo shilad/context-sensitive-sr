@@ -422,7 +422,7 @@ public class Kmeans {
         float SAMPLES[][] = sm.getFloatMatrix();
 
         Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(1000, .001);
+        Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
         test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
