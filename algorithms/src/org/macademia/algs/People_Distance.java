@@ -31,6 +31,8 @@ public class People_Distance {
         if(jamaMatrix==null){
             jamaMatrix= new Matrix(matrix.getDoubleMatrix());
         }
+
+
         double distance = 0;
         ArrayList<Integer> p1IDs = getInterestIDs(p1);
         ArrayList<Integer> p2IDs = getInterestIDs(p2);
@@ -229,10 +231,12 @@ public class People_Distance {
 
 
         Matrix personVector = new Matrix(row);
-        personVector=jamaMatrix.times(personVector);
+
+        Matrix resultVector=jamaMatrix.times(personVector);
 
 
-        return personVector;
+
+        return resultVector;
     }
 
     private static double cosineSimilarity(Matrix person1, Matrix person2) {
