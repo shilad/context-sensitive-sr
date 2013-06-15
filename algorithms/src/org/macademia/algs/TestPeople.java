@@ -23,7 +23,7 @@ public class TestPeople {
         People candidate = people.get(107);
         //System.out.print(target.getEmail());                  //0 is Shilad and 107 is Danny Kaplan
         //scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
-        for(int i=1;i<people.size();i++){
+        for(int i=0;i<people.size();i++){
             scoresForAllCandidate(people, out, people.get(i));         //findPersonByEmail(people,"shoop@macalester.edu")
         }
         out.flush();
@@ -88,7 +88,7 @@ public class TestPeople {
 
         try{
 
-            out.append(target.getID()+":"+sortedset.toString());
+            out.append(target.getID()+":"+sortedset.toString()+"\n");
 
         }
         catch (IOException e){
