@@ -13,17 +13,11 @@ public class People {
     private String email="";
     private String id="";
     private ArrayList<Interest> interest=new ArrayList<Interest>();
-    private String department;
+
 
     public People(String id, String email){
         this.id=id;
         this.email=email;
-
-    }
-    public People(String id, String email,String department){
-        this.id=id;
-        this.email=email;
-        this.department=department;
 
     }
     public String getID(){
@@ -50,10 +44,5 @@ public class People {
 
         this.interest=interest;
     }
-    public void setDepartment(String dept){
-        this.department=dept;
-    }
-    public String getDepartment(){
-        return department;
-    }
+
 }

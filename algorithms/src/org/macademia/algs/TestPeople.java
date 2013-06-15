@@ -16,7 +16,7 @@ public class TestPeople {
             e.printStackTrace();
         }
 
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
         People target = people.get(0);
         People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
                                                             //findPersonByEmail(people,"shoop@macalester.edu")
