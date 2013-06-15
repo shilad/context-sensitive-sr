@@ -88,7 +88,7 @@ public class TestPeople {
 
         try{
 
-            out.append(sortedset.toString());
+            out.append(target.getID()+":"+sortedset.toString());
 
         }
         catch (IOException e){
