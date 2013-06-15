@@ -22,7 +22,7 @@ public class CosinePeople {
 
     //Create a person vector
     public static void createPersonVector() {
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
     }
 
 }
