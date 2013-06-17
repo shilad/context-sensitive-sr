@@ -14,36 +14,32 @@ public class People {
     private String id="";
     private ArrayList<Interest> interest=new ArrayList<Interest>();
 
-
-
-    public People(String id, String email){
+    public People(String id, String email) {
         this.id=id;
         this.email=email;
-
     }
-    public String getID(){
 
+    public String getID() {
         return id;
     }
-    public void setID(String id){
 
+    public void setID(String id) {
         this.id=id;
     }
-    public String getEmail(){
 
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
 
+    public void setEmail(String email) {
         this.email=email;
     }
-    public ArrayList<Interest> getInterest(){
 
+    public ArrayList<Interest> getInterest() {
         return interest;
     }
-    public void setInterest(ArrayList<Interest> interest){
 
+    public void setInterest(ArrayList<Interest> interest) {
         this.interest=interest;
     }
-
 }
