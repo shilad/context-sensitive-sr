@@ -17,7 +17,7 @@ public class Kmeans {
     private int k;
 
 
-    public Kmeans(float[][] data, int k) {
+    public Kmeans(double[][] data, int k) {
         this.data = new ArrayList<Point>();
         this.k = k;
         this.clusters = new Cluster[k];
@@ -37,7 +37,7 @@ public class Kmeans {
         return data;
     }
 
-    public void setData(float[][] data) {
+    public void setData(double[][] data) {
         for(int i=0;i<data.length;i++) {
             this.data.add(new Point(i, data[i]));
         }
@@ -49,6 +49,14 @@ public class Kmeans {
 
     public void setK(int k) {
         this.k = k;
+    }
+
+    public Cluster[] getClusters() {
+        return clusters;
+    }
+
+    public Point[] getCentroids() {
+        return centroids;
     }
 
     private class Cluster {
@@ -77,11 +85,12 @@ public class Kmeans {
             return result;
         }
 
+
     }
 
     private static class Point {
 
-        private float[] data;
+        private double[] data;
 
         private int id;
 
@@ -89,20 +98,20 @@ public class Kmeans {
             return;
         }
 
-        private Point(float[] data) {
+        private Point(double[] data) {
             this.data = data;
         }
 
-        private Point(int id, float[] data){
+        private Point(int id, double[] data){
             this.id = id;
             this.data = data;
         }
 
-        private float[] getData() {
+        private double[] getData() {
             return data;
         }
 
-        private void setData(float[] data) {
+        private void setData(double[] data) {
             this.data = data;
         }
 
@@ -110,6 +119,8 @@ public class Kmeans {
             String result = "" + id;
             return result;
         }
+
+
 
     }
 
@@ -131,8 +142,8 @@ public class Kmeans {
      * @return the sum of squares between the two points
      */
     public double getSumOfSquares(Point p1, Point p2){
-        float[] coordinates1 = p1.data;
-        float[] coordinates2 = p2.data;
+        double[] coordinates1 = p1.data;
+        double[] coordinates2 = p2.data;
 
         double sum = 0;
         for (int i=0; i < coordinates1.length; i++) {
@@ -173,7 +184,7 @@ public class Kmeans {
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
             //Redefine centroids
-            centroids = getCentroids(clusters);
+            centroids = computeCentroids(clusters);
 
             //Calculate variance
             double curVariance = getVariance(clusters, centroids);
@@ -233,7 +244,7 @@ public class Kmeans {
 
     /**
      * Returns the index of the centroid nearest to a given point
-     * Noted that the index of the centroid is the same as the index of the cluster
+     * Note that the index of the centroid is the same as the index of the cluster
      * @param point
      * @param centroids
      * @return the index of the cluster
@@ -283,7 +294,7 @@ public class Kmeans {
      * @param clusters
      * @return an array of centroid points corresponding to the array of clusters
      */
-    public Point[] getCentroids(Cluster[] clusters){
+    public Point[] computeCentroids(Cluster[] clusters){
 
         Point[] centroids = new Point[clusters.length];
 
@@ -295,7 +306,7 @@ public class Kmeans {
             Point temp = new Point();
 
             //Initialize temp for each new cluster
-            temp.setData(new float[m]);
+            temp.setData(new double[m]);
 
             //Loops through all of the points inside of a cluster
             for (Point row : c.points) {
@@ -408,7 +419,13 @@ public class Kmeans {
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 50;
+        int NUM_CLUSTERS = 5;
+
+        HashMap<String,SortedMap<String,Double>> map;
+        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        TestPeople p = new TestPeople();
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        double[][] matrix = p.createMatrixArray(map, people);
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -418,18 +435,18 @@ public class Kmeans {
 //                {4.5, 5.0},
 //                {3.5, 4.5}};
 
-        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
-        float SAMPLES[][] = sm.getFloatMatrix();
+//        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+//        double SAMPLES[][] = sm.getdoubleMatrix();
 
-        Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
-        Point[] centroids = test.compute(10000, .001);
+        Kmeans test = new Kmeans(matrix, NUM_CLUSTERS);
+        Point[] centroids = test.compute(10, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
-        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
+//        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
 
 
 
-        Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
+//        Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
 
 
 
@@ -489,7 +506,7 @@ public class Kmeans {
 //
 //        for (int z = 0; z< 100; z++) {
 //
-//            test.centroids = test.getCentroids(test.clusters);
+//            test.centroids = test.computeCentroids(test.clusters);
 //
 //            System.out.println("New Clusters");
 //
