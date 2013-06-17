@@ -43,7 +43,7 @@ public class Kmeans {
     }
 
     /**
-     * Sets the data points as
+     * Sets the data points
      * @param data
      */
     public void setData(float[][] data) {
@@ -73,7 +73,6 @@ public class Kmeans {
         private ArrayList<Point> points = new ArrayList<Point>();
 
         private Cluster() {
-
         }
 
         private Cluster(ArrayList<Point> points) {
@@ -131,7 +130,7 @@ public class Kmeans {
     }
 
     /**
-     * Calculate the distance between the two points
+     * Calculate the distance between two points
      * @param p1 the Point object for the first point
      * @param p2 the Point object for the second point
      * @return the distance between the two points
@@ -142,7 +141,7 @@ public class Kmeans {
     }
 
     /**
-     * Calculate the sum of squares of the two points
+     * Calculate the sum of squares of two points
      * @param p1 the Point object for the first point
      * @param p2 the Point object for the second point
      * @return the sum of squares between the two points
@@ -160,9 +159,9 @@ public class Kmeans {
     }
 
     /**
-     * Return the centroids of the clusters computed using Lloyd's algorithm
-     * @param iterations
-     * @param tolerance
+     * Return the centroids after running Lloyd's algorithm with the given number of clusters, iterations and tolerance
+     * @param iterations the maximum number of times you'd like Lloyd's algorithm to repeat
+     * @param tolerance the threshold for variance change between iterations that if broken the algorithm stops
      * @return centroids
      */
     public Point[] compute(int iterations, double tolerance) {
@@ -185,7 +184,7 @@ public class Kmeans {
             for (Cluster cluster:clusters) {
                 cluster.points.clear();
             }
-            //Place in clusters
+            //Place into clusters
             for (Point p: data) {
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
@@ -202,14 +201,7 @@ public class Kmeans {
 
             prevVariance = curVariance;
 
-            System.out.println("Variance:");
-            System.out.println(curVariance);
-            System.out.println("New Clusters");
-
-            //Print current centroids
-//            for (Point point: centroids) {
-//                System.out.println(Arrays.toString(point.data));
-//            }
+            System.out.println("Iteration: " + (c+1) + "\tVariance:\t" + curVariance + "\n");
 
             c++;
         }
@@ -219,9 +211,9 @@ public class Kmeans {
     }
 
     /**
-     * returns k random points from within the data
-     * @param data
-     * @param k
+     * Returns k random points from within the data
+     * @param data a float double array of the data points to be picked from
+     * @param k the number of desired clusters
      * @return an array of k points
      */
     public Point[] getKRandomPoints(ArrayList<Point> data, int k) {
@@ -250,9 +242,9 @@ public class Kmeans {
 
     /**
      * Returns the index of the centroid nearest to a given point
-     * Noted that the index of the centroid is the same as the index of the cluster
-     * @param point
-     * @param centroids
+     * Note that the index of the centroid is the same as the index of the cluster
+     * @param point a point object that you'd like a cluster for
+     * @param centroids a list of points representing the clusters
      * @return the index of the cluster
      */
     public int getBestClusterForPoint(Point point, Point[] centroids) {
@@ -273,8 +265,8 @@ public class Kmeans {
 
     /**
      * Computes the intra-cluster variance over all clusters
-     * @param clusters
-     * @param centroids
+     * @param clusters a list of lists of points representing the clusters
+     * @param centroids a list of points
      * @return the intra-cluster variance over all clusters
      */
     public double getVariance(Cluster[] clusters, Point[] centroids){
@@ -297,7 +289,7 @@ public class Kmeans {
 
     /**
      * Computes the centroids of each cluster
-     * @param clusters
+     * @param clusters a list of points representing a cluster
      * @return an array of centroid points corresponding to the array of clusters
      */
     public Point[] getCentroids(Cluster[] clusters){
@@ -321,18 +313,13 @@ public class Kmeans {
                 for (int k = 0; k < m; k++) {
                     temp.data[k] += row.getData()[k];
                 }
-
             }
-
             //Divide each entry by number of points in the cluster to calculate the mean
             for (int l = 0; l < m; l++) {
                 temp.data[l] /= c.points.size();
             }
-
             centroids[i] = temp;
-
         }
-
         return centroids;
     }
 
@@ -385,16 +372,24 @@ public class Kmeans {
             ex.printStackTrace();
         }
     }
-    public void bestSamplePointsFromClusterToFileWithNames(Cluster[] clusters, String path, int n, Point[] centroids, ArrayList<People> people) {
 
+    /**
+     * @param clusters a list of clusters
+     * @param path filename and path of file to be written
+     * @param n the maximum number of points per cluster desired
+     * @param centroids a list of integers representing the cluster centers
+     * @param people an array list of people objects with at least email addresses and interests
+     */
+
+    public void bestSamplePointsFromClusterToFileWithNames(Cluster[] clusters, String path, int n, Point[] centroids, ArrayList<People> people) {
         try{
             FileWriter out = new FileWriter(path);
 
             for (int i = 0; i<k; i++) {
                 ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
                 if(clusters[i].getPoints().size()>40){
-                out.append("\nCluster "+i+"\n");
-                out.append("Cluster Centroid:" +centroids[i].toString() + "\n");
+                out.append("\nCluster: "+i+"\n");
+                out.append("Cluster Centroid: " +Arrays.toString(centroids[i].getData()) + "\n");
                 out.append("Points in Cluster:" + clusters[i].getPoints().size() + "\n");
                 for(Point point: points) {
                     out.append("\tID: "+people.get(point.id).getID()+"\tEmail: "+people.get(point.id).getEmail()+"\n");
@@ -418,9 +413,9 @@ public class Kmeans {
 
 
     /**
-     * Get i best points from a given cluster
-     * @param cluster
-     * @param n
+     * Get n best points from a given cluster
+     * @param cluster a list of points that belong to a given cluster
+     * @param n the maximum number of points that you'd like as a sample
      * @return an array of points with length k
      */
     public ArrayList<Point> getBestSamplePointsFromCluster(Cluster cluster, int n, Point centroid) {
@@ -455,7 +450,6 @@ public class Kmeans {
            points.add(data.get(current.getKey()));
            i++;
         }
-
 
         System.out.println("points:" + points);
 
