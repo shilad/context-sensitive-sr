@@ -17,7 +17,13 @@ public class Kmeans {
     private int k;
 
 
-    public Kmeans(double[][] data, int k) {
+    /**
+     * Use this constructor to create Kmeans object
+     * run compute() function to get the resulting clusters
+     * @param data 2-D float array that represents the matrix
+     * @param k number of clusters
+     */
+    public Kmeans(float[][] data, int k) {
         this.data = new ArrayList<Point>();
         this.k = k;
         this.clusters = new Cluster[k];
@@ -37,7 +43,7 @@ public class Kmeans {
         return data;
     }
 
-    public void setData(double[][] data) {
+    public void setData(float[][] data) {
         for(int i=0;i<data.length;i++) {
             this.data.add(new Point(i, data[i]));
         }
@@ -85,12 +91,11 @@ public class Kmeans {
             return result;
         }
 
-
     }
 
     private static class Point {
 
-        private double[] data;
+        private float[] data;
 
         private int id;
 
@@ -98,20 +103,20 @@ public class Kmeans {
             return;
         }
 
-        private Point(double[] data) {
+        private Point(float[] data) {
             this.data = data;
         }
 
-        private Point(int id, double[] data){
+        private Point(int id, float[] data){
             this.id = id;
             this.data = data;
         }
 
-        private double[] getData() {
+        private float[] getData() {
             return data;
         }
 
-        private void setData(double[] data) {
+        private void setData(float[] data) {
             this.data = data;
         }
 
@@ -119,8 +124,6 @@ public class Kmeans {
             String result = "" + id;
             return result;
         }
-
-
 
     }
 
@@ -142,8 +145,8 @@ public class Kmeans {
      * @return the sum of squares between the two points
      */
     public double getSumOfSquares(Point p1, Point p2){
-        double[] coordinates1 = p1.data;
-        double[] coordinates2 = p2.data;
+        float[] coordinates1 = p1.data;
+        float[] coordinates2 = p2.data;
 
         double sum = 0;
         for (int i=0; i < coordinates1.length; i++) {
@@ -184,7 +187,7 @@ public class Kmeans {
                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
             }
             //Redefine centroids
-            centroids = computeCentroids(clusters);
+            centroids = getCentroids(clusters);
 
             //Calculate variance
             double curVariance = getVariance(clusters, centroids);
@@ -244,7 +247,7 @@ public class Kmeans {
 
     /**
      * Returns the index of the centroid nearest to a given point
-     * Note that the index of the centroid is the same as the index of the cluster
+     * Noted that the index of the centroid is the same as the index of the cluster
      * @param point
      * @param centroids
      * @return the index of the cluster
@@ -294,7 +297,7 @@ public class Kmeans {
      * @param clusters
      * @return an array of centroid points corresponding to the array of clusters
      */
-    public Point[] computeCentroids(Cluster[] clusters){
+    public Point[] getCentroids(Cluster[] clusters){
 
         Point[] centroids = new Point[clusters.length];
 
@@ -306,7 +309,7 @@ public class Kmeans {
             Point temp = new Point();
 
             //Initialize temp for each new cluster
-            temp.setData(new double[m]);
+            temp.setData(new float[m]);
 
             //Loops through all of the points inside of a cluster
             for (Point row : c.points) {
@@ -353,6 +356,14 @@ public class Kmeans {
         }
     }
 
+    /**
+     * Get n best points from each cluster and put them into the file
+     * You need to run compute() before running this method
+     * @param clusters the resulting clusters after running compute()
+     * @param path output file path
+     * @param n the number of best points from each clusters
+     * @param centroids the cetroids array after running compute()
+     */
     public void bestSamplePointsFromClusterToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
 
         try{
@@ -419,13 +430,7 @@ public class Kmeans {
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 5;
-
-        HashMap<String,SortedMap<String,Double>> map;
-        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
-        TestPeople p = new TestPeople();
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        double[][] matrix = p.createMatrixArray(map, people);
+        int NUM_CLUSTERS = 50;
 
 //        double SAMPLES[][] = new double[][] {{1.0, 1.0},
 //                {1.5, 2.0},
@@ -435,18 +440,18 @@ public class Kmeans {
 //                {4.5, 5.0},
 //                {3.5, 4.5}};
 
-//        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
-//        double SAMPLES[][] = sm.getdoubleMatrix();
+        SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
+        float SAMPLES[][] = sm.getFloatMatrix();
 
-        Kmeans test = new Kmeans(matrix, NUM_CLUSTERS);
-        Point[] centroids = test.compute(10, .001);
+        Kmeans test = new Kmeans(SAMPLES, NUM_CLUSTERS);
+        Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
-//        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
+        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
 
 
 
-//        Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
+        Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
 
 
 
@@ -506,7 +511,7 @@ public class Kmeans {
 //
 //        for (int z = 0; z< 100; z++) {
 //
-//            test.centroids = test.computeCentroids(test.clusters);
+//            test.centroids = test.getCentroids(test.clusters);
 //
 //            System.out.println("New Clusters");
 //
