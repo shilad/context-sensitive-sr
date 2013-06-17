@@ -15,6 +15,7 @@ public class People {
     private ArrayList<Interest> interest=new ArrayList<Interest>();
 
 
+
     public People(String id, String email){
         this.id=id;
         this.email=email;

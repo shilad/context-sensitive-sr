@@ -1,15 +1,32 @@
 package org.macademia.algs;
 
 
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.*;
 
 public class TestPeople {
-
+    //0 is Shilad and 107 is Danny Kaplan in list
+    //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        //createSerializedMatrix(people);
+        HashMap<String,SortedMap<String,Double>> map;
+        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        float[][] matrix = createMatrixArray(map,people);
+
+    }
+    public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
+        int size=map.keySet().size();
+        float[][] matrix = new float[size][size];
+        for(int i=0;i<people.size();i++){
+            for(int j=0;j<people.size();j++){
+                matrix[i][j]=map.get(people.get(i).getID()).get(people.get(j).getID()).floatValue();
+            }
+        }
+
+        return matrix;
+    }
+    public static void createSerializedMatrix(ArrayList<People> people) throws IOException {
         FileOutputStream file=null;
         ObjectOutputStream out=null;
         try{
@@ -20,10 +37,8 @@ public class TestPeople {
             e.printStackTrace();
         }
 
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        People target = people.get(0);
-        People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
-                                                            //findPersonByEmail(people,"shoop@macalester.edu")
+
+
 
 
         HashMap<String,SortedMap<String,Double>> allMap = new HashMap<String, SortedMap<String, Double>>();
@@ -98,5 +113,6 @@ public class TestPeople {
 
         return scoreMap;
     }
+
 
 }
