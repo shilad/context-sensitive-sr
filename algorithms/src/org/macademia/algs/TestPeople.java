@@ -14,10 +14,13 @@ public class TestPeople {
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
-        Kmeans kmeans = new Kmeans(matrix,20);
-        kmeans.compute(10000,.000000000000000001);
-        //kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
-        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+        //Running Kmeans algorithm for k random center points
+//        Kmeans kmeans = new Kmeans(matrix,20);
+//        System.out.println(Arrays.toString(kmeans.compute(10000,.000000000000000001)));
+//        //kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
+//        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+
+        //Running Kmeans algorithm for k predefined center points
 
     }
     public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
