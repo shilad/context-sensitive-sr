@@ -121,7 +121,8 @@ public class Kmeans {
         }
 
         public String toString(){
-            String result = "" + id;
+            String result = id+" ";
+            result+= Arrays.toString(this.data);
             return result;
         }
 
@@ -214,6 +215,68 @@ public class Kmeans {
         return centroids;
 
     }
+
+    /**
+      * Return the centroids of the clusters computed using Lloyd's algorithm
+      * We initialize the center using a list of points
+      * @param iterations
+      * @param tolerance
+      * @param points a list of points that acts as the initial centers of the clusters
+      * @return centroids
+      */
+     public Point[] computeUsingPoints(int iterations, double tolerance, Point[] points) {
+
+         //Initialize the centers
+         centroids = points;
+         k = points.length;
+
+         //Place Points into clusters
+         for (Point p: data) {
+             clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+         }
+
+
+         double prevVariance = Double.POSITIVE_INFINITY;
+         int c = 0;
+
+         while (c < iterations) {
+
+             //Clear the clusters
+             for (Cluster cluster:clusters) {
+                 cluster.points.clear();
+             }
+             //Place in clusters
+             for (Point p: data) {
+                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+             }
+             //Redefine centroids
+             centroids = getCentroids(clusters);
+
+             //Calculate variance
+             double curVariance = getVariance(clusters, centroids);
+
+             if (Math.abs(curVariance-prevVariance) < tolerance) {
+                 return centroids;
+
+             }
+
+             prevVariance = curVariance;
+
+             System.out.println("Variance:");
+             System.out.println(curVariance);
+             System.out.println("New Clusters");
+
+             //Print current centroids
+ //            for (Point point: centroids) {
+ //                System.out.println(Arrays.toString(point.data));
+ //            }
+
+             c++;
+         }
+
+         return centroids;
+
+     }
 
     /**
      * returns k random points from within the data
