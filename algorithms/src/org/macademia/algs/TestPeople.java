@@ -17,7 +17,7 @@ public class TestPeople {
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
-        double[][] matrix = createMatrixArray(map, people);
+        float[][] matrix = createMatrixArray(map, people);
 
         Kmeans c = new Kmeans(matrix, 10);
 
