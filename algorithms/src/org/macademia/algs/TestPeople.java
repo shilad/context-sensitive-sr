@@ -16,7 +16,7 @@ public class TestPeople {
 
         Kmeans kmeans = new Kmeans(matrix,10);
         kmeans.compute(10,.01);
-        kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
+        kmeans.bestSamplePointsFromClustersToFile(kmeans.getClusters(), "dat/peopleClusters.txt", 10, kmeans.getCentroids());
 
 
     }
