@@ -37,10 +37,6 @@ public class TestPeople {
             e.printStackTrace();
         }
 
-
-
-
-
         HashMap<String,SortedMap<String,Double>> allMap = new HashMap<String, SortedMap<String, Double>>();
 
         for(int i=0;i<people.size();i++){          //Cycles through each person in list using them as the target to
