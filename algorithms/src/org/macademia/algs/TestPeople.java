@@ -17,8 +17,8 @@ public class TestPeople {
         }
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        People target = people.get(0);
-        People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
+        //People target = people.get(0);
+        //People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
                                                             //findPersonByEmail(people,"shoop@macalester.edu")
 
         for(int i=0;i<people.size();i++){          //Cycles through each person in list using them as the target to
@@ -72,11 +72,15 @@ public class TestPeople {
         double a = 0;
         SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
 
+        System.out.println("The target person is "+target.getEmail()+" with ID "+target.getID());
+
         for(int i=0;i<people.size();i++){                               //Maps each person to a distance score
-            a = People_Distance.findDistance(target,people.get(i));
-            scoreMap.put(people.get(i).getID(),a);
+            People candidate = people.get(i);
+            a = People_Distance.findDistance(target,candidate);
+            scoreMap.put(candidate.getID(),a);
         }
-                                                                         //Transforms scoreMap to SortedSet
+
+        //Transforms scoreMap to SortedSet, sort the results by value
         SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
                 new Comparator<Map.Entry<String, Double>>() {
                     public int compare(Map.Entry<String, Double> e1,
