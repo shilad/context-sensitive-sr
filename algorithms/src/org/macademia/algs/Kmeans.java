@@ -16,7 +16,6 @@ public class Kmeans {
     private ArrayList<Point> data;
     private int k;
 
-
     /**
      * Use this constructor to create Kmeans object
      * run compute() function to get the resulting clusters
@@ -43,6 +42,10 @@ public class Kmeans {
         return data;
     }
 
+    /**
+     * Sets the data points as
+     * @param data
+     */
     public void setData(float[][] data) {
         for(int i=0;i<data.length;i++) {
             this.data.add(new Point(i, data[i]));
@@ -364,7 +367,7 @@ public class Kmeans {
      * @param n the number of best points from each clusters
      * @param centroids the cetroids array after running compute()
      */
-    public void bestSamplePointsFromClusterToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
+    public void bestSamplePointsFromClustersToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
 
         try{
             FileWriter out = new FileWriter(path);
@@ -382,6 +385,37 @@ public class Kmeans {
             ex.printStackTrace();
         }
     }
+    public void bestSamplePointsFromClusterToFileWithNames(Cluster[] clusters, String path, int n, Point[] centroids, ArrayList<People> people) {
+
+        try{
+            FileWriter out = new FileWriter(path);
+
+            for (int i = 0; i<k; i++) {
+                ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
+                if(clusters[i].getPoints().size()>40){
+                out.append("\nCluster "+i+"\n");
+                out.append("Cluster Centroid:" +centroids[i].toString() + "\n");
+                out.append("Points in Cluster:" + clusters[i].getPoints().size() + "\n");
+                for(Point point: points) {
+                    out.append("\tID: "+people.get(point.id).getID()+"\tEmail: "+people.get(point.id).getEmail()+"\n");
+                    if(people.get(point.id).getInterest().size()!=0){
+                        for(Interest interest:people.get(point.id).getInterest()){
+                            if(interest!=null)
+                                out.append("\t\t"+interest.getName()+"\n");
+                        }
+                        out.append("\n");
+                    }
+                }
+                }
+            }
+            out.flush();
+            out.close();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+
 
     /**
      * Get i best points from a given cluster
@@ -447,7 +481,7 @@ public class Kmeans {
         Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
-        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
+        test.bestSamplePointsFromClustersToFile(test.clusters, "dat/clusters.txt", 10, test.centroids);
 
 
 

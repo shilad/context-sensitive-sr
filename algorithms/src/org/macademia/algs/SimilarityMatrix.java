@@ -14,7 +14,6 @@ import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class SimilarityMatrix extends DenseMatrix{
