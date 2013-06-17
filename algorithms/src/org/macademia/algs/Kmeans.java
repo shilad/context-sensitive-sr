@@ -57,6 +57,14 @@ public class Kmeans {
         this.k = k;
     }
 
+    public Cluster[] getClusters() {
+        return clusters;
+    }
+
+    public Point[] getCentroids() {
+        return centroids;
+    }
+
     private class Cluster {
 
         private ArrayList<Point> points = new ArrayList<Point>();
