@@ -1,15 +1,10 @@
 package org.macademia.algs;
 
 
-import java.awt.*;
 import java.io.*;
 import java.util.*;
 
 public class TestPeople {
-
-    public TestPeople() {
-    }
-
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
@@ -19,17 +14,23 @@ public class TestPeople {
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
-        Kmeans c = new Kmeans(matrix, 10);
-
-        c.bestSamplePointsFromClusterToFile(c.getClusters(), "dat/testPeopleCluster.txt", 10, c.getCentroids());
+        Kmeans kmeans = new Kmeans(matrix,10);
+        kmeans.compute(10,.01);
 
     }
     public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
         int size=map.keySet().size();
         float[][] matrix = new float[size][size];
+        float temp = 0;
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.size();j++){
-                matrix[i][j]=map.get(people.get(i).getID()).get(people.get(j).getID()).floatValue();
+                temp=map.get(people.get(i).getID()).get(people.get(j).getID()).floatValue();
+                if (Float.isNaN(temp)) {
+                    matrix[i][j]=0;
+                }
+                else{
+                    matrix[i][j]=temp;
+                }
             }
         }
 
