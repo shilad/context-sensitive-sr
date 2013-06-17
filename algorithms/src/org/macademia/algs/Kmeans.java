@@ -364,7 +364,7 @@ public class Kmeans {
      * @param n the number of best points from each clusters
      * @param centroids the cetroids array after running compute()
      */
-    public void bestSamplePointsFromClusterToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
+    public void bestSamplePointsFromClustersToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
 
         try{
             FileWriter out = new FileWriter(path);
@@ -472,7 +472,7 @@ public class Kmeans {
         Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
-        test.bestSamplePointsFromClusterToFile(test.clusters,"dat/clusters.txt",10,test.centroids);
+        test.bestSamplePointsFromClustersToFile(test.clusters, "dat/clusters.txt", 10, test.centroids);
 
 
 
