@@ -19,17 +19,25 @@ public class TestPeople {
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
-        Kmeans c = new Kmeans(matrix, 10);
+        Kmeans kmeans = new Kmeans(matrix,10);
+        kmeans.compute(10,.01);
 
         c.bestSamplePointsFromClusterToFile(c.getClusters(), "dat/testPeopleCluster.txt", 10, c.getCentroids());
 
     }
-    public static double[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
+    public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
         int size=map.keySet().size();
-        double[][] matrix = new double[size][size];
+        float[][] matrix = new float[size][size];
+        float temp = 0;
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.size();j++){
-                matrix[i][j]=map.get(people.get(i).getID()).get(people.get(j).getID());
+                temp=map.get(people.get(i).getID()).get(people.get(j).getID()).floatValue();
+                if (Float.isNaN(temp)) {
+                    matrix[i][j]=0;
+                }
+                else{
+                    matrix[i][j]=temp;
+                }
             }
         }
 
