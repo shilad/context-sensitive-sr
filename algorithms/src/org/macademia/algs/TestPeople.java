@@ -25,6 +25,7 @@ public class TestPeople {
             scoresForAllCandidate(people, out, people.get(i));            //compile full matrix of scores
         }
 
+
         out.flush();
         out.close();
 
