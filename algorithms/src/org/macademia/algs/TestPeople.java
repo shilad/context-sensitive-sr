@@ -17,19 +17,19 @@ public class TestPeople {
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
-        double[][] matrix = createMatrixArray(map, people);
+        float[][] matrix = createMatrixArray(map, people);
 
         Kmeans c = new Kmeans(matrix, 10);
 
         c.bestSamplePointsFromClusterToFile(c.getClusters(), "dat/testPeopleCluster.txt", 10, c.getCentroids());
 
     }
-    public static double[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
+    public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
         int size=map.keySet().size();
-        double[][] matrix = new double[size][size];
+        float[][] matrix = new float[size][size];
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.size();j++){
-                matrix[i][j]=map.get(people.get(i).getID()).get(people.get(j).getID());
+                matrix[i][j]=map.get(people.get(i).getID()).get(people.get(j).getID()).floatValue();
             }
         }
 
