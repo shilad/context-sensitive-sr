@@ -19,23 +19,22 @@ public class People_Interests {
     private static ArrayList<People> peopleList = new ArrayList<People>();
     private static HashMap interestMap = new HashMap();
 
-    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath,String departmentPath){
+    //Creates an ArrayList of people objects with their interests given the paths to the data files
+    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath){
         BufferedReader peopleFile=null;
         BufferedReader interestFile=null;
         BufferedReader people_interestFile=null;
-        BufferedReader departmentFile=null;
+
         try {
             peopleFile = new BufferedReader(new FileReader(peoplePath));
             interestFile = new BufferedReader(new FileReader(interestPath));
             people_interestFile = new BufferedReader(new FileReader(people_interestPath));
-            //departmentFile = new BufferedReader(new FileReader(departmentPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
             peopleList=makePeopleList(peopleFile);
-            //peopleList=addDepartments(departmentFile,peopleList);
             interestMap=makeInterestMap(interestFile);
             peopleList=addInterests(peopleList,people_interestFile);
         } catch (IOException e) {
@@ -45,6 +44,7 @@ public class People_Interests {
         return peopleList;
     }
 
+    //Reads people file and creates an ArrayList of People objects
     private static ArrayList<People> makePeopleList(BufferedReader peopleFile) throws IOException{
         ArrayList<People> temp = new ArrayList<People>();
         String line = null;
@@ -57,31 +57,8 @@ public class People_Interests {
         }
         return temp;
     }
-    private static ArrayList<People> addDepartments(BufferedReader departmentFile,ArrayList<People> people) throws IOException{
-        ArrayList<People> temp = people;
-        String line = null;
-        String dept="";
-        while ((line = departmentFile.readLine()) != null) {
-            String[] lineSplit=line.split(",");
-            for(int i=0;i<temp.size();i++){
-                if(temp.get(i).getID().equals(lineSplit[1])){
-                    if(lineSplit.length>2)
-                        if(lineSplit[2].charAt(0)=='"'){
-                            for(int j=2;j<lineSplit.length;j++){
-                                dept+=lineSplit[j];
-                            }
-                            dept=dept.substring(1,dept.length()-1);
-                            temp.get(i).setDepartment(dept);
-                            dept="";
-                        }
-                        else
-                            temp.get(i).setDepartment(lineSplit[2]);
-                }
-            }
 
-        }
-        return temp;
-    }
+    //Reads in file and returns a HashMap of Interest objects
     private static HashMap makeInterestMap(BufferedReader interestFile) throws IOException{
         HashMap temp = new HashMap();
         String line = null;
@@ -94,6 +71,8 @@ public class People_Interests {
         }
         return temp;
     }
+
+    //Reads in person to interest file and creates a hashmap of the connections
     private static HashMap makePeopleHash(BufferedReader file) throws IOException {
         String line = null;
         HashMap map= new HashMap();
@@ -113,6 +92,8 @@ public class People_Interests {
         }
         return map;
     }
+
+    //Adds the interest objects to the people objects
     private static ArrayList<People> addInterests(ArrayList<People> people, BufferedReader connectionFile) {
         ArrayList<People> peopleArray = people;
 
@@ -120,15 +101,15 @@ public class People_Interests {
         try {
             peopleMap = makePeopleHash(connectionFile);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         ArrayList<String> interestStrings = new ArrayList<String>();
         ArrayList<Interest> temp;
+
         for(int i = 0; i < peopleArray.size(); i++){                                     //For each person in person array
             if(peopleMap.get(peopleArray.get(i).getID())!=null){                         //If person in array exists in peopleMap
                 interestStrings = (ArrayList<String>) peopleMap.get(peopleArray.get(i).getID());     //Get length on interest strings from map
-                //System.out.println(peopleMap.get(peopleArray.get(i).getID()));
             }
             if(interestStrings!=null){                                                     //If there are interest strings
                 temp = new ArrayList<Interest>();
@@ -146,4 +127,5 @@ public class People_Interests {
 
         return peopleArray;
     }
+
 }
