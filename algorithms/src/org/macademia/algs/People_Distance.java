@@ -24,6 +24,7 @@ public class People_Distance {
 
         if(matrix==null){                       //Checks to see if static matrixes have been created yet
             try {
+                System.out.println("Loading Similarity Matrix");
                 matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
             } catch (IOException e) {
                 e.printStackTrace();
