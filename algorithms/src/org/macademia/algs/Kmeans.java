@@ -44,7 +44,7 @@ public class Kmeans {
 
     /**
      * Sets the data points
-     * @param data
+     * @param data a 2d array
      */
     public void setData(float[][] data) {
         for(int i=0;i<data.length;i++) {
