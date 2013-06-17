@@ -16,6 +16,8 @@ public class TestPeople {
 
         Kmeans kmeans = new Kmeans(matrix,10);
         kmeans.compute(10,.01);
+        kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
+
 
     }
     public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
