@@ -12,6 +12,7 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class FileParser {
+
     public static HashMap<String,SortedMap<String,Double>> deserializePeopleMatrix(String path){
         HashMap<String,SortedMap<String,Double>> e = null;
         try
