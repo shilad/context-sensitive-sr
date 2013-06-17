@@ -65,67 +65,18 @@ public class Kmeans {
         return centroids;
     }
 
-    private class Cluster {
-
-        private ArrayList<Point> points = new ArrayList<Point>();
-
-        private Cluster() {
-
-        }
-
-        private Cluster(ArrayList<Point> points) {
-            this.points = points;
-        }
-
-        private ArrayList<Point> getPoints() {
-            return points;
-        }
-
-        private void setPoints(ArrayList<Point> points) {
-            this.points = points;
-        }
-
-        public String toString(){
-            String result = "Cluster \n";
-            result+=points.toString();
-            return result;
-        }
-
+    public Point createPoint(float[] data){
+        return new Point(data);
     }
 
-    private static class Point {
-
-        private float[] data;
-
-        private int id;
-
-        private Point() {
-            return;
-        }
-
-        private Point(float[] data) {
-            this.data = data;
-        }
-
-        private Point(int id, float[] data){
-            this.id = id;
-            this.data = data;
-        }
-
-        private float[] getData() {
-            return data;
-        }
-
-        private void setData(float[] data) {
-            this.data = data;
-        }
-
-        public String toString(){
-            String result = id+" ";
-            result+= Arrays.toString(this.data);
-            return result;
-        }
-
+    /**
+     * Returns a new point object
+     * @param id
+     * @param data
+     * @return
+     */
+    public Point createPoint(int id, float[] data){
+        return new Point(id, data);
     }
 
     /**
@@ -628,6 +579,66 @@ public class Kmeans {
 
 
     }
+    class Cluster {
 
+        private ArrayList<Point> points = new ArrayList<Point>();
 
+        Cluster() {
+
+        }
+
+        Cluster(ArrayList<Point> points) {
+            this.points = points;
+        }
+
+        public ArrayList<Point> getPoints() {
+            return points;
+        }
+
+        public void setPoints(ArrayList<Point> points) {
+            this.points = points;
+        }
+
+        public String toString(){
+            String result = "Cluster \n";
+            result+=points.toString();
+            return result;
+        }
+
+    }
+
+    class Point {
+
+        private float[] data;
+
+        private int id;
+
+        Point() {
+            return;
+        }
+
+        Point(float[] data) {
+            this.data = data;
+        }
+
+        Point(int id, float[] data){
+            this.id = id;
+            this.data = data;
+        }
+
+        public float[] getData() {
+            return data;
+        }
+
+        public void setData(float[] data) {
+            this.data = data;
+        }
+
+        public String toString(){
+            String result = id+" ";
+            result+= Arrays.toString(this.data);
+            return result;
+        }
+
+    }
 }

@@ -21,6 +21,20 @@ public class TestPeople {
 //        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
 
         //Running Kmeans algorithm for k predefined center points
+        int k = 6;
+        Kmeans kmeans = new Kmeans(matrix,6);
+        Kmeans.Point[] points = new Kmeans.Point[k];
+        points[0] = kmeans.createPoint(624,matrix[624]);
+        points[1] = kmeans.createPoint(1457,matrix[1457]);
+        points[2] = kmeans.createPoint(1761,matrix[1761]);
+        points[3] = kmeans.createPoint(1853,matrix[1853]);
+        points[4] = kmeans.createPoint(2027,matrix[2027]);
+        points[5] = kmeans.createPoint(1933,matrix[1933]);
+        kmeans.computeUsingPoints(10000,.000000000000000001,points);
+        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+
+
+
 
     }
     public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){
