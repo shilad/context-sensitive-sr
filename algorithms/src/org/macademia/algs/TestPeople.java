@@ -1,40 +1,32 @@
 package org.macademia.algs;
 
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class TestPeople {
 
     public static void main(String args[]) throws IOException {
-        FileOutputStream file=null;
-        ObjectOutputStream out=null;
+        FileWriter out=null;
         try{
-            file = new FileOutputStream("dat/peopleMatrix.ser");
-            out = new ObjectOutputStream(file);
+            out = new FileWriter("dat/personMatrix.txt");
         }
         catch (IOException e){
             e.printStackTrace();
         }
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        People target = people.get(0);
-        People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
+        //People target = people.get(0);
+        //People candidate = people.get(107);                  //0 is Shilad and 107 is Danny Kaplan in list
                                                             //findPersonByEmail(people,"shoop@macalester.edu")
 
-
-        HashMap<String,SortedMap<String,Double>> allMap = new HashMap<String, SortedMap<String, Double>>();
-
         for(int i=0;i<people.size();i++){          //Cycles through each person in list using them as the target to
-            allMap.put(people.get(i).getID(),scoresForAllCandidate(people, people.get(i)));            //compile full matrix of scores
+            scoresForAllCandidate(people, out, people.get(i));            //compile full matrix of scores
         }
 
-        out.writeObject(allMap);
+        out.flush();
         out.close();
-        file.close();
 
     }
     //SINGLE PERSON TEST - Prints out the result of the target person to the candidate
@@ -76,29 +68,35 @@ public class TestPeople {
 
     //Finds scores for all candidates relative to the target person
     // - Take in full People array and file writer object along with target person
-    public static SortedMap<String,Double> scoresForAllCandidate(ArrayList<People> people, People target){
+    public static void scoresForAllCandidate(ArrayList<People> people,FileWriter out, People target){
         double a = 0;
         SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
 
-        System.out.println("Target person "+target.getEmail()+" with ID "+target.getID());
+        System.out.println("The target person is "+target.getEmail()+" with ID "+target.getID());
 
         for(int i=0;i<people.size();i++){                               //Maps each person to a distance score
-            a = People_Distance.findDistance(target,people.get(i));
-            scoreMap.put(people.get(i).getID(),a);
+            People candidate = people.get(i);
+            a = People_Distance.findDistance(target,candidate);
+            scoreMap.put(candidate.getID(),a);
         }
-                                                                         //Transforms scoreMap to SortedSet
-//        SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
-//                new Comparator<Map.Entry<String, Double>>() {
-//                    public int compare(Map.Entry<String, Double> e1,
-//                                       Map.Entry<String, Double> e2) {
-//                        return e1.getValue().compareTo(e2.getValue());
-//                    }
-//                });
 
-//        sortedset.addAll(scoreMap.entrySet());
+        //Transforms scoreMap to SortedSet, sort the results by value
+        SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
+                new Comparator<Map.Entry<String, Double>>() {
+                    public int compare(Map.Entry<String, Double> e1,
+                                       Map.Entry<String, Double> e2) {
+                        return e1.getValue().compareTo(e2.getValue());
+                    }
+                });
+        sortedset.addAll(scoreMap.entrySet());
 
 
-        return scoreMap;
+        try{              //Appends to file the sorted set -  TargetID:[CandidateID1=val1,CandidateID2=val2,...]
+            out.append(target.getID()+":"+sortedset.toString()+"\n");
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }
