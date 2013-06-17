@@ -91,6 +91,8 @@ public class TestPeople {
         double a = 0;
         SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
 
+        System.out.println("Target person "+target.getEmail()+" with ID "+target.getID());
+
         for(int i=0;i<people.size();i++){                               //Maps each person to a distance score
             a = People_Distance.findDistance(target,people.get(i));
             scoreMap.put(people.get(i).getID(),a);
