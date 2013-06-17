@@ -17,6 +17,12 @@ public class Kmeans {
     private int k;
 
 
+    /**
+     * Use this constructor to create Kmeans object
+     * run compute() function to get the resulting clusters
+     * @param data 2-D float array that represents the matrix
+     * @param k number of clusters
+     */
     public Kmeans(float[][] data, int k) {
         this.data = new ArrayList<Point>();
         this.k = k;
@@ -342,6 +348,14 @@ public class Kmeans {
         }
     }
 
+    /**
+     * Get n best points from each cluster and put them into the file
+     * You need to run compute() before running this method
+     * @param clusters the resulting clusters after running compute()
+     * @param path output file path
+     * @param n the number of best points from each clusters
+     * @param centroids the cetroids array after running compute()
+     */
     public void bestSamplePointsFromClusterToFile(Cluster[] clusters, String path, int n, Point[] centroids) {
 
         try{
