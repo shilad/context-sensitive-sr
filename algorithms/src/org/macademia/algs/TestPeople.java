@@ -19,11 +19,14 @@ public class TestPeople {
         }
 
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
-        People target = people.get(0);
-        People candidate = people.get(107);
+
+        //People target = people.get(0);
+        //People candidate = people.get(107);
         //System.out.print(target.getEmail());                  //0 is Shilad and 107 is Danny Kaplan
         //scoresForAllCandidate(people, target);                  //Lepczyk is 1961 and Eric Palmer is 1822
-        for(int i=1;i<people.size();i++){
+
+        //changed i=1 into i=0
+        for(int i=0;i<people.size();i++){
             scoresForAllCandidate(people, out, people.get(i));         //findPersonByEmail(people,"shoop@macalester.edu")
         }
         out.flush();
@@ -60,19 +63,15 @@ public class TestPeople {
 
     //Finds scores for all candidates
     public static void scoresForAllCandidate(ArrayList<People> people,FileWriter out, People target){
-        double d = 0;
         double a = 0;
-        int count = 0;
-        int index=0;
-
         SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
 
-        ArrayList<People> peeps=new ArrayList<People>();
-        //ArrayList<Double> peepScores=new ArrayList<Double>();
+        System.out.println("Running on person "+target.getEmail()+" with ID "+target.getID());
 
         for(int i=0;i<people.size();i++){
-            a = People_Distance.findDistance(target,people.get(i));
-            scoreMap.put(people.get(i).getID(),a);
+            People p = people.get(i);
+            a = People_Distance.findDistance(target,p);
+            scoreMap.put(p.getID(),a);
         }
 
         SortedSet<Map.Entry<String, Double>> sortedset = new TreeSet<Map.Entry<String, Double>>(
@@ -85,10 +84,13 @@ public class TestPeople {
 
         sortedset.addAll(scoreMap.entrySet());
 
+        System.out.println(sortedset.toString());
 
         try{
 
-            out.append(sortedset.toString());
+            System.out.println("Writing results to file");
+            out.append(scoreMap.values().toString());
+            out.append("\n");
 
         }
         catch (IOException e){

@@ -24,6 +24,7 @@ public class People_Distance {
     public static double findDistance(People p1, People p2){
         if(matrix==null){
             try {
+                System.out.println("Loading Similarity Matrix");
                 matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
             } catch (IOException e) {
                 e.printStackTrace();
