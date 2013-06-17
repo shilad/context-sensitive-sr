@@ -53,8 +53,6 @@ public class Parse_Clusters {
         }
     }
 
-
-
     public static void printClustersFromList(String pathPhrases, int[] list) throws IOException {
         BufferedReader interestFile=null;
         interestFile = new BufferedReader(new FileReader(pathPhrases));

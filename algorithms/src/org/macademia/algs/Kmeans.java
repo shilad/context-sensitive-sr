@@ -44,7 +44,7 @@ public class Kmeans {
 
     /**
      * Sets the data points
-     * @param data a 2d array
+     * @param data
      */
     public void setData(float[][] data) {
         for(int i=0;i<data.length;i++) {
@@ -460,14 +460,6 @@ public class Kmeans {
 
         int NUM_CLUSTERS = 50;
 
-//        double SAMPLES[][] = new double[][] {{1.0, 1.0},
-//                {1.5, 2.0},
-//                {3.0, 4.0},
-//                {5.0, 7.0},
-//                {3.5, 5.0},
-//                {4.5, 5.0},
-//                {3.5, 4.5}};
-
         SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
         float SAMPLES[][] = sm.getFloatMatrix();
 
@@ -480,93 +472,6 @@ public class Kmeans {
 
 
         Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
-
-
-
-//        int i = 1;
-//
-//        for (Cluster c: test.clusters) {
-//            System.out.println("Cluster " + i);
-//            for (int j = 0; j < 10; j++) {
-//                Point p = c.points.get(j);
-//                System.out.println(p.toString());
-//            }
-//            i++;
-//        }
-
-
-//        double min = Double.POSITIVE_INFINITY;
-//        double dist;
-//        int[] centers = new int[NUM_CLUSTERS];
-//
-//        for (int j = 0; j < NUM_CLUSTERS; j++) {
-//
-//            Cluster cluster = test.clusters[j];
-//            min = Double.POSITIVE_INFINITY;
-//
-//            for (Point p:  cluster.getPoints()) {
-//
-//                dist = test.getDistance(p, test.centroids[j]);
-//
-//                if (dist < min) {
-//                    min = dist;
-//                    centers[j] = p.id;
-//                }
-//            }
-//
-//        }
-//
-//        System.out.println(Arrays.toString(centers));
-
-
-
-
-//        test.centroids = test.getKRandomPoints(test.getData(), test.getK());
-//
-//        for (Point point: test.centroids) {
-//            System.out.println(Arrays.toString(point.data));
-//        }
-//
-//        for (int i = 0; i < test.data.length; i++) {
-//
-////            System.out.println(Arrays.toString(test.data[i]));
-//
-//            Point p = new Kmeans.Point(test.data[i]);
-//            test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
-//        }
-//
-//
-//
-//        for (int z = 0; z< 100; z++) {
-//
-//            test.centroids = test.getCentroids(test.clusters);
-//
-//            System.out.println("New Clusters");
-//
-//            //Print current centroids
-//            for (Point point: test.centroids) {
-//
-//
-//                System.out.println(Arrays.toString(point.data));
-//            }
-//
-//
-//            //Redefine Centroids
-//
-//            for (Cluster cluster:test.clusters) {
-//                cluster.points.clear();
-//            }
-//
-//
-//            for (int i = 0; i < test.data.length; i++) {
-//
-//                Point p = new Point(test.data[i]);
-//                test.clusters[test.getBestClusterForPoint(p, test.centroids)].points.add(p);
-//            }
-//
-//        }
-
-
     }
 
 
