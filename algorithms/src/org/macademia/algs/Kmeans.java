@@ -389,6 +389,7 @@ public class Kmeans {
 
             for (int i = 0; i<k; i++) {
                 ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
+                if(clusters[i].getPoints().size()>40){
                 out.append("\nCluster "+i+"\n");
                 out.append("Points in Cluster:" + clusters[i].getPoints().size() + "\n");
                 for(Point point: points) {
@@ -400,6 +401,7 @@ public class Kmeans {
                         }
                         out.append("\n");
                     }
+                }
                 }
             }
             out.flush();

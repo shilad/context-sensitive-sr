@@ -14,8 +14,8 @@ public class TestPeople {
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
-        Kmeans kmeans = new Kmeans(matrix,75);
-        kmeans.compute(1000,.000000000001);
+        Kmeans kmeans = new Kmeans(matrix,20);
+        kmeans.compute(10000,.000000000000000001);
         //kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
         kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
 
