@@ -475,7 +475,7 @@ public class Kmeans {
 
     public static void main(String args[]) throws IOException {
 
-        int NUM_CLUSTERS = 50;
+        int NUM_CLUSTERS = 100;
 
         SimilarityMatrix sm = new SimilarityMatrix(new File("dat/similarity.matrix"));
         float SAMPLES[][] = sm.getFloatMatrix();
