@@ -419,9 +419,9 @@ public class Kmeans {
 
             for (int i = 0; i<k; i++) {
                 ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
-                if(clusters[i].getPoints().size()>40){
+//                if(clusters[i].getPoints().size()>40){
                 out.append("\nCluster: "+i+"\n");
-                out.append("Cluster Centroid: " +Arrays.toString(centroids[i].getData()) + "\n");
+//                out.append("Cluster Centroid: " +Arrays.toString(centroids[i].getData()) + "\n");
                 out.append("Points in Cluster:" + clusters[i].getPoints().size() + "\n");
                 for(Point point: points) {
                     out.append("\tID: "+people.get(point.id).getID()+"\tEmail: "+people.get(point.id).getEmail()+"\n");
@@ -433,7 +433,7 @@ public class Kmeans {
                         out.append("\n");
                     }
                 }
-                }
+//                }
             }
             out.flush();
             out.close();

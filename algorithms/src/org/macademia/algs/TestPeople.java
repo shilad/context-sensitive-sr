@@ -37,7 +37,7 @@ public class TestPeople {
         kmeansNew.computeUsingPoints(1,.0000001,initialPoints);
         kmeansNew.bestSamplePointsFromClusterToFileWithNames(
                 kmeansNew.getClusters(),"dat/peopleClusters.txt",
-                10,kmeansNew.getCentroids(),people);
+                100,kmeansNew.getCentroids(),people);
 
 //        kmeansCluster.bestSamplePointsFromClustersToFile(kmeansCluster.getClusters(),"dat/peopleClusters.txt",10,kmeansCluster.getCentroids());
 //        kmeansCluster.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
