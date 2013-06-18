@@ -15,12 +15,41 @@ public class TestPeople {
         float[][] matrix = createMatrixArray(map, people);
 
         //Running Kmeans algorithm for k random center points
-//        Kmeans kmeans = new Kmeans(matrix,20);
-//        System.out.println(Arrays.toString(kmeans.compute(10000,.000000000000000001)));
-//        //kmeans.bestSamplePointsFromClusterToFile(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids());
-//        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+        System.out.println("Finding the centroids for clusters");
+        Kmeans kmeans = new Kmeans(matrix,100);
+        Kmeans.Point[] centers = kmeans.compute(4000,.001);
+        int m = centers.length;
+        int n = centers[0].getData().length;
+        float[][] data = new float[m][n];
+        for(int i=0; i<m;i++){
+            data[i] = centers[i].getData();
+        }
+
+        System.out.println("Finding the centroids for centroids");
+        Kmeans kmeansCluster = new Kmeans(data,6);
+        Kmeans.Point[] initialPoints = kmeansCluster.compute(100,.000000000000000001);
+
+        kmeans.computeUsingPoints(1,.0000001,initialPoints);
+        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+
+//        kmeansCluster.bestSamplePointsFromClustersToFile(kmeansCluster.getClusters(),"dat/peopleClusters.txt",10,kmeansCluster.getCentroids());
+//        kmeansCluster.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
 
         //Running Kmeans algorithm for k predefined center points
+//        int k = 6;
+//        Kmeans kmeans = new Kmeans(matrix,6);
+//        Kmeans.Point[] points = new Kmeans.Point[k];
+//        points[0] = kmeans.createPoint(624,matrix[624]);
+//        points[1] = kmeans.createPoint(1457,matrix[1457]);
+//        points[2] = kmeans.createPoint(1761,matrix[1761]);
+//        points[3] = kmeans.createPoint(1853,matrix[1853]);
+//        points[4] = kmeans.createPoint(2027,matrix[2027]);
+//        points[5] = kmeans.createPoint(1933,matrix[1933]);
+//        kmeans.computeUsingPoints(1,.0000001,points);
+//        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+
+
+
 
     }
     public static float[][] createMatrixArray(HashMap<String,SortedMap<String,Double>> map,ArrayList<People> people){

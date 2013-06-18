@@ -70,65 +70,18 @@ public class Kmeans {
         return centroids;
     }
 
-    private class Cluster {
-
-        private ArrayList<Point> points = new ArrayList<Point>();
-
-        private Cluster() {
-        }
-
-        private Cluster(ArrayList<Point> points) {
-            this.points = points;
-        }
-
-        private ArrayList<Point> getPoints() {
-            return points;
-        }
-
-        private void setPoints(ArrayList<Point> points) {
-            this.points = points;
-        }
-
-        public String toString(){
-            String result = "Cluster \n";
-            result+=points.toString();
-            return result;
-        }
-
+    public Point createPoint(float[] data){
+        return new Point(data);
     }
 
-    private static class Point {
-
-        private float[] data;
-
-        private int id;
-
-        private Point() {
-            return;
-        }
-
-        private Point(float[] data) {
-            this.data = data;
-        }
-
-        private Point(int id, float[] data){
-            this.id = id;
-            this.data = data;
-        }
-
-        private float[] getData() {
-            return data;
-        }
-
-        private void setData(float[] data) {
-            this.data = data;
-        }
-
-        public String toString(){
-            String result = "" + id;
-            return result;
-        }
-
+    /**
+     * Returns a new point object
+     * @param id
+     * @param data
+     * @return
+     */
+    public Point createPoint(int id, float[] data){
+        return new Point(id, data);
     }
 
     /**
@@ -213,11 +166,73 @@ public class Kmeans {
     }
 
     /**
-     * Returns k random points from within the data
-     * @param data a float double array of the data points to be picked from
-     * @param k the number of desired clusters
-     * @return an array of k points
-     */
+      * Return the centroids of the clusters computed using Lloyd's algorithm
+      * We initialize the center using a list of points
+      * @param iterations
+      * @param tolerance
+      * @param points a list of points that acts as the initial centers of the clusters
+      * @return centroids
+      */
+     public Point[] computeUsingPoints(int iterations, double tolerance, Point[] points) {
+
+         //Initialize the centers
+         centroids = points;
+         k = points.length;
+
+         //Place Points into clusters
+         for (Point p: data) {
+             clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+         }
+
+
+         double prevVariance = Double.POSITIVE_INFINITY;
+         int c = 0;
+
+         while (c < iterations) {
+
+             //Clear the clusters
+             for (Cluster cluster:clusters) {
+                 cluster.points.clear();
+             }
+             //Place in clusters
+             for (Point p: data) {
+                 clusters[getBestClusterForPoint(p, centroids)].points.add(p);
+             }
+             //Redefine centroids
+             centroids = getCentroids(clusters);
+
+             //Calculate variance
+             double curVariance = getVariance(clusters, centroids);
+
+             if (Math.abs(curVariance-prevVariance) < tolerance) {
+                 return centroids;
+
+             }
+
+             prevVariance = curVariance;
+
+             System.out.println("Variance:");
+             System.out.println(curVariance);
+             System.out.println("New Clusters");
+
+             //Print current centroids
+ //            for (Point point: centroids) {
+ //                System.out.println(Arrays.toString(point.data));
+ //            }
+
+             c++;
+         }
+
+         return centroids;
+
+     }
+
+    /**
+      * Returns k random points from within the data
+      * @param data a float double array of the data points to be picked from
+      * @param k the number of desired clusters
+      * @return an array of k points
+      */
     public Point[] getKRandomPoints(ArrayList<Point> data, int k) {
 
         int max = data.size();
@@ -475,6 +490,66 @@ public class Kmeans {
 
         Parse_Clusters.printClusters("dat/phrases.tsv","dat/clusters.txt");
     }
+    class Cluster {
 
+        private ArrayList<Point> points = new ArrayList<Point>();
 
+        Cluster() {
+
+        }
+
+        Cluster(ArrayList<Point> points) {
+            this.points = points;
+        }
+
+        public ArrayList<Point> getPoints() {
+            return points;
+        }
+
+        public void setPoints(ArrayList<Point> points) {
+            this.points = points;
+        }
+
+        public String toString(){
+            String result = "Cluster \n";
+            result+=points.toString();
+            return result;
+        }
+
+    }
+
+    class Point {
+
+        private float[] data;
+
+        private int id;
+
+        Point() {
+            return;
+        }
+
+        Point(float[] data) {
+            this.data = data;
+        }
+
+        Point(int id, float[] data){
+            this.id = id;
+            this.data = data;
+        }
+
+        public float[] getData() {
+            return data;
+        }
+
+        public void setData(float[] data) {
+            this.data = data;
+        }
+
+        public String toString(){
+            String result = id+" ";
+            result+= Arrays.toString(this.data);
+            return result;
+        }
+
+    }
 }
