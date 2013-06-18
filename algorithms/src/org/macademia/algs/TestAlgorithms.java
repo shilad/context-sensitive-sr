@@ -8,6 +8,7 @@ import java.util.*;
 
 public class TestAlgorithms {
     static SimilarityMatrix matrix=null;
+    static ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
@@ -111,7 +112,7 @@ public class TestAlgorithms {
      * The basic test that finds 100 clusters for a group of people vectors
      */
     public static void basicClusteringTest(){
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
