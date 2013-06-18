@@ -321,18 +321,33 @@ public class Kmeans {
             //Initialize temp for each new cluster
             temp.setData(new float[m]);
 
-            //Loops through all of the points inside of a cluster
-            for (Point row : c.points) {
+            int size = c.points.size();
 
-                //Sums all of the points
-                for (int k = 0; k < m; k++) {
-                    temp.data[k] += row.getData()[k];
+            if(size == 0){ //no point inside a cluster
+                for (int l = 0; l < m; l++) {
+                    temp.data[l] = 0;
+                }
+
+            } else {
+                //Loops through all of the points inside of a cluster
+                for (Point row : c.points) {
+
+                    //Sums all of the points
+                    for (int k = 0; k < m; k++) {
+                        temp.data[k] += row.getData()[k];
+                    }
+                }
+                //Divide each entry by number of points in the cluster to calculate the mean
+                for (int l = 0; l < m; l++) {
+                    temp.data[l] /= size;
+                    if(Float.isNaN(temp.data[l])){
+                        System.out.println("There is null centroids");
+                        System.out.println(size);
+
+                    }
                 }
             }
-            //Divide each entry by number of points in the cluster to calculate the mean
-            for (int l = 0; l < m; l++) {
-                temp.data[l] /= c.points.size();
-            }
+
             centroids[i] = temp;
         }
         return centroids;
