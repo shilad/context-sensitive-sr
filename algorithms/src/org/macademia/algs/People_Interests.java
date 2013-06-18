@@ -59,7 +59,7 @@ public class People_Interests {
     }
 
     //Reads in file and returns a HashMap of Interest objects
-    private static HashMap makeInterestMap(BufferedReader interestFile) throws IOException{
+    public static HashMap makeInterestMap(BufferedReader interestFile) throws IOException{
         HashMap temp = new HashMap();
         String line = null;
         Interest i;
