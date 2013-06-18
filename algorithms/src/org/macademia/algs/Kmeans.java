@@ -60,6 +60,8 @@ public class Kmeans {
         this.k = k;
     }
 
+    //com
+
     public Cluster[] getClusters() {
         return clusters;
     }
