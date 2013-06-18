@@ -25,20 +25,17 @@ public class TestAlgorithms {
 
 
               /*
-              Political Science 7176 649
               Political Theory 5688	207
               US politics 7029	12031
               Biochemsitry 7052 738
               general biology   6252	11104
               Computer Science 2836 15495
               Applied Math 1201 293
-              Theater 6190 410
-              Philosophy 649 617
               Psychology 7163 890
               */
-        int[] ids = {649,207,12031,738,11104,15495,293,617,890};
-        String[] names = {"Political Science","Political Theory","US Politics","Biochemsitry","General Biology",
-                "Computer Science","Applied Math","Philosophy","Psychology"};
+        int[] ids = {207,12031,738,11104,15495,293,890};
+        String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
+                "Computer Science","Applied Math","Psychology"};
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
