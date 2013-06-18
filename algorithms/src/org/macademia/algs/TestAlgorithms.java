@@ -13,6 +13,38 @@ public class TestAlgorithms {
     }
 
     /**
+     * We make fake people vectors containing top interests from popular areas
+     * We use those fake people vector to be the center of the cluster and divide people into different clusters
+     *
+     */
+    public static void fakePeopleClusteringTest(){
+        //Get the original people list
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+
+        //Adding the fake people in
+        ArrayList<People> fakePeople = new ArrayList<People>();
+        people.addAll(fakePeople);
+
+        try{
+            createSerializedMatrix(people);
+
+            HashMap<String,SortedMap<String,Double>> map;
+            map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+
+            //Running Kmeans for one round
+            float[][] matrix = createMatrixArray(map,people);
+            Kmeans kmeans = new Kmeans(matrix, 6);
+            kmeans.compute(1,0.001);
+
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+
+
+    }
+
+    /**
      * The basic test that finds 100 clusters for a group of people vectors
      */
     public static void basicClusteringTest(){
