@@ -18,19 +18,26 @@ public class TestPeople {
         System.out.println("Finding the centroids for clusters");
         Kmeans kmeans = new Kmeans(matrix,100);
         Kmeans.Point[] centers = kmeans.compute(4000,.001);
+        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/fullPeopleClusters.txt",10,kmeans.getCentroids(),people);
+
+        System.out.println("Finding the centers of the centroids");
         int m = centers.length;
         int n = centers[0].getData().length;
         float[][] data = new float[m][n];
         for(int i=0; i<m;i++){
             data[i] = centers[i].getData();
+            System.out.println(Arrays.toString(centers[i].getData()));
         }
 
-        System.out.println("Finding the centroids for centroids");
-        Kmeans kmeansCluster = new Kmeans(data,6);
+        Kmeans kmeansCluster = new Kmeans(data,10);
         Kmeans.Point[] initialPoints = kmeansCluster.compute(100,.000000000000000001);
 
-        kmeans.computeUsingPoints(1,.0000001,initialPoints);
-        kmeans.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);
+        System.out.println("Use the centers of the centroids as the initial points");
+        Kmeans kmeansNew = new Kmeans(matrix,100);
+        kmeansNew.computeUsingPoints(1,.0000001,initialPoints);
+        kmeansNew.bestSamplePointsFromClusterToFileWithNames(
+                kmeansNew.getClusters(),"dat/peopleClusters.txt",
+                100,kmeansNew.getCentroids(),people);
 
 //        kmeansCluster.bestSamplePointsFromClustersToFile(kmeansCluster.getClusters(),"dat/peopleClusters.txt",10,kmeansCluster.getCentroids());
 //        kmeansCluster.bestSamplePointsFromClusterToFileWithNames(kmeans.getClusters(),"dat/peopleClusters.txt",10,kmeans.getCentroids(),people);

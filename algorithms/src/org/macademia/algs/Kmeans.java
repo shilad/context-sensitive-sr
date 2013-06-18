@@ -323,18 +323,33 @@ public class Kmeans {
             //Initialize temp for each new cluster
             temp.setData(new float[m]);
 
-            //Loops through all of the points inside of a cluster
-            for (Point row : c.points) {
+            int size = c.points.size();
 
-                //Sums all of the points
-                for (int k = 0; k < m; k++) {
-                    temp.data[k] += row.getData()[k];
+            if(size == 0){ //no point inside a cluster
+                for (int l = 0; l < m; l++) {
+                    temp.data[l] = 0;
+                }
+
+            } else {
+                //Loops through all of the points inside of a cluster
+                for (Point row : c.points) {
+
+                    //Sums all of the points
+                    for (int k = 0; k < m; k++) {
+                        temp.data[k] += row.getData()[k];
+                    }
+                }
+                //Divide each entry by number of points in the cluster to calculate the mean
+                for (int l = 0; l < m; l++) {
+                    temp.data[l] /= size;
+                    if(Float.isNaN(temp.data[l])){
+                        System.out.println("There is null centroids");
+                        System.out.println(size);
+
+                    }
                 }
             }
-            //Divide each entry by number of points in the cluster to calculate the mean
-            for (int l = 0; l < m; l++) {
-                temp.data[l] /= c.points.size();
-            }
+
             centroids[i] = temp;
         }
         return centroids;
@@ -404,9 +419,9 @@ public class Kmeans {
 
             for (int i = 0; i<k; i++) {
                 ArrayList<Point> points = getBestSamplePointsFromCluster(clusters[i], n, centroids[i]);
-                if(clusters[i].getPoints().size()>40){
+//                if(clusters[i].getPoints().size()>40){
                 out.append("\nCluster: "+i+"\n");
-                out.append("Cluster Centroid: " +Arrays.toString(centroids[i].getData()) + "\n");
+//                out.append("Cluster Centroid: " +Arrays.toString(centroids[i].getData()) + "\n");
                 out.append("Points in Cluster:" + clusters[i].getPoints().size() + "\n");
                 for(Point point: points) {
                     out.append("\tID: "+people.get(point.id).getID()+"\tEmail: "+people.get(point.id).getEmail()+"\n");
@@ -418,7 +433,7 @@ public class Kmeans {
                         out.append("\n");
                     }
                 }
-                }
+//                }
             }
             out.flush();
             out.close();
