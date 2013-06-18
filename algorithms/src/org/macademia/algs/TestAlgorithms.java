@@ -84,21 +84,21 @@ public class TestAlgorithms {
      */
     public static void fakePeopleClusteringTest(){
         //Get the original people list
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
 
         //Adding the fake people in
         ArrayList<People> fakePeople = new ArrayList<People>();
-        people.addAll(fakePeople);
+        newPeople.addAll(fakePeople);
 
         try{
-            createSerializedMatrix(people);
+            createSerializedMatrix(newPeople);
 
             HashMap<String,SortedMap<String,Double>> map;
             map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
 
             //Running Kmeans for one round
-            float[][] matrix = createMatrixArray(map,people);
-            Kmeans kmeans = new Kmeans(matrix, 6);
+            float[][] newMatrix = createMatrixArray(map,newPeople);
+            Kmeans kmeans = new Kmeans(newMatrix, 6);
             kmeans.compute(1,0.001);
 
         } catch (IOException ex){
