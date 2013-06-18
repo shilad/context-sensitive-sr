@@ -21,7 +21,7 @@ public class TestAlgorithms {
             }
         }
               /*
-              Political Science 7176 649    cxzczxc
+              Political Science 7176 649
               Biochemsitry 7052 738
               Computer Science 2836 15495
               Applied Math 1201 293
@@ -34,13 +34,14 @@ public class TestAlgorithms {
         int[] ids = {649,738,15495,293,410,617,890,1043,10362};
         String[] names = {"Political Science","Biochemsitry","Computer Science","Applied Math","Theater","Philosophy","Psychology","Music","Religious Studies"};
         ArrayList<People> interestingPeople = new ArrayList<People>();
-        int i=0;
-        for(int id:ids){
+
+        for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopTenInterests(id,10));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],10));
         }
+        printAllList(interestingPeople);
     }
-    public static ArrayList<Interest> getTopTenInterests(int interestID,int n) throws IOException {
+    public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
         SortedSet<Map.Entry<Integer, Float>> sortedset = new TreeSet<Map.Entry<Integer, Float>>(
                 new Comparator<Map.Entry<Integer, Float>>() {
@@ -83,24 +84,25 @@ public class TestAlgorithms {
      */
     public static void fakePeopleClusteringTest(){
         //Get the original people list
+        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
 
         //Adding the fake people in
         ArrayList<People> fakePeople = new ArrayList<People>();
-        people.addAll(fakePeople);
+        newPeople.addAll(fakePeople);
 
         try{
-            createSerializedMatrix(people);
+            createSerializedMatrix(newPeople);
 
             HashMap<String,SortedMap<String,Double>> map;
             map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
 
             //Running Kmeans for one round
-            float[][] matrix = createMatrixArray(map,people);
-            Kmeans kmeans = new Kmeans(matrix, 6);
+            float[][] newMatrix = createMatrixArray(map,newPeople);
+            Kmeans kmeans = new Kmeans(newMatrix, 6);
             kmeans.compute(1,0.001);
 
-        } catch (IOException e){
-            e.printStackTrace();
+        } catch (IOException ex){
+            ex.printStackTrace();
         }
     }
 
@@ -128,6 +130,7 @@ public class TestAlgorithms {
      *
      */
     public static void clusteringTheClusterTest(){
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
@@ -190,7 +193,7 @@ public class TestAlgorithms {
 
         return matrix;
     }
-    public static void createSerializedMatrix() throws IOException {
+    public static void createSerializedMatrix(ArrayList<People> people) throws IOException {
         FileOutputStream file=null;
         ObjectOutputStream out=null;
         try{
@@ -229,7 +232,7 @@ public class TestAlgorithms {
     }
 
     //Finds a person by their people id - returns a people object
-    public static People findPersonByID(String id){
+    public static People findPersonByID(ArrayList<People> people,String id){
         People peep = null;
         for(int i=1;i<people.size();i++){
             if(people.get(i).getID().equals(id))
@@ -239,7 +242,7 @@ public class TestAlgorithms {
     }
 
     //Prints out every email to interest in the People list
-    public static void printAllList(){
+    public static void printAllList(ArrayList<People> people){
         for(int i=0;i<people.size();i++){
             for (int j=0;j<people.get(i).getInterest().size();j++){
                 if(people.get(i)!=null&&people.get(i).getInterest().get(j)!=null)
@@ -251,7 +254,7 @@ public class TestAlgorithms {
 
     //Finds scores for all candidates relative to the target person
     // - Take in full People array and file writer object along with target person
-    public static SortedMap<String,Double> scoresForAllCandidate(People target){
+    public static SortedMap<String,Double> scoresForAllCandidate(ArrayList<People> people, People target){
         double a = 0;
         SortedMap<String,Double> scoreMap = new TreeMap<String, Double>();
 
