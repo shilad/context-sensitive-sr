@@ -7,11 +7,11 @@ import java.io.*;
 import java.util.*;
 
 public class TestAlgorithms {
-    static SimilarityMatrix matrix=null;
-    static ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+    public static SimilarityMatrix matrix=null;
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
         if(matrix==null){
             try {
                 System.out.println("Loading Similarity Matrix");
@@ -20,26 +20,65 @@ public class TestAlgorithms {
                 e.printStackTrace();
             }
         }
+
+
               /*
               Political Science 7176 649
+              Political Theory 5688	207
+              US politics 7029	12031
               Biochemsitry 7052 738
+              general biology   6252	11104
               Computer Science 2836 15495
               Applied Math 1201 293
               Theater 6190 410
               Philosophy 649 617
               Psychology 7163 890
-              Music 7202 1043
-              Religious Studies 2733 10362
-               */
-        int[] ids = {649,738,15495,293,410,617,890,1043,10362};
-        String[] names = {"Political Science","Biochemsitry","Computer Science","Applied Math","Theater","Philosophy","Psychology","Music","Religious Studies"};
+              */
+        int[] ids = {649,207,12031,738,11104,15495,293,617,890};
+        String[] names = {"Political Science","Political Theory","US Politics","Biochemsitry","General Biology",
+                "Computer Science","Applied Math","Philosophy","Psychology"};
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],10));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],200));
         }
-        printAllList(interestingPeople);
+
+        SortedSet<Map.Entry<People, Double>> sortedset = null;
+        HashMap<People,Double> scores = null;
+        for(People p:interestingPeople){
+            sortedset = new TreeSet<Map.Entry<People, Double>>(
+                    new Comparator<Map.Entry<People, Double>>() {
+                        public int compare(Map.Entry<People, Double> e1,
+                                           Map.Entry<People, Double> e2) {
+                            return e2.getValue().compareTo(e1.getValue());
+                        }
+                    });
+            scores=new HashMap<People, Double>();
+            for(int i=0;i<people.size();i++){
+                scores.put(people.get(i),People_Distance.findDistance(p,people.get(i)));
+            }
+            sortedset.addAll(scores.entrySet());
+
+            Iterator<Map.Entry<People, Double>> it = sortedset.iterator();
+            Map.Entry<People, Double> current;
+
+            int i = 0;
+
+            while (i < 200 && it.hasNext()) {
+                current = it.next();
+                System.out.println("Num:"+i+": "+current.getKey().getEmail());
+                if(current.getKey().getInterest().size()!=0){
+                    for(Interest interest:current.getKey().getInterest()){
+                        if(interest!=null)
+                            System.out.println("\t\t"+interest.getName());
+                    }
+                }
+                i++;
+            }
+            scores.clear();
+            sortedset.clear();
+        }
     }
     public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
@@ -109,7 +148,7 @@ public class TestAlgorithms {
     /**
      * The basic test that finds 100 clusters for a group of people vectors
      */
-    public static void basicClusteringTest(){
+    public static void basicClusteringTest(ArrayList<People> people){
 
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
