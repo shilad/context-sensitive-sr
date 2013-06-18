@@ -160,6 +160,9 @@ public class TestAlgorithms {
         }
     }
 
+
+
+
     //Finds scores for all candidates relative to the target person
     // - Take in full People array and file writer object along with target person
     public static SortedMap<String,Double> scoresForAllCandidate(ArrayList<People> people, People target){
