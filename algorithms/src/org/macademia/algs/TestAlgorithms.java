@@ -1,13 +1,108 @@
 package org.macademia.algs;
 
 
+import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
+
 import java.io.*;
 import java.util.*;
 
 public class TestAlgorithms {
+    static SimilarityMatrix matrix=null;
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
+        if(matrix==null){
+            try {
+                System.out.println("Loading Similarity Matrix");
+                matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+              /*
+              Political Science 7176 649
+              Biochemsitry 7052 738
+              Computer Science 2836 15495
+              Applied Math 1201 293
+              Theater 6190 410
+              Philosophy 649 617
+              Psychology 7163 890
+              Music 7202 1043
+              Religious Studies 2733 10362
+               */
+        int[] ids = {649,738,15495,293,410,617,890,1043,10362};
+
+        for(int id:ids){
+            System.out.println(id);
+            for(Interest i:getTopTenInterests(id, 10)){
+                System.out.println(i.getName());
+            }
+        }
+    }
+    public static ArrayList<Interest> getTopTenInterests(int interestID,int n) throws IOException {
+        ArrayList<Interest> interests = new ArrayList<Interest>();
+        SortedSet<Map.Entry<Integer, Float>> sortedset = new TreeSet<Map.Entry<Integer, Float>>(
+                new Comparator<Map.Entry<Integer, Float>>() {
+                    public int compare(Map.Entry<Integer, Float> e1,
+                                       Map.Entry<Integer, Float> e2) {
+                        return e2.getValue().compareTo(e1.getValue());
+                    }
+                });
+
+
+        DenseMatrixRow row = matrix.getRow(interestID);
+        HashMap<Integer,Float> map =row.asMap();
+
+        sortedset.addAll(map.entrySet());
+        BufferedReader file = null;
+        try{
+        file =new BufferedReader(new FileReader("dat/phrases.tsv"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        HashMap<String, Interest> interestMap =People_Interests.makeInterestMap(file);
+
+        Iterator<Map.Entry<Integer, Float>> it = sortedset.iterator();
+        Map.Entry<Integer, Float> current;
+
+        int i = 0;
+
+        while (i < n && it.hasNext()) {
+            current = it.next();
+            interests.add(interestMap.get(current.getKey().toString()));
+            i++;
+        }
+        return interests;
+    }
+
+    /**
+     * We make fake people vectors containing top interests from popular areas
+     * We use those fake people vector to be the center of the cluster and divide people into different clusters
+     *
+     */
+    public static void fakePeopleClusteringTest(){
+        //Get the original people list
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+
+        //Adding the fake people in
+        ArrayList<People> fakePeople = new ArrayList<People>();
+        people.addAll(fakePeople);
+
+        try{
+            createSerializedMatrix(people);
+
+            HashMap<String,SortedMap<String,Double>> map;
+            map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+
+            //Running Kmeans for one round
+            float[][] matrix = createMatrixArray(map,people);
+            Kmeans kmeans = new Kmeans(matrix, 6);
+            kmeans.compute(1,0.001);
+
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+
 
 
     }
