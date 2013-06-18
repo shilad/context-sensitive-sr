@@ -90,8 +90,10 @@ public class TestPeople {
 
         HashMap<String,SortedMap<String,Double>> allMap = new HashMap<String, SortedMap<String, Double>>();
 
-        for(int i=0;i<people.size();i++){          //Cycles through each person in list using them as the target to
-            allMap.put(people.get(i).getID(),scoresForAllCandidate(people, people.get(i)));            //compile full matrix of scores
+        //Cycles through each person in list using them as the target to
+        for(int i=0;i<people.size();i++){
+            //Compile full matrix of scores
+            allMap.put(people.get(i).getID(),scoresForAllCandidate(people, people.get(i)));
         }
 
         out.writeObject(allMap);
