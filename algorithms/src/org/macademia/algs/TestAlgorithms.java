@@ -18,7 +18,7 @@ public class TestAlgorithms {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-    }
+        }
               /*
               Political Science 7176 649
               Biochemsitry 7052 738
@@ -34,12 +34,13 @@ public class TestAlgorithms {
 
         for(int id:ids){
             System.out.println(id);
-            for(Interest i:getTopTenInterests(id, 10)){
+            for(Interest i: getTopNInterests(id, 10)){
                 System.out.println(i.getName());
             }
         }
     }
-    public static ArrayList<Interest> getTopTenInterests(int interestID,int n) throws IOException {
+
+    public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
         SortedSet<Map.Entry<Integer, Float>> sortedset = new TreeSet<Map.Entry<Integer, Float>>(
                 new Comparator<Map.Entry<Integer, Float>>() {
