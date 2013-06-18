@@ -13,7 +13,6 @@ public class TestAlgorithms {
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        //HashMap<String, Matrix> matrix = People_Distance.deSerializeVectorMap("dat/peopleVectors.ser");
 
         if(matrix==null){
             try {

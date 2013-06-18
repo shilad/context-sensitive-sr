@@ -18,7 +18,7 @@ import java.util.SortedMap;
 public class People_Distance {
     private static SimilarityMatrix matrix = null;
     private static Matrix jamaMatrix=null;
-    private static HashMap<String,Matrix> vectorMap = new HashMap<String, Matrix>();
+    private static HashMap<String,Matrix> vectorMap = null;
 
     /**
      * Serialize the vectorMap that contains the people vectors
@@ -134,6 +134,9 @@ public class People_Distance {
         }
         if(jamaMatrix==null){
             jamaMatrix= new Matrix(matrix.getDoubleMatrix());
+        }
+        if(vectorMap==null){
+            vectorMap = deSerializeVectorMap("dat/peopleVectors.ser");
         }
 
         double distance = 0;
