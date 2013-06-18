@@ -64,7 +64,7 @@ public class TestAlgorithms {
 
             while (i < 200 && it.hasNext()) {
                 current = it.next();
-                System.out.println("Num:"+i+": "+current.getKey().getEmail());
+                System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
                 if(current.getKey().getInterest().size()!=0){
                     for(Interest interest:current.getKey().getInterest()){
                         if(interest!=null)
