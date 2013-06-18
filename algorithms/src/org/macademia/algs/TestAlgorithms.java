@@ -5,6 +5,7 @@ import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
 
 import java.io.*;
 import java.util.*;
+import Jama.Matrix;
 
 public class TestAlgorithms {
     public static SimilarityMatrix matrix=null;
@@ -12,6 +13,7 @@ public class TestAlgorithms {
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+
         if(matrix==null){
             try {
                 System.out.println("Loading Similarity Matrix");
