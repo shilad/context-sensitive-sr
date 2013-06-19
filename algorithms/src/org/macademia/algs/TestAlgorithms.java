@@ -13,7 +13,7 @@ public class TestAlgorithms {
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
+//        People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
 
         if(matrix==null){
             try {
@@ -23,8 +23,6 @@ public class TestAlgorithms {
                 e.printStackTrace();
             }
         }
-
-
               /*
               Political Theory 5688	207
               US politics 7029	12031
@@ -67,19 +65,21 @@ public class TestAlgorithms {
 
             while (i < 200 && it.hasNext()) {
                 current = it.next();
-                System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
-                if(current.getKey().getInterest().size()!=0){
-                    for(Interest interest:current.getKey().getInterest()){
-                        if(interest!=null)
-                            System.out.println("\t\t"+interest.getName());
-                    }
-                }
+                System.out.println(current.getValue());
+//                System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
+//                if(current.getKey().getInterest().size()!=0){
+//                    for(Interest interest:current.getKey().getInterest()){
+//                        if(interest!=null)
+//                            System.out.println("\t\t"+interest.getName());
+//                    }
+//                }
                 i++;
             }
             scores.clear();
             sortedset.clear();
         }
     }
+
     public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
         SortedSet<Map.Entry<Integer, Float>> sortedset = new TreeSet<Map.Entry<Integer, Float>>(
@@ -232,6 +232,7 @@ public class TestAlgorithms {
 
         return matrix;
     }
+
     public static void createSerializedMatrix(ArrayList<People> people) throws IOException {
         FileOutputStream file=null;
         ObjectOutputStream out=null;
@@ -292,9 +293,6 @@ public class TestAlgorithms {
 
         }
     }
-
-
-
 
     //Finds scores for all candidates relative to the target person
     // - Take in full People array and file writer object along with target person
