@@ -2,10 +2,11 @@ package org.macademia.algs;
 
 
 import Jama.Matrix;
-import java.io.File;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.SortedMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,97 @@ import java.util.HashMap;
 public class People_Distance {
     private static SimilarityMatrix matrix = null;
     private static Matrix jamaMatrix=null;
-    private static HashMap<String,Matrix> vectorMap = new HashMap<String, Matrix>();
+    private static HashMap<String,Matrix> vectorMap = null;
+
+    /**
+     * Serialize the vectorMap that contains the people vectors
+     * @param people
+     * @param path
+     * @return a HashMap, key: people's id, value: the matrix that represents the vector of a person
+     */
+    public static HashMap<String,Matrix> serializeVectorMap(ArrayList<People> people, String path){
+
+        if(matrix==null){                       //Checks to see if static matrixes have been created yet
+            try {
+                System.out.println("Loading Similarity Matrix");
+                matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(jamaMatrix==null){
+            jamaMatrix= new Matrix(matrix.getDoubleMatrix());
+        }
+
+
+        HashMap<String,Matrix> peopleVectorMap = new HashMap<String, Matrix>();
+        try{
+
+            // constructing the the vectorMap
+            for (People p:people){
+                //System.out.println("Finding vector for "+p.getEmail()+" with ID "+p.getID());
+                ArrayList<Integer> interestIDs = getInterestIDs(p);
+                Matrix vector = getPersonVector(interestIDs);
+                peopleVectorMap.put(p.getID(),vector);
+            }
+
+            // serilaizing the Vector Map
+            FileOutputStream file = new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(peopleVectorMap);
+            out.close();
+
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        return peopleVectorMap;
+    }
+
+    /**
+     *
+     * deserialize the vectorMap that contains the people vectors
+     * @param path the path for serialized file
+     * @return a HashMap, key: people's id, value: the matrix that represents the vector of a person
+     */
+    public static HashMap<String,Matrix> deSerializeVectorMap(String path){
+
+        if(matrix==null){                       //Checks to see if static matrixes have been created yet
+            try {
+                System.out.println("Loading Similarity Matrix");
+                matrix = new SimilarityMatrix(new File("dat/similarity.matrix"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(jamaMatrix==null){
+            jamaMatrix= new Matrix(matrix.getDoubleMatrix());
+        }
+
+        HashMap<String,Matrix> peopleVectorMap = new HashMap<String, Matrix>();
+
+        try
+        {
+            FileInputStream fileIn =
+                    new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            peopleVectorMap = (HashMap<String,Matrix>) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+
+        }
+        return peopleVectorMap;
+    }
+
+
 
     //Given two people objects returns the distance between them
     public static double findDistance(People p1, People p2){
@@ -32,6 +123,9 @@ public class People_Distance {
         }
         if(jamaMatrix==null){
             jamaMatrix= new Matrix(matrix.getDoubleMatrix());
+        }
+        if(vectorMap==null){
+            vectorMap = deSerializeVectorMap("dat/peopleVectors.ser");
         }
 
         double distance = 0;
