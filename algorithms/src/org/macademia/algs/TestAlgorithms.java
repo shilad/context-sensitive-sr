@@ -5,7 +5,6 @@ import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
 
 import java.io.*;
 import java.util.*;
-import Jama.Matrix;
 
 public class TestAlgorithms {
     public static SimilarityMatrix matrix=null;
@@ -137,7 +136,7 @@ public class TestAlgorithms {
             createSerializedMatrix(newPeople);
 
             HashMap<String,SortedMap<String,Double>> map;
-            map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+            map= deserializePeopleMatrix("dat/peopleMatrix.ser");
 
             //Running Kmeans for one round
             float[][] newMatrix = createMatrixArray(map,newPeople);
@@ -156,7 +155,7 @@ public class TestAlgorithms {
 
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
-        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        map= deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
         //Running Kmeans algorithm for k random center points
@@ -176,7 +175,7 @@ public class TestAlgorithms {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
-        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        map= deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
         //Running Kmeans algorithm for k random center points
@@ -258,6 +257,31 @@ public class TestAlgorithms {
         file.close();
 
     }
+
+    public static HashMap<String,SortedMap<String,Double>> deserializePeopleMatrix(String path){
+        HashMap<String,SortedMap<String,Double>> e = null;
+        try
+        {
+            FileInputStream fileIn =
+                    new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            e = (HashMap<String,SortedMap<String,Double>>) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+
+        }
+        return e;
+    }
+
+
     //SINGLE PERSON TEST - Prints out the result of the target person to the candidate
     public static void singleTestDistance(People target, People candidate){
         double dis = People_Distance.findDistance(target,candidate);
@@ -318,9 +342,9 @@ public class TestAlgorithms {
 
 //        sortedset.addAll(scoreMap.entrySet());
 
-
         return scoreMap;
     }
+
 
 
 }
