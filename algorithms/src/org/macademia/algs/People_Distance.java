@@ -46,7 +46,7 @@ public class People_Distance {
 
             // constructing the the vectorMap
             for (People p:people){
-                System.out.println("Finding vector for "+p.getEmail()+" with ID "+p.getID());
+                //System.out.println("Finding vector for "+p.getEmail()+" with ID "+p.getID());
                 ArrayList<Integer> interestIDs = getInterestIDs(p);
                 Matrix vector = getPersonVector(interestIDs);
                 peopleVectorMap.put(p.getID(),vector);
@@ -108,18 +108,7 @@ public class People_Distance {
         return peopleVectorMap;
     }
 
-    /**
-     * Given two people objects and the vectorMap containing the two people vectors
-     * Return the cosine similarity between the two people
-     * @param p1
-     * @param p2
-     * @param vectorMap
-     * @return
-     */
-    public static double findDistance(People p1, People p2, HashMap<String, Matrix> vectorMap){
-        People_Distance.vectorMap = vectorMap;
-        return findDistance(p1,p2);
-    }
+
 
     //Given two people objects returns the distance between them
     public static double findDistance(People p1, People p2){
