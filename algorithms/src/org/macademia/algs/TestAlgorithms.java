@@ -41,7 +41,7 @@ public class TestAlgorithms {
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],200));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],100));
         }
 
         SortedSet<Map.Entry<People, Double>> sortedset = null;
