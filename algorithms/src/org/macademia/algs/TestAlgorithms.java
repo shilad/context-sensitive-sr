@@ -13,7 +13,7 @@ public class TestAlgorithms {
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-        //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
+        People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
 
         if(matrix==null){
             try {
@@ -37,11 +37,14 @@ public class TestAlgorithms {
         int[] ids = {207,12031,738,11104,15495,293,890};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
+        findGroupsByInterestingPeople(ids,names,200,people);
+    }
+    public static void findGroupsByInterestingPeople(int[] ids, String[] names, int n, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],100));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],n));
         }
 
         SortedSet<Map.Entry<People, Double>> sortedset = null;
@@ -65,7 +68,7 @@ public class TestAlgorithms {
 
             int i = 0;
 
-            while (i < 200 && it.hasNext()) {
+            while (i < n && it.hasNext()) {
                 current = it.next();
                 System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
                 if(current.getKey().getInterest().size()!=0){

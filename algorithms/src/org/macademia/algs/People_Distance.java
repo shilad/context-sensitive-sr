@@ -198,7 +198,12 @@ public class People_Distance {
             total+=dotProduct[i][0];
         }
         double euclideanDist = person1.normF() * person2.normF();    //Calculates the euclidean distance
-        return total / euclideanDist;
+
+        if(Double.isNaN(total / euclideanDist)){
+            return 0;
+        }
+        else
+            return total / euclideanDist;
     }
 
 
