@@ -36,7 +36,7 @@ public class TestAlgorithms {
         int[] ids = {207,12031,738,11104,15495,293,890};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
-        findGroupsByInterestingPeople(ids,names,100, 200, people);
+        findGroupsByInterestingPeople(ids,names,300, 200, people);
     }
     public static void findGroupsByInterestingPeople(int[] ids, String[] names, int num_interest, int num_people, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
