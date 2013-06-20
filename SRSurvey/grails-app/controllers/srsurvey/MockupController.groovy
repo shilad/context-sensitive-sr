@@ -14,6 +14,10 @@ class MockupController {
         render(view : 'comments')
     }
     def disclaimer() {
-        render(view : '/mockup/disclaimer')
+        render(view : 'disclaimer')
+    }
+
+    def expertise() {
+        render(view: 'expertise')
     }
 }

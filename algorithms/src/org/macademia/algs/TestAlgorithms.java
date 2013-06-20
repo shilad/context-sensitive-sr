@@ -5,7 +5,6 @@ import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
 
 import java.io.*;
 import java.util.*;
-import Jama.Matrix;
 
 public class TestAlgorithms {
     public static SimilarityMatrix matrix=null;
@@ -23,6 +22,8 @@ public class TestAlgorithms {
                 e.printStackTrace();
             }
         }
+
+
               /*
               Political Theory 5688	207
               US politics 7029	12031
@@ -31,15 +32,24 @@ public class TestAlgorithms {
               Computer Science 2836 15495
               Applied Math 1201 293
               Psychology 7163 890
+              6804	2235	21555729	cinema	Film
+              5515	2535	176945	film music	Film score
+              3102	1654	268515	public economics	Public finance
+
+
               */
-        int[] ids = {207,12031,738,11104,15495,293,890};
+        int[] ids = {207,12031,738,11104,15495,293,890,2535,1654};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
-                "Computer Science","Applied Math","Psychology"};
+                "Computer Science","Applied Math","Psychology", "Film Music", "Public Economics"};
+        findGroupsByInterestingPeople(ids,names,200,people);
+    }
+
+    public static void findGroupsByInterestingPeople(int[] ids, String[] names, int n, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],200));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],n));
         }
 
         SortedSet<Map.Entry<People, Double>> sortedset = null;
@@ -63,23 +73,31 @@ public class TestAlgorithms {
 
             int i = 0;
 
-            while (i < 200 && it.hasNext()) {
+            while (i < n && it.hasNext()) {
                 current = it.next();
-                System.out.println(current.getValue());
-//                System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
-//                if(current.getKey().getInterest().size()!=0){
-//                    for(Interest interest:current.getKey().getInterest()){
-//                        if(interest!=null)
-//                            System.out.println("\t\t"+interest.getName());
-//                    }
-//                }
+                System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
+                if(current.getKey().getInterest().size()!=0){
+                    for(Interest interest:current.getKey().getInterest()){
+                        if(interest!=null)
+                            System.out.println("\t\t"+interest.getName());
+                    }
+                }
                 i++;
             }
             scores.clear();
             sortedset.clear();
         }
-    }
 
+//        for(People p1: interestingPeople) {
+//
+//            for (People p2: interestingPeople) {
+//                System.out.println(p1.getEmail());
+//                System.out.println("\t" + p2.getEmail());
+//                System.out.println("\t" +People_Distance.findDistance(p1,p2));
+//            }
+//
+//        }
+    }
     public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
         SortedSet<Map.Entry<Integer, Float>> sortedset = new TreeSet<Map.Entry<Integer, Float>>(
@@ -133,7 +151,7 @@ public class TestAlgorithms {
             createSerializedMatrix(newPeople);
 
             HashMap<String,SortedMap<String,Double>> map;
-            map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+            map= deserializePeopleMatrix("dat/peopleMatrix.ser");
 
             //Running Kmeans for one round
             float[][] newMatrix = createMatrixArray(map,newPeople);
@@ -152,7 +170,7 @@ public class TestAlgorithms {
 
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
-        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        map= deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
         //Running Kmeans algorithm for k random center points
@@ -172,7 +190,7 @@ public class TestAlgorithms {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
-        map=FileParser.deserializePeopleMatrix("dat/peopleMatrix.ser");
+        map= deserializePeopleMatrix("dat/peopleMatrix.ser");
         float[][] matrix = createMatrixArray(map, people);
 
         //Running Kmeans algorithm for k random center points
@@ -232,7 +250,6 @@ public class TestAlgorithms {
 
         return matrix;
     }
-
     public static void createSerializedMatrix(ArrayList<People> people) throws IOException {
         FileOutputStream file=null;
         ObjectOutputStream out=null;
@@ -246,10 +263,8 @@ public class TestAlgorithms {
 
         HashMap<String,SortedMap<String,Double>> allMap = new HashMap<String, SortedMap<String, Double>>();
 
-        //Cycles through each person in list using them as the target to
-        for(int i=0;i<people.size();i++){
-            //Compile full matrix of scores
-            allMap.put(people.get(i).getID(),scoresForAllCandidate(people, people.get(i)));
+        for(int i=0;i<people.size();i++){          //Cycles through each person in list using them as the target to
+            allMap.put(people.get(i).getID(),scoresForAllCandidate(people, people.get(i)));            //compile full matrix of scores
         }
 
         out.writeObject(allMap);
@@ -257,6 +272,31 @@ public class TestAlgorithms {
         file.close();
 
     }
+
+    public static HashMap<String,SortedMap<String,Double>> deserializePeopleMatrix(String path){
+        HashMap<String,SortedMap<String,Double>> e = null;
+        try
+        {
+            FileInputStream fileIn =
+                    new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            e = (HashMap<String,SortedMap<String,Double>>) in.readObject();
+            in.close();
+            fileIn.close();
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+
+        }
+        return e;
+    }
+
+
     //SINGLE PERSON TEST - Prints out the result of the target person to the candidate
     public static void singleTestDistance(People target, People candidate){
         double dis = People_Distance.findDistance(target,candidate);
@@ -317,9 +357,9 @@ public class TestAlgorithms {
 
 //        sortedset.addAll(scoreMap.entrySet());
 
-
         return scoreMap;
     }
+
 
 
 }
