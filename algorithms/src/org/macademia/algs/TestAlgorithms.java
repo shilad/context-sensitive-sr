@@ -14,9 +14,6 @@ public class TestAlgorithms {
         ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
 
-
-
-
         if(matrix==null){
             try {
                 System.out.println("Loading Similarity Matrix");
@@ -94,11 +91,12 @@ public class TestAlgorithms {
         return ids;
     }
     public static void findGroupsByInterestingPeople(int[] ids, String[] names, int n, ArrayList<People> people) throws IOException {
+    public static void findGroupsByInterestingPeople(int[] ids, String[] names, int num_interest, int num_people, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],n));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],num_interest));
         }
 
         SortedSet<Map.Entry<People, Double>> sortedset = null;
@@ -122,7 +120,7 @@ public class TestAlgorithms {
 
             int i = 0;
 
-            while (i < n && it.hasNext()) {
+            while (i < num_people && it.hasNext()) {
                 current = it.next();
                 System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
                 if(current.getKey().getInterest().size()!=0){
