@@ -11,8 +11,8 @@ public class TestAlgorithms {
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
-//        People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
+        //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
 
         if(matrix==null){
             try {
@@ -32,24 +32,70 @@ public class TestAlgorithms {
               Computer Science 2836 15495
               Applied Math 1201 293
               Psychology 7163 890
-              6804	2235	21555729	cinema	Film
-              5515	2535	176945	film music	Film score
-              3102	1654	268515	public economics	Public finance
-
-
               */
-        int[] ids = {207,12031,738,11104,15495,293,890,2535,1654};
+        int[] ids = {207,12031,738,11104,15495,293,890};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
-                "Computer Science","Applied Math","Psychology", "Film Music", "Public Economics"};
-        findGroupsByInterestingPeople(ids,names,200,people);
-    }
+                "Computer Science","Applied Math","Psychology"};
+//        findGroupsByInterestingPeople(ids,names,200,people);
 
-    public static void findGroupsByInterestingPeople(int[] ids, String[] names, int n, ArrayList<People> people) throws IOException {
+        for(Interest i: getInterestsOfDept(people,"Political Science",10)){
+            System.out.println(i.getName());
+        }
+    }
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int numInterests){
+
+
+        ArrayList<People> bioPeople = new ArrayList<People>();
+        for(int i=0;i<people.size();i++){
+            for(int j=0;j<people.get(i).getDepartment().size();j++){
+                if(people.get(i).getDepartment().get(j).equals(department)){
+                    bioPeople.add(people.get(i));
+                }
+            }
+        }
+
+        SortedSet<Map.Entry<Interest, Integer>> sortedset = new TreeSet<Map.Entry<Interest, Integer>>(
+                new Comparator<Map.Entry<Interest, Integer>>() {
+                    public int compare(Map.Entry<Interest, Integer> e1,
+                                       Map.Entry<Interest, Integer> e2) {
+                        return e2.getValue().compareTo(e1.getValue());
+                    }
+                });
+        HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
+
+        for(People p:bioPeople){
+
+            for(Interest i:p.getInterest()) {
+                if (i != null) {
+                    if(scores.containsKey(i)){
+                        scores.put(i,scores.get(i)+1);
+                    }
+                    else{
+                        scores.put(i,1);
+                    }
+                }
+            }
+        }
+        sortedset.addAll(scores.entrySet());
+
+        Iterator<Map.Entry<Interest, Integer>> it = sortedset.iterator();
+        Map.Entry<Interest, Integer> current;
+
+        int i = 0;
+        ArrayList<Interest> ids = new ArrayList<Interest>();
+        while (i < numInterests && it.hasNext()) {
+            current = it.next();
+            ids.add(current.getKey());
+            i++;
+        }
+        return ids;
+    }
+    public static void findGroupsByInterestingPeople(int[] ids, String[] names, int num_interest, int num_people, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
         for(int i=0;i<ids.length;i++){
             interestingPeople.add(new People(String.valueOf(i),names[i]));
-            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],n));
+            interestingPeople.get(i).setInterest(getTopNInterests(ids[i],num_interest));
         }
 
         SortedSet<Map.Entry<People, Double>> sortedset = null;
@@ -73,7 +119,7 @@ public class TestAlgorithms {
 
             int i = 0;
 
-            while (i < n && it.hasNext()) {
+            while (i < num_people && it.hasNext()) {
                 current = it.next();
                 System.out.println("Num:"+i+": "+current.getKey().getEmail()+"\tPerson\'s Score: "+current.getValue());
                 if(current.getKey().getInterest().size()!=0){
@@ -87,16 +133,6 @@ public class TestAlgorithms {
             scores.clear();
             sortedset.clear();
         }
-
-//        for(People p1: interestingPeople) {
-//
-//            for (People p2: interestingPeople) {
-//                System.out.println(p1.getEmail());
-//                System.out.println("\t" + p2.getEmail());
-//                System.out.println("\t" +People_Distance.findDistance(p1,p2));
-//            }
-//
-//        }
     }
     public static ArrayList<Interest> getTopNInterests(int interestID, int n) throws IOException {
         ArrayList<Interest> interests = new ArrayList<Interest>();
@@ -141,7 +177,7 @@ public class TestAlgorithms {
      */
     public static void fakePeopleClusteringTest(){
         //Get the original people list
-        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
 
         //Adding the fake people in
         ArrayList<People> fakePeople = new ArrayList<People>();
@@ -187,7 +223,7 @@ public class TestAlgorithms {
      *
      */
     public static void clusteringTheClusterTest(){
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map= deserializePeopleMatrix("dat/peopleMatrix.ser");
