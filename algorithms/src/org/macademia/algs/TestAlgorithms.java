@@ -11,8 +11,11 @@ public class TestAlgorithms {
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
+
+
+
 
         if(matrix==null){
             try {
@@ -36,9 +39,60 @@ public class TestAlgorithms {
         int[] ids = {207,12031,738,11104,15495,293,890};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
-        findGroupsByInterestingPeople(ids,names,200,people);
-    }
+//        findGroupsByInterestingPeople(ids,names,200,people);
 
+        for(Interest i: getInterestsOfDept(people,"Political Science",10)){
+            System.out.println(i.getName());
+        }
+    }
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int numInterests){
+
+
+        ArrayList<People> bioPeople = new ArrayList<People>();
+        for(int i=0;i<people.size();i++){
+            for(int j=0;j<people.get(i).getDepartment().size();j++){
+                if(people.get(i).getDepartment().get(j).equals(department)){
+                    bioPeople.add(people.get(i));
+                }
+            }
+        }
+
+        SortedSet<Map.Entry<Interest, Integer>> sortedset = new TreeSet<Map.Entry<Interest, Integer>>(
+                new Comparator<Map.Entry<Interest, Integer>>() {
+                    public int compare(Map.Entry<Interest, Integer> e1,
+                                       Map.Entry<Interest, Integer> e2) {
+                        return e2.getValue().compareTo(e1.getValue());
+                    }
+                });
+        HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
+
+        for(People p:bioPeople){
+
+            for(Interest i:p.getInterest()) {
+                if (i != null) {
+                    if(scores.containsKey(i)){
+                        scores.put(i,scores.get(i)+1);
+                    }
+                    else{
+                        scores.put(i,1);
+                    }
+                }
+            }
+        }
+        sortedset.addAll(scores.entrySet());
+
+        Iterator<Map.Entry<Interest, Integer>> it = sortedset.iterator();
+        Map.Entry<Interest, Integer> current;
+
+        int i = 0;
+        ArrayList<Interest> ids = new ArrayList<Interest>();
+        while (i < numInterests && it.hasNext()) {
+            current = it.next();
+            ids.add(current.getKey());
+            i++;
+        }
+        return ids;
+    }
     public static void findGroupsByInterestingPeople(int[] ids, String[] names, int n, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
 
@@ -126,7 +180,7 @@ public class TestAlgorithms {
      */
     public static void fakePeopleClusteringTest(){
         //Get the original people list
-        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
 
         //Adding the fake people in
         ArrayList<People> fakePeople = new ArrayList<People>();
@@ -172,7 +226,7 @@ public class TestAlgorithms {
      *
      */
     public static void clusteringTheClusterTest(){
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map= deserializePeopleMatrix("dat/peopleMatrix.ser");

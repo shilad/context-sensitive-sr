@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -20,15 +21,17 @@ public class People_Interests {
     private static HashMap interestMap = new HashMap();
 
     //Creates an ArrayList of people objects with their interests given the paths to the data files
-    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath){
+    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath, String deptPath){
         BufferedReader peopleFile=null;
         BufferedReader interestFile=null;
         BufferedReader people_interestFile=null;
+        BufferedReader deptFile=null;
 
         try {
             peopleFile = new BufferedReader(new FileReader(peoplePath));
             interestFile = new BufferedReader(new FileReader(interestPath));
             people_interestFile = new BufferedReader(new FileReader(people_interestPath));
+            deptFile = new BufferedReader(new FileReader(deptPath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -37,6 +40,7 @@ public class People_Interests {
             peopleList=makePeopleList(peopleFile);
             interestMap=makeInterestMap(interestFile);
             peopleList=addInterests(peopleList,people_interestFile);
+            peopleList=addDepartments(peopleList, deptFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,6 +130,46 @@ public class People_Interests {
         }
 
         return peopleArray;
+    }
+
+
+    private static ArrayList<People> addDepartments(ArrayList<People> people,BufferedReader departmentFile) throws IOException{
+//        ArrayList<People> temp = people;
+        String line = null;
+        String[] lineSplit=null;
+        ArrayList<String> dept= null;
+        String s="";
+        while ((line = departmentFile.readLine()) != null) {
+            dept=new ArrayList<String>();
+            lineSplit=line.split(",");
+            for(int i=0;i<people.size();i++){
+                if(people.get(i).getID().equals(lineSplit[1])){
+                    if(lineSplit.length>2){
+                        if(lineSplit[2].charAt(0)=='"'){
+                            lineSplit[2]=lineSplit[2].substring(1,lineSplit[2].length());
+                            for(int j=2;j<lineSplit.length;j++){
+                                dept.add(lineSplit[j]);
+                            }
+                            s=dept.get(dept.size()-1).substring(0,dept.get(dept.size()-1).length()-1);
+                            dept.remove(dept.size()-1);
+                            dept.add(s);
+                            people.get(i).setDepartment(dept);
+
+                        }
+                        else{
+                            dept.add(lineSplit[2]);
+                            //System.out.println(dept.toString());
+                            people.get(i).setDepartment(dept);
+
+                        }
+                        //System.out.println(people.get(i).getDepartment().toString());
+                    }
+                }
+            }
+
+
+        }
+        return people;
     }
 
 }
