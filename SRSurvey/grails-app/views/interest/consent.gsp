@@ -34,7 +34,7 @@
     <h1>Disclaimer  </h1>
     <br>
     <br>
-<g:form controller="Interest" action="interest" name = "consent-form" method="post">
+<g:form controller="Interest" action="expertise" name = "consent-form" method="post">
     <table>
         <tr>
             <td>

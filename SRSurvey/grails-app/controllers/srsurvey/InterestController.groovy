@@ -14,7 +14,24 @@ class InterestController {
 
     }
 
-    def process() {
+    def expertise() {
+        render(view: 'expertise')
+    }
+
+    def processExpertise() {
+
+        //Find the person
+        Person p = Person.findById(session.person)
+
+        //Assign Group
+        SRService sr = new SRService()
+        sr.assignGroup(p)
+
+        redirect(action: "interest")
+
+    }
+
+    def processInterest() {
         List<String> inputs = params.get("interest_inputs")
         //print(inputs)
 
@@ -30,9 +47,7 @@ class InterestController {
             }
         }
 
-        //Assign Group
-        SRService sr = new SRService()
-        sr.assignGroup(p, inputs)
+
 
         redirect(controller: 'rating', action: 'ratings')
 
