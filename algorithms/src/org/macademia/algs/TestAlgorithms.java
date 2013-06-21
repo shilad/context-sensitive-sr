@@ -2,6 +2,8 @@ package org.macademia.algs;
 
 
 import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
+import org.apache.commons.collections.MultiMap;
+import org.apache.commons.collections.map.MultiValueMap;
 
 import java.io.*;
 import java.util.*;
@@ -11,7 +13,7 @@ public class TestAlgorithms {
     //0 is Shilad and 107 is Danny Kaplan in list
     //findPersonByEmail(people,"shoop@macalester.edu")
     public static void main(String args[]) throws IOException {
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //People_Distance.serializeVectorMap(people,"dat/peopleVectors.ser");
 
         if(matrix==null){
@@ -36,11 +38,99 @@ public class TestAlgorithms {
         int[] ids = {207,12031,738,11104,15495,293,890};
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
-        // Here we use 200(the first number) interests to define a
-        // fake people who identifies an area of study
-        // We can experiment with this number because 200
-        // may be too big or too small to define an area of study
-        findGroupsByInterestingPeople(ids,names,200, 200, people);
+//        findGroupsByInterestingPeople(ids,names,200,people);
+
+        for(Interest i: getInterestsOfDept(people,"Computer Science",2)){
+            System.out.println(i.getName());
+        }
+        interestsToFile(getInterestsOfDept(people,"Computer Science",2),"dat/compSciInterests.txt");
+    }
+    public static void interestsToFile(ArrayList<Interest> interests, String path){
+        try{
+            FileWriter out = new FileWriter(path);
+            for(Interest i:interests){
+                out.append(i.getName()+"\n");
+            }
+            out.flush();
+            out.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
+
+
+        ArrayList<People> deptPeople = new ArrayList<People>();
+        for(int i=0;i<people.size();i++){
+            for(int j=0;j<people.get(i).getDepartment().size();j++){
+                if(people.get(i).getDepartment().get(j).equals(department)){
+                    deptPeople.add(people.get(i));
+                }
+            }
+        }
+
+
+
+        final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
+
+        for(People p:deptPeople){
+
+            for(Interest i:p.getInterest()) {
+                if (i != null) {
+                    if(scores.containsKey(i)){
+                        scores.put(i,scores.get(i)+1);
+                    }
+                    else{
+                        scores.put(i,1);
+                    }
+                }
+            }
+        }
+
+//        TreeMap<Interest,Integer> sortedMap = new TreeMap<Interest, Integer>(
+//                new Comparator<Interest>() {
+//                    public int compare(Interest i, Interest i2) {
+//                        return scores.get(i2).compareTo(scores.get(i));
+//                    }
+//                }
+//        );                                                                                     fuck it I'm doing it the shitty way
+//        for(Interest i:scores.keySet()){
+//            sortedMap.put(i,scores.get(i));
+//        }
+//        ArrayList<Interest> interests = new ArrayList<Interest>();
+//
+//        for(Interest current:sortedMap.keySet()){
+//            if(sortedMap.get(current)>1){
+//                interests.add(current);
+//                System.out.println(current.getName()+"--"+sortedMap.get(current));
+//            }
+//
+//        }
+        ArrayList<Interest> interests = new ArrayList<Interest>();
+        int count=0;
+        int cur=0;
+        int best=-1;
+        Interest bestInterest=null;
+        boolean found;
+        do{
+            found=false;
+            for(Interest current:scores.keySet()){
+                cur=scores.get(current);
+                if(cur>=minNumOccurrences&&cur>best&&!interests.contains(current)){
+                    best=cur;
+                    bestInterest=current;
+                    found=true;
+                }
+
+            }
+            if(found)
+                interests.add(bestInterest);
+
+            cur=0;
+            best=0;
+            count++;
+        }while(found);
+        return interests;
     }
     public static void findGroupsByInterestingPeople(int[] ids, String[] names, int num_interest, int num_people, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
@@ -129,7 +219,7 @@ public class TestAlgorithms {
      */
     public static void fakePeopleClusteringTest(){
         //Get the original people list
-        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> newPeople=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
 
         //Adding the fake people in
         ArrayList<People> fakePeople = new ArrayList<People>();
@@ -175,7 +265,7 @@ public class TestAlgorithms {
      *
      */
     public static void clusteringTheClusterTest(){
-        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt");
+        ArrayList<People> people=People_Interests.makePeopleInterests("dat/people.txt","dat/phrases.tsv","dat/people_interests.txt","dat/person_departments.csv");
         //createSerializedMatrix(people);
         HashMap<String,SortedMap<String,Double>> map;
         map= deserializePeopleMatrix("dat/peopleMatrix.ser");

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class People {
     private String email="";
     private String id="";
+    private ArrayList<String> department=new ArrayList<String>();
     private ArrayList<Interest> interest=new ArrayList<Interest>();
 
     public People(String id, String email) {
@@ -41,5 +42,13 @@ public class People {
 
     public void setInterest(ArrayList<Interest> interest) {
         this.interest=interest;
+    }
+
+    public ArrayList<String> getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(ArrayList<String> department) {
+        this.department = department;
     }
 }
