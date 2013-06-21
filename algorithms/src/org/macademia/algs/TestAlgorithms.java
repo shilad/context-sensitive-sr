@@ -2,6 +2,8 @@ package org.macademia.algs;
 
 
 import edu.macalester.wpsemsim.matrix.DenseMatrixRow;
+import org.apache.commons.collections.MultiMap;
+import org.apache.commons.collections.map.MultiValueMap;
 
 import java.io.*;
 import java.util.*;
@@ -38,32 +40,40 @@ public class TestAlgorithms {
                 "Computer Science","Applied Math","Psychology"};
 //        findGroupsByInterestingPeople(ids,names,200,people);
 
-        for(Interest i: getInterestsOfDept(people,"Political Science",10)){
+        for(Interest i: getInterestsOfDept(people,"Computer Science",2)){
             System.out.println(i.getName());
         }
+        interestsToFile(getInterestsOfDept(people,"Computer Science",2),"dat/compSciInterests.txt");
     }
-    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int numInterests){
+    public static void interestsToFile(ArrayList<Interest> interests, String path){
+        try{
+            FileWriter out = new FileWriter(path);
+            for(Interest i:interests){
+                out.append(i.getName()+"\n");
+            }
+            out.flush();
+            out.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
 
 
-        ArrayList<People> bioPeople = new ArrayList<People>();
+        ArrayList<People> deptPeople = new ArrayList<People>();
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.get(i).getDepartment().size();j++){
                 if(people.get(i).getDepartment().get(j).equals(department)){
-                    bioPeople.add(people.get(i));
+                    deptPeople.add(people.get(i));
                 }
             }
         }
 
-        SortedSet<Map.Entry<Interest, Integer>> sortedset = new TreeSet<Map.Entry<Interest, Integer>>(
-                new Comparator<Map.Entry<Interest, Integer>>() {
-                    public int compare(Map.Entry<Interest, Integer> e1,
-                                       Map.Entry<Interest, Integer> e2) {
-                        return e2.getValue().compareTo(e1.getValue());
-                    }
-                });
-        HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
 
-        for(People p:bioPeople){
+
+        final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
+
+        for(People p:deptPeople){
 
             for(Interest i:p.getInterest()) {
                 if (i != null) {
@@ -76,19 +86,51 @@ public class TestAlgorithms {
                 }
             }
         }
-        sortedset.addAll(scores.entrySet());
 
-        Iterator<Map.Entry<Interest, Integer>> it = sortedset.iterator();
-        Map.Entry<Interest, Integer> current;
+//        TreeMap<Interest,Integer> sortedMap = new TreeMap<Interest, Integer>(
+//                new Comparator<Interest>() {
+//                    public int compare(Interest i, Interest i2) {
+//                        return scores.get(i2).compareTo(scores.get(i));
+//                    }
+//                }
+//        );                                                                                     fuck it I'm doing it the shitty way
+//        for(Interest i:scores.keySet()){
+//            sortedMap.put(i,scores.get(i));
+//        }
+//        ArrayList<Interest> interests = new ArrayList<Interest>();
+//
+//        for(Interest current:sortedMap.keySet()){
+//            if(sortedMap.get(current)>1){
+//                interests.add(current);
+//                System.out.println(current.getName()+"--"+sortedMap.get(current));
+//            }
+//
+//        }
+        ArrayList<Interest> interests = new ArrayList<Interest>();
+        int count=0;
+        int cur=0;
+        int best=-1;
+        Interest bestInterest=null;
+        boolean found;
+        do{
+            found=false;
+            for(Interest current:scores.keySet()){
+                cur=scores.get(current);
+                if(cur>=minNumOccurrences&&cur>best&&!interests.contains(current)){
+                    best=cur;
+                    bestInterest=current;
+                    found=true;
+                }
 
-        int i = 0;
-        ArrayList<Interest> ids = new ArrayList<Interest>();
-        while (i < numInterests && it.hasNext()) {
-            current = it.next();
-            ids.add(current.getKey());
-            i++;
-        }
-        return ids;
+            }
+            if(found)
+                interests.add(bestInterest);
+
+            cur=0;
+            best=0;
+            count++;
+        }while(found);
+        return interests;
     }
     public static void findGroupsByInterestingPeople(int[] ids, String[] names, int num_interest, int num_people, ArrayList<People> people) throws IOException {
         ArrayList<People> interestingPeople = new ArrayList<People>();
