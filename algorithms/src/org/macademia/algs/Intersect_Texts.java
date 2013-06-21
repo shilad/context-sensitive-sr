@@ -34,8 +34,8 @@ public class Intersect_Texts {
 
         System.out.println("Training background model");
         TokenizedLM backgroundModel = buildModel(tokenizerFactory,NGRAM,BACKGROUND_DIR);
-
-        System.out.println(backgroundModel.toString());
+        tokenizerFactory.tokenizer("jgvkdsjhbfksdhabflkhadsbfljhabvkjhbdvkjhbdvhjbkhbdfvkhjd".toCharArray(),2,2);
+        //System.out.println(backgroundModel.toString());
 
 
 //        BufferedReader interestFile=null;
