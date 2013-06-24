@@ -39,11 +39,17 @@ public class TestAlgorithms {
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
 //        findGroupsByInterestingPeople(ids,names,200,people);
-
-        for(Interest i: getInterestsOfDept(people,"Computer Science",2)){
-            System.out.println(i.getName());
+        String[] deptNames = {"Philosophy","Political Science","Biology","Chemistry","Theatre Arts","Visual Arts","Media Studies",
+                "History","Psychology","Enviromental Studies","Computer Science","Mathematics","Sociology","Anthropology",
+                "Religious Studies","Neuroscience","Physics","Astronomy","Music","English","Education Studies","Classics","Geology",
+                "Geography","Engineering","Linguistics","Health Sciences","Physical Ed. Recreation & Athletics","Gender and Sexuality Studies"};
+        for(String s:deptNames){
+            System.out.println(s);
+            for(Interest i: getInterestsOfDept(people,s,3)){
+                System.out.println("\t"+i.getName());
+            }
         }
-        interestsToFile(getInterestsOfDept(people,"Computer Science",2),"dat/compSciInterests.txt");
+        //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
     }
     public static void interestsToFile(ArrayList<Interest> interests, String path){
         try{
@@ -63,14 +69,14 @@ public class TestAlgorithms {
         ArrayList<People> deptPeople = new ArrayList<People>();
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.get(i).getDepartment().size();j++){
-                if(people.get(i).getDepartment().get(j).equals(department)){
+                if(people.get(i).getDepartment().get(j).toLowerCase().equals(department.toLowerCase())){
                     deptPeople.add(people.get(i));
                 }
             }
         }
 
 
-
+        System.out.println(deptPeople.size());
         final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
 
         for(People p:deptPeople){

@@ -26,7 +26,7 @@ public class Intersect_Texts {
     private static int MAX_COUNT = 1000;
 
     private static File BACKGROUND_DIR
-            = new File("dat/background");
+            = new File("dat/Computer Science/computer science");
     private static File FOREGROUND_DIR
             = new File("dat/foreground");
 
