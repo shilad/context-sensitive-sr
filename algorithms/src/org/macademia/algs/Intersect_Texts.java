@@ -45,8 +45,6 @@ public class Intersect_Texts {
         String[] files = BACKGROUND_DIR.list();
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
-        Pattern p = Pattern.compile("(?<!i\\.e)\\.? |\\.$");
-        RegExFilteredTokenizerFactory regExFilteredTokenizerFactory = new RegExFilteredTokenizerFactory(tokenNGramTokenizerFactory,p);
         HashMap<String, Integer> words = new HashMap<String, Integer>();
         Tokenization t = null;
         Integer i=0;
@@ -54,10 +52,10 @@ public class Intersect_Texts {
             String text = Files.readFromFile(new File(BACKGROUND_DIR,
                     files[j]),
                     "UTF8");
-            t=new Tokenization(text,regExFilteredTokenizerFactory);
+            t = new Tokenization(text.replaceAll("[^\\w\\s]", ""),tokenNGramTokenizerFactory);
 
             for(String s:t.tokenList()) {
-                s=PorterStemmerTokenizerFactory.stem(s).toLowerCase();
+                s= PorterStemmerTokenizerFactory.stem(s).toLowerCase();
                 i = words.get(s);
                 if(i == null) {
                     words.put(s, 1);
@@ -72,6 +70,9 @@ public class Intersect_Texts {
             if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
                 System.out.println(s);
         }
+
+        System.out.println(words.toString());
+
 
         }
 
