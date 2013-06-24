@@ -22,3 +22,5 @@ dat/
 .idea/
 *.iml
 *.iws
+
+/dat

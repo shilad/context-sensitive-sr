@@ -11,15 +11,8 @@ class SRService {
         return num
     }
 
-    //TODO: Code for generating the group based off of the inputs on the expertise view
-
-//    //Assigning people to group based off of preference
-//    def assignGroup(Person person) {
-//
-//    }
-
     //Assigning people to group based on a list of interests
-    def assignGroup(Person person) {
+    def assignGroup(Person person, List<Interest> interests) {
 
         Random rand = new Random()
         int max = 2

@@ -499,7 +499,7 @@ public class Kmeans {
         Point[] centroids = test.compute(10000, .001);
         test.clusterToFile(test.clusters,"dat/clusters.txt");
 //        test.getBestSamplePointsFromCluster(test.clusters[0],5,test.centroids[0]);
-        test.bestSamplePointsFromClustersToFile(test.clusters, "dat/clusters.txt", 10, test.centroids);
+        test.bestSamplePointsFromClustersToFile(test.clusters, "dat/clusters.txt", 100, test.centroids);
 
 
 
