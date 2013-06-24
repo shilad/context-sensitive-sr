@@ -8,6 +8,9 @@ import com.aliasi.util.ScoredObject;
 
 import java.util.HashMap;
 import java.util.SortedSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jesse
@@ -42,6 +45,8 @@ public class Intersect_Texts {
         String[] files = BACKGROUND_DIR.list();
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
+        Pattern p = Pattern.compile("(?<!i\\.e)\\.? |\\.$");
+        RegExFilteredTokenizerFactory regExFilteredTokenizerFactory = new RegExFilteredTokenizerFactory(tokenNGramTokenizerFactory,p);
         HashMap<String, Integer> words = new HashMap<String, Integer>();
         Tokenization t = null;
         Integer i=0;
@@ -49,7 +54,7 @@ public class Intersect_Texts {
             String text = Files.readFromFile(new File(BACKGROUND_DIR,
                     files[j]),
                     "UTF8");
-            t=new Tokenization(text,tokenNGramTokenizerFactory);
+            t=new Tokenization(text,regExFilteredTokenizerFactory);
 
             for(String s:t.tokenList()) {
                 s=PorterStemmerTokenizerFactory.stem(s).toLowerCase();
