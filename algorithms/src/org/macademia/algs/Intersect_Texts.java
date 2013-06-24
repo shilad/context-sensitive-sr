@@ -71,7 +71,7 @@ public class Intersect_Texts {
                 System.out.println(s);
         }
 
-        System.out.println(words.toString());
+//        System.out.println(words.toString());
 
 
         }
