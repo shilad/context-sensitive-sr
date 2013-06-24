@@ -16,6 +16,7 @@ stacktrace.log
 /target-eclipse/
 dat/
 
+
 # Intellij
 .idea/
 *.iml
