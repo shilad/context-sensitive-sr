@@ -45,9 +45,10 @@ public class Intersect_Texts {
         String[] files = BACKGROUND_DIR.list();
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
-        HashMap<String, Integer> words = new HashMap<String, Integer>();
+        HashMap<String, HashMap<String,Integer>> words = new HashMap<String, HashMap<String,Integer>>();
         Tokenization t = null;
         Integer i=0;
+        HashMap<String,Integer> innerMap=null;
         for (int j = 0; j < files.length; ++j) {
             String text = Files.readFromFile(new File(BACKGROUND_DIR,
                     files[j]),
@@ -56,11 +57,21 @@ public class Intersect_Texts {
 
             for(String s:t.tokenList()) {
                 s= PorterStemmerTokenizerFactory.stem(s).toLowerCase();
-                i = words.get(s);
-                if(i == null) {
-                    words.put(s, 1);
+
+                innerMap = words.get(s);
+                if(innerMap == null) {
+                    innerMap=new HashMap<String, Integer>();
+                    innerMap.put(s+"_"+files[j],1);
+                    words.put(s, innerMap);
+
                 } else {
-                    words.put(s, i + 1);
+                    if(innerMap.get(s+"_"+files[j])==null){
+                        innerMap.put(s+"_"+files[j],1);
+                    }else{
+                        innerMap.put(s+"_"+files[j],innerMap.get(s+"_"+files[j])+1);
+                        words.put(s, innerMap);
+                    }
+
                     }
                 }
 
@@ -68,7 +79,7 @@ public class Intersect_Texts {
         while ((line = phrases.readLine()) != null) {
             String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
             if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])));
+                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
         }
 
 //        System.out.println(words.toString());
