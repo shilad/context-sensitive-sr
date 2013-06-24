@@ -5,6 +5,8 @@ import com.aliasi.lm.TokenizedLM;
 import com.aliasi.tokenizer.*;
 import com.aliasi.util.Files;
 import com.aliasi.util.ScoredObject;
+
+import java.util.HashMap;
 import java.util.SortedSet;
 /**
  * Created with IntelliJ IDEA.
@@ -34,24 +36,40 @@ public class Intersect_Texts {
         }catch (IOException e){
             e.printStackTrace();
         }
+
+
         String line="";
         String[] files = BACKGROUND_DIR.list();
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
+        HashMap<String, Integer> words = new HashMap<String, Integer>();
         Tokenization t = null;
-        while ((line = phrases.readLine()) != null) {
-            for (int j = 0; j < files.length; ++j) {
-                String text = Files.readFromFile(new File(BACKGROUND_DIR,
-                        files[j]),
-                        "UTF8");
-                t=new Tokenization(text,tokenNGramTokenizerFactory);
-                for(String s:t.tokenList()){
-                    if(s.equals(line))
-                        System.out.println(s);
+        Integer i=0;
+        for (int j = 0; j < files.length; ++j) {
+            String text = Files.readFromFile(new File(BACKGROUND_DIR,
+                    files[j]),
+                    "UTF8");
+            t=new Tokenization(text,tokenNGramTokenizerFactory);
+
+            for(String s:t.tokenList()) {
+                s=PorterStemmerTokenizerFactory.stem(s).toLowerCase();
+                i = words.get(s);
+                if(i == null) {
+                    words.put(s, 1);
+                } else {
+                    words.put(s, i + 1);
+                    }
                 }
 
             }
+        while ((line = phrases.readLine()) != null) {
+            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
+            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
+                System.out.println(s);
         }
+
+        }
+
 
         //StreamTokenizer stream = new StreamTokenizer();
 
@@ -77,7 +95,7 @@ public class Intersect_Texts {
 //            e.printStackTrace();
 //        }
 
-    }
+
     private static TokenizedLM buildModel(TokenizerFactory tokenizerFactory,
                                           int ngram,
                                           File directory)
