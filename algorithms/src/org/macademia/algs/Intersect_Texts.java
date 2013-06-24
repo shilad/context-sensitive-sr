@@ -1,11 +1,8 @@
 package org.macademia.algs;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.*;
 import com.aliasi.lm.TokenizedLM;
-import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
-import com.aliasi.tokenizer.TokenizerFactory;
+import com.aliasi.tokenizer.*;
 import com.aliasi.util.Files;
 import com.aliasi.util.ScoredObject;
 import java.util.SortedSet;
@@ -29,12 +26,35 @@ public class Intersect_Texts {
             = new File("dat/foreground");
 
     public static void main(String args[]) throws IOException {
-
+        BufferedReader phrases=null;
+        BufferedReader twoCities=null;
+        try {
+            phrases = new BufferedReader(new FileReader("dat/phrases.tsv"));
+            twoCities = new BufferedReader(new FileReader("dat/foreground/crimeandpunishment.txt"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        String line="";
+        String[] files = BACKGROUND_DIR.list();
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
+        TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
+        Tokenization t = null;
+        while ((line = phrases.readLine()) != null) {
+            for (int j = 0; j < files.length; ++j) {
+                String text = Files.readFromFile(new File(BACKGROUND_DIR,
+                        files[j]),
+                        "UTF8");
+                t=new Tokenization(text,tokenNGramTokenizerFactory);
+                for(String s:t.tokenList()){
+                    if(s.equals(line))
+                        System.out.println(s);
+                }
 
-        System.out.println("Training background model");
-        TokenizedLM backgroundModel = buildModel(tokenizerFactory,NGRAM,BACKGROUND_DIR);
-        tokenizerFactory.tokenizer("jgvkdsjhbfksdhabflkhadsbfljhabvkjhbdvkjhbdvhjbkhbdfvkhjd".toCharArray(),2,2);
+            }
+        }
+
+        //StreamTokenizer stream = new StreamTokenizer();
+
         //System.out.println(backgroundModel.toString());
 
 
