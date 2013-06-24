@@ -68,7 +68,7 @@ public class Intersect_Texts {
         while ((line = phrases.readLine()) != null) {
             String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
             if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-                System.out.println(s);
+                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])));
         }
 
 //        System.out.println(words.toString());
