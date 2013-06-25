@@ -43,10 +43,22 @@ public class TestAlgorithms {
                 "History","Psychology","Enviromental Studies","Computer Science","Mathematics","Sociology","Anthropology",
                 "Religious Studies","Neuroscience","Physics","Astronomy","Music","English","Education Studies","Classics","Geology",
                 "Geography","Engineering","Linguistics","Health Sciences","Physical Ed. Recreation & Athletics","Gender and Sexuality Studies"};
+        HashMap<String,Integer> deptNums = new HashMap<String, Integer>();
         for(String s:deptNames){
-            System.out.println(s);
-            for(Interest i: getInterestsOfDept(people,s,3)){
-                System.out.println("\t"+i.getName());
+            deptNums.put(s,getDepartmentPeople(people,s).size());
+        }
+        SortedSet<Map.Entry<String, Integer>> sortedset = new TreeSet<Map.Entry<String, Integer>>(
+                new Comparator<Map.Entry<String, Integer>>() {
+                    public int compare(Map.Entry<String, Integer> e1,
+                                       Map.Entry<String, Integer> e2) {
+                        return e2.getValue().compareTo(e1.getValue());
+                    }
+                });
+        sortedset.addAll(deptNums.entrySet());
+        for(Map.Entry<String, Integer> e:sortedset){
+            System.out.println(e.getKey()+"\n\t"+e.getValue());
+            for(Interest i: getInterestsOfDept(people,e.getKey(),2)){
+                System.out.println("\t\t"+i.getName());
             }
         }
         //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
@@ -63,9 +75,7 @@ public class TestAlgorithms {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
-
-
+    public static ArrayList<People> getDepartmentPeople(ArrayList<People> people,String department){
         ArrayList<People> deptPeople = new ArrayList<People>();
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.get(i).getDepartment().size();j++){
@@ -74,9 +84,15 @@ public class TestAlgorithms {
                 }
             }
         }
+        return deptPeople;
+    }
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
 
 
-        System.out.println(deptPeople.size());
+        ArrayList<People> deptPeople = getDepartmentPeople(people,department);
+
+
+
         final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
 
         for(People p:deptPeople){
