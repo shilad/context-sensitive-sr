@@ -45,15 +45,64 @@ public class TestAlgorithms {
                 "Physical Ed. Recreation & Athletics",
                 "Sociology","Media Studies","Computer Science",
                 "Education Studies","Theatre Arts","Anthropology"};
-        for(String s:deptNames){
-            System.out.println("");
-            System.out.println(s);
-            for(Interest i: getInterestsOfDept(people,s,2)){
-                System.out.println(i.getName());
-            }
-        }
+//        for(String s:deptNames){
+//            System.out.println("");
+//            System.out.println(s);
+//            for(Interest i: getInterestsOfDept(people,s,2)){
+//                System.out.println(i.getName());
+//            }
+//        }
         //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
+        createDepartmentFiles(deptNames,people);
     }
+
+    /**
+     * This method produces necessary files for the download program
+     * @param deptNames
+     * @param people
+     */
+    public static void createDepartmentFiles(String[] deptNames, ArrayList<People> people){
+
+        try{
+
+            File theDir = new File("dat/department");
+
+            // if the directory does not exist, create it
+            if (!theDir.exists())
+            {
+                boolean result = theDir.mkdir();
+                if(result){
+                    System.out.println("DIR created");
+                }
+
+            }
+
+            FileWriter departOut = new FileWriter("dat/department/department.txt");
+
+            for(String s:deptNames){
+                System.out.println("");
+                System.out.println(s);
+                departOut.write(s);
+
+                String name = "dat/department/"+s+".txt";
+                FileWriter interestOut = new FileWriter(name);
+                for(Interest i: getInterestsOfDept(people,s,2)){
+                    System.out.println(i.getName());
+                    interestOut.write(i.getName());
+                }
+                interestOut.flush();
+                interestOut.close();
+            }
+
+            departOut.flush();
+            departOut.close();
+        } catch (IOException ex) {
+            System.out.println("Unable to create file");
+            ex.printStackTrace();
+        }
+
+    }
+
     public static void interestsToFile(ArrayList<Interest> interests, String path){
         try{
             FileWriter out = new FileWriter(path);
