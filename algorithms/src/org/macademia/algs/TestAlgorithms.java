@@ -39,14 +39,17 @@ public class TestAlgorithms {
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
 //        findGroupsByInterestingPeople(ids,names,200,people);
-        String[] deptNames = {"Philosophy","Political Science","Biology","Chemistry","Theatre Arts","Visual Arts","Media Studies",
-                "History","Psychology","Enviromental Studies","Computer Science","Mathematics","Sociology","Anthropology",
-                "Religious Studies","Neuroscience","Physics","Astronomy","Music","English","Education Studies","Classics","Geology",
-                "Geography","Engineering","Linguistics","Health Sciences","Physical Ed. Recreation & Athletics","Gender and Sexuality Studies"};
+        String[] deptNames = {"Biology", "English","Chemistry",
+                "Psychology","Mathematics","History","Music",
+                "Political Science","Visual Arts","Philosophy",
+                "Physical Ed. Recreation & Athletics",
+                "Sociology","Media Studies","Computer Science",
+                "Education Studies","Theatre Arts","Anthropology"};
         for(String s:deptNames){
+            System.out.println("");
             System.out.println(s);
-            for(Interest i: getInterestsOfDept(people,s,3)){
-                System.out.println("\t"+i.getName());
+            for(Interest i: getInterestsOfDept(people,s,2)){
+                System.out.println(i.getName());
             }
         }
         //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
