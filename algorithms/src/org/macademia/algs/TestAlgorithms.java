@@ -39,30 +39,73 @@ public class TestAlgorithms {
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
 //        findGroupsByInterestingPeople(ids,names,200,people);
-        String[] deptNames = {"Philosophy","Political Science","Biology","Chemistry","Theatre Arts","Visual Arts","Media Studies",
-                "History","Psychology","Enviromental Studies","Computer Science","Mathematics","Sociology","Anthropology",
-                "Religious Studies","Neuroscience","Physics","Astronomy","Music","English","Education Studies","Classics","Geology",
-                "Geography","Engineering","Linguistics","Health Sciences","Physical Ed. Recreation & Athletics","Gender and Sexuality Studies"};
-        HashMap<String,Integer> deptNums = new HashMap<String, Integer>();
-        for(String s:deptNames){
-            deptNums.put(s,getDepartmentPeople(people,s).size());
-        }
-        SortedSet<Map.Entry<String, Integer>> sortedset = new TreeSet<Map.Entry<String, Integer>>(
-                new Comparator<Map.Entry<String, Integer>>() {
-                    public int compare(Map.Entry<String, Integer> e1,
-                                       Map.Entry<String, Integer> e2) {
-                        return e2.getValue().compareTo(e1.getValue());
-                    }
-                });
-        sortedset.addAll(deptNums.entrySet());
-        for(Map.Entry<String, Integer> e:sortedset){
-            System.out.println(e.getKey()+"\n\t"+e.getValue());
-            for(Interest i: getInterestsOfDept(people,e.getKey(),2)){
-                System.out.println("\t\t"+i.getName());
-            }
-        }
+        String[] deptNames = {"Biology", "English","Chemistry",
+                "Psychology","Mathematics","History","Music",
+                "Political Science","Visual Arts","Philosophy",
+                "Physical Ed. Recreation & Athletics",
+                "Sociology","Media Studies","Computer Science",
+                "Education Studies","Theatre Arts","Anthropology"};
+//        for(String s:deptNames){
+//            System.out.println("");
+//            System.out.println(s);
+//            for(Interest i: getInterestsOfDept(people,s,2)){
+//                System.out.println(i.getName());
+//            }
+//        }
         //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
+        createDepartmentFiles(deptNames,people);
     }
+
+    /**
+     * This method produces necessary files for the download program
+     * @param deptNames
+     * @param people
+     */
+    public static void createDepartmentFiles(String[] deptNames, ArrayList<People> people){
+
+        try{
+
+            File theDir = new File("dat/department");
+
+            // if the directory does not exist, create it
+            if (!theDir.exists())
+            {
+                boolean result = theDir.mkdir();
+                if(result){
+                    System.out.println("DIR created");
+                }
+
+            }
+
+            FileWriter departOut = new FileWriter("dat/department/department.txt");
+
+            for(String s:deptNames){
+                System.out.println("");
+                System.out.println(s);
+                departOut.write(s+"\n");
+
+                String name = "dat/department/"+s+".txt";
+                FileWriter interestOut = new FileWriter(name);
+                for(Interest i: getInterestsOfDept(people,s,2)){
+                    String interestName = i.getName();
+                    System.out.println(interestName);
+                    if(!interestName.equals("")){
+                        interestOut.write(i.getName()+"\n");
+                    }
+                }
+                interestOut.flush();
+                interestOut.close();
+            }
+
+            departOut.flush();
+            departOut.close();
+        } catch (IOException ex) {
+            System.out.println("Unable to create file");
+            ex.printStackTrace();
+        }
+
+    }
+
     public static void interestsToFile(ArrayList<Interest> interests, String path){
         try{
             FileWriter out = new FileWriter(path);
@@ -75,7 +118,9 @@ public class TestAlgorithms {
             e.printStackTrace();
         }
     }
-    public static ArrayList<People> getDepartmentPeople(ArrayList<People> people,String department){
+    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
+
+
         ArrayList<People> deptPeople = new ArrayList<People>();
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.get(i).getDepartment().size();j++){
@@ -84,15 +129,9 @@ public class TestAlgorithms {
                 }
             }
         }
-        return deptPeople;
-    }
-    public static ArrayList<Interest> getInterestsOfDept(ArrayList<People> people, String department, int minNumOccurrences){
 
 
-        ArrayList<People> deptPeople = getDepartmentPeople(people,department);
-
-
-
+        System.out.println(deptPeople.size());
         final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
 
         for(People p:deptPeople){
