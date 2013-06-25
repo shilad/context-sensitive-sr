@@ -82,13 +82,16 @@ public class TestAlgorithms {
             for(String s:deptNames){
                 System.out.println("");
                 System.out.println(s);
-                departOut.write(s);
+                departOut.write(s+"\n");
 
                 String name = "dat/department/"+s+".txt";
                 FileWriter interestOut = new FileWriter(name);
                 for(Interest i: getInterestsOfDept(people,s,2)){
-                    System.out.println(i.getName());
-                    interestOut.write(i.getName());
+                    String interestName = i.getName();
+                    System.out.println(interestName);
+                    if(!interestName.equals("")){
+                        interestOut.write(i.getName()+"\n");
+                    }
                 }
                 interestOut.flush();
                 interestOut.close();
