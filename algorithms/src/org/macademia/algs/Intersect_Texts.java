@@ -73,7 +73,8 @@ public class Intersect_Texts {
         HashMap<String, HashSet<String>> interestingWords = new HashMap<String, HashSet<String>>();
         while ((line = phrases.readLine()) != null) {
             line=PorterStemmerTokenizerFactory.stem(line);
-            interestingWords.put(line,words.get(line));
+            if(words.get(line)!=null)
+                interestingWords.put(line,words.get(line));
         }
         Set<String> docs1;
         Set<String> docs2;
