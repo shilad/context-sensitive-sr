@@ -54,6 +54,7 @@ public class Intersect_Texts {
             files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
         }
         for(File file:files){
+            System.err.println(file);
             fileStrings=file.list();
             for (String file_string:fileStrings) {
                 String text = Files.readFromFile(new File(file,
@@ -66,7 +67,7 @@ public class Intersect_Texts {
                     innerSet = words.get(s);
                     if(innerSet == null) {
                         innerSet=new HashSet<String>();
-                        innerSet.add(file_string);
+                        innerSet.add(file+file_string);
                         words.put(s, innerSet);
                     } else {
                         innerSet.add(file_string);
@@ -99,12 +100,14 @@ public class Intersect_Texts {
 
             }
         }
-        System.out.println(jointScores.toString());
-//        while ((line = phrases.readLine()) != null) {
-//            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
-//            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-//                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
-//        }
+
+
+
+        System.out.println(jointScores.get("human physiolog_human physiolog"));
+        System.out.println(words.get("human physiolog"));
+
+
+
     }
 
 
