@@ -1,7 +1,6 @@
 package org.macademia.algs;
 
 import java.io.*;
-import com.aliasi.lm.TokenizedLM;
 import com.aliasi.tokenizer.*;
 import com.aliasi.util.Files;
 import java.util.*;
