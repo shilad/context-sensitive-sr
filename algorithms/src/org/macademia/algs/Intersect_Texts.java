@@ -6,10 +6,7 @@ import com.aliasi.tokenizer.*;
 import com.aliasi.util.Files;
 import com.aliasi.util.ScoredObject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,7 +43,7 @@ public class Intersect_Texts {
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
         HashMap<String, HashSet<String>> words = new HashMap<String, HashSet<String>>();
         Tokenization t = null;
-
+        Integer docCount=0;
         HashSet<String> innerSet=null;
         String[] fileStrings = BACKGROUND_DIR.list();
         File[] files=new File[fileStrings.length];
@@ -54,9 +51,9 @@ public class Intersect_Texts {
             files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
         }
         for(File file:files){
-            System.err.println(file);
             fileStrings=file.list();
             for (String file_string:fileStrings) {
+                docCount++;
                 String text = Files.readFromFile(new File(file,
                         file_string),
                         "UTF8");
@@ -67,10 +64,10 @@ public class Intersect_Texts {
                     innerSet = words.get(s);
                     if(innerSet == null) {
                         innerSet=new HashSet<String>();
-                        innerSet.add(file+file_string);
+                        innerSet.add(file.getName()+file_string);
                         words.put(s, innerSet);
                     } else {
-                        innerSet.add(file_string);
+                        innerSet.add(file.getName()+file_string);
                         words.put(s, innerSet);
                     }
                 }
@@ -101,13 +98,41 @@ public class Intersect_Texts {
             }
         }
 
+        SortedSet<Map.Entry<String,Double>> sortedscores = new TreeSet<Map.Entry<String, Double>>(
+                new Comparator<Map.Entry<String, Double>>() {
+                    public int compare(Map.Entry<String, Double> e1,
+                                       Map.Entry<String, Double> e2) {
+                        return e2.getValue().compareTo(e1.getValue());
+                    }
+                });
+        String[] terms;
+        HashMap<String,Double> pmi = new HashMap<String, Double>();
+        Double score=0.0;
+        for(String pair:jointScores.keySet()){
+             terms=pair.split("_");
+             score=Math.log10((jointScores.get(pair).doubleValue()/docCount)/
+                     ((words.get(terms[0]).size()/docCount.doubleValue())*
+                             (words.get(terms[1]).size()/docCount.doubleValue())));
+             pmi.put(pair,score);
+        }
 
 
-        System.out.println(jointScores.get("human physiolog_human physiolog"));
-        System.out.println(words.get("human physiolog"));
+        sortedscores.addAll(pmi.entrySet());
+        Iterator<Map.Entry<String, Double>> it = sortedscores.iterator();
+        Map.Entry<String, Double> current;
 
-
-
+        int i = 0;
+        String[] s;
+        while (i < 100 && it.hasNext()) {
+            current=it.next();
+            s=current.getKey().split("_");
+            System.out.println("Key1: "+s[0]+"\tKey2: "+s[1]+"\tValue: "+current.getValue());
+        }
+//        while ((line = phrases.readLine()) != null) {
+//            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
+//            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
+//                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
+//        }
     }
 
 
