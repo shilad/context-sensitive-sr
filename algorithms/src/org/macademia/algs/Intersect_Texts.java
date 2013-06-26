@@ -50,54 +50,54 @@ public class Intersect_Texts {
         HashSet<String> innerSet=null;
         String[] fileStrings = BACKGROUND_DIR.list();
         File[] files=new File[fileStrings.length];
+
+
         for(int i=0;i<fileStrings.length;i++){
             files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
         }
-        for(File file:files){
 
-        for (String file_string:file.list()) {
-            String text = Files.readFromFile(new File(file,
-                    file_string),
-                    "UTF8");
-            t = new Tokenization(text.replaceAll("[^\\w\\s]", ""),tokenNGramTokenizerFactory);
+        for(File file:files) {
+            System.err.println("doing " + file);
+            for (String file_string:file.list()) {
+                System.err.println("doing " + file_string);
+                String text = Files.readFromFile(new File(file,
+                        file_string),
+                        "UTF8");
+                System.out.println("here 1");
+                t = new Tokenization(text.replaceAll("[^\\w\\s]", ""),tokenNGramTokenizerFactory);
 
-            for(String s:t.tokenList()) {
-                s= PorterStemmerTokenizerFactory.stem(s).toLowerCase();
-
-                innerSet = words.get(s);
-                if(innerSet == null) {
-                    innerSet=new HashSet<String>();
-                    innerSet.add(file_string);
-                    words.put(s, innerSet);
-
-                } else {
-                    innerSet.add(file_string);
-                    words.put(s, innerSet);
-
-
+                System.out.println("here 2");
+                for(String s:t.tokenList()) {
+                    s = PorterStemmerTokenizerFactory.stem(s).toLowerCase();
+                    if(words.containsKey(s)) {
+                        words.get(s).add(file_string);
+                    } else {
+                        innerSet = new HashSet<String>();
+                        innerSet.add(file_string);
+                        words.put(s, innerSet);
                     }
                 }
-
+                System.out.println("here 3");
             }
-
-
-//        System.out.println(words.toString());
-
-
+            System.out.println("finished " + file);
         }
+        System.err.println("after loop");
+
         Set<String> docs1;
         Set<String> docs2;
         Set<String> intersection;
         HashMap<String,Integer> jointScores=new HashMap<String, Integer>();
-        for(String key1:words.keySet()){
+        for(String key1:phrases){
             for(String key2:words.keySet()){
                 docs1=words.get(key1);
                 docs2=words.get(key2);
                 intersection=new HashSet<String>(docs1);
                 intersection.retainAll(docs2);
                 jointScores.put(key1+"_"+key2,intersection.size());
+                System.err.println("here");
             }
         }
+        System.err.println("after loop");
 
         while ((line = phrases.readLine()) != null) {
             String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
