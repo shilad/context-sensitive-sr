@@ -4,11 +4,8 @@ import java.io.*;
 import com.aliasi.lm.TokenizedLM;
 import com.aliasi.tokenizer.*;
 import com.aliasi.util.Files;
-import com.aliasi.util.ScoredObject;
-
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,16 +15,9 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class Intersect_Texts {
-//    private static int NGRAM = 20;
-//    private static int MIN_COUNT = 5;
-//    private static int MAX_NGRAM_REPORTING_LENGTH = 10;
-//    private static int NGRAM_REPORTING_LENGTH = 2;
-//    private static int MAX_COUNT = 1000;
 
     private static File BACKGROUND_DIR
             = new File("dat/background");
-    private static File FOREGROUND_DIR
-            = new File("dat/foreground");
 
     public static void main(String args[]) throws IOException {
         BufferedReader phrases=null;
@@ -78,7 +68,7 @@ public class Intersect_Texts {
         String line="";
         HashMap<String, HashSet<String>> interestingWords = new HashMap<String, HashSet<String>>();
         while ((line = phrases.readLine()) != null) {
-            line=PorterStemmerTokenizerFactory.stem(line);
+            line=PorterStemmerTokenizerFactory.stem(line.replaceAll("[^\\w\\s]", "")).toLowerCase();
             if(words.get(line)!=null){
                 interestingWords.put(line,words.get(line));
             }
@@ -128,31 +118,6 @@ public class Intersect_Texts {
             s=current.getKey().split("_");
             System.out.println("Key1: "+s[0]+"\tKey2: "+s[1]+"\tValue: "+current.getValue());
         }
-//        while ((line = phrases.readLine()) != null) {
-//            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
-//            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-//                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
-//        }
-    }
 
-
-    private static TokenizedLM buildModel(TokenizerFactory tokenizerFactory,
-                                          int ngram,
-                                          File directory)
-            throws IOException {
-
-        String[] trainingFiles = directory.list();
-        TokenizedLM model =
-                new TokenizedLM(tokenizerFactory,
-                        ngram);
-        System.out.println("Training on "+directory);
-
-        for (int j = 0; j < trainingFiles.length; ++j) {
-            String text = Files.readFromFile(new File(directory,
-                    trainingFiles[j]),
-                    "ISO-8859-1");
-            model.handle(text);
-        }
-        return model;
     }
 }
