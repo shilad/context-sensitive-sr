@@ -7,6 +7,8 @@ import com.aliasi.util.Files;
 import com.aliasi.util.ScoredObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +35,7 @@ public class Intersect_Texts {
     public static void main(String args[]) throws IOException {
         BufferedReader phrases=null;
         try {
-            phrases = new BufferedReader(new FileReader("dat/phrases.tsv"));
+            phrases = new BufferedReader(new FileReader("dat/foreground/biology.txt"));
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -42,17 +44,17 @@ public class Intersect_Texts {
 
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
-        HashMap<String, HashMap<String,Integer>> words = new HashMap<String, HashMap<String,Integer>>();
+        HashMap<String, HashSet<String>> words = new HashMap<String, HashSet<String>>();
         Tokenization t = null;
         String line="";
-
+        HashSet<String> innerSet=null;
         String[] fileStrings = BACKGROUND_DIR.list();
         File[] files=new File[fileStrings.length];
         for(int i=0;i<fileStrings.length;i++){
             files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
         }
         for(File file:files){
-        HashMap<String,Integer> innerMap=null;
+
         for (String file_string:file.list()) {
             String text = Files.readFromFile(new File(file,
                     file_string),
@@ -62,33 +64,45 @@ public class Intersect_Texts {
             for(String s:t.tokenList()) {
                 s= PorterStemmerTokenizerFactory.stem(s).toLowerCase();
 
-                innerMap = words.get(s);
-                if(innerMap == null) {
-                    innerMap=new HashMap<String, Integer>();
-                    innerMap.put(s+"_"+file_string,1);
-                    words.put(s, innerMap);
+                innerSet = words.get(s);
+                if(innerSet == null) {
+                    innerSet=new HashSet<String>();
+                    innerSet.add(file_string);
+                    words.put(s, innerSet);
 
                 } else {
-                    if(innerMap.get(s+"_"+file_string)==null){
-                        innerMap.put(s+"_"+file_string,1);
-                    }else{
-                        innerMap.put(s+"_"+file_string,innerMap.get(s+"_"+file_string)+1);
-                        words.put(s, innerMap);
-                    }
+                    innerSet.add(file_string);
+                    words.put(s, innerSet);
+
 
                     }
                 }
 
             }
-        while ((line = phrases.readLine()) != null) {
-            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
-            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
-        }
+
 
 //        System.out.println(words.toString());
 
 
+        }
+        Set<String> docs1;
+        Set<String> docs2;
+        Set<String> intersection;
+        HashMap<String,Integer> jointScores=new HashMap<String, Integer>();
+        for(String key1:words.keySet()){
+            for(String key2:words.keySet()){
+                docs1=words.get(key1);
+                docs2=words.get(key2);
+                intersection=new HashSet<String>(docs1);
+                intersection.retainAll(docs2);
+                jointScores.put(key1+"_"+key2,intersection.size());
+            }
+        }
+
+        while ((line = phrases.readLine()) != null) {
+            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
+            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
+                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
         }
     }
 
