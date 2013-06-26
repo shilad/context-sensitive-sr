@@ -123,7 +123,7 @@ public class Intersect_Texts {
 
         int i = 0;
         String[] s;
-        while (i < 100 && it.hasNext()) {
+        while (i < sortedscores.size() && it.hasNext()) {
             current=it.next();
             s=current.getKey().split("_");
             System.out.println("Key1: "+s[0]+"\tKey2: "+s[1]+"\tValue: "+current.getValue());
