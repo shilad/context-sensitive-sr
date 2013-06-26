@@ -25,14 +25,14 @@ public class Intersect_Texts {
 //    private static int MAX_COUNT = 1000;
 
     private static File BACKGROUND_DIR
-            = new File("dat/background");
+            = new File("dat/History");
     private static File FOREGROUND_DIR
             = new File("dat/foreground");
 
     public static void main(String args[]) throws IOException {
         BufferedReader phrases=null;
         try {
-            phrases = new BufferedReader(new FileReader("dat/foreground/biology.txt"));
+            phrases = new BufferedReader(new FileReader("dat/department/History.txt"));
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -78,7 +78,7 @@ public class Intersect_Texts {
         String line="";
         HashMap<String, HashSet<String>> interestingWords = new HashMap<String, HashSet<String>>();
         while ((line = phrases.readLine()) != null) {
-            line=PorterStemmerTokenizerFactory.stem(line);
+            line=PorterStemmerTokenizerFactory.stem(line.replaceAll("[^\\w\\s]", "").toLowerCase());
             if(words.get(line)!=null){
                 interestingWords.put(line,words.get(line));
             }
@@ -91,6 +91,9 @@ public class Intersect_Texts {
             for(String key2:interestingWords.keySet()){
                 docs1=words.get(key1);
                 docs2=words.get(key2);
+                if(key1.equals(key2)) {
+                    continue;
+                }
                 intersection=new HashSet<String>(docs1);
                 intersection.retainAll(docs2);
                 jointScores.put(key1+"_"+key2,intersection.size());
@@ -123,11 +126,14 @@ public class Intersect_Texts {
 
         int i = 0;
         String[] s;
-        while (i < sortedscores.size() && it.hasNext()) {
+        FileWriter out = new FileWriter("dat/resultsHistory2.txt");
+        while (i < 100 && it.hasNext()) {
             current=it.next();
             s=current.getKey().split("_");
-            System.out.println("Key1: "+s[0]+"\tKey2: "+s[1]+"\tValue: "+current.getValue());
+
+           out.append("Key1: "+s[0]+"\tKey2: "+s[1]+"\tValue: "+current.getValue() + "\n");
         }
+        out.close();
 //        while ((line = phrases.readLine()) != null) {
 //            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
 //            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
