@@ -82,6 +82,10 @@ public class Intersect_Texts {
         for(String key1:interestingWords.keySet()){
             for(String key2:interestingWords.keySet()){
                 docs1=words.get(key1);
+
+
+
+
                 docs2=words.get(key2);
                 intersection=new HashSet<String>(docs1);
                 intersection.retainAll(docs2);
