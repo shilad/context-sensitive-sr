@@ -86,7 +86,7 @@ public class TestAlgorithms {
 
                 String name = "dat/department/"+s+".txt";
                 FileWriter interestOut = new FileWriter(name);
-                for(Interest i: getInterestsOfDept(people,s,2)){
+                for(Interest i: getInterestsOfDept(people,s,3)){
                     String interestName = i.getName();
                     System.out.println(interestName);
                     if(!interestName.equals("")){

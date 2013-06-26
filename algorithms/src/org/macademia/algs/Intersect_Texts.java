@@ -19,39 +19,43 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class Intersect_Texts {
-    private static int NGRAM = 20;
-    private static int MIN_COUNT = 5;
-    private static int MAX_NGRAM_REPORTING_LENGTH = 10;
-    private static int NGRAM_REPORTING_LENGTH = 2;
-    private static int MAX_COUNT = 1000;
+//    private static int NGRAM = 20;
+//    private static int MIN_COUNT = 5;
+//    private static int MAX_NGRAM_REPORTING_LENGTH = 10;
+//    private static int NGRAM_REPORTING_LENGTH = 2;
+//    private static int MAX_COUNT = 1000;
 
     private static File BACKGROUND_DIR
-            = new File("dat/Computer Science/computer science");
+            = new File("dat/background");
     private static File FOREGROUND_DIR
             = new File("dat/foreground");
 
     public static void main(String args[]) throws IOException {
         BufferedReader phrases=null;
-        BufferedReader twoCities=null;
         try {
             phrases = new BufferedReader(new FileReader("dat/phrases.tsv"));
-            twoCities = new BufferedReader(new FileReader("dat/foreground/crimeandpunishment.txt"));
         }catch (IOException e){
             e.printStackTrace();
         }
 
 
-        String line="";
-        String[] files = BACKGROUND_DIR.list();
+
         TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
         HashMap<String, HashMap<String,Integer>> words = new HashMap<String, HashMap<String,Integer>>();
         Tokenization t = null;
-        Integer i=0;
+        String line="";
+
+        String[] fileStrings = BACKGROUND_DIR.list();
+        File[] files=new File[fileStrings.length];
+        for(int i=0;i<fileStrings.length;i++){
+            files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
+        }
+        for(File file:files){
         HashMap<String,Integer> innerMap=null;
-        for (int j = 0; j < files.length; ++j) {
-            String text = Files.readFromFile(new File(BACKGROUND_DIR,
-                    files[j]),
+        for (String file_string:file.list()) {
+            String text = Files.readFromFile(new File(file,
+                    file_string),
                     "UTF8");
             t = new Tokenization(text.replaceAll("[^\\w\\s]", ""),tokenNGramTokenizerFactory);
 
@@ -61,14 +65,14 @@ public class Intersect_Texts {
                 innerMap = words.get(s);
                 if(innerMap == null) {
                     innerMap=new HashMap<String, Integer>();
-                    innerMap.put(s+"_"+files[j],1);
+                    innerMap.put(s+"_"+file_string,1);
                     words.put(s, innerMap);
 
                 } else {
-                    if(innerMap.get(s+"_"+files[j])==null){
-                        innerMap.put(s+"_"+files[j],1);
+                    if(innerMap.get(s+"_"+file_string)==null){
+                        innerMap.put(s+"_"+file_string,1);
                     }else{
-                        innerMap.put(s+"_"+files[j],innerMap.get(s+"_"+files[j])+1);
+                        innerMap.put(s+"_"+file_string,innerMap.get(s+"_"+file_string)+1);
                         words.put(s, innerMap);
                     }
 
@@ -86,7 +90,7 @@ public class Intersect_Texts {
 
 
         }
-
+    }
 
         //StreamTokenizer stream = new StreamTokenizer();
 
