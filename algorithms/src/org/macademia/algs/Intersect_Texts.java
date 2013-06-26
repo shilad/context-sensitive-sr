@@ -46,89 +46,56 @@ public class Intersect_Texts {
         TokenNGramTokenizerFactory tokenNGramTokenizerFactory = new TokenNGramTokenizerFactory(tokenizerFactory,1,3);
         HashMap<String, HashSet<String>> words = new HashMap<String, HashSet<String>>();
         Tokenization t = null;
-        String line="";
+
         HashSet<String> innerSet=null;
         String[] fileStrings = BACKGROUND_DIR.list();
         File[] files=new File[fileStrings.length];
-
-
         for(int i=0;i<fileStrings.length;i++){
             files[i] = new File(BACKGROUND_DIR,fileStrings[i]);
         }
+        for(File file:files){
 
-        for(File file:files) {
-            System.err.println("doing " + file);
-            for (String file_string:file.list()) {
-                System.err.println("doing " + file_string);
-                String text = Files.readFromFile(new File(file,
-                        file_string),
-                        "UTF8");
-                System.out.println("here 1");
-                t = new Tokenization(text.replaceAll("[^\\w\\s]", ""),tokenNGramTokenizerFactory);
-
-                System.out.println("here 2");
-                for(String s:t.tokenList()) {
-                    s = PorterStemmerTokenizerFactory.stem(s).toLowerCase();
-                    if(words.containsKey(s)) {
-                        words.get(s).add(file_string);
+                    innerSet = words.get(s);
+                    if(innerSet == null) {
+                        innerSet=new HashSet<String>();
+                        innerSet.add(file_string);
+                        words.put(s, innerSet);
                     } else {
-                        innerSet = new HashSet<String>();
                         innerSet.add(file_string);
                         words.put(s, innerSet);
                     }
                 }
-                System.out.println("here 3");
-            }
-            System.out.println("finished " + file);
-        }
-        System.err.println("after loop");
 
+
+            }
+        }
+        String line="";
+        HashMap<String, HashSet<String>> interestingWords = new HashMap<String, HashSet<String>>();
+        while ((line = phrases.readLine()) != null) {
+            line=PorterStemmerTokenizerFactory.stem(line);
+            interestingWords.put(line,words.get(line));
+        }
         Set<String> docs1;
         Set<String> docs2;
         Set<String> intersection;
         HashMap<String,Integer> jointScores=new HashMap<String, Integer>();
-        for(String key1:phrases){
-            for(String key2:words.keySet()){
+        for(String key1:interestingWords.keySet()){
+            for(String key2:interestingWords.keySet()){
                 docs1=words.get(key1);
                 docs2=words.get(key2);
                 intersection=new HashSet<String>(docs1);
                 intersection.retainAll(docs2);
                 jointScores.put(key1+"_"+key2,intersection.size());
-                System.err.println("here");
+
             }
         }
-        System.err.println("after loop");
-
-        while ((line = phrases.readLine()) != null) {
-            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
-            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
-                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
-        }
-    }
-
-        //StreamTokenizer stream = new StreamTokenizer();
-
-        //System.out.println(backgroundModel.toString());
-
-
-//        BufferedReader interestFile=null;
-//        try{
-//            interestFile = new BufferedReader(new FileReader("dat/phrases.tsv"));
-//            String line="";
-//            String phrase="";
-//            while ((line = interestFile.readLine()) != null) {
-//                for(String s: line.split("\t")[3].toLowerCase().split(" ")){
-//                   phrase+=" "+PorterStemmerTokenizerFactory.stem(s);
-//                }
-//                phrase=phrase.substring(1,phrase.length());
-//
-//                System.out.println(phrase);
-//
-//                phrase="";
-//            }
-//        }catch (IOException e){
-//            e.printStackTrace();
+        System.out.println(jointScores.toString());
+//        while ((line = phrases.readLine()) != null) {
+//            String s=PorterStemmerTokenizerFactory.stem(line.split("\t")[3]);
+//            if(words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3]))!=null)
+//                System.out.println(s+"\t\t\t"+words.get(PorterStemmerTokenizerFactory.stem(line.split("\t")[3])).size());
 //        }
+    }
 
 
     private static TokenizedLM buildModel(TokenizerFactory tokenizerFactory,
