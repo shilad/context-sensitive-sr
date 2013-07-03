@@ -1,11 +1,23 @@
 package srsurvey
 
 class PersonService {
+    def getForSession(session) {
+        Person p = null
+        if (session.person) {
+            p = Person.get(session.person)
+        }
+        if (p == null) {
+            p = new Person()
+            Survey s = new Survey()
+            p.setSurvey(s)
+            p.save(flush: true)
+            session.person = p.id
+        }
+        return p
+    }
 
-    Person person
-
-    PersonService(Person person){
-        this.person = person
+    def saveToSession(session, person) {
+        session.person = person.id
     }
 
     def create(String email) {

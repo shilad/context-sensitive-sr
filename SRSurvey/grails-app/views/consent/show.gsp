@@ -12,37 +12,23 @@
     <title>Disclaimer</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
-    <style>
-
-    p.margin
-    {
-        margin: auto 40px auto 40px;
-    }
-    p {text-indent:45px;}
-
-
-      #main-container {
-      height:500px;
-      }
-
-    </style>
 </head>
 <body>
 <div class= "rounded-corners" id="main-container">
-    <br>
-    <br>
-    <h1>Disclaimer  </h1>
-    <br>
-    <br>
+    <h1>Consent  </h1>
 <g:form controller="Interest" action="interest" name = "consent-form" method="post">
     <table>
         <tr>
-            <td>
+            <td colspan="2">
                 <p class= "margin">Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
             </td>
         </tr>
         <tr>
-            <td style= "text-align: right; padding-right: 40;">
+            <td style="text-align: right">
+                <br><label for="email">email:</label>
+                <input type="text" id="email" name="email" class="myInput" value="${person.email?.encodeAsHTML()}">
+            </td>
+            <td style= "vertical-align : bottom; text-align: right; padding-right: 40;">
                 <br>
                 <button name="nextpage" class="myButton">Yes, I consent</button>
             </td>

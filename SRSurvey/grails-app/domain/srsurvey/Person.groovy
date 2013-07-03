@@ -2,6 +2,9 @@ package srsurvey
 
 class Person {
 
+    // Their state in the survey
+    boolean hasConsented = false
+
     String email
     String firstName
     String lastName
@@ -12,6 +15,7 @@ class Person {
     static hasMany = [personToInterest:PersonToInterest]
 
     static constraints = {
+        email nullable: true
         survey nullable: true
         group nullable: true
         firstName nullable: true

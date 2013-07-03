@@ -36,6 +36,8 @@ time, mark, audio, video {
     background: -ms-linear-gradient(top, rgba(132,211,239,1) 0%,rgba(145,232,239,1) 40%,rgba(148,237,239,0.98) 50%,rgba(145,232,239,1) 60%,rgba(132,211,239,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom, rgba(132,211,239,1) 0%,rgba(145,232,239,1) 40%,rgba(148,237,239,0.98) 50%,rgba(145,232,239,1) 60%,rgba(132,211,239,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#84d3ef', endColorstr='#84d3ef',GradientType=0 ); /* IE6-9 */
+    padding: 15px;
+    border: 1px solid #444;
 }
 h1{
     padding-left: 1em;
@@ -94,3 +96,14 @@ h1{
     position:relative;
     top:1px;
 }
+
+.myInput {
+    padding: 5px;
+    width: 266px;
+    height: 30px;
+    font-size: 100%;
+    background-color: whitesmoke;
+    resize: none;
+    border: 2.4px solid #000000;
+}
+
