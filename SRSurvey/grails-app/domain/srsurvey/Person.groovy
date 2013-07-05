@@ -32,4 +32,14 @@ class Person {
         this.title = title
         this.isRegistered = isRegistered
     }
+
+    public int numAnswers() {
+        int n = 0
+        for (Question q : survey.questions) {
+            if (q.hasAnswer()) {
+                n++
+            }
+        }
+        return n
+    }
 }

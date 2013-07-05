@@ -7,8 +7,8 @@ import grails.test.mixin.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(FooService)
-class FooServiceTests {
+@TestFor(SrService)
+class SrServiceTests {
 
     void testSomething() {
         fail "Implement me"

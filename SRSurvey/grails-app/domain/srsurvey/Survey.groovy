@@ -3,9 +3,10 @@ package srsurvey
 class Survey {
 
     String comment
+    List questions
 
     static belongsTo = [person: Person]
-    static hasMany = [question:Question]
+    static hasMany = [questions:Question]
 
     Date dateCreated
 

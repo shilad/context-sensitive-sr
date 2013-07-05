@@ -2,17 +2,23 @@ package srsurvey
 
 class Question {
 
+    int round
+    int page    // which page of questions this will appear on
     Double result
     Date lastUpdated
     Integer questionNumber
     Interest interest1
     Interest interest2
+    Boolean interest1Known
+    Boolean interest2Known
 
     static belongsTo = [survey:Survey]
 
     static constraints = {
         result nullable: true
         survey nullable: true
+        interest1Known nullable: true
+        interest2Known nullable: true
     }
 
     Question(Double result, Integer questionNumber){
@@ -32,5 +38,9 @@ class Question {
         this.interest1 = interest1
         this.interest2 = interest2
         this.survey = survey
+    }
+
+    public boolean hasAnswer() {
+        return result != null || interest1Known != null || interest2Known != null
     }
 }

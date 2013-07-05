@@ -16,7 +16,7 @@ class SRserviceIntegrationTests {
 
     @Test
     void testSomething() {
-        FooService srService = new FooService()
+        SrService srService = new SrService()
         List<Question> questions = srService.getQuestions(ExperimentalGroup.findByName("Grass"))
         for (i in questions) {
             print i.interest1.text

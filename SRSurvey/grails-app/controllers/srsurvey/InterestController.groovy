@@ -2,7 +2,7 @@ package srsurvey
 
 class InterestController {
     def personService
-    def sRService
+    def srService
 
     def show() {
         Person p = personService.getForSession(session)
@@ -28,11 +28,10 @@ class InterestController {
             }
         }
 
-        //Assign Group
-        sRService.assignGroup(p, inputs)
+        //Assign Group (will happen on previous page)
+        srService.assignGroup(p, inputs)
 
-        redirect(controller: 'rating', action: 'ratings')
-
+        redirect(controller: 'rating', action: 'show')
     }
 
 }

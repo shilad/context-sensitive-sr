@@ -1,6 +1,6 @@
 package srsurvey
 
-class FooService {
+class SrService {
 
     //Return a ranking for a pair of interests
     def double getRating(Interest interest1, Interest interest2) {

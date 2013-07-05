@@ -1,6 +1,6 @@
 package srsurvey
 
-class CommentController {
+class FinishController {
 
     def show() {
         render(view: "comment")

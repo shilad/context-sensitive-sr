@@ -3,7 +3,6 @@ package srsurvey
 
 
 import grails.test.mixin.*
-import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -64,7 +63,7 @@ class SurveyTests {
         Survey s =  new Survey()
         Person p = new Person()
         ExperimentalGroup g = new ExperimentalGroup()
-        s.setQuestion([q1,q2] as Set<Question>)
+        s.setQuestions([q1,q2] as Set<Question>)
         s.setPerson(p)
         s.setExperimentalGroup(g)
         s.save(failOnError: true, flush: true)

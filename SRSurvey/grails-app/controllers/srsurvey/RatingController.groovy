@@ -1,70 +1,124 @@
 package srsurvey
 
 class RatingController {
+    static public final int QUESTIONS_PER_PAGE = 10
 
-    def ratings(){
+    def personService
+    def srService
 
-        //TODO: Get the person from the session, delete this part! Testing only!
 
-        if(session.person==null){
-            Person p = Person.findByEmail("zwang@macalester.edu")
-            session.person = p.id
-            Survey s = new Survey()
-            p.survey = s
-            p.save(flush: true)
-            print(s.id)
-            session.survey = s.id
-            FooService srService = new FooService()
-            srService.assignGroup(p, new ArrayList<Interest>())
+    def show(){
+        Person p = personService.getForSession(session)
+        if (!p.hasConsented || p.group == null) {
+            redirect(url : '/')
+            return
         }
-        Person p = Person.findById(session.person)
-
-        //TODO: We assume that new questions will be asked each time
-        List<Question> questions = new FooService().getQuestions(p.group)
-
-        //Saving the questions
-        for (q in questions){
-            if (q.id == null){
-                q.survey = p.survey
-                q.save(flush: true)
-            }
+        if (params.page == null || params.page == '') {
+            redirectToNextUnfinishedPage(p)
+            return
         }
 
-        //TODO: Change here to send in all questions
-        //TODO: On the javascript page we need to disable the rating radios if the user checked the checkbox
-        render(view:'ratings', model:[questions:questions[0..5]])
+        println("questions are " + p.survey.questions.size())
+
+        int page = params.page as int
+        List<Question> toAsk = p.survey.questions.findAll({it.page == page })
+        if (toAsk.isEmpty()) throw new IllegalStateException()
+
+        def round = toAsk[0].round
+        def inRound = p.survey.questions.findAll({it.round == round})
+        def roundBeg = inRound[0].page
+        def roundEnd = inRound[-1].page
+
+        render(view:'show', model:[
+                questions: toAsk,
+                round : round,
+                page: page,
+                roundBegPage : roundBeg,
+                roundEndPage : roundEnd,
+        ])
     }
 
-    def processForm(){
-        for(i in params['checks']){
-            //"add this into database for 'I don't know' checkbox"
-            //i is the id for interest
-            Interest interest = Interest.get(i)
-            int count = interest.unknown
-            interest.unknown++
-            interest.save(flush: true)
+    def redirectToNextUnfinishedPage(Person p) {
+        if (p.numAnswers() == p.survey.questions.size()) {
+            List<Question> questions = srService.getQuestions(p.group)
+            if (questions.isEmpty()) {
+                redirect(controller : 'finish', action: 'show', params: ['noMoreQuestions' : 'true'])
+                return
+            }
+
+            // find the next page of questions
+            int maxPage = -1
+            int maxRound = -1
+            if (!p.survey.questions.isEmpty()) {
+                maxPage = p.survey.questions*.page.max()
+                maxRound = p.survey.questions*.round.max()
+            }
+
+            for (int i = 0; i < questions.size(); i++) {
+                Question q = questions[i]
+                q.page = 1 + maxPage + i / QUESTIONS_PER_PAGE
+                q.round = maxRound + 1
+                p.survey.addToQuestions(q)
+            }
+            p.save(flush : true)
         }
-        for(qparam in params){
-            if(qparam.key[0..4]=="radio"){
+        for (Question q : p.survey.questions) {
+            if (!q.hasAnswer()) {
+                println("redirecting to " + q.page)
+                redirect(action: 'show', params: [page : q.page])
+                return
+            }
+        }
+        throw new IllegalStateException()
+    }
+
+    def save(){
+        Person p = personService.getForSession(session)
+        if (!p.hasConsented || p.group == null) {
+            redirect(url : '/')
+            return
+        }
+
+        for (qparam in params){
+            println("qparam is $qparam")
+            if(qparam.key.startsWith("radio")){
                 //"This is the question id "+q.key+" and
                 // this is the score "+q.value+". Put these into the database."
-                String id = qparam.key[6..-1]
-                Question question = Question.get(Integer.parseInt(id))
-                question.result = qparam.value
-                question.save(flush: true)
+                String [] tokens = qparam.key.split("_")
+                int qid = tokens[1] as int
+                Question question = Question.get(qid)
+                question.result = qparam.value as int
+                question.save()
             }
+            if (qparam.key.startsWith("unknown")) {
+                String [] tokens = qparam.key.split("_")
+                int qid = tokens[1] as int
+                int iid = tokens[2] as int
+                Question question = Question.get(qid)
+                if (iid == question.interest1.id) {
+                    question.interest1Known = false
+                } else if (iid == question.interest2.id) {
+                    question.interest2Known = false
+                } else {
+                    throw new IllegalArgumentException("question " + qid + " has no id " + iid)
+                }
+                question.result = -1.0
+                question.save()
+            }
+        }
+        if (p.numAnswers() % 50 == 0) {
         }
 
         if(params['nextLocation']=="comments"){
-            redirect(controller: 'comment', action: 'show')            
+            redirect(controller: 'finish', action: 'show')
         }
         else if(params['nextLocation']=="reload"){
             //TODO: Add randomization for question grabbing and ensure that questions are not asked twice
-            redirect(action:'ratings')
+            redirect(action:'show')
         }
     }
 
     def index() {
-        render(view:'ratings')
+        redirect(action: 'show')
     }
 }
