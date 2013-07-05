@@ -13,35 +13,14 @@ class ConsentController {
     }
 
     def save() {
-
-        if(params.emails!=null)
-        {
-            String email = params.emails
-            //print(email)
-            Person p = Person.findByEmail(email)
-            //print(p)
-
-            if(Survey.findByPerson(p) == null) {
-                p = new Person(email : params.emails)
-                Survey s = new Survey()
-                p.setSurvey(s)
-                p.save(flush: true)
-            }
-
-
-            //put the person into session
-            if(session.person==null)
-            {
-                session.person = p.id
-            }
-
-            if(session.survey==null){
-                Survey s = Survey.findByPerson(p)
-                session.survey = s.id
-            }
-
-            render(view:'show')
+        if (!params.email) {
+            redirect(action: 'show')
+            return
         }
-
+        Person p = personService.getForSession(session)
+        p.email = params.email
+        p.hasConsented = true
+        p.save()
+        redirect(controller: 'interest', action: 'show')
     }
 }

@@ -1,8 +1,6 @@
 package srsurvey
 
-import static org.junit.Assert.*
 import org.junit.*
-import srsurvey.*
 
 class SRserviceIntegrationTests {
 
@@ -18,7 +16,7 @@ class SRserviceIntegrationTests {
 
     @Test
     void testSomething() {
-        SRService srService = new SRService()
+        FooService srService = new FooService()
         List<Question> questions = srService.getQuestions(ExperimentalGroup.findByName("Grass"))
         for (i in questions) {
             print i.interest1.text

@@ -38,7 +38,7 @@
 <body>
 <div class= "consent rounded-corners" id="main-container">
     <h1>Research study: Context-sensitive semantic relatedness</h1>
-<g:form controller="Interest" action="interest" name = "consent-form" method="post">
+<g:form controller="consent" action="save" name = "consent-form" method="post">
     <table>
         <tr>
             <td colspan="3">

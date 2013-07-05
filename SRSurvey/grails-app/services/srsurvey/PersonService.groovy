@@ -16,24 +16,20 @@ class PersonService {
         return p
     }
 
-    def saveToSession(session, person) {
-        session.person = person.id
-    }
-
     def create(String email) {
         Person person = new Person()
         person.setEmail(email)
         person.save(flush: true)
     }
 
-    def addInterest(String text) {
+    def addInterest(Person p, String text) {
         def interest = Interest.findByText(text)
         if (interest == null && !text.equals(""))
         {
             interest = new Interest(text)
             interest.save(flush: true)
         }
-        PersonToInterest pi = new PersonToInterest(person, interest)
+        PersonToInterest pi = new PersonToInterest(p, interest)
         pi.save(flush: true)
     }
 }

@@ -1,7 +1,5 @@
 package srsurvey
 
-import com.sun.xml.internal.bind.v2.TODO
-
 class RatingController {
 
     def ratings(){
@@ -16,13 +14,13 @@ class RatingController {
             p.save(flush: true)
             print(s.id)
             session.survey = s.id
-            SRService srService = new SRService()
+            FooService srService = new FooService()
             srService.assignGroup(p, new ArrayList<Interest>())
         }
         Person p = Person.findById(session.person)
 
         //TODO: We assume that new questions will be asked each time
-        List<Question> questions = new SRService().getQuestions(p.group)
+        List<Question> questions = new FooService().getQuestions(p.group)
 
         //Saving the questions
         for (q in questions){

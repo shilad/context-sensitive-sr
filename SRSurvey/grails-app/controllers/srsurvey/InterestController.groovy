@@ -1,62 +1,38 @@
 package srsurvey
 
 class InterestController {
+    def personService
+    def sRService
 
-
-    //Links Consent to Interest page
-
-    def interest() {
-
-        //Find the survey based off the person in session
-        Survey s = Survey.findByPerson(Person.findById(session.person))
-
-        render(view: 'interest')
-
+    def show() {
+        Person p = personService.getForSession(session)
+        if (!p.hasConsented) {
+            redirect(url : '/')
+            return
+        }
+        render(view: 'interest', model: [person: p])
     }
 
-    def process() {
-        List<String> inputs = params.get("interest_inputs")
-        //print(inputs)
+    def save() {
+        Person p = personService.getForSession(session)
+        if (!p.hasConsented) {
+            redirect(url : '/')
+            return
+        }
 
-        //Find the person
-        Person p = Person.findById(session.person)
+        List<String> inputs = params.get("interest_inputs") as List<String>
 
-        //Associate the person with the interest
-        PersonService ps = new PersonService(p)
-        //print(inputs+"here")
         for (interest in inputs){
             if(interest!=""){
-                ps.addInterest(interest)
+                personService.addInterest(p, interest)
             }
         }
 
         //Assign Group
-        SRService sr = new SRService()
-        sr.assignGroup(p, inputs)
+        sRService.assignGroup(p, inputs)
 
         redirect(controller: 'rating', action: 'ratings')
 
     }
-
-    def index() {
-
-        if(params.emails!= null){
-            String email = params.emails
-
-            Person p = Person.findByEmail(email)
-
-            //put the person into session
-            if(session.person==null){
-                session.person = p.id
-            }
-
-            redirect(action: "interest", params: [emails:params.emails])
-        } else {
-            redirect(url: "/")
-        }
-    }
-
-
-
 
 }

@@ -1,0 +1,52 @@
+#main-container.interest {
+  padding: 20px;
+
+  strong {font-weight: bold !important}
+
+  input{
+    width: 400px;
+    height: 30px;
+    font-size: 100%;
+    background-color: whitesmoke;
+    resize: none;
+    border: 1px solid #aaa;
+    margin: 10px 0;
+
+    @include border-radius(5px);
+    padding: 5px;
+  }
+  #add-more {
+    margin: 1px 25px 0px 2px
+  }
+  #instructions {
+    padding: 0 20px;
+    vertical-align: top;
+    height: 100%;
+    line-height: 18px;
+  }
+  .myButton {
+
+    font-size:100%!important;
+    padding:4px 9px!important;
+
+  }
+  .main-boxes{
+    padding:5px;
+  }
+
+  .indent-click{
+    margin: 4px 0px 0px 70px
+  }
+  #next{
+    margin: 4px 45px 0px 30px
+  }
+
+  .error{
+    background: #ff5459;
+  }
+  #error{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 35px;
+    color:#FF0000;
+  }
+}

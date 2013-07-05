@@ -1,7 +1,6 @@
 package srsurvey
-import java.util.Random
 
-class SRService {
+class FooService {
 
     //Return a ranking for a pair of interests
     def double getRating(Interest interest1, Interest interest2) {
