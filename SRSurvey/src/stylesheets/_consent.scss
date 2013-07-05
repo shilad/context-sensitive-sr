@@ -1,0 +1,39 @@
+#main-container.consent {
+
+  h1 {
+    margin-left: 20px;
+  }
+
+  #consent-text {
+    height: 300px;
+    overflow: scroll;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(248, 255, 255);
+    @include border-radius(10px);
+    border: 1px solid #ccc;
+    padding: 0 10px;
+
+    font-size: 14px;
+    line-height: 16px;
+
+    h3,h4 {
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 2px;
+    }
+  }
+
+  #email {
+    @include border-radius(5px);
+  }
+
+  tr.bottom {
+    td {
+      padding-top: 20px;
+      text-align : center;
+    }
+  }
+
+
+}

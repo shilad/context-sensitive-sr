@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+// Here's where we define some default constants
+@import "compass";
+
+// Then we'll import the compass extension
+@import "compass/utilities";
+@import "compass/css3";
+@import "compass/layout";
+@import "compass/reset";
+@import "compass/css3/images";
+
+@import "shared";
+@import "consent";
+

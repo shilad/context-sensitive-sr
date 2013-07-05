@@ -14,8 +14,14 @@
 		<r:layoutResources />
 	</head>
 	<body>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
+        <div id="root">
+		    <g:layoutBody/>
+            <div id="root_footer"></div>
+        </div>
+		<div id="footer" role="contentinfo">
+            For questions about this research project, please contact
+                    <a href="mailto:ssen@macalester.edu">Shilad Sen</a> or <a href="mailto:bhecht@cs.umn.edu">Brent Hecht</a>
+		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
 		<r:layoutResources />
