@@ -25,32 +25,40 @@
         <div id="dontknow">I don't know<br/>this term</div>
         <div id="ratings">
             <g:each status="i" in="${questions}" var="q">
-                <div class="row ${ (i % 2) == 0 ? 'odd' : 'even'} num${i}" id="${q.questionNumber}">
+                <div class="row ${ (i % 2) == 0 ? 'odd' : 'even'} num${i}" id="${q.questionNumber}" >
                     <table>
                         <tbody>
                         <tr class="first">
                             <td class="interest">${q.interest1.text}</td>
                             <td class="checkbox">
-                                <input type="checkbox" name="unknown_${q.id}_${q.interest1.id}" class="checks" value="${q.interest1.id}">
+                                <input type="checkbox"
+                                       name="unknown_${q.id}_${q.interest1.id}"
+                                       class="checks" value="${q.interest1.id}"
+                                       <g:if test="${q.interest1Known == Boolean.FALSE}">checked</g:if> >
                             </td>
                             <td rowspan="2">
                                 <div class="rounded-corners rating-bars">
                                     <table>
                                         <tr>
                                             <td>
-                                                1 <input type="radio" name="${"radio_"+q.id}" value="1"/>
+                                                1 <input type="radio" name="${"radio_"+q.id}" value="1"
+                                                <g:if test="${q.result == 1}">checked</g:if>/>
                                             </td>
                                             <td>
-                                                2 <input type="radio" name="${"radio_"+q.id}" value="2"/>
+                                                2 <input type="radio" name="${"radio_"+q.id}" value="2"
+                                                         <g:if test="${q.result == 2}">checked</g:if>/>
                                             </td>
                                             <td>
-                                                3 <input type="radio" name="${"radio_"+q.id}" value="3"/>
+                                                3 <input type="radio" name="${"radio_"+q.id}" value="3"
+                                                         <g:if test="${q.result == 3}">checked</g:if>/>
                                             </td>
                                             <td>
-                                                4 <input type="radio" name ="${"radio_"+q.id}" value="4"/>
+                                                4 <input type="radio" name ="${"radio_"+q.id}" value="4"
+                                                         <g:if test="${q.result == 4}">checked</g:if>/>
                                             </td>
                                             <td>
-                                                5 <input type="radio" name="${"radio_"+q.id}" value="5"/>
+                                                5 <input type="radio" name="${"radio_"+q.id}" value="5"
+                                                         <g:if test="${q.result == 5}">checked</g:if>/>
                                             </td>
                                         </tr>
                                     </table>
@@ -66,7 +74,12 @@
                         <tr class="second">
                             <td class="interest">${q.interest2.text}</td>
                             <td class="checkbox">
-                                <input type="checkbox" name="checks" class="checks" id="${q.interest2.id}" value="${q.interest2.id}">
+                                <input type="checkbox"
+                                       name="unknown_${q.id}_${q.interest2.id}"
+                                       class="checks"
+                                       id="${q.interest2.id}"
+                                       value="${q.interest2.id}"
+                                       <g:if test="${q.interest2Known == Boolean.FALSE}">checked</g:if> >
                             </td>
                         </tr>
                         </tbody>
@@ -102,27 +115,21 @@
             }
             return isComplete;
         });
-        $(".checks").on('click', function( e ) {
-            $("div.row").each(function () {
-                if ($(this).find('input[type=checkbox]:checked').length > 0) {
-                    $(this).find(".rating-bars").fadeTo(500,.5);
-                    $(this).find("input[type=radio]").attr('disabled','disabled');
-                    $(this).find("input[type=radio]").prop('checked',false);
-                }  else {
-                    $(this).find(".rating-bars").fadeTo(500,1);
-                    $(this).find("input[type=radio]").removeAttr('disabled','disabled');
-                    //console.log($(this).find("input[type=radio]"));
-                }
-            });
+        $("input[type='checkbox']").click(function () {
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                var row = $this.parents(".row");
+                row.removeClass("error");
+                row.find("input[type=radio]").prop('checked', false);
+            }
         });
-
-        $("input[type='checkbox'], input[type='radio']").click(function () {
-            $("div.row").each(function () {
-                if ($(this).find('input:checked').length > 0) {
-                    $(this).removeClass("error");
-                    isComplete = false;
-                }
-            });
+        $("input[type='radio']").click(function () {
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                var row = $this.parents(".row");
+                row.removeClass("error");
+                row.find("input[type=checkbox]").prop('checked', false);
+            }
         });
     });
 </r:script>

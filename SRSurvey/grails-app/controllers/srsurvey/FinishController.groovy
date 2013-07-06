@@ -3,10 +3,10 @@ package srsurvey
 class FinishController {
 
     def show() {
-        render(view: "comment")
+        render(view: "show")
     }
 
-    def process() {
+    def save() {
         //TODO: limiting the size of the input string on javascript
 
         //Find the survey based off the person in session
@@ -19,14 +19,6 @@ class FinishController {
 
         //TODO: change this to the final view when created
         render(view: "final")
-    }
-
-    def test() {
-        if (!session.person) {
-            Person p = Person.findByEmail("bhillman@macalester.edu")
-            session.person = p.id
-        }
-        redirect(action: 'show')
     }
 
 }

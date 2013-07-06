@@ -79,8 +79,11 @@ class RatingController {
             return
         }
 
+        int page = params.page as int
+        List<Question> toAsk = p.survey.questions.findAll({it.page == page })
+        if (toAsk.isEmpty()) throw new IllegalStateException()
+
         for (qparam in params){
-            println("qparam is $qparam")
             if(qparam.key.startsWith("radio")){
                 //"This is the question id "+q.key+" and
                 // this is the score "+q.value+". Put these into the database."
@@ -88,6 +91,8 @@ class RatingController {
                 int qid = tokens[1] as int
                 Question question = Question.get(qid)
                 question.result = qparam.value as int
+                question.interest1Known = true
+                question.interest2Known = true
                 question.save()
             }
             if (qparam.key.startsWith("unknown")) {
@@ -106,15 +111,16 @@ class RatingController {
                 question.save()
             }
         }
-        if (p.numAnswers() % 50 == 0) {
-        }
 
-        if(params['nextLocation']=="comments"){
+        def round = toAsk[0].round
+        def inRound = p.survey.questions.findAll({it.round == round})
+        def roundBeg = inRound[0].page
+        def roundEnd = inRound[-1].page
+
+        if (page == roundEnd) {
             redirect(controller: 'finish', action: 'show')
-        }
-        else if(params['nextLocation']=="reload"){
-            //TODO: Add randomization for question grabbing and ensure that questions are not asked twice
-            redirect(action:'show')
+        } else {
+            redirect(action: 'show', params: [page: page+1])
         }
     }
 
