@@ -68,7 +68,7 @@
     <h1> Interests </h1>
     <br>
     <br>
-    <form action= "/SRSurvey/interest/process" name = "interest-form" id= "interest-form" method="post">
+    <form action= "/SRSurvey/interest/processInterest" name = "interest-form" id= "interest-form" method="post">
         <table>
             <tr>
                 <td>
