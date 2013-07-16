@@ -1,35 +1,111 @@
 package srsurvey
 
 class InterestController {
-    def personService
-    def srService
 
-    def show() {
-        Person p = personService.getForSession(session)
-        if (!p.hasConsented) {
-            redirect(url : '/')
-            return
-        }
-        render(view: 'interest', model: [person: p])
+
+    //Links Consent to Interest page
+
+    def interest() {
+
+        //Find the survey based off the person in session
+        Survey s = Survey.findByPerson(Person.findById(session.person))
+
+        render(view: 'interest')
+
     }
 
-    def save() {
-        Person p = personService.getForSession(session)
-        if (!p.hasConsented) {
-            redirect(url : '/')
-            return
-        }
+    def expertise() {
+        render(view: 'expertise')
+    }
 
-        List<String> inputs = params.get("interest_inputs") as List<String>
+    def processExpertise() {
 
+        //Find the person
+        Person p = Person.findById(session.person)
+
+        //Assign Group
+        SRService sr = new SRService()
+        sr.assignGroup(p)
+
+        redirect(action: "interest")
+    }
+
+    def processInterest() {
+        List<String> inputs = params.get("interest_inputs")
+        //print(inputs)
+
+        //Find the person
+        Person p = Person.findById(session.person)
+
+        //Associate the person with the interest
+        PersonService ps = new PersonService(p)
+        //print(inputs+"here")
         for (interest in inputs){
             if(interest!=""){
-                personService.addInterest(p, interest)
+                ps.addInterest(interest)
             }
         }
 
 
-        redirect(controller: 'rating', action: 'show')
+
+        redirect(controller: 'rating', action: 'ratings')
+
     }
+
+    def index() {
+
+        if(params.emails!= null){
+            String email = params.emails
+
+            Person p = Person.findByEmail(email)
+
+            //put the person into session
+            if(session.person==null){
+                session.person = p.id
+            }
+
+            redirect(action: "interest", params: [emails:params.emails])
+        } else {
+            redirect(url: "/")
+        }
+    }
+
+    // Create connect from email to consent should be like create
+    def consent()
+    {
+
+        if(params.emails!=null)
+        {
+            String email = params.emails
+            //print(email)
+            Person p = Person.findByEmail(email)
+            //print(p)
+
+            if(Survey.findByPerson(p) == null) {
+                Survey s = new Survey()
+                p.setSurvey(s)
+                p.save(flush: true)
+            }
+
+
+            //put the person into session
+            if(session.person==null)
+            {
+                session.person = p.id
+            }
+
+            if(session.survey==null){
+                Survey s = Survey.findByPerson(p)
+                session.survey = s.id
+            }
+
+            render(view:'consent')
+        } else
+        {
+            redirect(url: "/")
+        }
+    }
+
+
 
 }

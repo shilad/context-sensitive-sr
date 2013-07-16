@@ -39,12 +39,73 @@ public class TestAlgorithms {
         String[] names = {"Political Theory","US Politics","Biochemsitry","General Biology",
                 "Computer Science","Applied Math","Psychology"};
 //        findGroupsByInterestingPeople(ids,names,200,people);
-
-        for(Interest i: getInterestsOfDept(people,"Computer Science",2)){
-            System.out.println(i.getName());
-        }
-        interestsToFile(getInterestsOfDept(people,"Computer Science",2),"dat/compSciInterests.txt");
+        String[] deptNames = {"Biology", "English","Chemistry",
+                "Psychology","Mathematics","History","Music",
+                "Political Science","Visual Arts","Philosophy",
+                "Physical Ed. Recreation & Athletics",
+                "Sociology","Media Studies","Computer Science",
+                "Education Studies","Theatre Arts","Anthropology"};
+//        for(String s:deptNames){
+//            System.out.println("");
+//            System.out.println(s);
+//            for(Interest i: getInterestsOfDept(people,s,2)){
+//                System.out.println(i.getName());
+//            }
+//        }
+        //interestsToFile(getInterestsOfDept(people,"Computer Science",3),"dat/compSciInterests.txt");
+        createDepartmentFiles(deptNames,people);
     }
+
+    /**
+     * This method produces necessary files for the download program
+     * @param deptNames
+     * @param people
+     */
+    public static void createDepartmentFiles(String[] deptNames, ArrayList<People> people){
+
+        try{
+
+            File theDir = new File("dat/department");
+
+            // if the directory does not exist, create it
+            if (!theDir.exists())
+            {
+                boolean result = theDir.mkdir();
+                if(result){
+                    System.out.println("DIR created");
+                }
+
+            }
+
+            FileWriter departOut = new FileWriter("dat/department/department.txt");
+
+            for(String s:deptNames){
+                System.out.println("");
+                System.out.println(s);
+                departOut.write(s+"\n");
+
+                String name = "dat/department/"+s+".txt";
+                FileWriter interestOut = new FileWriter(name);
+                for(Interest i: getInterestsOfDept(people,s,3)){
+                    String interestName = i.getName();
+                    System.out.println(interestName);
+                    if(!interestName.equals("")){
+                        interestOut.write(i.getName()+"\n");
+                    }
+                }
+                interestOut.flush();
+                interestOut.close();
+            }
+
+            departOut.flush();
+            departOut.close();
+        } catch (IOException ex) {
+            System.out.println("Unable to create file");
+            ex.printStackTrace();
+        }
+
+    }
+
     public static void interestsToFile(ArrayList<Interest> interests, String path){
         try{
             FileWriter out = new FileWriter(path);
@@ -63,14 +124,14 @@ public class TestAlgorithms {
         ArrayList<People> deptPeople = new ArrayList<People>();
         for(int i=0;i<people.size();i++){
             for(int j=0;j<people.get(i).getDepartment().size();j++){
-                if(people.get(i).getDepartment().get(j).equals(department)){
+                if(people.get(i).getDepartment().get(j).toLowerCase().equals(department.toLowerCase())){
                     deptPeople.add(people.get(i));
                 }
             }
         }
 
 
-
+        System.out.println(deptPeople.size());
         final HashMap<Interest,Integer> scores = new HashMap<Interest, Integer>();
 
         for(People p:deptPeople){
