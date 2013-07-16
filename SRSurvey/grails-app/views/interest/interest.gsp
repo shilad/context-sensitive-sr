@@ -12,11 +12,63 @@
     <title>Interest</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
+    <style>
+
+    p.margin{
+        margin: 16px 30px 0px 45px;
+    }
+    p {text-indent:45px;}
+
+    strong {font-weight: bold !important}
+
+    input{
+        margin: 19px 1px 0px 47px;
+        width: 266px;
+        height: 30px;
+        font-size: 100%;
+        background-color: whitesmoke;
+        resize: none;
+        border: 2.4px solid #000000;
+    }
+    #add-more
+    {
+        margin: 1px 25px 0px 2px
+    }
+    .myButton {
+
+        font-size:100%!important;
+        padding:4px 9px!important;
+
+    }
+    .main-boxes{
+        padding:5px;
+    }
+
+    .indent-click{
+        margin: 4px 0px 0px 70px
+    }
+    #next{
+        margin: 4px 45px 0px 30px
+    }
+
+    .error{
+        background: rgb(255,0,0);
+    }
+    #error{
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 35px;
+        color:#FF0000;
+    }
+    </style>
 </head>
 <body>
-<div class= "interest rounded-corners" id="main-container">
-    <h1>Research interests</h1>
-    <form action="save" name="interest-form" id="interest-form" method="post">
+<div class= "rounded-corners" id="main-container">
+    <br>
+    <br>
+    <h1> Interests </h1>
+    <br>
+    <br>
+    <form action= "/SRSurvey/interest/processInterest" name = "interest-form" id= "interest-form" method="post">
         <table>
             <tr>
                 <td>
@@ -98,13 +150,14 @@
                         </tr>
                     </table>
                 </td>
-                <td id="instructions">
-                    Please enter at least <strong>THREE</strong> of your academic research interests.
-                    These could be broad or specific pedagogical or research interests.
-
-                    <br/>
-                    <br/>
-                    <button class="myButton">Next</button>
+                <td>
+                    <br>
+                    <p class="margin"> Please enter at least <strong>THREE</strong> of your academic interests. These could be pedagogical interests, research interests, subjects you teach, ect. You can enter up to ten interests.  These can be broad or specific. </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;">
+                    <a id="next" class="myButton">Next</a>
                 </td>
             </tr>
         </table>
@@ -115,16 +168,9 @@
 </html>
 <r:script>
 
-    function numInterests() {
-        var n = 0;
-        $("tr.main-boxes").each(function () {
-            if ($(this).find('input[type=text]').val() != "") {
-                n++;
-            }
-        });
-        return n;
-    }
     $(document).ready(function() {
+
+
         $(".extra").hide();
         $("#add-boxes").click(function( e ) {
             $(".extra").toggle();
@@ -137,30 +183,59 @@
 
         });
 
-        // remove errors after user enters enough interests
-        $('form#interest-form').bind('click keyup', function( e ) {
-            if(numInterests() >= 3){
-                $("tr.main-boxes").each(function () {
-                   $(this).find('input[type=text]').removeClass("error");
-                });
-            }
-        });
 
-        $('form').on('submit', function( e ) {
-            if(numInterests() >= 3){
-                return true;
-            } else{
+        $('form#interest-form').bind('click keyup', function( e ) {
+            var noError = false;
+            var i=0;
+            $("tr.main-boxes").each(function () {
+                if ($(this).find('input[type=text]').val() != "") {
+                    if(i==2){
+                    noError=true
+                    }
+                    i++;
+                }
+            });
+            if(noError==true){
+
+                $("tr.main-boxes").each(function () {
+
+                   $(this).find('input[type=text]').removeClass("error");
+
+                });
+
+            }
+
+        });
+        $('#next').bind('click', function( e ) {
+            var noError = false;
+            var i=0;
+            $("tr.main-boxes").each(function () {
+                if ($(this).find('input[type=text]').val() != "") {
+                    if(i==2){
+                        noError=true
+                    }
+                    i++;
+                }
+            });
+            if(noError==true){
+                $("#interest-form").submit();
+                //submit form and move to rating page
+            }
+            else{
                 var i=0;
                 $("tr.main-boxes").each(function () {
-                    if(i++<3){
+                    if(i<3){
                         $(this).find('input[type=text]').addClass("error");
+                        i++;
                     }
                 });
+
                 $.fancybox({
                     content: $('#error')
                 });
-                return false;
             }
+
         });
+
     });
 </r:script>
