@@ -1,193 +1,50 @@
-Key1: neurosci	Key2: cognitive neurosci	Value: 0.7048642827220115
-Key1: bilingu	Key2: history of psycholog	Value: 0.6164897067506038
-Key1: linguist	Key2: bilingu	Value: 0.5821073945531156
-Key1: cognitive develop	Key2: developmental psycholog	Value: 0.4903724226567612
-Key1: health psycholog	Key2: community psycholog	Value: 0.46404769402967505
-Key1: clinical psycholog	Key2: community psycholog	Value: 0.45391636270042784
-Key1: cognitive develop	Key2: history of psycholog	Value: 0.4403984476949226
-Key1: cognitive develop	Key2: linguist	Value: 0.4346613169469643
-Key1: community psycholog	Key2: history of psycholog	Value: 0.41753556473541836
-Key1: cognitive neurosci	Key2: cognitive psycholog	Value: 0.4140534522397164
-Key1: history of psycholog	Key2: developmental psycholog	Value: 0.395816315042182
-Key1: clinical psycholog	Key2: health psycholog	Value: 0.3822231380453529
-Key1: cognitive psycholog	Key2: history of psycholog	Value: 0.3458423400803435
-Key1: cognitive neurosci	Key2: linguist	Value: 0.330765183078242
-Key1: cognitive develop	Key2: cognitive psycholog	Value: 0.32229913561692813
-Key1: memori	Key2: cognitive neurosci	Value: 0.32070804664296826
-Key1: cognitive psycholog	Key2: linguist	Value: 0.3170639054008537
-Key1: neurosci	Key2: animal behavior	Value: 0.30692427404997386
-Key1: history of psycholog	Key2: linguist	Value: 0.3027364594779983
-Key1: community psycholog	Key2: social psycholog	Value: 0.2938323751394254
-Key1: bilingu	Key2: gender	Value: 0.2901144522455268
-Key1: history of psycholog	Key2: neurosci	Value: 0.2788955504497303
-Key1: developmental psycholog	Key2: bilingu	Value: 0.27477262231740635
-Key1: introductory psycholog	Key2: history of psycholog	Value: 0.2708775784338821
-Key1: linguist	Key2: developmental psycholog	Value: 0.2651404476859238
-Key1: cognitive neurosci	Key2: history of psycholog	Value: 0.26041214475571717
-Key1: memori	Key2: cognitive psycholog	Value: 0.2600102062893565
-Key1: health psycholog	Key2: social psycholog	Value: 0.25992771137375026
-Key1: introductory psycholog	Key2: social psycholog	Value: 0.2587491638882075
-Key1: cognitive psycholog	Key2: neurosci	Value: 0.25391326236265316
-Key1: bilingu	Key2: cognitive psycholog	Value: 0.2506059109618532
-Key1: cognitive neurosci	Key2: cognitive develop	Value: 0.2431178895693033
-Key1: community psycholog	Key2: gender	Value: 0.2324894630268107
-Key1: community psycholog	Key2: emot	Value: 0.2295450823800294
-Key1: neurosci	Key2: cognitive develop	Value: 0.22774302800234902
-Key1: neurosci	Key2: memori	Value: 0.22309812295658543
-Key1: history of psycholog	Key2: emot	Value: 0.2185496980785662
-Key1: cognitive psycholog	Key2: developmental psycholog	Value: 0.21429630427510263
-Key1: neurosci	Key2: linguist	Value: 0.21384441848579008
-Key1: health psycholog	Key2: emot	Value: 0.21220952004754723
-Key1: gender	Key2: health psycholog	Value: 0.2087197906889186
-Key1: animal behavior	Key2: history of psycholog	Value: 0.19568681511906205
-Key1: history of psycholog	Key2: gender	Value: 0.19346535512510396
-Key1: linguist	Key2: memori	Value: 0.182088599515156
-Key1: clinical psycholog	Key2: social psycholog	Value: 0.17636746288596944
-Key1: cognitive neurosci	Key2: animal behavior	Value: 0.17449751604912397
-Key1: cognitive neurosci	Key2: developmental psycholog	Value: 0.17050703331631922
-Key1: emot	Key2: clinical psycholog	Value: 0.1631601226879303
-Key1: memori	Key2: cognitive develop	Value: 0.16041105477051887
-Key1: social psycholog	Key2: bilingu	Value: 0.15990915423863492
-Key1: social psycholog	Key2: emot	Value: 0.15611616522149585
-Key1: emot	Key2: gender	Value: 0.15389470522753784
-Key1: gender	Key2: social psycholog	Value: 0.14845571418477374
-Key1: memori	Key2: animal behavior	Value: 0.14683824758124503
-Key1: bilingu	Key2: clinical psycholog	Value: 0.14356456662454956
-Key1: cognitive develop	Key2: bilingu	Value: 0.1432634959144656
-Key1: cognit	Key2: cognitive neurosci	Value: 0.14305205750624672
-Key1: cognit	Key2: cognitive psycholog	Value: 0.14305205750624667
-Key1: history of psycholog	Key2: memori	Value: 0.13238233117027534
-Key1: gender	Key2: developmental psycholog	Value: 0.1261260715844474
-Key1: bilingu	Key2: emot	Value: 0.11770939144207739
-Key1: history of psycholog	Key2: cognit	Value: 0.11502333390600321
-Key1: developmental psycholog	Key2: cognit	Value: 0.11005179740332129
-Key1: learn	Key2: linguist	Value: 0.10891643346188555
-Key1: gender	Key2: clinical psycholog	Value: 0.10719921326139822
-Key1: community psycholog	Key2: developmental psycholog	Value: 0.10578170367966405
-Key1: cognitive neurosci	Key2: learn	Value: 0.09737245333062665
-Key1: cognit	Key2: linguist	Value: 0.09615318788676239
-Key1: learn	Key2: cognitive psycholog	Value: 0.09538027331484217
-Key1: history of psycholog	Key2: clinical psycholog	Value: 0.09267296006480182
-Key1: neurosci	Key2: developmental psycholog	Value: 0.09208042600227595
-Key1: memori	Key2: cognit	Value: 0.08769220635430446
-Key1: history of psycholog	Key2: learn	Value: 0.08284620013403028
-Key1: neurosci	Key2: cognit	Value: 0.07924098172849207
-Key1: cognitive develop	Key2: learn	Value: 0.07778640136462797
-Key1: statist	Key2: gender	Value: 0.0726051025221276
-Key1: emot	Key2: cognit	Value: 0.07177998151246662
-Key1: introductory psycholog	Key2: cognitive psycholog	Value: 0.06980403129112367
-Key1: bilingu	Key2: statist	Value: 0.06966072187534636
-Key1: social psycholog	Key2: cognit	Value: 0.06756695701858553
-Key1: bilingu	Key2: cognit	Value: 0.06621202727352438
-Key1: memori	Key2: developmental psycholog	Value: 0.06614113792867082
-Key1: developmental psycholog	Key2: psycholog	Value: 0.06597214078720252
-Key1: history of psycholog	Key2: social psycholog	Value: 0.06535304662405582
-Key1: neurosci	Key2: learn	Value: 0.06434603957487339
-Key1: emot	Key2: developmental psycholog	Value: 0.06314303788273598
-Key1: learn	Key2: animal behavior	Value: 0.060318550291829955
-Key1: health psycholog	Key2: cognit	Value: 0.06007782244148274
-Key1: statist	Key2: health psycholog	Value: 0.05942549996080308
-Key1: memori	Key2: introductory psycholog	Value: 0.05615691702206988
-Key1: statist	Key2: clinical psycholog	Value: 0.05292845328664998
-Key1: cognitive neurosci	Key2: emot	Value: 0.05267760420457107
-Key1: clinical psycholog	Key2: cognit	Value: 0.0492929251771484
-Key1: psycholog	Key2: linguist	Value: 0.04852825050599385
-Key1: cognit	Key2: psycholog	Value: 0.04707035510864915
-Key1: bilingu	Key2: memori	Value: 0.04705419071203413
-Key1: psycholog	Key2: emot	Value: 0.04431308019833853
-Key1: bilingu	Key2: psycholog	Value: 0.041838461070483154
-Key1: developmental psycholog	Key2: learn	Value: 0.039937651370855726
-Key1: cognitive neurosci	Key2: psycholog	Value: 0.039319946015762254
-Key1: learn	Key2: emot	Value: 0.03801927449314023
-Key1: developmental psycholog	Key2: clinical psycholog	Value: 0.03619160411235356
-Key1: cognit	Key2: learn	Value: 0.03590097125375064
-Key1: cognit	Key2: introductory psycholog	Value: 0.03541817910641708
-Key1: psycholog	Key2: memori	Value: 0.03485234020981708
-Key1: linguist	Key2: emot	Value: 0.032076403229163164
-Key1: statist	Key2: community psycholog	Value: 0.031003571732610185
-Key1: gender	Key2: cognit	Value: 0.02881316624149037
-Key1: cognitive psycholog	Key2: social psycholog	Value: 0.028788885987163493
-Key1: introductory psycholog	Key2: clinical psycholog	Value: 0.026431766823197332
-Key1: memori	Key2: emot	Value: 0.025979164628389572
-Key1: psycholog	Key2: learn	Value: 0.024284918837828403
-Key1: psycholog	Key2: gender	Value: 0.024136071739620436
-Key1: statist	Key2: emot	Value: 0.022176412014165196
-Key1: gender	Key2: cognitive develop	Value: 0.021269139952946933
-Key1: social psycholog	Key2: statist	Value: 0.020145644144401825
-Key1: bilingu	Key2: learn	Value: 0.019794454386941253
-Key1: learn	Key2: introductory psycholog	Value: 0.019415984226254034
-Key1: introductory psycholog	Key2: statist	Value: 0.017253251710649117
-Key1: neurosci	Key2: emot	Value: 0.011723822046716566
-Key1: bilingu	Key2: animal behavior	Value: 0.007696332763673037
-Key1: social psycholog	Key2: learn	Value: 0.003770995957742435
-Key1: psycholog	Key2: animal behavior	Value: 0.0012468111505473992
-Key1: statist	Key2: developmental psycholog	Value: 0.0011664318171943839
-Key1: learn	Key2: health psycholog	Value: -7.816008658208383E-4
-Key1: cognit	Key2: community psycholog	Value: -8.545181780332188E-4
-Key1: psycholog	Key2: statist	Value: -0.0018010895911928905
-Key1: cognit	Key2: statist	Value: -0.002745841719831402
-Key1: linguist	Key2: animal behavior	Value: -0.0050269188449512565
-Key1: cognitive psycholog	Key2: emot	Value: -0.006004944913715054
-Key1: psycholog	Key2: neurosci	Value: -0.007314826874429705
-Key1: memori	Key2: social psycholog	Value: -0.00740767831917252
-Key1: statist	Key2: learn	Value: -0.010773687426976217
-Key1: neurosci	Key2: bilingu	Value: -0.018239401330726657
-Key1: gender	Key2: learn	Value: -0.02215781385381648
-Key1: statist	Key2: memori	Value: -0.022755594309946094
-Key1: statist	Key2: cognitive psycholog	Value: -0.02489538573923279
-Key1: learn	Key2: clinical psycholog	Value: -0.0269010375791984
-Key1: cognitive psycholog	Key2: animal behavior	Value: -0.028867827873219256
-Key1: statist	Key2: neurosci	Value: -0.033850228392159204
-Key1: community psycholog	Key2: learn	Value: -0.035253111943964285
-Key1: linguist	Key2: social psycholog	Value: -0.038450674331901025
-Key1: animal behavior	Key2: statist	Value: -0.04242534542592336
-Key1: linguist	Key2: gender	Value: -0.04767703589451752
-Key1: introductory psycholog	Key2: emot	Value: -0.05181147781896309
-Key1: health psycholog	Key2: history of psycholog	Value: -0.05209766859169413
-Key1: cognit	Key2: animal behavior	Value: -0.057077442416873334
-Key1: cognitive develop	Key2: emot	Value: -0.05838186761360375
-Key1: history of psycholog	Key2: statist	Value: -0.05917305861647784
-Key1: cognitive neurosci	Key2: statist	Value: -0.06147701352604219
-Key1: statist	Key2: linguist	Value: -0.068001266341578
-Key1: statist	Key2: cognitive develop	Value: -0.07646731380289168
-Key1: memori	Key2: clinical psycholog	Value: -0.09087418137047136
-Key1: gender	Key2: memori	Value: -0.10653915132118694
-Key1: bilingu	Key2: health psycholog	Value: -0.11514941433878315
-Key1: introductory psycholog	Key2: community psycholog	Value: -0.11606704593669229
-Key1: cognitive psycholog	Key2: gender	Value: -0.13001459211055927
-Key1: memori	Key2: health psycholog	Value: -0.14441192991060145
-Key1: introductory psycholog	Key2: gender	Value: -0.1482517293080936
-Key1: social psycholog	Key2: cognitive develop	Value: -0.16042599662073287
-Key1: neurosci	Key2: gender	Value: -0.1724184406636466
-Key1: linguist	Key2: health psycholog	Value: -0.17363015650808258
-Key1: emot	Key2: animal behavior	Value: -0.1906713210031604
-Key1: linguist	Key2: introductory psycholog	Value: -0.20283742759386886
-Key1: cognitive neurosci	Key2: social psycholog	Value: -0.23567694903992537
-Key1: linguist	Key2: clinical psycholog	Value: -0.250708277467943
-Key1: introductory psycholog	Key2: developmental psycholog	Value: -0.2627250322382285
-Key1: bilingu	Key2: introductory psycholog	Value: -0.2692954220328693
-Key1: cognitive develop	Key2: clinical psycholog	Value: -0.27140878134626834
-Key1: neurosci	Key2: social psycholog	Value: -0.2841403329765254
-Key1: developmental psycholog	Key2: health psycholog	Value: -0.28467028359982366
-Key1: clinical psycholog	Key2: cognitive psycholog	Value: -0.2867836429132227
-Key1: community psycholog	Key2: memori	Value: -0.3003197837609741
-Key1: clinical psycholog	Key2: neurosci	Value: -0.33024933669431294
-Key1: cognitive neurosci	Key2: gender	Value: -0.3348084220419397
-Key1: cognitive psycholog	Key2: community psycholog	Value: -0.4090790695848253
-Key1: neurosci	Key2: introductory psycholog	Value: -0.4307983192780616
-Key1: introductory psycholog	Key2: cognitive develop	Value: -0.4453866810885506
-Key1: health psycholog	Key2: cognitive psycholog	Value: -0.45274357063965665
-Key1: health psycholog	Key2: introductory psycholog	Value: -0.46076154265550484
-Key1: animal behavior	Key2: cognitive develop	Value: -0.46942492195598934
-Key1: linguist	Key2: community psycholog	Value: -0.4821481735646137
-Key1: social psycholog	Key2: animal behavior	Value: -0.4922878049154936
-Key1: animal behavior	Key2: developmental psycholog	Value: -0.51400705460873
-Key1: clinical psycholog	Key2: animal behavior	Value: -0.516120413922129
-Key1: clinical psycholog	Key2: cognitive neurosci	Value: -0.5483050972935302
-Key1: gender	Key2: animal behavior	Value: -0.591419277917508
-Key1: health psycholog	Key2: cognitive neurosci	Value: -0.5961657129419697
-Key1: cognitive neurosci	Key2: introductory psycholog	Value: -0.625372984027756
-Key1: cognitive develop	Key2: community psycholog	Value: -0.7246974270592954
-Key1: health psycholog	Key2: cognitive develop	Value: -0.8933006647224268
-Key1: health psycholog	Key2: animal behavior	Value: -0.9619210382426061
-Key1: cognitive neurosci	Key2: community psycholog	Value: -Infinity
+neuroscience	cognitive neuroscience	0.7048642827220115
+cognitive development	developmental psychology	0.4903724226567612
+cognitive development	linguistics	0.4346613169469643
+clinical psychology	health psychology	0.3822231380453529
+memory	cognitive neuroscience	0.32070804664296826
+community psychology	social psychology	0.2938323751394254
+introductory psychology	history of psychology	0.2708775784338821
+health psychology	social psychology	0.25992771137375026
+bilingualism	cognitive psychology	0.2506059109618532
+neuroscience	cognitive development	0.22774302800234902
+neuroscience	linguistics	0.21384441848579008
+history of psychology	gender	0.19346535512510396
+cognitive neuroscience	developmental psychology	0.17050703331631922
+social psychology	emotion	0.15611616522149585
+bilingualism	clinical psychology	0.14356456662454956
+cognition	cognitive psychology	0.14305205750624667
+history of psychology	cognition	0.11502333390600321
+community psychology	developmental psychology	0.10578170367966405
+history of psychology	clinical psychology	0.09267296006480182
+neuroscience	cognition	0.07924098172849207
+introductory psychology	cognitive psychology	0.06980403129112367
+memory	developmental psychology	0.06614113792867082
+neuroscience	learning	0.06434603957487339
+statistics	health psychology	0.05942549996080308
+clinical psychology	cognition	0.0492929251771484
+psychology	emotion	0.04431308019833853
+learning	emotion	0.03801927449314023
+psychology	memory	0.03485234020981708
+cognitive psychology	social psychology	0.028788885987163493
+psychology	learning	0.024284918837828403
+social psychology	statistics	0.020145644144401825
+neuroscience	emotion	0.011723822046716566
+statistics	developmental psychology	0.0011664318171943839
+cognition	statistics	-0.002745841719831402
+memory	social psychology	-0.00740767831917252
+statistics	memory	-0.022755594309946094
+cognitive psychology	animal behavior	-0.028867827873219256
+animal behavior	statistics	-0.04242534542592336
+cognition	animal behavior	-0.057077442416873334
+statistics	linguistics	-0.068001266341578
+bilingualism	health psychology	-0.11514941433878315
+introductory psychology	gender	-0.1482517293080936
+emotion	animal behavior	-0.1906713210031604
+linguistics	clinical psychology	-0.250708277467943
+neuroscience	social psychology	-0.2841403329765254
+clinical psychology	neuroscience	-0.33024933669431294
+introductory psychology	cognitive development	-0.4453866810885506
+linguistics	community psychology	-0.4821481735646137
+clinical psychology	cognitive neuroscience	-0.5483050972935302
+cognitive development	community psychology	-0.7246974270592954
