@@ -1,0 +1,87 @@
+Key1: european histori	Key2: medieval histori	Value: 0.6587091371576692
+Key1: latin american histori	Key2: european histori	Value: 0.6439858803369628
+Key1: african american histori	Key2: womens histori	Value: 0.6324040077871477
+Key1: latin american histori	Key2: medieval histori	Value: 0.5948876465192585
+Key1: world histori	Key2: european histori	Value: 0.5742461905221795
+Key1: latin american histori	Key2: cultural histori	Value: 0.5589750906286142
+Key1: african american histori	Key2: latin american histori	Value: 0.513217600067939
+Key1: latin american histori	Key2: world histori	Value: 0.5084187171861703
+Key1: medieval histori	Key2: irish histori	Value: 0.4756317572413219
+Key1: world histori	Key2: medieval histori	Value: 0.4674418238087747
+Key1: irish histori	Key2: latin american histori	Value: 0.4431797334601839
+Key1: popular religion	Key2: early american histori	Value: 0.4128470549503761
+Key1: european histori	Key2: cultural histori	Value: 0.3887133752336567
+Key1: race	Key2: african american histori	Value: 0.3657130355608977
+Key1: womens histori	Key2: european histori	Value: 0.36523227938413383
+Key1: gender	Key2: womens histori	Value: 0.3459379825008977
+Key1: digital human	Key2: african american histori	Value: 0.3429558846729816
+Key1: cultural histori	Key2: world histori	Value: 0.3402963878017644
+Key1: environmental histori	Key2: cultural histori	Value: 0.3304957621132447
+Key1: womens histori	Key2: early american histori	Value: 0.31018471305322837
+Key1: popular religion	Key2: womens histori	Value: 0.28022148967578514
+Key1: womens histori	Key2: world histori	Value: 0.2754226067940165
+Key1: african american histori	Key2: cultural histori	Value: 0.2579450949646329
+Key1: world histori	Key2: popular religion	Value: 0.25314621208286425
+Key1: cultural histori	Key2: womens histori	Value: 0.24243292878638537
+Key1: cultural histori	Key2: medieval histori	Value: 0.23487979089593944
+Key1: womens histori	Key2: race	Value: 0.22379739451607644
+Key1: world histori	Key2: environmental histori	Value: 0.2117535269246392
+Key1: race	Key2: gender	Value: 0.1948457206288043
+Key1: ident	Key2: african american histori	Value: 0.1904078300807158
+Key1: environmental histori	Key2: african american histori	Value: 0.17079491924573273
+Key1: latin american histori	Key2: ident	Value: 0.15148976405034614
+Key1: ident	Key2: gender	Value: 0.1494244705719277
+Key1: gender	Key2: african american histori	Value: 0.12868498457369035
+Key1: ident	Key2: popular religion	Value: 0.12346104045010264
+Key1: race	Key2: european histori	Value: 0.1104405304575916
+Key1: world histori	Key2: early american histori	Value: 0.1070181764046262
+Key1: race	Key2: ident	Value: 0.09359597380986177
+Key1: race	Key2: cultural histori	Value: 0.09069647226183453
+Key1: womens histori	Key2: ident	Value: 0.08079662822824032
+Key1: popular religion	Key2: gender	Value: 0.07753246212630907
+Key1: cultural histori	Key2: ident	Value: 0.07230851800272135
+Key1: histori	Key2: environmental histori	Value: 0.06482049661017132
+Key1: cultural histori	Key2: irish histori	Value: 0.06296849174857791
+Key1: womens histori	Key2: latin american histori	Value: 0.0583727400594288
+Key1: european histori	Key2: ident	Value: 0.055861666952292915
+Key1: latin american histori	Key2: race	Value: 0.05492320260776024
+Key1: ident	Key2: irish histori	Value: 0.05342317384234754
+Key1: early american histori	Key2: race	Value: 0.04349374082697832
+Key1: histori	Key2: popular religion	Value: 0.03485727323272816
+Key1: race	Key2: world histori	Value: 0.03221273041728945
+Key1: gender	Key2: cultural histori	Value: 0.0069513878406018284
+Key1: popular religion	Key2: cultural histori	Value: 0.0026725898613268752
+Key1: race	Key2: histori	Value: -0.01162071207142458
+Key1: histori	Key2: ident	Value: -0.01530589558176635
+Key1: gender	Key2: histori	Value: -0.029232305553404298
+Key1: race	Key2: irish histori	Value: -0.030178410435870648
+Key1: environmental histori	Key2: race	Value: -0.050138562419842096
+Key1: gender	Key2: world histori	Value: -0.05220515736375957
+Key1: world histori	Key2: ident	Value: -0.05742910148734735
+Key1: gender	Key2: european histori	Value: -0.05930549778169862
+Key1: latin american histori	Key2: gender	Value: -0.06513504144242241
+Key1: popular religion	Key2: race	Value: -0.0656507285980896
+Key1: european histori	Key2: environmental histori	Value: -0.09637680915728106
+Key1: histori	Key2: digital human	Value: -0.10544121878478604
+Key1: gender	Key2: early american histori	Value: -0.11435306411260407
+Key1: world histori	Key2: irish histori	Value: -0.11792165018887205
+Key1: european histori	Key2: popular religion	Value: -0.13416537004668086
+Key1: popular religion	Key2: latin american histori	Value: -0.1399949137074047
+Key1: medieval histori	Key2: race	Value: -0.14783748478543976
+Key1: ident	Key2: medieval histori	Value: -0.1628456983931723
+Key1: gender	Key2: irish histori	Value: -0.1632016316504211
+Key1: ident	Key2: environmental histori	Value: -0.16460397804951096
+Key1: environmental histori	Key2: popular religion	Value: -0.1813875988656297
+Key1: digital human	Key2: ident	Value: -0.18149924884231097
+Key1: latin american histori	Key2: environmental histori	Value: -0.22714508942630482
+Key1: gender	Key2: environmental histori	Value: -0.26925502409834723
+Key1: environmental histori	Key2: medieval histori	Value: -0.2916030786532233
+Key1: digital human	Key2: gender	Value: -0.29338870381506654
+Key1: medieval histori	Key2: womens histori	Value: -0.3071152448314709
+Key1: european histori	Key2: irish histori	Value: -0.3291419732627358
+Key1: gender	Key2: medieval histori	Value: -0.3794705038859409
+Key1: ident	Key2: early american histori	Value: -0.4997882499477979
+Key1: environmental histori	Key2: irish histori	Value: -0.5013029386899847
+Key1: medieval histori	Key2: popular religion	Value: -0.5054828985983044
+Key1: womens histori	Key2: environmental histori	Value: -0.5850799364267586
+Key1: african american histori	Key2: world histori	Value: -Infinity
