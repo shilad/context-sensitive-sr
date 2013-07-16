@@ -1,0 +1,29 @@
+#main-container.career {
+
+}
+#main-container.expertise {
+
+  div {
+    line-height: 1.5em;
+  }
+
+  height:500px !important;
+  padding: 50px;
+
+  .error{
+    background: rgb(255,0,0);
+    display: none;
+  }
+
+  #errorPrimary{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 35px;
+    color:#FF0000;
+  }
+
+  #errorSecondary{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 35px;
+    color:#FF0000;
+  }
+}

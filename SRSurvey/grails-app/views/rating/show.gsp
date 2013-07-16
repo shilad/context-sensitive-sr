@@ -41,24 +41,24 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                1 <input type="radio" name="${"radio_"+q.id}" value="1"
-                                                <g:if test="${q.result == 1}">checked</g:if>/>
+                                                <label>1 <input type="radio" name="${"radio_"+q.id}" value="1"
+                                                <g:if test="${q.result == 1}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                2 <input type="radio" name="${"radio_"+q.id}" value="2"
-                                                         <g:if test="${q.result == 2}">checked</g:if>/>
+                                                <label>2 <input type="radio" name="${"radio_"+q.id}" value="2"
+                                                         <g:if test="${q.result == 2}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                3 <input type="radio" name="${"radio_"+q.id}" value="3"
-                                                         <g:if test="${q.result == 3}">checked</g:if>/>
+                                                <label>3 <input type="radio" name="${"radio_"+q.id}" value="3"
+                                                         <g:if test="${q.result == 3}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                4 <input type="radio" name ="${"radio_"+q.id}" value="4"
-                                                         <g:if test="${q.result == 4}">checked</g:if>/>
+                                                <label>4 <input type="radio" name ="${"radio_"+q.id}" value="4"
+                                                         <g:if test="${q.result == 4}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                5 <input type="radio" name="${"radio_"+q.id}" value="5"
-                                                         <g:if test="${q.result == 5}">checked</g:if>/>
+                                                <label>5 <input type="radio" name="${"radio_"+q.id}" value="5"
+                                                         <g:if test="${q.result == 5}">checked</g:if>/></label>
                                             </td>
                                         </tr>
                                     </table>

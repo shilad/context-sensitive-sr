@@ -32,7 +32,10 @@
     <br>
     <h1>Thank You!</h1>
     <br><br><br><br>
-    <p class= "margin">Thanks for answering our survey. Your responses are being processed.</p>
+    <p>
+        Thanks for generously volunteering your time and energy to complete our survey.
+        Your responses will foo....
+    </p>
 
 </div>
 </body>

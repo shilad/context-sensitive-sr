@@ -5,6 +5,8 @@ class Person {
     // Their state in the survey
     boolean hasConsented = false
 
+    Boolean scholar
+
     String email
     String firstName
     String lastName
@@ -18,6 +20,7 @@ class Person {
         email nullable: true
         survey nullable: true
         group nullable: true
+        scholar nullable: true
         firstName nullable: true
         lastName nullable: true
         title nullable: true

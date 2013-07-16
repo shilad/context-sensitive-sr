@@ -21,6 +21,6 @@ class ConsentController {
         p.email = params.email
         p.hasConsented = true
         p.save()
-        redirect(controller: 'interest', action: 'show')
+        redirect(controller: 'expertise', action: 'showCareer')
     }
 }

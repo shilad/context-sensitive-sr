@@ -11,7 +11,7 @@ class SrService {
     }
 
     //Assigning people to group based on a list of interests
-    def assignGroup(Person person, List<Interest> interests) {
+    def assignGroup(Person person) {
 
         Random rand = new Random()
         int max = 2

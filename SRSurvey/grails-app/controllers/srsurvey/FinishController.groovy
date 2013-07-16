@@ -1,24 +1,22 @@
 package srsurvey
 
 class FinishController {
+    def personService
 
     def show() {
         render(view: "show")
     }
 
     def save() {
-        //TODO: limiting the size of the input string on javascript
-
-        //Find the survey based off the person in session
-        Survey s = Survey.findByPerson(Person.findById(session.person))
-
-
-        //Set the comment for a particular survey
-        s.setComment(params["text-area"])
-        s.save(flush: true)
-
-        //TODO: change this to the final view when created
-        render(view: "final")
+        Person p = personService.getForSession(session)
+        p.survey.comment = params.comments
+        p.save(flush : true)
+        String s = params.submit
+        if (s.toLowerCase().startsWith("sure")) {
+            redirect(controller : 'rating', action : 'show')
+        } else {
+            render(view: "thanks")
+        }
     }
 
 }

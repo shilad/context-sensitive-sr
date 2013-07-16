@@ -28,8 +28,6 @@ class InterestController {
             }
         }
 
-        //Assign Group (will happen on previous page)
-        srService.assignGroup(p, inputs)
 
         redirect(controller: 'rating', action: 'show')
     }
