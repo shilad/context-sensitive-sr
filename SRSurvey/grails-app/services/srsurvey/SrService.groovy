@@ -1,6 +1,16 @@
 package srsurvey
 
 class SrService {
+    Map<String, List<SrPair>> pairs = [:]
+
+
+    def addPair(String group, SrPair pair) {
+        if (pairs.containsKey(group)) {
+            pairs[group].add(pair)
+        } else {
+            pairs[group] = [pair]
+        }
+    }
 
     //Return a ranking for a pair of interests
     def double getRating(Interest interest1, Interest interest2) {
@@ -12,17 +22,20 @@ class SrService {
 
     //Assigning people to group based on a list of interests
     def assignGroup(Person person) {
-
-        Random rand = new Random()
-        int max = 2
-        int num = rand.nextInt(max)
-
-        print ExperimentalGroup.findAll().get(num).name
-        print person.group
-
-        person.setGroup(ExperimentalGroup.findAll().get(num))
-        person.save(flush: true)
-
+        List<String> fields = ['history', 'psychology', 'biology']
+        for (String key : ['primary', 'secondary', 'tertiary']) {
+            String area = ((String)person.getProperty(key))?.toLowerCase()
+            if (fields.contains(area)) {
+                person.group = ExperimentalGroup.findByName(area)
+                break
+            }
+        }
+        if (person.group == null && person.scholar) {
+            person.group = ExperimentalGroup.findByName('scholar')
+        } else {
+            person.group = ExperimentalGroup.findByName('mturk')
+        }
+        person.save(flush : true)
     }
 
     //Input is a group and output is a set of interests

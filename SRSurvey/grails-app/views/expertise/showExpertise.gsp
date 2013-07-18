@@ -22,15 +22,15 @@
     <div class="margin" style="width: 69%;margin: auto;">
         <p>Please enter up to three of your fields of expertise, in order of preference:</p>
         <br/><br/>
-        <g:form controller="Interest" action="processExpertise" id="expertise-form" name = "expertise-form" method="post">
+        <g:form controller="expertise" action="saveExpertise" method="post">
             <table width="100%" style="border-collapse: collapse;">
                 <tr class="padding" id="primary">
                     <td>
                         <h2>Primary:</h2>
                     </td>
                     <td>
-                        <select name="Expertise_Select1" id="select1">
-                            <option selected disabled="true" value="Primary">Please Select An Option</option>
+                        <select name="primary" id="select1">
+                            <option selected disabled="true" value="none">Please Select An Option</option>
                             <option value='Anthropology'>Anthropology</option>
                             <option value='Archaeology'>Archaeology</option>
                             <option value='Astronomy'>Astronomy</option>
@@ -72,10 +72,6 @@
                             <option value='Visual_Arts'>Visual Arts</option>
                             <option value="Other">Other</option>
                         </select>
-                        <div id="Other1" class="other" style="display: none !important;">
-                            <br/>
-                            Other: <g:textField name="Other:"></g:textField>
-                        </div>
                     </td>
 
                 </tr>
@@ -84,8 +80,8 @@
                         <h2>Secondary:</h2>
                     </td>
                     <td>
-                        <select name="Expertise_Select2" id="select2">
-                            <option selected value="Secondary">Please Select An Option</option>
+                        <select name="secondary" id="select2">
+                            <option selected value="none">Please Select An Option</option>
                             <option value='Anthropology'>Anthropology</option>
                             <option value='Archaeology'>Archaeology</option>
                             <option value='Astronomy'>Astronomy</option>
@@ -127,10 +123,6 @@
                             <option value='Visual_Arts'>Visual Arts</option>
                             <option value="Other">Other</option>
                         </select>
-                        <div id="Other2" class="other" style="display: none !important;">
-                            <br/>
-                            Other: <g:textField name="Other:"></g:textField>
-                        </div>
                     </td>
                 </tr>
                 <tr class="padding">
@@ -138,8 +130,8 @@
                         <h3>Tertiary:</h3>
                     </td>
                     <td>
-                        <select name="Expertise_Select3" id="select3">
-                            <option selected value="Tertiary">Please Select An Option</option>
+                        <select name="tertiary" id="select3">
+                            <option selected value="none">Please Select An Option</option>
                             <option value='Anthropology'>Anthropology</option>
                             <option value='Archaeology'>Archaeology</option>
                             <option value='Astronomy'>Astronomy</option>
@@ -181,10 +173,6 @@
                             <option value='Visual_Arts'>Visual Arts</option>
                             <option value="Other">Other</option>
                         </select>
-                        <div id="Other3" class="other" style="display: none !important;">
-                            <br/>
-                            Other: <g:textField name="Other:"></g:textField>
-                        </div>
                     </td>
                 </tr>
 
@@ -193,7 +181,7 @@
                     <td></td>
                     <td></td>
                     <td style="text-align: right;">
-                        <a id="next" class="myButton">Next</a>
+                        <input type="submit" id="next" class="myButton" name="next" value="Next"/>
 
                     </td>
 
@@ -207,43 +195,15 @@
 
 
 </div>
-</body>
-</html>
-
 <r:script>
 
     $(document).ready(function () {
-        $("select").change(function () {
-            var $this = $(this);
-//            console.log(this);
-//            console.log($this);
-//            console.log($this.attr("id"));
-            var prevVal = $this.data("prev");
-            var otherSelects = $("select").not(this);
-            if (("Other")==$(this).val()) {
-                $this.parent().find(".other").show();
-            }else{
-                otherSelects.find("option[value=" + $(this).val() + "]").attr('disabled', true);
-            }
-            if (prevVal) {
-                if (("Other")==prevVal) {
-                    $this.parent().find(".other").hide();
-                } else {
-                    otherSelects.find("option[value=" + prevVal + "]").attr('disabled', false);
-                }
-            }
-            $this.data("prev", $this.val());
-        });
 
-        $('#next').bind('click', function( e ) {
-            var noError = false;
+        $("form").submit(function( e ) {
+            var noError = true;
             $('#select1').find('option:selected').each(function() {
-                if ($(this).val() != ("Primary")) {
-                    noError=true;
-                } else {
-
-                    $("#primary").addClass("error");
-
+                if ($(this).val() == ("none")) {
+                    noError = false;
                     $.fancybox({
                         content: $('#errorPrimary')
                     });
@@ -251,27 +211,20 @@
             });
 
             $('#select2').find('option:selected').each(function() {
-                if ($(this).val() == ("Secondary")) {
-                    $('#select3').find('option:selected').each(function() {
-                        if($(this).val() != ("Tertiary")) {
-                            $("#secondary").addClass("error");
-                            $.fancybox({
-                                content: $('#errorSecondary')
-                            });
-                            noError = false;
-                        }
+                if ($(this).val() == ("none") &&
+                $('#select3').find('option:selected').val() != ("none")) {
+                    $.fancybox({
+                        content: $('#errorSecondary')
                     });
+                    noError = false;
                 }
 
             });
 
-            if(noError==true){
-                $("#expertise-form").submit();
-                //submit form and move to rating page
-            }
-
-
+            return noError;
         });
 
     });
 </r:script>
+</body>
+</html>

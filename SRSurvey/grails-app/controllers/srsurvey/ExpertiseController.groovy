@@ -45,13 +45,17 @@ class ExpertiseController {
             return
         }
 
-        List<String> inputs = params.get("interest_inputs") as List<String>
-
-        for (interest in inputs){
-            if(interest!=""){
-                personService.addInterest(p, interest)
+        for (String key: ['primary', 'secondary', 'tertiary']) {
+            if (params[key] != 'none') {
+                Interest i = Interest.findByText(params[key])
+                if (i == null) {
+                    i = new Interest(text: params[key])
+                    i.save(flush : true)
+                }
+                p.setProperty(key, i)
             }
         }
+        p.save(flush : true)
 
         //Assign Group (will happen on previous page)
         srService.assignGroup(p)

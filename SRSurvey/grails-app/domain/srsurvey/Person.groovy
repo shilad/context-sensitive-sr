@@ -12,6 +12,9 @@ class Person {
     String lastName
     String title
     Boolean isRegistered
+    Interest primary
+    Interest secondary
+    Interest tertiary
 
     static hasOne = [survey:Survey, group:ExperimentalGroup]
     static hasMany = [personToInterest:PersonToInterest]
