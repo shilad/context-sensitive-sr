@@ -11,6 +11,7 @@ class Question {
     Interest interest2
     Boolean interest1Known
     Boolean interest2Known
+    String groupName    // name of the experimental ingroup
 
     static belongsTo = [survey:Survey]
 

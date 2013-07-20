@@ -1,8 +1,67 @@
 package srsurvey
 
+import java.util.concurrent.atomic.AtomicInteger
+
 class SrService {
+    static int NUM_QUESTIONS_PER_FIELD = 25
+    static int NUM_QUESTIONS_GENERAL = 10
+
+    String [] FIELDS = ['biology', 'psychology', 'history']
+
+    // randomly ordered list of experimental group names as shown in FIELDS
+    List<String> randomOrder = []
+
+    Map<String, Integer> inGroupCounters = [:]
+    Map<String, Integer> outGroupCounters = [:]
     Map<String, List<SrPair>> pairs = [:]
 
+    def init() {
+        for (int i : 0..1000) {
+            List<String> shuffled = []
+            shuffled.addAll(FIELDS)
+            Collections.shuffle(shuffled)
+            randomOrder.addAll(shuffled)
+        }
+        for (String g : FIELDS + ['general']) {
+            inGroupCounters[g] = 0
+            outGroupCounters[g] = 0
+        }
+        for (ExperimentalState e : ExperimentalState.list()) {
+            if (e.inGroup) {
+                inGroupCounters[e.name] = Math.max(inGroupCounters[e.name], e.counter+1)
+            } else {
+                outGroupCounters[e.name] = Math.max(outGroupCounters[e.name], e.counter+1)
+            }
+        }
+        readPairs()
+    }
+
+    def readPairs() {
+        for (String field : FIELDS + ['general']) {
+            for (String line : new File("dat/${field}.txt")) {
+                String [] tokens = line.trim().split('\t')
+                Interest i1 = addInterest(tokens[0])
+                Interest i2 = addInterest(tokens[1])
+                double sim = tokens[2] as double
+                addPair(field, new SrPair(phrase1: i1.text, phrase2: i2.text, sim: sim))
+            }
+        }
+        for (String group : pairs.keySet()) {
+            int n = (g == 'general') ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
+            if (pairs % n != 0) {
+                throw new IllegalStateException()
+            }
+        }
+    }
+
+    def addInterest(String text) {
+        Interest i = Interest.findByText(text)
+        if (i == null) {
+            i = new Interest(text: text)
+            i.save(flush : true)
+        }
+        return i
+    }
 
     def addPair(String group, SrPair pair) {
         if (pairs.containsKey(group)) {
@@ -12,87 +71,101 @@ class SrService {
         }
     }
 
-    //Return a ranking for a pair of interests
-    def double getRating(Interest interest1, Interest interest2) {
-        Random rand = new Random()
-        int max = 10
-        double num = rand.nextInt(max)/10.0
-        return num
+    String pickRandomGroup(String groupToSkip=null) {
+        if (groupToSkip == null) {
+            return randomOrder.remove(0)
+        }
+        for (int i = 0; i < randomOrder.size(); i++) {
+            if (randomOrder[i] != groupToSkip) {
+                return randomOrder.remove(i)
+            }
+        }
+        throw new IllegalStateException()
     }
 
     //Assigning people to group based on a list of interests
-    def assignGroup(Person person) {
-        List<String> fields = ['history', 'psychology', 'biology']
+    def assignGroup(Person p) {
         for (String key : ['primary', 'secondary', 'tertiary']) {
-            String area = ((String)person.getProperty(key))?.toLowerCase()
-            if (fields.contains(area)) {
-                person.group = ExperimentalGroup.findByName(area)
+            String area = ((String)p.getProperty(key))?.toLowerCase()
+            if (FIELDS.contains(area)) {
+                p.group = ExperimentalGroup.findByName(area)
                 break
             }
         }
-        if (person.group == null && person.scholar) {
-            person.group = ExperimentalGroup.findByName('scholar')
+        if (p.group == null && p.scholar) {
+            p.group = ExperimentalGroup.findByName('scholar')
         } else {
-            person.group = ExperimentalGroup.findByName('mturk')
+            p.group = ExperimentalGroup.findByName('mturk')
         }
-        person.save(flush : true)
-    }
-
-    //Input is a group and output is a set of interests
-    def List<Interest> getInterests(ExperimentalGroup g) {
-        List<Interest> interests = InterestToGroup.findAllByGroup(g)
-        return interests
-    }
-
-    //Input a persons group generate 50 questions for them
-    def List<Question> getQuestions(ExperimentalGroup g) {
-
-        List<Question> questions = new ArrayList<Question>()
-
-        //Find the survey the questions belong to
-        //Survey s = new Survey(Person.findByGroup(g))
-        Survey s = Survey.findByPerson(Person.findByGroup(g))
-
-        List<InterestToGroup> personInterests = InterestToGroup.findAllByGroup(g)
-
-        //TODO: Code for generating the cross group to generate questions when ready
-        List<InterestToGroup> crossInterests = InterestToGroup.findAllByGroupNotEqual(g)
-
-        //TODO: Code for the random other questions not related to a specific group
-        List<Interest> allInterests = Interest.findAll()
-
-        //Set up the random number generator
-        Random rand = new Random()
-        int num1
-        int num2
-
-        //Counter also used for questions number
-        int i = 0
-
-        //First 20 generated Questions where Interests are from within the same Group
-        while (i++ <= 20) {
-            num1 = rand.nextInt(personInterests.size())
-            num2 = rand.nextInt(personInterests.size())
-
-            Question q = new Question(i, personInterests.get(num1).interest, personInterests.get(num2).interest, s)
-            questions.add(q)
+        if (p.group == null) {
+            throw new IllegalStateException()
+        }
+        if (p.survey.group1 == null) {
+            if (FIELDS.contains(p.group.name)) {
+                p.survey.group1 = makeState(p.group.name, true)
+            } else {
+                p.survey.group1 = makeState(pickRandomGroup(), false)
             }
-        //Next 20 generated Questions where Interests are from Persons Group and all other Group
-        while(i++ <= 40) {
-            num1 = rand.nextInt(personInterests.size())
-            num2 = rand.nextInt(crossInterests.size())
-            Question q = new Question(i, personInterests.get(num1).interest, crossInterests.get(num2).interest, s)
-            questions.add(q)
+            p.survey.group2 = makeState(pickRandomGroup(p.survey.group1.name), false)
         }
-        //Last 10 totally random generated questions
-        while(i++ < 50) {
-            num1 = rand.nextInt(allInterests.size())
-            num2 = rand.nextInt(allInterests.size())
-            Question q = new Question(i, allInterests.get(num1), allInterests.get(num2), s)
-            questions.add(q)
-        }
-
-         return questions
+        p.survey.general = makeState('general', false)
+        p.save(flush : true)
     }
 
+    //Input a persons group generate 60 questions for them
+    def List<Question> getQuestions(Person p) {
+        List<Question> newQs = []
+        for (ExperimentalState e : [p.survey.group1, p.survey.group2, p.survey.general]) {
+            Set<SrPair> seen = p.survey.getSeenPairs(e.name)
+            if (seen.size() % e.questionsPerRound != 0) {
+                log.warn("for person ${p.id}, group ${e.name} seen was ${seen.size()}")
+            }
+            int round = seen.size() / e.questionsPerRound
+            for (SrPair pair : getQuestionsInRound(e, round)) {
+                if (seen.contains(pair)) {
+                    log.warn("for person ${p.id}, group ${e.name} skipping seen pair ${pair}")
+                } else {
+                    newQs.add(new Question(
+                                    round : round,
+                                    interest1 : Interest.findByText(pair.phrase1),
+                                    interest2 : Interest.findByText(pair.phrase2),
+                                    groupName : e.name
+                            ))
+                }
+            }
+        }
+        Collections.shuffle(newQs)
+        return newQs
+    }
+
+    def List<SrPair> getQuestionsInRound(ExperimentalState state, int round) {
+        List<SrPair> pairs = new ArrayList(this.pairs[state.name])
+        Collections.shuffle(pairs, new Random(state.randomSeed))
+        int numRounds = pairs.size() / state.questionsPerRound
+        int i = (state.roundOffset + round) % numRounds
+        def results = []
+        for (; i < pairs.size(); i += numRounds) {
+            results.add(pairs[i])
+        }
+        return results
+    }
+
+    def ExperimentalState makeState(String groupName, boolean inGroup) {
+        int questionsPerRound = (groupName == 'general') ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
+        if (pairs[groupName].size() % questionsPerRound != 0) {
+            throw new IllegalStateException()
+        }
+        int maxRounds = pairs[groupName].size() / questionsPerRound
+        Map<String, Integer> counter = inGroup ? inGroupCounters : outGroupCounters
+        ExperimentalState state = new ExperimentalState(name : groupName, inGroup : inGroup, questionsPerRound : questionsPerRound, maxRounds: maxRounds)
+        synchronized (counter) {
+            if (!counter.containsKey(groupName)) {
+                counter[groupName] = 0
+            }
+            state.randomSeed = counter[groupName] / maxRounds
+            state.roundOffset = counter[groupName] % maxRounds
+            counter[groupName]++
+        }
+        return state
+    }
 }

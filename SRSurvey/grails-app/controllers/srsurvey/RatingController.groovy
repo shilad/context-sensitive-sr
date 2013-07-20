@@ -18,8 +18,6 @@ class RatingController {
             return
         }
 
-        println("questions are " + p.survey.questions.size())
-
         int page = params.page as int
         List<Question> toAsk = p.survey.questions.findAll({it.page == page })
         if (toAsk.isEmpty()) throw new IllegalStateException()
@@ -40,7 +38,7 @@ class RatingController {
 
     def redirectToNextUnfinishedPage(Person p) {
         if (p.numAnswers() == p.survey.questions.size()) {
-            List<Question> questions = srService.getQuestions(p.group)
+            List<Question> questions = srService.getQuestions(p)
             if (questions.isEmpty()) {
                 redirect(controller : 'finish', action: 'show', params: ['noMoreQuestions' : 'true'])
                 return
