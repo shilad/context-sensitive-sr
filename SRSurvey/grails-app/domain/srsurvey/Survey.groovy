@@ -10,7 +10,7 @@ class Survey {
     ExperimentalState general
 
     static belongsTo = [person: Person]
-    static hasMany = [questions:Question]
+    static hasMany = [questions: Question]
     static transients = ['seenPairs']
 
     Date dateCreated
@@ -30,8 +30,7 @@ class Survey {
         Set<SrPair> seen = new HashSet<SrPair>()
         for (Question q : questions) {
             if (group == null || q.groupName == group) {
-                seen.add(new SrPair(phrase1: q.interest1.text,
-                                    phrase2: q.interest2.text))
+                seen.add(q.toSrPair())
             }
         }
         return seen

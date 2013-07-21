@@ -9,7 +9,7 @@ import org.junit.Test
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(SrService)
-@Mock([ExperimentalState, Interest, Survey, ExperimentalGroup, Person])
+@Mock([ExperimentalState, Interest, Survey, ExperimentalGroup, Person, Question])
 class SrServiceTests {
 
     @Test
@@ -86,6 +86,69 @@ class SrServiceTests {
         assertEquals(seedCounts.size(), 10)
         assertEquals(seedCounts[0], 2)
         assertEquals(seedCounts[1], 2)
+
+
+
+        // Test people who are biologists
+        groupCounts.clear()
+        for (String n : SrService.FIELDS) {
+            groupCounts[n] = 0
+        }
+        for (int i : 0..29) {
+            Person p = new Person(scholar : true, survey: new Survey(), primary : 'biology')
+            service.assignGroup(p)
+            assertNotNull(p.survey.group1)
+            assertNotNull(p.survey.group2)
+            assertNotNull(p.survey.general)
+            assertTrue(p.survey.group1.inGroup)
+            assertFalse(p.survey.group2.inGroup)
+            groupCounts[p.survey.group1.name]++
+            groupCounts[p.survey.group2.name]++
+        }
+        assertEquals(groupCounts.size(), 3)
+        assertEquals(groupCounts['biology'], 30)
+        assertEquals(groupCounts['psychology'], 15)
+        assertEquals(groupCounts['history'], 15)
+    }
+
+    @Test
+    def void testQuestions() {
+        setupGroups()
+        service.init()
+        Person p = new Person(scholar : true, survey: new Survey(), primary : 'biology')
+        service.assignGroup(p)
+        List<Question> qs = service.getQuestions(p)
+        assertEquals(qs.size(), 60)
+        def pairs = [:]
+        for (Question q : qs) {
+            p.survey.addToQuestions(q)
+            if (!pairs.containsKey(q.groupName)) {
+                pairs[q.groupName] = []
+            }
+            assertFalse(pairs[q.groupName].contains(q.toSrPair()))
+            pairs[q.groupName].add(q.toSrPair())
+        }
+
+        String group2 = p.survey.group2.name
+        assertEquals(pairs.size(), 3)
+        assertEquals(pairs['biology'].size(), 25)
+        assertEquals(pairs['general'].size(), 10)
+        assertEquals(pairs[group2].size(), 25)
+        assert(group2 != 'biology')
+
+
+        qs = service.getQuestions(p)
+        assertEquals(qs.size(), 60)
+        for (Question q : qs) {
+            p.survey.addToQuestions(q)
+            assertFalse(pairs[q.groupName].contains(q.toSrPair()))
+            pairs[q.groupName].add(q.toSrPair())
+        }
+
+        assertEquals(pairs.size(), 3)
+        assertEquals(pairs['biology'].size(), 50)
+        assertEquals(pairs['general'].size(), 20)
+        assertEquals(pairs[group2].size(), 50)
     }
 
     def void setupGroups() {

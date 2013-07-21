@@ -86,28 +86,28 @@ class SrService {
     //Assigning people to group based on a list of interests
     def assignGroup(Person p) {
         for (String key : ['primary', 'secondary', 'tertiary']) {
-            String area = ((String)p.getProperty(key))?.toLowerCase()
+            String area = ((Interest)p.getProperty(key))?.text?.toLowerCase()
             if (FIELDS.contains(area)) {
                 p.group = ExperimentalGroup.findByName(area)
                 break
             }
         }
-        if (p.group == null && p.scholar) {
-            p.group = ExperimentalGroup.findByName('scholar')
-        } else {
-            p.group = ExperimentalGroup.findByName('mturk')
+        if (p.group == null) {
+            if (p.scholar) {
+                p.group = ExperimentalGroup.findByName('scholar')
+            } else {
+                p.group = ExperimentalGroup.findByName('mturk')
+            }
         }
         if (p.group == null) {
             throw new IllegalStateException()
         }
-        if (p.survey.group1 == null) {
-            if (FIELDS.contains(p.group.name)) {
-                p.survey.group1 = makeState(p.group.name, true)
-            } else {
-                p.survey.group1 = makeState(pickRandomGroup(), false)
-            }
-            p.survey.group2 = makeState(pickRandomGroup(p.survey.group1.name), false)
+        if (FIELDS.contains(p.group.name)) {
+            p.survey.group1 = makeState(p.group.name, true)
+        } else {
+            p.survey.group1 = makeState(pickRandomGroup(), false)
         }
+        p.survey.group2 = makeState(pickRandomGroup(p.survey.group1.name), false)
         p.survey.general = makeState(GROUP_GENERAL, false)
         p.save(flush : true)
     }

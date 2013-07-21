@@ -41,6 +41,10 @@ class Question {
         this.survey = survey
     }
 
+    public SrPair toSrPair() {
+        return new SrPair(phrase1: interest1.text, phrase2: interest2.text)
+    }
+
     public boolean hasAnswer() {
         return result != null || interest1Known != null || interest2Known != null
     }
