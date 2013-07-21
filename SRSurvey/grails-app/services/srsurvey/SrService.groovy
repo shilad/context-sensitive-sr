@@ -109,6 +109,9 @@ class SrService {
         }
         p.survey.group2 = makeState(pickRandomGroup(p.survey.group1.name), false)
         p.survey.general = makeState(GROUP_GENERAL, false)
+        p.survey.group1.save()
+        p.survey.group2.save()
+        p.survey.general.save()
         p.save(flush : true)
     }
 

@@ -16,7 +16,7 @@
 <body>
 <div class= "interest rounded-corners" id="main-container">
     <h1>Research interests</h1>
-    <form action="save" name="interest-form" id="interest-form" method="post">
+    <g:form action="save" name="interest-form" id="interest-form" method="post">
         <table>
             <tr>
                 <td>
@@ -108,7 +108,7 @@
                 </td>
             </tr>
         </table>
-    </form>
+    </g:form>
     <div id="error" style="display: none;">You must enter at least three interests.</div>
 </div>
 </body>

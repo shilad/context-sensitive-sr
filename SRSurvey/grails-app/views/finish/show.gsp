@@ -25,12 +25,19 @@
             Do you have any comments about this survey or your responses?
             <textarea rows="10" cols="80" class ="rounded-corners"  name="comments"></textarea>
         </div>
+        <g:if test="${person.numAnswers() > 60}">
+            <div>
+                <g:submitButton name="submit" value="Save comments." class="myButton" title="Save comments.."/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
 
-        <div>
-            Would you provide more responses to help improve Macademia? <br/>
-            <g:submitButton name="submit" value="Sure! I'll complete another round of ratings." class="myButton" title="No thanks! I'm done."/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <g:submitButton name="submit" value="No thanks! I'm done." class="myButton" title="No thanks! I'm done."/>
-        </div>
+        </g:if>
+        <g:else>
+            <div>
+                Would you provide more responses to help improve Macademia? <br/>
+                <g:submitButton name="submit" value="Sure! I'll complete another round of ratings." class="myButton" title="No thanks! I'm done."/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <g:submitButton name="submit" value="No thanks! I'm done." class="myButton" title="No thanks! I'm done."/>
+            </div>
+        </g:else>
     </g:form>
 </div>
 </body>

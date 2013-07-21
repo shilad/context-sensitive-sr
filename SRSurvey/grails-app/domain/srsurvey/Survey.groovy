@@ -11,6 +11,7 @@ class Survey {
 
     static belongsTo = [person: Person]
     static hasMany = [questions: Question]
+
     static transients = ['seenPairs']
 
     Date dateCreated

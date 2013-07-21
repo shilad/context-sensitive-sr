@@ -56,6 +56,7 @@ class RatingController {
                 Question q = questions[i]
                 q.page = 1 + maxPage + i / QUESTIONS_PER_PAGE
                 q.round = maxRound + 1
+                q.questionNumber = i
                 p.survey.addToQuestions(q)
             }
             p.save(flush : true)

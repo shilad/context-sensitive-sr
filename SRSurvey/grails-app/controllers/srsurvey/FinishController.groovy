@@ -4,7 +4,8 @@ class FinishController {
     def personService
 
     def show() {
-        render(view: "show")
+        Person p = personService.getForSession(session)
+        render(view: "show", model: [person:p])
     }
 
     def save() {

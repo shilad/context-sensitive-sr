@@ -49,17 +49,14 @@ class ExpertiseController {
             if (params[key] != 'none') {
                 Interest i = Interest.findByText(params[key])
                 if (i == null) {
-                    i = new Interest(text: params[key])
+                    i = new Interest(text: (String)params[key])
                     i.save(flush : true)
                 }
                 p.setProperty(key, i)
             }
         }
-        p.save(flush : true)
 
-        //Assign Group (will happen on previous page)
         srService.assignGroup(p)
-
         redirect(controller: 'rating', action: 'show')
     }
 

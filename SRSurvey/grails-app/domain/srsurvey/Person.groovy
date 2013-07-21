@@ -16,7 +16,10 @@ class Person {
     Interest secondary
     Interest tertiary
 
-    static hasOne = [survey:Survey, group:ExperimentalGroup]
+    static hasOne = [
+            survey:Survey,
+            group:ExperimentalGroup
+    ]
     static hasMany = [personToInterest:PersonToInterest]
 
     static constraints = {
