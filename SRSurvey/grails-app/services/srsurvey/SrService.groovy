@@ -3,10 +3,10 @@ package srsurvey
 import java.util.concurrent.atomic.AtomicInteger
 
 class SrService {
-    static int NUM_QUESTIONS_PER_FIELD = 25
-    static int NUM_QUESTIONS_GENERAL = 10
-
-    String [] FIELDS = ['biology', 'psychology', 'history']
+    public static final int NUM_QUESTIONS_PER_FIELD = 25
+    public static final int NUM_QUESTIONS_GENERAL = 10
+    public static final String [] FIELDS = ['biology', 'psychology', 'history']
+    public static final String GROUP_GENERAL = 'general'
 
     // randomly ordered list of experimental group names as shown in FIELDS
     List<String> randomOrder = []
@@ -22,7 +22,7 @@ class SrService {
             Collections.shuffle(shuffled)
             randomOrder.addAll(shuffled)
         }
-        for (String g : FIELDS + ['general']) {
+        for (String g : FIELDS + [GROUP_GENERAL]) {
             inGroupCounters[g] = 0
             outGroupCounters[g] = 0
         }
@@ -37,7 +37,7 @@ class SrService {
     }
 
     def readPairs() {
-        for (String field : FIELDS + ['general']) {
+        for (String field : FIELDS + [GROUP_GENERAL]) {
             for (String line : new File("dat/${field}.txt")) {
                 String [] tokens = line.trim().split('\t')
                 Interest i1 = addInterest(tokens[0])
@@ -46,10 +46,10 @@ class SrService {
                 addPair(field, new SrPair(phrase1: i1.text, phrase2: i2.text, sim: sim))
             }
         }
-        for (String group : pairs.keySet()) {
-            int n = (g == 'general') ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
-            if (pairs % n != 0) {
-                throw new IllegalStateException()
+        for (String g : pairs.keySet()) {
+            int n = (g == GROUP_GENERAL) ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
+            if (pairs[g].size() % n != 0) {
+                throw new IllegalStateException("$g, ${pairs[g].size()}, $n")
             }
         }
     }
@@ -108,7 +108,7 @@ class SrService {
             }
             p.survey.group2 = makeState(pickRandomGroup(p.survey.group1.name), false)
         }
-        p.survey.general = makeState('general', false)
+        p.survey.general = makeState(GROUP_GENERAL, false)
         p.save(flush : true)
     }
 
@@ -151,7 +151,7 @@ class SrService {
     }
 
     def ExperimentalState makeState(String groupName, boolean inGroup) {
-        int questionsPerRound = (groupName == 'general') ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
+        int questionsPerRound = (groupName == GROUP_GENERAL) ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
         if (pairs[groupName].size() % questionsPerRound != 0) {
             throw new IllegalStateException()
         }
@@ -159,12 +159,10 @@ class SrService {
         Map<String, Integer> counter = inGroup ? inGroupCounters : outGroupCounters
         ExperimentalState state = new ExperimentalState(name : groupName, inGroup : inGroup, questionsPerRound : questionsPerRound, maxRounds: maxRounds)
         synchronized (counter) {
-            if (!counter.containsKey(groupName)) {
-                counter[groupName] = 0
-            }
+            state.counter = counter.get(groupName, 0)
             state.randomSeed = counter[groupName] / maxRounds
             state.roundOffset = counter[groupName] % maxRounds
-            counter[groupName]++
+            counter[groupName] = state.counter+1
         }
         return state
     }
