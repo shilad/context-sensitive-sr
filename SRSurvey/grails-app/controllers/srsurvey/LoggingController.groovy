@@ -25,7 +25,7 @@ class LoggingController {
         render('okay')
     }
 
-    public String getIpAddress(HttpServletRequest request) {
+    private String getIpAddress(HttpServletRequest request) {
         String ipAddr = request.getHeader("X-Forwarded-For")
         if (ipAddr == null) {
             ipAddr = request.getRemoteAddr()
