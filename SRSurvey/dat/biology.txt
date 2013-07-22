@@ -1,0 +1,50 @@
+faculty development	genomics education	2.4340363540203143
+active learning	genomics education	1.6324040077871476
+plant biology	undergraduate research	1.3090976174120141
+invasive species	biogeography	1.193071313956885
+environmental science	plant biology	1.0458561826374329
+conservation biology	ornithology	0.9303969667256466
+invasive species	plant ecology	0.8283722384235266
+bioethics	neuroscience	0.7873059677728909
+undergraduate research	cell biology	0.6893088591236202
+electrophysiology	neuroscience	0.6203580881570794
+sustainability	invasive species	0.5884789861135276
+molecular biology	faculty development	0.5570491695925757
+animal behavior	animal physiology	0.5237677824012472
+plant ecology	introductory biology	0.48955368187014553
+biodiversity	sustainability	0.44898152933430263
+human physiology	cell biology	0.4163075870598826
+bioinformatics	molecular biology	0.3592386608436582
+conservation biology	active learning	0.3206501467313934
+conservation biology	animal behavior	0.29119516739311774
+plant ecology	population genetics	0.27870031655525235
+human physiology	electrophysiology	0.23905975080425915
+assessment	environmental science	0.20595933630898375
+environmental science	introductory biology	0.18852368620616433
+assessment	undergraduate research	0.16817077541958397
+assessment	plant ecology	0.15480681386160247
+conservation biology	statistics	0.14583061473934938
+animal behavior	assessment	0.1310289674150174
+biology	behavioral ecology	0.12077190193932136
+genomics	biology	0.0945700799987675
+environmental science	animal behavior	0.08443508857098457
+conservation biology	genetics	0.07324278870456293
+sustainability	cell biology	0.05584040354403371
+behavioral ecology	genetics	0.047537388469661004
+invasive species	statistics	0.0359805489252726
+active learning	bioinformatics	0.019620151067412203
+ecology	active learning	0.005038151194415077
+assessment	invertebrate zoology	-0.007920483636097243
+bioinformatics	assessment	-0.018644349027870242
+genomics	faculty development	-0.05026348532647162
+neuroscience	genetics	-0.08730963679888797
+molecular biology	population genetics	-0.13092545044197995
+active learning	genetics	-0.15203496643554312
+sustainability	genomics	-0.18542138711645773
+conservation biology	genomics	-0.23168357788721985
+biogeography	bioinformatics	-0.281409844596569
+behavioral ecology	molecular biology	-0.3180120937991244
+introductory biology	bioinformatics	-0.3828674853553461
+animal behavior	population genetics	-0.4652368332972896
+biodiversity	cell biology	-0.542733805261211
+animal behavior	bioinformatics	-0.6630473420462071
