@@ -3,7 +3,7 @@ package srsurvey
 import java.util.concurrent.atomic.AtomicInteger
 
 class SrService {
-    public static final int NUM_QUESTIONS_PER_FIELD = 25
+    public static final int NUM_QUESTIONS_PER_FIELD = 20
     public static final int NUM_QUESTIONS_GENERAL = 10
     public static final String [] FIELDS = ['biology', 'psychology', 'history']
     public static final String GROUP_GENERAL = 'general'
