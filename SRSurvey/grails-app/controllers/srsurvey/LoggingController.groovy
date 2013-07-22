@@ -15,7 +15,7 @@ class LoggingController {
         Person p = personService.getForSession(session)
         String id = (p.id) ? p.id : "unknown"
         String email = (p.email) ? p.email : "unknown"
-        String ip = getIpAddress()
+        String ip = getIpAddress(request)
         String tstamp = new Date().format("yyyy-MM-dd hh:mm:ss")
         String message = params.message.replace("\n", " ")
 
@@ -25,7 +25,7 @@ class LoggingController {
         render('okay')
     }
 
-    public static String getIpAddress(HttpServletRequest request) {
+    public String getIpAddress(HttpServletRequest request) {
         String ipAddr = request.getHeader("X-Forwarded-For")
         if (ipAddr == null) {
             ipAddr = request.getRemoteAddr()
