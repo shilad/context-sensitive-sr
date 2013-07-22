@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 class LoggingController {
     def personService
 
-    private static File output = new File("../sr-log.txt")
+    private static File output = new File("./sr-log.txt")
 
     def index() {
     }
