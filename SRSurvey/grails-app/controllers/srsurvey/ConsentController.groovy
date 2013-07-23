@@ -2,6 +2,8 @@ package srsurvey
 
 class ConsentController {
     def personService
+    def loggingService
+
     def show() {
         Person p = personService.getForSession(session)
         String email = params.email ? params.email : p?.email
@@ -21,6 +23,9 @@ class ConsentController {
         p.email = params.email
         p.hasConsented = true
         p.save()
+
+        loggingService.append(p, request, "consent")
+
         redirect(controller: 'expertise', action: 'showCareer')
     }
 }

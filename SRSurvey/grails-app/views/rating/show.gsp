@@ -100,6 +100,24 @@
 
 <r:script>
 
+    // Hack: waits 200 millis for everything to clear
+    function logRating(div) {
+        window.setTimeout(function() {
+            var qid = div.prop("id");
+            var interests = div.find("td.interest");
+            var checkboxes = div.find("input[type='checkbox']");
+            var rating = div.find("input[type='radio']:checked").val();
+            ajaxLog("rating",
+                    qid,
+                    $(interests[0]).text(),
+                    $(interests[1]).text(),
+                    $(checkboxes.get(0)).prop('checked'),
+                    $(checkboxes.get(1)).prop('checked'),
+                    rating
+            );
+        }, 200);
+    }
+
     $(document).ready(function() {
         $('form').on('submit', function(e) {
             var isComplete = true;
@@ -121,6 +139,7 @@
                 var row = $this.parents(".row");
                 row.removeClass("error");
                 row.find("input[type=radio]").prop('checked', false);
+                logRating(row);
             }
         });
         $("input[type='radio']").click(function () {
@@ -129,6 +148,7 @@
                 var row = $this.parents(".row");
                 row.removeClass("error");
                 row.find("input[type=checkbox]").prop('checked', false);
+                logRating(row);
             }
         });
     });

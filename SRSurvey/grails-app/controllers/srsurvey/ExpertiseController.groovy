@@ -3,6 +3,7 @@ package srsurvey
 class ExpertiseController {
     def personService
     def srService
+    def loggingService
 
     def showCareer() {
         Person p = personService.getForSession(session)
@@ -20,6 +21,7 @@ class ExpertiseController {
         }
         p.scholar = Boolean.valueOf((String)params.scholar)
         p.save(flush : true)
+        loggingService.append(p, request, "scholar\t${p.scholar}")
         redirect(action: 'showExpertise')
     }
 
@@ -56,7 +58,10 @@ class ExpertiseController {
             }
         }
 
+        loggingService.append(p, request, "interests\t${params.primary}\t${params.secondary}\t${params.tertiary}")
         srService.assignGroup(p)
+        loggingService.append(p, request, "groups\t${p.group.name}\t${p.survey.group1.name}\t${p.survey.group2.name}")
+
         redirect(controller: 'rating', action: 'show')
     }
 

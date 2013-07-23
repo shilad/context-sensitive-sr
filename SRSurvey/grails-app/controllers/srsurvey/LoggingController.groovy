@@ -1,10 +1,8 @@
 package srsurvey
 
-import javax.servlet.http.HttpServletRequest
-import java.util.regex.Pattern
-
 class LoggingController {
     def personService
+    def loggingService
 
     private static File output = new File("./sr-log.txt")
 
@@ -13,23 +11,7 @@ class LoggingController {
 
     def append() {
         Person p = personService.getForSession(session)
-        String id = (p.id) ? p.id : "unknown"
-        String email = (p.email) ? p.email : "unknown"
-        String ip = getIpAddress(request)
-        String tstamp = new Date().format("yyyy-MM-dd hh:mm:ss")
-        String message = params.message.replace("\n", " ")
-
-        synchronized (output) {
-            output.append("$tstamp\t$ip\t$id\t$email\t$message\n")
-        }
+        loggingService.append(p, request, params.message)
         render('okay')
-    }
-
-    private String getIpAddress(HttpServletRequest request) {
-        String ipAddr = request.getHeader("X-Forwarded-For")
-        if (ipAddr == null) {
-            ipAddr = request.getRemoteAddr()
-        }
-        return ipAddr
     }
 }
