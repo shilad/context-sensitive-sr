@@ -95,7 +95,7 @@ public class MakeFinalResults {
     public static void main(String args[]) throws IOException {
         MakeFinalResults mfr = new MakeFinalResults();
         for (String field : new String[] { "biology", "psychology", "history"}) {
-            mfr.writePairs("results/" + field + "_raw.txt", 60, "results/" + field + ".txt");
+            mfr.writePairs("results/" + field + "_raw.txt", 75, "results/" + field + ".txt");
         }
     }
 }

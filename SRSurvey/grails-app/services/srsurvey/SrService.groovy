@@ -3,8 +3,10 @@ package srsurvey
 import java.util.concurrent.atomic.AtomicInteger
 
 class SrService {
-    public static final int NUM_QUESTIONS_PER_FIELD = 20
+    public static final int NUM_QUESTIONS_PER_FIELD = 25
     public static final int NUM_QUESTIONS_GENERAL = 10
+    public static final int NUM_DUPLICATES = 5
+    public static final int MIN_DUP_SPACING = 15
     public static final String [] FIELDS = ['biology', 'psychology', 'history']
     public static final String GROUP_GENERAL = 'general'
 
@@ -138,7 +140,38 @@ class SrService {
             }
         }
         Collections.shuffle(newQs)
+        addDuplicates(newQs, NUM_DUPLICATES)
+
         return newQs
+    }
+
+    /**
+     * Drops in n duplicate questions.
+     *
+     * The procedure is as follows:
+     * - divide up the questions into n+2 segments
+     * - for each segment i in [0...n)
+     *      - select one question
+     *      - drop it somewhere in segment i+1 or after
+     *
+     * The procedure goes from back to front so questions are only duplicated once.
+     *
+     * @param qs
+     */
+    def void addDuplicates(List<Question> qs, int n) {
+        double ss = 1.0 * qs.size() / (n+2);     // segment size
+        for (int i = n-1; i >= 0; i--) {
+            int from = randBetween((int)(i * ss), (int)((i+1)*ss));
+            int to = randBetween(from + MIN_DUP_SPACING, qs.size());
+            println("segment $i is from $from to $to")
+            Question q = new Question()
+            q.properties = qs[from].properties
+            qs.add(to, q);
+        }
+    }
+
+    def int randBetween(int beg, int end) {
+        return beg + new Random().nextInt(end-beg);
     }
 
     def List<SrPair> getQuestionsInRound(ExperimentalState state, int round) {

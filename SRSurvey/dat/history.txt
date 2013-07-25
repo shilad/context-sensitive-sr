@@ -1,60 +1,75 @@
 European history	medieval history	0.6587091371576692
 Latin American history	European history	0.6439858803369628
 African American history	women's history	0.6324040077871477
+Latin American history	medieval history	0.5948876465192585
 World history	European history	0.5742461905221795
 Latin American history	cultural history	0.5589750906286142
-Latin American history	World history	0.5084187171861703
+African American history	Latin American history	0.513217600067939
 medieval history	Irish history	0.4756317572413219
+World history	medieval history	0.4674418238087747
 Irish history	Latin American history	0.4431797334601839
 popular religion	early American history	0.4128470549503761
+European history	cultural history	0.3887133752336567
 Race	African American history	0.3657130355608977
-women's history	European history	0.36523227938413383
 gender	women's history	0.3459379825008977
+digital humanities	African American history	0.3429558846729816
 cultural history	World history	0.3402963878017644
 Environmental history	cultural history	0.3304957621132447
+women's history	early American history	0.31018471305322837
 popular religion	women's history	0.28022148967578514
-women's history	World history	0.2754226067940165
+African American history	cultural history	0.2579450949646329
 World history	popular religion	0.25314621208286425
 cultural history	women's history	0.24243292878638537
+cultural history	medieval history	0.23487979089593944
 women's history	Race	0.22379739451607644
 World history	Environmental history	0.2117535269246392
 identity	African American history	0.1904078300807158
 Environmental history	African American history	0.17079491924573273
 Latin American history	identity	0.15148976405034614
+identity	gender	0.1494244705719277
 gender	African American history	0.12868498457369035
 identity	popular religion	0.12346104045010264
-World history	early American history	0.1070181764046262
+Race	European history	0.1104405304575916
 Race	identity	0.09359597380986177
+Race	cultural history	0.09069647226183453
 women's history	identity	0.08079662822824032
 popular religion	gender	0.07753246212630907
+cultural history	identity	0.07230851800272135
 history	Environmental history	0.06482049661017132
-cultural history	Irish history	0.06296849174857791
 women's history	Latin American history	0.0583727400594288
+European history	identity	0.055861666952292915
 Latin American history	Race	0.05492320260776024
 identity	Irish history	0.05342317384234754
+early American history	Race	0.04349374082697832
 history	popular religion	0.03485727323272816
-Race	World history	0.03221273041728945
+gender	cultural history	0.0069513878406018284
 popular religion	cultural history	0.0026725898613268752
 Race	history	-0.01162071207142458
+history	identity	-0.01530589558176635
 gender	history	-0.029232305553404298
 Race	Irish history	-0.030178410435870648
 gender	World history	-0.05220515736375957
 World history	identity	-0.05742910148734735
 gender	European history	-0.05930549778169862
+Latin American history	gender	-0.06513504144242241
 popular religion	Race	-0.0656507285980896
 European history	Environmental history	-0.09637680915728106
-gender	early American history	-0.11435306411260407
+history	digital humanities	-0.10544121878478604
 World history	Irish history	-0.11792165018887205
+European history	popular religion	-0.13416537004668086
 popular religion	Latin American history	-0.1399949137074047
 medieval history	Race	-0.14783748478543976
+identity	medieval history	-0.1628456983931723
 gender	Irish history	-0.1632016316504211
-identity	Environmental history	-0.16460397804951096
 Environmental history	popular religion	-0.1813875988656297
+digital humanities	identity	-0.18149924884231097
 Latin American history	Environmental history	-0.22714508942630482
 gender	Environmental history	-0.26925502409834723
+Environmental history	medieval history	-0.2916030786532233
 digital humanities	gender	-0.29338870381506654
-medieval history	women's history	-0.3071152448314709
+European history	Irish history	-0.3291419732627358
 gender	medieval history	-0.3794705038859409
 identity	early American history	-0.4997882499477979
+Environmental history	Irish history	-0.5013029386899847
 medieval history	popular religion	-0.5054828985983044
 women's history	Environmental history	-0.5850799364267586

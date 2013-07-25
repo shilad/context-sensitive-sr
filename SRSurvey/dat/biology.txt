@@ -1,60 +1,75 @@
 faculty development	genomics education	2.4340363540203143
-tropical biology	ornithology	1.7650295730617387
-faculty development	environmental science	1.3926436688620891
-bioethics	electrophysiology	1.2390597508042591
+faculty development	undergraduate research	1.8319763626923518
+faculty development	active learning	1.4563127487314664
+plant biology	undergraduate research	1.3090976174120141
+genomics education	introductory biology	1.2299163713643895
 plant biology	plant ecology	1.1707949192457328
-tropical biology	biogeography	1.0303440164591853
-conservation biology	ornithology	0.9303969667256466
-biogeography	faculty development	0.854252757403504
+environmental science	plant biology	1.0458561826374329
+undergraduate research	environmental science	0.966674936589808
+environmental science	conservation biology	0.9101935806373598
+invasive species	plant ecology	0.8283722384235266
 genomics education	cell biology	0.8142475957319202
-undergraduate research	conservation biology	0.6963137606922788
-conservation biology	population genetics	0.6615516544330667
-neuroscience	faculty development	0.6112147087172096
+biogeography	undergraduate research	0.729314020795204
+undergraduate research	cell biology	0.6893088591236202
+faculty development	cell biology	0.6381563366762389
+environmental science	biodiversity	0.6096935355966768
 sustainability	invasive species	0.5884789861135276
-ecology	conservation biology	0.563102498117989
-plant biology	electrophysiology	0.5400897464682404
-ornithology	ecology	0.5178749581806119
+sustainability	science writing	0.5787191488243713
+biogeography	ecology	0.5491061955446906
+animal behavior	animal physiology	0.5237677824012472
+cell biology	plant biology	0.5132176000679389
 sustainability	conservation biology	0.4778186530835102
-population genetics	behavioral ecology	0.44503173832177734
-human physiology	cell biology	0.4163075870598826
-tropical biology	sustainability	0.3745991661684465
+biodiversity	sustainability	0.44898152933430263
+human physiology	animal behavior	0.4268577693931908
+bioinformatics	genomics	0.3861706806239745
+bioinformatics	molecular biology	0.3592386608436582
 molecular biology	plant biology	0.3352004199762193
-active learning	cell biology	0.31364524516273484
-ecology	invertebrate zoology	0.28379175214724395
-animal physiology	statistics	0.2534644931391789
+population genetics	ecology	0.3159764355186452
+conservation biology	animal behavior	0.29119516739311774
+statistics	human physiology	0.28149321673942246
+biodiversity	plant biology	0.25314621208286425
 human physiology	electrophysiology	0.23905975080425915
-animal physiology	cell biology	0.21218760440395779
-plant ecology	electrophysiology	0.19766706564603417
-biogeography	assessment	0.17572391331002987
+active learning	assessment	0.21847589373097978
+assessment	conservation biology	0.19883959518603592
+environmental science	introductory biology	0.18852368620616433
+neuroscience	sustainability	0.17502681126324238
 genetics	bioinformatics	0.16310731377115403
-sustainability	plant biology	0.15275041655209015
-conservation biology	statistics	0.14583061473934938
-population genetics	bioinformatics	0.1332778772660231
+assessment	plant ecology	0.15480681386160247
+introductory biology	biology	0.15073512531676458
+human physiology	assessment	0.13820755204214077
+animal behavior	assessment	0.1310289674150174
 genomics	human physiology	0.12582777372920959
-population genetics	biology	0.10373856264054097
-assessment	statistics	0.09076890638457698
-biology	ornithology	0.0837883356861513
+invasive species	biology	0.1093424401585395
+genomics	biology	0.0945700799987675
+neuroscience	behavioral ecology	0.08833596343687197
+ornithology	genetics	0.0775006118471042
 conservation biology	genetics	0.07324278870456293
-statistics	neuroscience	0.060731562764280274
-cell biology	neuroscience	0.05212379078242726
-biodiversity	statistics	0.042611127824285756
+genetics	cell biology	0.061217085760853565
+biogeography	statistics	0.05389213823397476
+behavioral ecology	genetics	0.047537388469661004
+ecology	biology	0.04188320860191934
 biodiversity	biology	0.03054282373292629
-introductory biology	ecology	0.017523862742474812
-ecology	active learning	0.005038151194415077
-molecular biology	plant ecology	-0.007222260845986921
+active learning	bioinformatics	0.019620151067412203
+molecular biology	statistics	0.011066524866322784
+genetics	biodiversity	-0.0030189849727826927
+assessment	invertebrate zoology	-0.007920483636097243
 sustainability	genetics	-0.01626460478465669
-assessment	genomics	-0.026837471534464807
-animal behavior	sustainability	-0.06830798802011431
-electrophysiology	environmental science	-0.10336293001794702
+assessment	molecular biology	-0.01960624196129198
+genomics	faculty development	-0.05026348532647162
+biodiversity	genomics	-0.0850255915856835
+ecology	human physiology	-0.11414825652479363
 molecular biology	population genetics	-0.13092545044197995
-biology	invertebrate zoology	-0.1502948703472167
-biogeography	molecular biology	-0.17763638700997766
-conservation biology	molecular biology	-0.21063664711290297
+behavioral ecology	genomics	-0.14717349833452803
+biogeography	cell biology	-0.16347600955692757
+sustainability	genomics	-0.18542138711645773
+environmental science	cell biology	-0.22714508942630482
 introductory biology	biodiversity	-0.25200376623704174
-neuroscience	ecology	-0.2837573880525545
-behavioral ecology	molecular biology	-0.3180120937991244
-active learning	genomics	-0.3747745768399758
+biogeography	bioinformatics	-0.281409844596569
+bioinformatics	ecology	-0.3009633809722479
+biodiversity	active learning	-0.326637384533946
+introductory biology	bioinformatics	-0.3828674853553461
 electrophysiology	introductory biology	-0.44218148657132805
-neuroscience	conservation biology	-0.5244478932828635
-neuroscience	environmental science	-0.5551167130493154
-electrophysiology	biodiversity	-0.7199816415168344
+bioinformatics	environmental science	-0.5211701835216275
+biodiversity	cell biology	-0.542733805261211
+genomics	introductory biology	-0.652323476654434
+neuroscience	biogeography	-0.7924776288439194
