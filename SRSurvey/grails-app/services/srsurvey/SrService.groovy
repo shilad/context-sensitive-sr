@@ -163,7 +163,6 @@ class SrService {
         for (int i = n-1; i >= 0; i--) {
             int from = randBetween((int)(i * ss), (int)((i+1)*ss));
             int to = randBetween(from + MIN_DUP_SPACING, qs.size());
-            println("segment $i is from $from to $to")
             Question q = new Question()
             q.properties = qs[from].properties
             qs.add(to, q);
