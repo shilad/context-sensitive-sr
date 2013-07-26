@@ -7,7 +7,6 @@ import org.junit.Before
 import org.junit.Test
 
 /**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(SrService)
 @Mock([ExperimentalState, Interest, Survey, ExperimentalGroup, Person, Question])
@@ -128,6 +127,14 @@ class SrServiceTests {
     }
 
     @Test
+    def void testQuestionsRepeated() {
+        for (int i : 0..100) {
+            println("testing $i")
+            testQuestions()
+        }
+    }
+
+    @Test
     def void testQuestions() {
         initService()
         Person person = new Person(scholar : true, survey: new Survey(), primary : 'biology')
@@ -136,15 +143,18 @@ class SrServiceTests {
         assertEquals(qs.size(), 65)
         def pairs = [:]
         def dupes = [:]
+        def indexes = [:]
         int i = 0
+        int j = 0
         for (Question q : qs) {
-            q.questionNumber = i++
+            q.questionNumber = j++
             person.survey.addToQuestions(q)
             if (!pairs.containsKey(q.groupName)) {
                 pairs[q.groupName] = []
             }
             def p = q.toSrPair()
             if (!pairs[q.groupName].contains(p)) {
+                indexes[q] = i++      // indexes for original qs
                 pairs[q.groupName].add(q.toSrPair())
             } else {
                 assertFalse(dupes.containsKey(p))
@@ -162,7 +172,7 @@ class SrServiceTests {
             Question first = dupes[pair][0]
             Question second = dupes[pair][1]
             assert(second.questionNumber - first.questionNumber >= 15)
-            segments.add((int)(first.questionNumber / segmentSize))
+            segments.add(getSegment(indexes[first]))
         }
         Collections.sort(segments)
         assertEquals(segments, [0,1,2,3,4])
@@ -189,8 +199,19 @@ class SrServiceTests {
         assertEquals(pairs[group2].size(), 50)
     }
 
+    def int getSegment(int i) {
+        double ss = 1.0 * 60 / 7;     // segment size
+        for (int s = 4; s >= 0; s--) {
+            if (i >= (int)(ss * s)) {
+                return s
+            }
+        }
+        throw new IllegalArgumentException()
+    }
+
     def void setupGroups() {
-        for (String g : SrService.FIELDS + ['general', 'mturk', 'scholar']) {
+        for (String g : SrService.FIELDS +
+                ['general', 'mturk', 'scholar']) {
             if (ExperimentalGroup.findByName(g) == null) {
                 new ExperimentalGroup(name : g).save(flush : true)
             }
