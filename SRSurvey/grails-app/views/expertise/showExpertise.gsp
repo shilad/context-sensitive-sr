@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Expertise</title>
+    <title>Macademia survey: Area of study</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
 
@@ -17,7 +17,7 @@
 <body>
 <div class= "rounded-corners expertise" id="main-container">
     <br>
-    <h1>Area of Study</h1>
+    <h1>Macademia survey: Area of study</h1>
     <br/><br/>
     <div class="margin" style="width: 69%;margin: auto;">
         <p>Please enter up to three of your fields of expertise, in order of preference:</p>

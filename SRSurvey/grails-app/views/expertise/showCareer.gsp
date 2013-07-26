@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Career</title>
+    <title>Macademia survey: Type of job</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
 
@@ -17,7 +17,7 @@
 <body>
 <div class= "rounded-corners expertise" id="main-container">
     <g:form action="saveCareer">
-    <h1>Career</h1>
+    <h1>Macademia survey: Type of job</h1>
     <div>
         <p>Do you conduct scholarly research as part of your job?
         For example, do you publish articles or conduct scientific experiments?

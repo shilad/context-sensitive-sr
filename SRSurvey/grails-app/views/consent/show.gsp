@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Research study: Context-sensitive semantic relatedness</title>
+    <title>Macademia survey: Context-sensitive semantic relatedness</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <r:script>
@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class= "consent rounded-corners" id="main-container">
-    <h1>Research study: Context-sensitive semantic relatedness</h1>
+    <h1>Macademia survey: Context-sensitive semantic relatedness</h1>
 <g:form controller="consent" action="save" name = "consent-form" method="post">
     <table>
         <tr>

@@ -1,7 +1,5 @@
 package srsurvey
 
-import java.util.concurrent.atomic.AtomicInteger
-
 class SrService {
     public static final int NUM_QUESTIONS_PER_FIELD = 25
     public static final int NUM_QUESTIONS_GENERAL = 10

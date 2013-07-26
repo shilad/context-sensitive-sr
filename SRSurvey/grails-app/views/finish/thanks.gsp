@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Jesse
-  Date: 6/4/13
-  Time: 10:46 AM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Thank you</title>
+    <title>Macademia Survey: Thank you</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
     <style type="text/css">

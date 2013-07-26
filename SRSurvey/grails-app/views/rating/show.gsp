@@ -1,22 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jesse
-  Date: 6/4/13
-  Time: 9:31 AM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
-    <title>Rate the relatedness of each term</title>
+    <title>Macademia: Term relatedness, page ${page - roundBegPage + 1}</title>
 
 </head>
 <body>
 <div class="rounded-corners rating" id="main-container">
-    <br/><h1>Rate the relatedness of each term (page ${page - roundBegPage + 1} of ${roundEndPage - roundBegPage + 1})</h1>
+    <br/><h1>Macademia survey: Rate term relatedness (page ${page - roundBegPage + 1} of ${roundEndPage - roundBegPage + 1})</h1>
     <div id="instructions">
         Please rate how related each pair of terms is.
         When you finish rating all pairs, click "next".

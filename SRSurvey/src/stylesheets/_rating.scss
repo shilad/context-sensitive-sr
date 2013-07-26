@@ -7,7 +7,7 @@
 
   form {
     #dontknow {
-      margin-left: 185px;
+      margin-left: 215px;
       font-size: 14px;
       text-align: center;
       width:100px;
@@ -45,8 +45,11 @@
         &.odd{
           background: rgb(204, 214, 217);
         }
+        &:hover {
+          background: rgb(242, 252, 255);
+        }
         td.interest {
-          width : 180px;
+          width : 210px;
           text-align : left;
         }
         td.checkbox {

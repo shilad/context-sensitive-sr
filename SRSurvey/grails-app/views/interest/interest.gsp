@@ -9,13 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Interest</title>
+    <title>Macademia Survey: Research interests</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
 </head>
 <body>
 <div class= "interest rounded-corners" id="main-container">
-    <h1>Research interests</h1>
+    <h1>Macademia Survey: Research interests</h1>
     <g:form action="save" name="interest-form" id="interest-form" method="post">
         <table>
             <tr>

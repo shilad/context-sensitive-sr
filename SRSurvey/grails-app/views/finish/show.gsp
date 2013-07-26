@@ -9,14 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Comment</title>
+    <title>Macademia Survey: Finished?</title>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
 </head>
 <body>
 <div class= "finish rounded-corners" id="main-container">
     <br>
-    <h1>Finished?</h1>
+    <h1>Macademia Survey: Finished?</h1>
     <g:form controller="finish" action="save" method="post">
         <p>
             Thank you for volunteering your time and expertise!
