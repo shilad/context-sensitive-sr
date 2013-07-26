@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
-    <title>Macademia: Term relatedness, page ${page - roundBegPage + 1}</title>
+    <title>Macademia survey: Term relatedness, page ${page - roundBegPage + 1}</title>
 
 </head>
 <body>
