@@ -1,35 +1,28 @@
 package org.macademia.sr;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Person {
-    private String email="";
-    private String id="";
-    private ArrayList<String> department=new ArrayList<String>();
-    private ArrayList<Interest> interest=new ArrayList<Interest>();
+    private final String email;
+    private final String id;
+    private List<String> department=new ArrayList<String>();
+    private List<Interest> interest=new ArrayList<Interest>();
 
     public Person(String id, String email) {
         this.id=id;
         this.email=email;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
-    }
-
-    public void setID(String id) {
-        this.id=id;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email=email;
-    }
-
-    public ArrayList<Interest> getInterest() {
+    public List<Interest> getInterests() {
         return interest;
     }
 
@@ -41,11 +34,7 @@ public class Person {
         this.department.add(dept);
     }
 
-    public ArrayList<String> getDepartment() {
+    public List<String> getDepartments() {
         return department;
-    }
-
-    public void setDepartment(ArrayList<String> department) {
-        this.department = department;
     }
 }

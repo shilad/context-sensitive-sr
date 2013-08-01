@@ -46,9 +46,9 @@ public class Dao {
     }
 
     public Map<String, Interest> makeCanonicalMap() {
-        Map<String, Map<Interest, Integer>> normalizedCounts = new HashMap<String, Map<Interest, Integer>>();
+        Map<String, HashMap<Interest, Integer>> normalizedCounts = new HashMap<String, HashMap<Interest, Integer>>();
         for (Person p : people.values()) {
-            for (Interest i : p.getInterest()) {
+            for (Interest i : p.getInterests()) {
                 if (i == null) {
                     continue;
                 }
@@ -83,8 +83,8 @@ public class Dao {
     public LinkedHashMap<Interest, Integer> topInterests(String dept, int minPeople) {
         final TObjectIntMap<String> counts = new TObjectIntHashMap<String>();
         for (Person person : people.values()) {
-            if (person.getDepartment().contains(dept.toLowerCase())) {
-                for (Interest i : person.getInterest()) {
+            if (person.getDepartments().contains(dept.toLowerCase())) {
+                for (Interest i : person.getInterests()) {
                     if (i != null) {
                         String text = tokenizer.normalize(i.getName());
                         if (text.length() > 0) {

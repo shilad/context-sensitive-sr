@@ -146,7 +146,7 @@ public class People_Interests {
                             //System.out.println(dept.toString());
                             people.get(i).setDepartment(dept);
                         }
-                        //System.out.println(people.get(i).getDepartment().toString());
+                        //System.out.println(people.get(i).getDepartments().toString());
                     }
                 }
             }

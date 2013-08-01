@@ -23,22 +23,18 @@ public class Tokenizer {
 
     public List<String> tokenize(String text) {
         List<String> tokens = new ArrayList<String>();
-        Tokenization t = new Tokenization(text.replaceAll("[^\\w\\s]", ""), tokenNGramTokenizerFactory);
+        Tokenization t = new Tokenization(text, tokenNGramTokenizerFactory);
         for (String token : t.tokens()) {
             tokens.add(normalize(token));
         }
         return tokens;
     }
 
-    public String clean(String text) {
-        return StringUtils.join(text.split("\\s+"), " ").trim();
-    }
-
-    public String stem(String text) {
-        return PorterStemmerTokenizerFactory.stem(text.replaceAll("[^\\w\\s]", "")).toLowerCase();
-    }
-
     public String normalize(String text) {
-        return clean(stem(text));
+        String tokens[] = text.toLowerCase().replaceAll("[^\\w\\s]", "").split("\\s+");
+        for (int i = 0; i < tokens.length; i++) {
+            tokens[i] = PorterStemmerTokenizerFactory.stem(tokens[i]);
+        }
+        return StringUtils.join(tokens, " ").trim();
     }
 }
