@@ -413,7 +413,7 @@ public class Kmeans {
      * @param people an array list of people objects with at least email addresses and interests
      */
 
-    public void bestSamplePointsFromClusterToFileWithNames(Cluster[] clusters, String path, int n, Point[] centroids, ArrayList<People> people) {
+    public void bestSamplePointsFromClusterToFileWithNames(Cluster[] clusters, String path, int n, Point[] centroids, ArrayList<Person> people) {
         try{
             FileWriter out = new FileWriter(path);
 

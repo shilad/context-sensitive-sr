@@ -2,20 +2,13 @@ package org.macademia.algs;
 
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jesse
- * Date: 6/11/13
- * Time: 1:59 PM
- * To change this template use File | Settings | File Templates.
- */
-public class People {
+public class Person {
     private String email="";
     private String id="";
     private ArrayList<String> department=new ArrayList<String>();
     private ArrayList<Interest> interest=new ArrayList<Interest>();
 
-    public People(String id, String email) {
+    public Person(String id, String email) {
         this.id=id;
         this.email=email;
     }

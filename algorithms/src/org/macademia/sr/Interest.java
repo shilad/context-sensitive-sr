@@ -1,4 +1,4 @@
-package org.macademia.algs;
+package org.macademia.sr;
 
 /**
  */
@@ -8,7 +8,7 @@ public class Interest {
     String macademiaID;
     String denseID;
 
-    public Interest(String name, String macademiaID, String denseID){
+    Interest(String name, String macademiaID, String denseID){
         this.name=name;
         this.macademiaID=macademiaID;
         this.denseID=denseID;

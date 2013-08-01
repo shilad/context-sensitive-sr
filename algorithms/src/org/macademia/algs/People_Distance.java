@@ -6,7 +6,6 @@ import Jama.Matrix;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.SortedMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +25,7 @@ public class People_Distance {
      * @param path
      * @return a HashMap, key: people's id, value: the matrix that represents the vector of a person
      */
-    public static HashMap<String,Matrix> serializeVectorMap(ArrayList<People> people, String path){
+    public static HashMap<String,Matrix> serializeVectorMap(ArrayList<Person> people, String path){
 
         if(matrix==null){                       //Checks to see if static matrixes have been created yet
             try {
@@ -45,7 +44,7 @@ public class People_Distance {
         try{
 
             // constructing the the vectorMap
-            for (People p:people){
+            for (Person p:people){
                 //System.out.println("Finding vector for "+p.getEmail()+" with ID "+p.getID());
                 ArrayList<Integer> interestIDs = getInterestIDs(p);
                 Matrix vector = getPersonVector(interestIDs);
@@ -111,7 +110,7 @@ public class People_Distance {
 
 
     //Given two people objects returns the distance between them
-    public static double findDistance(People p1, People p2){
+    public static double findDistance(Person p1, Person p2){
 
         if(matrix==null){                       //Checks to see if static matrixes have been created yet
             try {
@@ -159,7 +158,7 @@ public class People_Distance {
     }
 
     //Returns a list of interest IDs given a people object
-    private static ArrayList<Integer> getInterestIDs(People p){
+    private static ArrayList<Integer> getInterestIDs(Person p){
         ArrayList<Integer> ids = new ArrayList<Integer>();
         ArrayList<Interest> interests=p.getInterest();
         for(int i=0;i<interests.size();i++){

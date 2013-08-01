@@ -1,11 +1,9 @@
 package org.macademia.algs;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -17,45 +15,32 @@ import java.util.HashMap;
  */
 public class People_Interests {
 
-    private static ArrayList<People> peopleList = new ArrayList<People>();
+    private static ArrayList<Person> peopleList = new ArrayList<Person>();
     private static HashMap interestMap = new HashMap();
 
     //Creates an ArrayList of people objects with their interests given the paths to the data files
-    public static ArrayList<People> makePeopleInterests(String peoplePath, String interestPath, String people_interestPath, String deptPath){
-        BufferedReader peopleFile=null;
-        BufferedReader interestFile=null;
-        BufferedReader people_interestFile=null;
-        BufferedReader deptFile=null;
+    public static ArrayList<Person> readPeople(String peoplePath, String interestPath, String people_interestPath, String deptPath) throws IOException {
+        BufferedReader peopleFile = new BufferedReader(new FileReader(peoplePath));
+        BufferedReader interestFile = new BufferedReader(new FileReader(interestPath));
+        BufferedReader people_interestFile = new BufferedReader(new FileReader(people_interestPath));
+        BufferedReader deptFile = new BufferedReader(new FileReader(deptPath));
 
-        try {
-            peopleFile = new BufferedReader(new FileReader(peoplePath));
-            interestFile = new BufferedReader(new FileReader(interestPath));
-            people_interestFile = new BufferedReader(new FileReader(people_interestPath));
-            deptFile = new BufferedReader(new FileReader(deptPath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            peopleList=makePeopleList(peopleFile);
-            interestMap=makeInterestMap(interestFile);
-            peopleList=addInterests(peopleList,people_interestFile);
-            peopleList=addDepartments(peopleList, deptFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        peopleList = makePeopleList(peopleFile);
+        interestMap = makeInterestMap(interestFile);
+        peopleList = addInterests(peopleList,people_interestFile);
+        peopleList = addDepartments(peopleList, deptFile);
 
         return peopleList;
     }
 
-    //Reads people file and creates an ArrayList of People objects
-    private static ArrayList<People> makePeopleList(BufferedReader peopleFile) throws IOException{
-        ArrayList<People> temp = new ArrayList<People>();
+    //Reads people file and creates an ArrayList of Person objects
+    private static ArrayList<Person> makePeopleList(BufferedReader peopleFile) throws IOException{
+        ArrayList<Person> temp = new ArrayList<Person>();
         String line = null;
-        People p;
+        Person p;
         while ((line = peopleFile.readLine()) != null) {
             String[] lineSplit=line.split("\t");
-            p=new People(lineSplit[0], lineSplit[1]);
+            p=new Person(lineSplit[0], lineSplit[1]);
             temp.add(p);
 
         }
@@ -98,8 +83,8 @@ public class People_Interests {
     }
 
     //Adds the interest objects to the people objects
-    private static ArrayList<People> addInterests(ArrayList<People> people, BufferedReader connectionFile) {
-        ArrayList<People> peopleArray = people;
+    private static ArrayList<Person> addInterests(ArrayList<Person> people, BufferedReader connectionFile) {
+        ArrayList<Person> peopleArray = people;
 
         HashMap peopleMap= null;
         try {
@@ -133,15 +118,15 @@ public class People_Interests {
     }
 
 
-    private static ArrayList<People> addDepartments(ArrayList<People> people,BufferedReader departmentFile) throws IOException{
-//        ArrayList<People> temp = people;
+    private static ArrayList<Person> addDepartments(ArrayList<Person> people,BufferedReader departmentFile) throws IOException{
+//        ArrayList<Person> temp = people;
         String line = null;
         String[] lineSplit=null;
         ArrayList<String> dept= null;
         String s="";
         while ((line = departmentFile.readLine()) != null) {
             dept=new ArrayList<String>();
-            lineSplit=line.split(",");
+            lineSplit=line.toLowerCase().split(",");
             for(int i=0;i<people.size();i++){
                 if(people.get(i).getID().equals(lineSplit[1])){
                     if(lineSplit.length>2){
@@ -160,7 +145,6 @@ public class People_Interests {
                             dept.add(lineSplit[2]);
                             //System.out.println(dept.toString());
                             people.get(i).setDepartment(dept);
-
                         }
                         //System.out.println(people.get(i).getDepartment().toString());
                     }
