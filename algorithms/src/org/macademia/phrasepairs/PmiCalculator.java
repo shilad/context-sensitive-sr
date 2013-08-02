@@ -1,4 +1,4 @@
-package org.macademia.sr;
+package org.macademia.phrasepairs;
 
 import java.io.*;
 
@@ -195,5 +195,6 @@ public class PmiCalculator {
             }
             writer.close();
         }
+        log.close();
     }
 }

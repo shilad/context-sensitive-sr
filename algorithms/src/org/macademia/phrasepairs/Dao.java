@@ -1,4 +1,4 @@
-package org.macademia.sr;
+package org.macademia.phrasepairs;
 
 import gnu.trove.map.TObjectIntMap;
 import gnu.trove.map.hash.TObjectIntHashMap;

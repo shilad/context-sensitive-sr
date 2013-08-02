@@ -1,4 +1,4 @@
-package org.macademia.sr;
+package org.macademia.phrasepairs;
 
 import com.aliasi.tokenizer.*;
 import org.apache.commons.lang3.StringUtils;

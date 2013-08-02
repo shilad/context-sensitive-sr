@@ -1,4 +1,4 @@
-package org.macademia.sr;
+package org.macademia.phrasepairs;
 
 import java.util.Collections;
 import java.util.Comparator;
