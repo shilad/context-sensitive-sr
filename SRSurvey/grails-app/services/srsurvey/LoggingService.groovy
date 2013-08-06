@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest
 
 class LoggingService {
 
-    private static File output = new File("./sr-log.txt")
+    private static File output = new File("./phrasepairs-log.txt")
 
     def append(Person p, HttpServletRequest request, String message) {
         String id = (p.id) ? p.id : "unknown"

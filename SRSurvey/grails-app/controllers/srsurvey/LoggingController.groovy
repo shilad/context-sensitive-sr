@@ -4,7 +4,7 @@ class LoggingController {
     def personService
     def loggingService
 
-    private static File output = new File("./sr-log.txt")
+    private static File output = new File("./phrasepairs-log.txt")
 
     def index() {
     }

@@ -18,6 +18,15 @@
 <div class= "rounded-corners expertise" id="main-container">
     <g:form action="saveCareer">
     <h1>Macademia survey: Type of job</h1>
+
+    <div class="question">
+        <div class="span-7">
+            What is your education level?&nbsp;&nbsp;
+        </div>
+        <div class="span-17 last">
+            <g:select name="education" from="${['please choose', 'high school G.E.D or equivalent', 'degree from two-year college', 'degree from four-year college', 'graduate degree']}"/>
+        </div>
+    </div>
     <div>
         <p>Do you conduct scholarly research as part of your job?
         For example, do you publish articles or conduct scientific experiments?

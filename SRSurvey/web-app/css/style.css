@@ -131,16 +131,16 @@ html, body { height: 100%; }
 /* line 55, ../../src/stylesheets/_rating.scss */
 #main-container.rating form #ratings div.row td.checkbox { border-left: 1px solid #666; border-right: 1px solid #666; width: 50px; text-align: center; }
 /* line 62, ../../src/stylesheets/_rating.scss */
-#main-container.rating form #ratings div.row .rating-bars { border: 1px solid #999; padding: 2px 0; background: white; /* Old browsers */ background: -moz-linear-gradient(left, white 0%, #05ce26 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, right top, color-stop(0%, white), color-stop(100%, #05ce26)); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(left, white 0%, #05ce26 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(left, white 0%, #05ce26 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(left, white 0%, #05ce26 100%); /* IE10+ */ background: linear-gradient(to right, #ffffff 0%, #05ce26 100%); /* W3C */ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#05ce26',GradientType=1 ); /* IE6-9 */ }
+#main-container.rating form #ratings div.row .rating-bars { border: 1px solid #999; padding: 2px 0; background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff), color-stop(15%, #ffffff), color-stop(100%, #05ce26)); background-image: -webkit-linear-gradient(left, #ffffff, #ffffff 15%, #05ce26); background-image: -moz-linear-gradient(left, #ffffff, #ffffff 15%, #05ce26); background-image: -o-linear-gradient(left, #ffffff, #ffffff 15%, #05ce26); background-image: linear-gradient(left, #ffffff, #ffffff 15%, #05ce26); }
 /* line 65, ../../src/stylesheets/_rating.scss */
 #main-container.rating form #ratings div.row .rating-bars td { text-align: center; width: 80px; }
-/* line 78, ../../src/stylesheets/_rating.scss */
+/* line 77, ../../src/stylesheets/_rating.scss */
 #main-container.rating form #ratings div.row .no-assoc { float: left; padding-left: 15px; font-size: 12px; padding-bottom: 5px; }
-/* line 84, ../../src/stylesheets/_rating.scss */
+/* line 83, ../../src/stylesheets/_rating.scss */
 #main-container.rating form #ratings div.row .str-assoc { float: right; padding-right: 15px; font-size: 12px; padding-bottom: 5px; }
-/* line 93, ../../src/stylesheets/_rating.scss */
+/* line 92, ../../src/stylesheets/_rating.scss */
 #main-container.rating form div.continue { padding: 15px; text-align: right; }
-/* line 99, ../../src/stylesheets/_rating.scss */
+/* line 98, ../../src/stylesheets/_rating.scss */
 #main-container.rating .error { background: red !important; }
 
 /* line 1, ../../src/stylesheets/_finish.scss */

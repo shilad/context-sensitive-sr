@@ -3,12 +3,12 @@
 <head>
     <meta name="layout" content="main"/>
     <r:require modules="core" />
-    <title>Macademia survey: Term relatedness, page ${page - roundBegPage + 1}</title>
+    <title>Macademia survey: Concept relatedness, page ${page - roundBegPage + 1}</title>
 
 </head>
 <body>
 <div class="rounded-corners rating" id="main-container">
-    <br/><h1>Macademia survey: Rate term relatedness (page ${page - roundBegPage + 1} of ${roundEndPage - roundBegPage + 1})</h1>
+    <br/><h1>Macademia survey: Rate concept relatedness (page ${page - roundBegPage + 1} of ${roundEndPage - roundBegPage + 1})</h1>
     <div id="instructions">
         Please rate how related each pair of terms is.
         When you finish rating all pairs, click "next".
@@ -33,33 +33,33 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <label>1 <input type="radio" name="${"radio_"+q.id}" value="1"
+                                                <label>0 <input type="radio" name="${"radio_"+q.id}" value="1"
                                                 <g:if test="${q.result == 1}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                <label>2 <input type="radio" name="${"radio_"+q.id}" value="2"
+                                                <label>1 <input type="radio" name="${"radio_"+q.id}" value="2"
                                                          <g:if test="${q.result == 2}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                <label>3 <input type="radio" name="${"radio_"+q.id}" value="3"
+                                                <label>2 <input type="radio" name="${"radio_"+q.id}" value="3"
                                                          <g:if test="${q.result == 3}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                <label>4 <input type="radio" name ="${"radio_"+q.id}" value="4"
+                                                <label>3 <input type="radio" name ="${"radio_"+q.id}" value="4"
                                                          <g:if test="${q.result == 4}">checked</g:if>/></label>
                                             </td>
                                             <td>
-                                                <label>5 <input type="radio" name="${"radio_"+q.id}" value="5"
+                                                <label>4 <input type="radio" name="${"radio_"+q.id}" value="5"
                                                          <g:if test="${q.result == 5}">checked</g:if>/></label>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="no-assoc">
-                                    No Association
+                                    Not related
                                 </div>
                                 <div class="str-assoc">
-                                    Strong Association
+                                    Strongly related
                                 </div>
                             </td>
                         </tr>

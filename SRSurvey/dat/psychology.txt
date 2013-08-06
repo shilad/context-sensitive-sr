@@ -1,75 +1,50 @@
-neuroscience	cognitive neuroscience	0.7048642827220115
-linguistics	bilingualism	0.5821073945531156
-clinical psychology	community psychology	0.45391636270042784
-cognitive development	linguistics	0.4346613169469643
-history of psychology	developmental psychology	0.395816315042182
-cognitive psychology	history of psychology	0.3458423400803435
-memory	cognitive neuroscience	0.32070804664296826
-history of psychology	linguistics	0.3027364594779983
-bilingualism	gender	0.2901144522455268
-introductory psychology	history of psychology	0.2708775784338821
-cognitive neuroscience	history of psychology	0.26041214475571717
-introductory psychology	social psychology	0.2587491638882075
-bilingualism	cognitive psychology	0.2506059109618532
-community psychology	emotion	0.2295450823800294
-history of psychology	emotion	0.2185496980785662
-neuroscience	linguistics	0.21384441848579008
-animal behavior	history of psychology	0.19568681511906205
-linguistics	memory	0.182088599515156
-cognitive neuroscience	developmental psychology	0.17050703331631922
-memory	cognitive development	0.16041105477051887
-emotion	gender	0.15389470522753784
-bilingualism	clinical psychology	0.14356456662454956
-cognition	cognitive neuroscience	0.14305205750624672
-gender	developmental psychology	0.1261260715844474
-history of psychology	cognition	0.11502333390600321
-gender	clinical psychology	0.10719921326139822
-cognitive neuroscience	learning	0.09737245333062665
-history of psychology	clinical psychology	0.09267296006480182
-history of psychology	learning	0.08284620013403028
-cognitive development	learning	0.07778640136462797
-introductory psychology	cognitive psychology	0.06980403129112367
-social psychology	cognition	0.06756695701858553
-developmental psychology	psychology	0.06597214078720252
-neuroscience	learning	0.06434603957487339
-health psychology	cognition	0.06007782244148274
-statistics	clinical psychology	0.05292845328664998
-clinical psychology	cognition	0.0492929251771484
-bilingualism	memory	0.04705419071203413
-bilingualism	psychology	0.041838461070483154
-learning	emotion	0.03801927449314023
-cognition	learning	0.03590097125375064
-linguistics	emotion	0.032076403229163164
-cognitive psychology	social psychology	0.028788885987163493
-memory	emotion	0.025979164628389572
-statistics	emotion	0.022176412014165196
-social psychology	statistics	0.020145644144401825
-introductory psychology	statistics	0.017253251710649117
-bilingualism	animal behavior	0.007696332763673037
-statistics	developmental psychology	0.0011664318171943839
-psychology	statistics	-0.0018010895911928905
-linguistics	animal behavior	-0.0050269188449512565
-memory	social psychology	-0.00740767831917252
-neuroscience	bilingualism	-0.018239401330726657
-statistics	cognitive psychology	-0.02489538573923279
-cognitive psychology	animal behavior	-0.028867827873219256
-linguistics	social psychology	-0.038450674331901025
-introductory psychology	emotion	-0.05181147781896309
-cognition	animal behavior	-0.057077442416873334
-cognitive neuroscience	statistics	-0.06147701352604219
-statistics	cognitive development	-0.07646731380289168
-bilingualism	health psychology	-0.11514941433878315
-cognitive psychology	gender	-0.13001459211055927
-social psychology	cognitive development	-0.16042599662073287
-emotion	animal behavior	-0.1906713210031604
-cognitive neuroscience	social psychology	-0.23567694903992537
-bilingualism	introductory psychology	-0.2692954220328693
-neuroscience	social psychology	-0.2841403329765254
-community psychology	memory	-0.3003197837609741
-cognitive neuroscience	gender	-0.3348084220419397
-introductory psychology	cognitive development	-0.4453866810885506
-animal behavior	cognitive development	-0.46942492195598934
-social psychology	animal behavior	-0.4922878049154936
-clinical psychology	cognitive neuroscience	-0.5483050972935302
-health psychology	cognitive neuroscience	-0.5961657129419697
-health psychology	cognitive development	-0.8933006647224268
+social change	community psychology	0.48602737540716245
+abnormal psychology	psychophysiology	0.3531831127355403
+stereotyping	bilingualism	0.331906562137051
+neuroscience	cognitive psychology	0.2403309232238474
+psychophysiology	memory	0.17918179423781352
+linguistics	Research methods	0.13963482468379879
+music	cognitive psychology	0.13962894422676855
+psychophysiology	cognitive psychology	0.12848891563357598
+abnormal psychology	Child development	0.1269274267136171
+Experimental Psychology	gerontology	0.11544068627742135
+consciousness	infancy	0.11325284676637466
+cognitive development	aging	0.11171763235246224
+consciousness	Positive Psychology	0.10637732878232704
+Child development	cognitive neuroscience	0.1061216632626439
+personality	gerontology	0.09986331496266893
+aging	metacognition	0.09754359404555012
+Experimental Psychology	learning	0.09558104113207912
+consciousness	Research methods	0.09468955438522542
+personality	social psychology	0.0920927287878437
+learning	cognitive psychology	0.08692972861493552
+cognitive neuroscience	learning	0.08470831845765
+psychophysiology	aging	0.08310414346392794
+personality	gender	0.08216380939980195
+cognitive neuroscience	aging	0.08186234601284201
+psychopathology	neuroscience	0.08167323307749204
+history of psychology	clinical psychology	0.06866512736246959
+developmental psychology	memory	0.06505926861726853
+emotion	developmental psychology	0.06353081821219382
+Positive Psychology	learning	0.06344341372665196
+consciousness	personality	0.06326860161490479
+psychophysiology	psychology	0.05693727226007415
+cognition	acculturation	0.05626884364925645
+community psychology	psychology	0.054314682018544294
+cognition	Positive Psychology	0.053589950470029526
+Child development	social psychology	0.04922369219991545
+cognition	language	0.04578074491133812
+health psychology	emotion regulation	0.04504267827586019
+history of psychology	psychology	0.039877996416038286
+cognitive development	psychology	0.03313993060464266
+linguistics	emotion	0.03292401478554702
+aging	memory	0.026402148573547498
+cognition	gender	0.02560406836505574
+cognitive psychology	social psychology	0.024045833734919666
+social change	psychology	0.023192737896457344
+linguistics	psychophysiology	0.014008641185774334
+animal behavior	bilingualism	0.0037243204294549297
+music	community psychology	-0.006621531396431402
+consciousness	clinical psychology	-0.014936456915748672
+cognitive neuroscience	Research methods	-0.12041773309017123
+Child development	health psychology	-0.2603141583268988
