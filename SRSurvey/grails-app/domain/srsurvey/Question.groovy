@@ -5,6 +5,7 @@ class Question {
     int round
     int page    // which page of questions this will appear on
     Double result
+    Double pmi = 0
     Date lastUpdated
     Integer questionNumber
     Interest interest1

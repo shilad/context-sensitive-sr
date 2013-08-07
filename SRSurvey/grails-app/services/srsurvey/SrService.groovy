@@ -7,6 +7,7 @@ class SrService {
     public static final int MIN_DUP_SPACING = 15
     public static final String [] FIELDS = ['biology', 'psychology', 'history']
     public static final String GROUP_GENERAL = 'general'
+    public static final String GROUP_VALIDATION = 'validation'
 
     // randomly ordered list of experimental group names as shown in FIELDS
     List<String> randomOrder = []
@@ -37,7 +38,7 @@ class SrService {
     }
 
     def readPairs() {
-        for (String field : FIELDS + [GROUP_GENERAL]) {
+        for (String field : FIELDS + [GROUP_GENERAL, GROUP_VALIDATION]) {
             for (String line : new File("dat/${field}.txt")) {
                 String [] tokens = line.trim().split('\t')
                 Interest i1 = addInterest(tokens[0])
@@ -47,6 +48,9 @@ class SrService {
             }
         }
         for (String g : pairs.keySet()) {
+            if (g == GROUP_VALIDATION) {
+                continue
+            }
             int n = (g == GROUP_GENERAL) ? NUM_QUESTIONS_GENERAL : NUM_QUESTIONS_PER_FIELD
             if (pairs[g].size() % n != 0) {
                 throw new IllegalStateException("$g, ${pairs[g].size()}, $n")
@@ -115,7 +119,7 @@ class SrService {
         p.save(flush : true)
     }
 
-    //Input a persons group generate 60 questions for them
+    //Input a persons group generate 64 (first time) or 60 questions for them
     def List<Question> getQuestions(Person p) {
         List<Question> newQs = []
         for (ExperimentalState e : [p.survey.group1, p.survey.group2, p.survey.general]) {
@@ -132,15 +136,51 @@ class SrService {
                                     round : round,
                                     interest1 : Interest.findByText(pair.phrase1),
                                     interest2 : Interest.findByText(pair.phrase2),
+                                    pmi : pair.sim,
                                     groupName : e.name
                             ))
                 }
             }
         }
-        Collections.shuffle(newQs)
-        addDuplicates(newQs, NUM_DUPLICATES)
 
-        return newQs
+        // Stratified shuffle
+        newQs.sort(true, {q1, q2 -> q1.pmi.compareTo(q2.pmi)})
+
+        // create buckets with increasing pmi values
+        int numBins = 5
+        def buckets = []
+        for (int i : 0..(numBins-1)) buckets.add([])
+        for (int i : 0..(newQs.size()-1)) {
+            buckets[i*numBins/newQs.size() as int].add(newQs[i])
+        }
+        // shuffle buckets
+        for (def bucket : buckets) {
+            Collections.shuffle(bucket)
+        }
+        // reconstruct stratified shuffle over buckets
+        def shuffled = []
+        for (int i = 0; shuffled.size() < newQs.size(); i++) {
+            if (!buckets[i%numBins].isEmpty()) {
+                shuffled.add(buckets[i%numBins].remove(0))
+            }
+        }
+
+        addDuplicates(shuffled, NUM_DUPLICATES)
+
+        // randomly add validation questions
+        if (p.survey.getSeenPairs(null).isEmpty()) {
+            for (SrPair pair : pairs[GROUP_VALIDATION]) {
+                int i = new Random().nextInt(newQs.size())
+                shuffled.add(i, new Question(
+                        round : 0,
+                        interest1 : Interest.findByText(pair.phrase1),
+                        interest2 : Interest.findByText(pair.phrase2),
+                        groupName : GROUP_VALIDATION
+                ))
+            }
+        }
+
+        return shuffled
     }
 
     /**

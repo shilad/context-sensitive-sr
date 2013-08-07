@@ -49,10 +49,10 @@ class SrServiceTests {
             assertEquals(e.name, 'biology')
             assertEquals(e.questionsPerRound, 25)
             assertEquals(e.inGroup, false)
-            assertEquals(e.randomSeed, (int)(i / 3))
+            assertEquals(e.randomSeed, (int)(i / 2))
             assertEquals(e.counter, i)
-            assertEquals(e.roundOffset, i % 3)
-            assertEquals(e.maxRounds, 3)
+            assertEquals(e.roundOffset, i % 2)
+            assertEquals(e.maxRounds, 2)
         }
     }
 
@@ -68,7 +68,7 @@ class SrServiceTests {
         }
 
         // Test people without primary groups who are scholars
-        for (int i : 0..(3 * 3 * 5 - 1)) {
+        for (int i : 0..(3 * 2 * 5 - 1)) {
             Person p = new Person(scholar : true, survey: new Survey(), primary : 'foobar')
             service.assignGroup(p)
             assertNotNull(p.survey.group1)
@@ -90,17 +90,16 @@ class SrServiceTests {
         assertEquals(groupCounts.size(), 3)
         for (String g : groupCounts.keySet()) {
             assertTrue(SrService.FIELDS.contains(g))
-            assertEquals(groupCounts[g], 30)
+            assertEquals(groupCounts[g], 20)
         }
 
-        assertEquals(offsetCounts.size(), 3)
+        assertEquals(offsetCounts.size(), 2)
         assertEquals(offsetCounts[0], 10)
         assertEquals(offsetCounts[1], 10)
-        assertEquals(offsetCounts[2], 10)
 
         assertEquals(seedCounts.size(), 10)
-        assertEquals(seedCounts[0], 3)
-        assertEquals(seedCounts[1], 3)
+        assertEquals(seedCounts[0], 2)
+        assertEquals(seedCounts[1], 2)
 
 
 
@@ -109,7 +108,7 @@ class SrServiceTests {
         for (String n : SrService.FIELDS) {
             groupCounts[n] = 0
         }
-        for (int i : 0..(3 * 3 * 10 - 1)) {
+        for (int i : 0..(3 * 2 * 10 - 1)) {
             Person p = new Person(scholar : true, survey: new Survey(), primary : 'biology')
             service.assignGroup(p)
             assertNotNull(p.survey.group1)
@@ -121,9 +120,9 @@ class SrServiceTests {
             groupCounts[p.survey.group2.name]++
         }
         assertEquals(groupCounts.size(), 3)
-        assertEquals(groupCounts['biology'], 90)
-        assertEquals(groupCounts['psychology'], 45)
-        assertEquals(groupCounts['history'], 45)
+        assertEquals(groupCounts['biology'], 60)
+        assertEquals(groupCounts['psychology'], 30)
+        assertEquals(groupCounts['history'], 30)
     }
 
     @Test
@@ -140,21 +139,24 @@ class SrServiceTests {
         Person person = new Person(scholar : true, survey: new Survey(), primary : 'biology')
         service.assignGroup(person)
         List<Question> qs = service.getQuestions(person)
-        assertEquals(qs.size(), 65)
+        assertEquals(qs.size(), 69)
         def pairs = [:]
         def dupes = [:]
         def indexes = [:]
         int i = 0
         int j = 0
+        def pmis = []
         for (Question q : qs) {
             q.questionNumber = j++
             person.survey.addToQuestions(q)
             if (!pairs.containsKey(q.groupName)) {
                 pairs[q.groupName] = []
             }
+            pmis.add([ pmi : q.pmi, questionNumber : q.questionNumber])
             def p = q.toSrPair()
             if (!pairs[q.groupName].contains(p)) {
-                indexes[q] = i++      // indexes for original qs
+                if (q.groupName != 'validation')
+                    indexes[q] = i++      // indexes for original qs
                 pairs[q.groupName].add(q.toSrPair())
             } else {
                 assertFalse(dupes.containsKey(p))
@@ -166,7 +168,6 @@ class SrServiceTests {
 
         // make sure the dupes seem reasonable
         def segments = []
-        double segmentSize = 60.0 / 7
         for (def pair : dupes.keySet()) {
             assertEquals(dupes[pair].size(), 2)
             Question first = dupes[pair][0]
@@ -177,10 +178,22 @@ class SrServiceTests {
         Collections.sort(segments)
         assertEquals(segments, [0,1,2,3,4])
 
+        // make sure pmis seem reasonable by summing the ordinal rankings for each bin
+        pmis.sort(true, {pmi1, pmi2-> pmi1.pmi.compareTo(pmi2.pmi)})
+        def ranks = []
+        def numBins = 5
+        for (int b : 0..(numBins-1)) {ranks.add([]) }
+        for (i = 0; i < pmis.size(); i++) {
+            ranks[i * numBins / pmis.size() as int].add(pmis[i].questionNumber)
+        }
+        def means = ranks.collect({1.0 * it.sum() / it.size()})
+        assert(means.min() / means.max() >= 0.50)
+
         String group2 = person.survey.group2.name
-        assertEquals(pairs.size(), 3)
+        assertEquals(pairs.size(), 4)
         assertEquals(pairs['biology'].size(), 25)
         assertEquals(pairs['general'].size(), 10)
+        assertEquals(pairs['validation'].size(), 4)
         assertEquals(pairs[group2].size(), 25)
         assert(group2 != 'biology')
 
@@ -193,7 +206,8 @@ class SrServiceTests {
             }
         }
 
-        assertEquals(pairs.size(), 3)
+        assertEquals(pairs.size(), 4)
+        assertEquals(pairs['validation'].size(), 4)
         assertEquals(pairs['biology'].size(), 50)
         assertEquals(pairs['general'].size(), 20)
         assertEquals(pairs[group2].size(), 50)

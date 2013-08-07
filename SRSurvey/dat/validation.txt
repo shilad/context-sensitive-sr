@@ -1,0 +1,4 @@
+female	woman	4.96
+film	movie	4.91
+shirt	tiger	1.04
+afternoon	substance	1.00
