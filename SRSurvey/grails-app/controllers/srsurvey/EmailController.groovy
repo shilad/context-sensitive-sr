@@ -20,12 +20,11 @@ class EmailController {
 
         sendMail {
             to params.email
-            subject "Take a short Macademia survey"
+            subject "Take a short Macademia survey!"
             html view: "invite", model: model
         }
 
         loggingService.append(p, request, "invite")
-
 
         render('Okay')
     }

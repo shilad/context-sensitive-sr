@@ -16,7 +16,7 @@ We are writing to invite you to participate in a <b>15 minute</b> online researc
 </g:if>
 </p>
 
-<p>Take the Macademia survey: <a href="${baseUrl}">${baseUrl}</a></p>
+<p>Take the Macademia survey: <a href="${baseUrl}?email=${email.encodeAsURL()}">${baseUrl}</a></p>
 
 <p>
     Our study will ask you to rate the "relatedness" of concept pairs (e.g. "collar" and "dog").
@@ -32,7 +32,7 @@ Shilad Sen (<a href="mailto:ssen@macalester.edu">ssen@macalester.edu</a>)</br>
 Brent Hecht (<a href="mailto:bhect@cs.umn.edu">bhect@cs.umn.edu</a>)</br>
 </p>
 
-<p><a href="${baseUrl}">Link to survey</a></p>
+<p><a href="${baseUrl}?email=${email.encodeAsURL()}">Link to survey</a></p>
 
 <p>
 The Macademia Team:<br>
