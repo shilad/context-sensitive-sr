@@ -29,14 +29,7 @@ class EmailController {
     }
 
     def test = {
-        if (params.email == null) {
-            Person p = Person.findByEmail("jrussel1@macalester.edu")
-            params.email = p.email
-            params.baseUrl = "http://localhost:8080/SRSurvey/interest/consent"
-            params.subject = "It works!"
-
-        }
-        redirect(action: 'invite', params: [email:params.email, baseUrl: params.baseUrl, subject: params.subject])
+        render(view: 'invite', model: [email:'ssen@macalester.edu', name:'Shilad Sen', baseUrl: 'http://macademia.macalester.edu/SRSurvey'])
     }
 
     def demo = {
