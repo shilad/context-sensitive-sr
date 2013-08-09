@@ -72,6 +72,10 @@
                     <h4>Institutional Oversight</h4>
                     This study has been approved by Macalester College's Institutional Review Board (IRB),
                     and is funded in part by National Science Foundation grant grant IIS-0964697.
+                    <div class="team">
+                        The Macademia Team:</br>
+                        <r:img uri="/images/team.jpg"/><br/>
+                    </div>
                 </div>
 
             </td>
