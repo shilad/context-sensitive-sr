@@ -25,7 +25,7 @@ We are writing to invite you to participate in a <b>15 minute</b> online researc
     Your ratings will help computers produce semantic relatedness estimates that better correspond to those of real people.
 </p>
 
-<p>We thank you in advance for your help!</p>
+<p>We <b>thank you</b> in advance for your help!</p>
 
 <p>
 Shilad Sen (<a href="mailto:ssen@macalester.edu">ssen@macalester.edu</a>)</br>
@@ -35,9 +35,11 @@ Brent Hecht (<a href="mailto:bhect@cs.umn.edu">bhect@cs.umn.edu</a>)</br>
 <p><a href="${baseUrl}">Link to survey</a></p>
 
 <p>
-The Macademia Team<br>
+The Macademia Team:<br>
     <img src="http://macademia.macalester.edu/SRSurvey/static/images/team.jpg" width="300px" height="200px"/>
 </p>
+
+<p>Please email <a href="mailto:ssen@macalester.edu">Shilad Sen</a> to unsubscribe from future Macademia emails.</p>
 
 </body>
 </html>
