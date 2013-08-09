@@ -111,7 +111,7 @@
     }
 
     $(document).ready(function() {
-        $("input[value='1']").attr('checked', 'checked');
+//        $("input[value='1']").attr('checked', 'checked');
         $('form').on('submit', function(e) {
             var isComplete = true;
             $("div.row").each(function () {
