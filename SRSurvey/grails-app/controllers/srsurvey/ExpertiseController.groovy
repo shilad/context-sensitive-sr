@@ -20,8 +20,17 @@ class ExpertiseController {
             throw new NullPointerException();
         }
         p.scholar = Boolean.valueOf((String)params.scholar)
+        if (params['gender-no']) {
+            p.gender = "NO_RESPONSE"
+        } else {
+            p.gender = params.gender
+        }
+        p.education = params.education
+
         p.save(flush : true)
         loggingService.append(p, request, "scholar\t${p.scholar}")
+        loggingService.append(p, request, "gender\t${p.gender}")
+        loggingService.append(p, request, "education\t${p.education}")
         redirect(action: 'showExpertise')
     }
 

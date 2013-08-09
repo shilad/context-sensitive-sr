@@ -27,7 +27,6 @@ class SrPair {
             return (phrase2+phrase1).hashCode()
     }
 
-
     @Override
     public String toString() {
         return "SrPair{" +

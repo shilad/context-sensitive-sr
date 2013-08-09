@@ -22,10 +22,10 @@
             Thank you for volunteering your time and expertise!
         </p>
         <div>
-            Do you have any comments about this survey or your responses?
+            Do you have any comments about this survey or your relatedness ratings?
             <textarea rows="10" cols="80" class ="rounded-corners"  name="comments"></textarea>
         </div>
-        <g:if test="${person.numAnswers() > 60}">
+        <g:if test="${person.numAnswers() > 80}">
             <div>
                 <g:submitButton name="submit" value="Save comments." class="myButton" title="Save comments.."/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>

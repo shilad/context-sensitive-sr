@@ -43,14 +43,14 @@
         <tr>
             <td colspan="3">
                 <div id="consent-text">
-                    <h4>Description of the Research</h4>
-                    You are invited to participate in a research study that examines whether different groups
-                    interpret phrases differently. This study is open to all internet users over 18.
+                    <h4>Overview</h4>
+                    We invite you to participate in a research study that measures differences in how individuals perceive the strength of relationships between concepts.
+                    This study will advance scholarly knowledge in the field of computational linguistics and improve the algorithms powering the Macademia website.
+                    This study is open to all Internet users over 18.
 
                     <h4>What will my participation involve?</h4>
-                    If you decide to participate in this research you will be asked to rate the similarity of a
-                    series of phrase pairs (e.g. How related are "race car" and "engine?").
-                    Your participation in the study will require approximately 10 minutes.
+                    Your participation in the study will require approximately 15 minutes.
+                    If you decide to participate in this research you will be asked to rate the relatedness of a series of concept pairs (e.g. How related are "race car" and "engine?").
 
                     <h4>Principal Investigators:</h4>
                     Shilad Sen (<a href="mailto:ssen@macalester.edu">ssen@macalester.edu</a>)<br/>
@@ -69,6 +69,9 @@
                     If you have questions about the research you should contact the Principal Investigator Assistant Prof. Shilad Sen at 651-696-6273.
                     Your participation is completely voluntary.
 
+                    <h4>Institutional Oversight</h4>
+                    This study has been approved by Macalester College's Institutional Review Board (IRB),
+                    and is funded in part by National Science Foundation grant grant IIS-0964697.
                 </div>
 
             </td>

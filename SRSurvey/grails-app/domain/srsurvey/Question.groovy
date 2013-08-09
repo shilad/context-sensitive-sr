@@ -5,7 +5,8 @@ class Question {
     int round
     int page    // which page of questions this will appear on
     Double result
-    Double pmi = 0
+    Double pmi
+
     Date lastUpdated
     Integer questionNumber
     Interest interest1
@@ -48,5 +49,16 @@ class Question {
 
     public boolean hasAnswer() {
         return result != null || interest1Known != null || interest2Known != null
+    }
+
+    public void maybeSwap() {
+        if (new Random().nextDouble() < 0.5) {
+            Interest iTmp = interest1
+            Boolean bTmp = interest1Known
+            interest1 = interest2
+            interest1Known = interest2Known
+            interest2 = iTmp
+            interest2Known = bTmp
+        }
     }
 }

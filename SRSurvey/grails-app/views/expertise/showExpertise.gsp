@@ -20,7 +20,7 @@
     <h1>Macademia survey: Area of study</h1>
     <br/><br/>
     <div class="margin" style="width: 69%;margin: auto;">
-        <p>Please enter up to three of your fields of expertise, in order of preference:</p>
+        <p>Please select up to three areas of research, in order of preference:</p>
         <br/><br/>
         <g:form controller="expertise" action="saveExpertise" method="post">
             <table width="100%" style="border-collapse: collapse;">

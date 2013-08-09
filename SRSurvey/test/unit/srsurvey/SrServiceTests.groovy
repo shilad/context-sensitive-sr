@@ -11,8 +11,6 @@ import org.junit.Test
 @TestFor(SrService)
 @Mock([ExperimentalState, Interest, Survey, ExperimentalGroup, Person, Question])
 class SrServiceTests {
-
-
     boolean serviceWasInited = false
     def initService() {
         if (!serviceWasInited) {

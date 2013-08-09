@@ -175,9 +175,13 @@ class SrService {
                         round : 0,
                         interest1 : Interest.findByText(pair.phrase1),
                         interest2 : Interest.findByText(pair.phrase2),
-                        groupName : GROUP_VALIDATION
+                        groupName : GROUP_VALIDATION,
+                        pmi : pair.sim
                 ))
             }
+        }
+        for (Question q : shuffled) {
+            q.maybeSwap()
         }
 
         return shuffled

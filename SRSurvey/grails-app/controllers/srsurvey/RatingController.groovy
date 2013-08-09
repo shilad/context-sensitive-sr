@@ -5,6 +5,7 @@ class RatingController {
 
     def personService
     def srService
+    def loggingService
 
 
     def show(){
@@ -21,6 +22,21 @@ class RatingController {
         int page = params.page as int
         List<Question> toAsk = p.survey.questions.findAll({it.page == page })
         if (toAsk.isEmpty()) throw new IllegalStateException()
+        for (Question q : toAsk) {
+            def tokens = [
+                    'showRating',
+                    q.id,
+                    q.round,
+                    q.page,
+                    q.questionNumber,
+                    q.groupName,
+                    q.interest1.text,
+                    q.interest2.text,
+                    q.pmi,
+
+            ]
+            loggingService.append(p, request, tokens.collect({it.toString()}).join('\t'))
+        }
 
         def round = toAsk[0].round
         def inRound = p.survey.questions.findAll({it.round == round})

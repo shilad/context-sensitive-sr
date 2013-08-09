@@ -7,12 +7,34 @@
     line-height: 1.5em;
   }
 
+  input[name='gender'] {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  div.question {
+    @import "compass/utilities/general/clearfix";
+    div.prompt {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      width: 360px; float: left; padding-right: 40px;
+    }
+    div.response {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      width: 350px; float: left;
+    }
+    clear: both;
+  }
+
   height:500px !important;
-  padding: 50px;
+  padding: 30px;
 
   .error{
-    background: rgb(255,0,0);
+    background: rgb(255,130,130);
     display: none;
+    padding: 30px;
+    font-weight: bold;
   }
 
   #errorPrimary{

@@ -10,7 +10,7 @@
 <div class="rounded-corners rating" id="main-container">
     <br/><h1>Macademia survey: Rate concept relatedness (page ${page - roundBegPage + 1} of ${roundEndPage - roundBegPage + 1})</h1>
     <div id="instructions">
-        Please rate how related each pair of terms is.
+        Please rate how related each pair of concepts is.
         When you finish rating all pairs, click "next".
     </div>
     <g:form action="save" name="rating-form" method="post" params="${[page: page]}">
@@ -111,6 +111,7 @@
     }
 
     $(document).ready(function() {
+        $("input[value='1']").attr('checked', 'checked');
         $('form').on('submit', function(e) {
             var isComplete = true;
             $("div.row").each(function () {

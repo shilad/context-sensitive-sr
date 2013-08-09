@@ -11,6 +11,8 @@ class Person {
     String firstName
     String lastName
     String title
+    String education
+    String gender
     Boolean isRegistered
     Interest primary
     Interest secondary
@@ -28,6 +30,8 @@ class Person {
         group nullable: true
         scholar nullable: true
         firstName nullable: true
+        education nullable: true
+        gender nullable: true
         lastName nullable: true
         title nullable: true
         isRegistered nullable: true

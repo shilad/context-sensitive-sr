@@ -71,14 +71,22 @@ html, body { height: 100%; }
 #main-container.consent tr.bottom td { padding-top: 20px; text-align: center; }
 
 /* line 4, ../../src/stylesheets/_expertise.scss */
-#main-container.expertise { height: 500px !important; padding: 50px; }
+#main-container.expertise { height: 500px !important; padding: 30px; }
 /* line 6, ../../src/stylesheets/_expertise.scss */
 #main-container.expertise div { line-height: 1.5em; }
-/* line 13, ../../src/stylesheets/_expertise.scss */
-#main-container.expertise .error { background: red; display: none; }
-/* line 18, ../../src/stylesheets/_expertise.scss */
+/* line 10, ../../src/stylesheets/_expertise.scss */
+#main-container.expertise input[name='gender'] { font-size: 14px; padding: 5px; }
+/* line 15, ../../src/stylesheets/_expertise.scss */
+#main-container.expertise div.question { clear: both; }
+/* line 17, ../../src/stylesheets/_expertise.scss */
+#main-container.expertise div.question div.prompt { margin-top: 10px; margin-bottom: 30px; width: 360px; float: left; padding-right: 40px; }
+/* line 22, ../../src/stylesheets/_expertise.scss */
+#main-container.expertise div.question div.response { margin-top: 10px; margin-bottom: 30px; width: 350px; float: left; }
+/* line 33, ../../src/stylesheets/_expertise.scss */
+#main-container.expertise .error { background: #ff8282; display: none; padding: 30px; font-weight: bold; }
+/* line 40, ../../src/stylesheets/_expertise.scss */
 #main-container.expertise #errorPrimary { font-family: Arial, Helvetica, sans-serif; padding-top: 35px; color: #FF0000; }
-/* line 24, ../../src/stylesheets/_expertise.scss */
+/* line 46, ../../src/stylesheets/_expertise.scss */
 #main-container.expertise #errorSecondary { font-family: Arial, Helvetica, sans-serif; padding-top: 35px; color: #FF0000; }
 
 /* line 1, ../../src/stylesheets/_interest.scss */
@@ -145,13 +153,24 @@ html, body { height: 100%; }
 
 /* line 1, ../../src/stylesheets/_finish.scss */
 #main-container.finish { height: 500px !important; padding: 50px; }
-/* line 3, ../../src/stylesheets/_finish.scss */
+/* line 2, ../../src/stylesheets/_finish.scss */
 #main-container.finish h1 { margin-bottom: 15px; }
-/* line 7, ../../src/stylesheets/_finish.scss */
+/* line 6, ../../src/stylesheets/_finish.scss */
 #main-container.finish div { line-height: 1.5em; }
-/* line 11, ../../src/stylesheets/_finish.scss */
-#main-container.finish p { margin-bottom: 1.5em; }
+/* line 10, ../../src/stylesheets/_finish.scss */
+#main-container.finish p { margin-bottom: 1.5em; line-height: 1.5em; }
 /* line 15, ../../src/stylesheets/_finish.scss */
 #main-container.finish textarea { margin-bottom: 10px; padding: 10px; }
 /* line 19, ../../src/stylesheets/_finish.scss */
 #main-container.finish input[type='submit'] { margin-top: 10px; }
+
+/* line 27, ../../src/stylesheets/_finish.scss */
+#main-container.thanks { padding: 50px; }
+/* line 28, ../../src/stylesheets/_finish.scss */
+#main-container.thanks h1 { margin-bottom: 15px; }
+/* line 32, ../../src/stylesheets/_finish.scss */
+#main-container.thanks div { font-size: 16px; line-height: 1.5em; }
+/* line 37, ../../src/stylesheets/_finish.scss */
+#main-container.thanks p { font-size: 16px; margin-bottom: 1.5em; line-height: 1.5em; }
+/* line 44, ../../src/stylesheets/_finish.scss */
+#main-container.thanks img { width: 600px; height: 400px; -webkit-box-shadow: #888888 5px 5px 10px; -moz-box-shadow: #888888 5px 5px 10px; box-shadow: #888888 5px 5px 10px; border: 1px solid #888; }

@@ -1,5 +1,4 @@
 #main-container.finish {
-
   h1 {
     margin-bottom: 15px;
   }
@@ -10,6 +9,7 @@
 
   p {
     margin-bottom: 1.5em;
+    line-height: 1.5em;
   }
 
   textarea {
@@ -21,5 +21,33 @@
   }
 
   height:500px !important;
+  padding: 50px;
+}
+
+#main-container.thanks {
+  h1 {
+    margin-bottom: 15px;
+  }
+
+  div {
+    font-size: 16px;
+    line-height: 1.5em;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 1.5em;
+    line-height: 1.5em;
+
+  }
+
+  img {
+
+    width: 600px;
+    height: 400px;
+    @include box-shadow(#888 5px 5px 10px);
+    border: 1px solid #888;
+  }
+
   padding: 50px;
 }

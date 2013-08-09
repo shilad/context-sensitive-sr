@@ -4,6 +4,7 @@ modules = {
     }
     core {
         dependsOn 'jquery'
+        dependsOn 'jquery-ui'
         resource 'js/jquery.fancybox.js'
         resource 'css/jquery.fancybox.css'
         resource 'css/style.css'

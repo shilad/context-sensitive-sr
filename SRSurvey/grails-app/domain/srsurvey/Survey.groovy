@@ -23,6 +23,10 @@ class Survey {
         general nullable: true
     }
 
+    static mapping = {
+        comment sqlType: "text"
+    }
+
     public Survey(Person person){
         this.person = person
     }
