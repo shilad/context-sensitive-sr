@@ -38,14 +38,26 @@ class SrService {
     }
 
     def readPairs() {
+        Map<String, String> cleaned = [:]
+        for (String line : new File("dat/cleaned_phrases.txt")) {
+            String [] tokens = line.split('\t')
+            cleaned[tokens[0]] = tokens[1].trim()
+        }
         for (String field : FIELDS + [GROUP_GENERAL, GROUP_VALIDATION]) {
             for (String line : new File("dat/${field}.txt")) {
                 String [] tokens = line.trim().split('\t')
-                Interest i1 = addInterest(tokens[0])
-                Interest i2 = addInterest(tokens[1])
+                if (!cleaned.containsKey(tokens[0])) {
+                    throw new IllegalStateException("couldn't find phrase '${tokens[0]}'")
+                }
+                if (!cleaned.containsKey(tokens[1])) {
+                    throw new IllegalStateException("couldn't find phrase '${tokens[1]}'")
+                }
+                Interest i1 = addInterest(cleaned[tokens[0]])
+                Interest i2 = addInterest(cleaned[tokens[1]])
                 double sim = tokens[2] as double
                 addPair(field, new SrPair(phrase1: i1.text, phrase2: i2.text, sim: sim))
             }
+            log.info("read ${pairs[field].size()} for $field")
         }
         for (String g : pairs.keySet()) {
             if (g == GROUP_VALIDATION) {
