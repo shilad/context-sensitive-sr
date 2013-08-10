@@ -16,7 +16,8 @@
         We believe this work will advance scholarly knowledge and improve Macademia.
     </p>
     <p>
-        <input id="foo" type="checkbox" name="foo">&nbsp;&nbsp;Please email me a link to the results of this study when they are published.
+        <input id="foo" type="checkbox" name="foo">&nbsp;&nbsp;Please email the results of this study when they are published. &nbsp;&nbsp;&nbsp;
+        <span class="saved">Your response has been saved!</span>
     </p>
     <p>
         Thanks for your help!
@@ -35,9 +36,12 @@
 </div>
 <r:script>
 $().ready(function() {
+    $(".saved").hide();
     $("#foo").click(function() {
         var checked = ($(this).attr("checked") == 'checked');
+        $(".saved").fadeIn().delay(1000).fadeOut();
         ajaxLog('emailPublication\t' + checked);
+
     });
 });
 </r:script>
