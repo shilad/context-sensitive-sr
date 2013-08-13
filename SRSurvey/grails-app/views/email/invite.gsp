@@ -29,7 +29,7 @@ We are writing to invite you to participate in a <b>15 minute</b> online researc
 
 <p>
 Shilad Sen (<a href="mailto:ssen@macalester.edu">ssen@macalester.edu</a>)</br>
-Brent Hecht (<a href="mailto:bhect@cs.umn.edu">bhect@cs.umn.edu</a>)</br>
+Brent Hecht (<a href="mailto:bhecht@cs.umn.edu">bhecht@cs.umn.edu</a>)</br>
 </p>
 
 <p><a href="${baseUrl}?email=${email.encodeAsURL()}">Link to survey</a></p>
