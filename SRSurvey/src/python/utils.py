@@ -3,7 +3,6 @@ import itertools
 import re
 import sys
 
-
 FIELDS = ['history', 'psychology', 'biology']
 IS_NUM = re.compile('^\d+$').match
 
@@ -67,7 +66,7 @@ class User:
 
         for r in records:
             if r.action == 'gender':
-                self.gender = r.params[0]
+                self.gender = clean_gender(r.params[0])
             if r.action == 'education':
                 self.education = r.params[0]
             if r.action == 'scholar':
@@ -90,6 +89,20 @@ class User:
             if len(ratedGroups) > 1:
                 self.group1 = ratedGroups[1]
 
+    def valid(self):
+        correct = 0
+        incorrect = 0
+
+        for r in self.rated:
+            if r.field == 'validation' and r.response:
+                if r.pmi > 3 and r.response >= 4:
+                    correct += 1
+                elif r.pmi < 3 and r.response <= 2:
+                    correct += 1
+                else:
+                    incorrect += 1
+
+        return incorrect == 0 and correct >= 4
 
     def build_ratings(self):
         # Hack: 
@@ -98,22 +111,27 @@ class User:
         # To find an actual rating after a displayed rating,
         # look for the first actual rating with the question num
         by_question_num = collections.defaultdict(list)
-        for (i,r) in enumerate(self.records):
+        round = -1
+        for r in self.records:
             if r.action == 'rating':
-                # todo: get last rating before next round
-                by_question_num[r.params[2]].append((i, r))
-    
-        for (i, r) in enumerate(self.records):
+                question_num = r.params[2]
+                by_question_num[(round, question_num)].append(r)
+
+            if r.action == 'showRating': # hack: get most recent round from shown log
+                rate = Rating(self, r, None)
+                if rate.round < round:
+                    raise 'round went from %s to %s' % (round, rate.round)
+                round = max(round, rate.round)
+                
+        for r in self.records:
             if r.action == 'showRating':
-                question_num = r.params[3]
-                response = None
-                for (j, r2) in by_question_num[question_num]:
-                    if j > i:
-                        response = r2
-                        break
-                rating = Rating(self, r, response)
+                rating = Rating(self, r, None)
+                key = (rating.round, rating.question_num)
+                if key in by_question_num:
+                    last = by_question_num[key][-1] # most recent rating
+                    rating = Rating(self, r, last)
                 self.shown.append(rating)
-                if response:
+                if rating.response != None:
                     self.rated.append(rating)
 
     def responded(self):
@@ -125,6 +143,8 @@ class User:
 class Rating:
     def __init__(self, user, showRecord, rateRecord):
         self.user = user
+	self.showRecord = showRecord
+	self.rateRecord = rateRecord
         self.id = showRecord.params[0]
         self.round = showRecord.params[1]
         self.page = showRecord.params[2]
@@ -134,6 +154,8 @@ class Rating:
         self.phrase1 = showRecord.params[5]
         self.phrase2 = showRecord.params[6]
         self.pmi = float(showRecord.params[7])
+        self.mean = 0.0 # mean of all OTHER ratings for this phrase pair
+
         if rateRecord:
             assert(showRecord.params[3] == rateRecord.params[2])
             self.knows1 = rateRecord.params[5] == 'true'
@@ -146,12 +168,14 @@ class Rating:
             self.response = None
             self.knows1 = None
             self.knows2 = None
+        self.pair_id = hash(self.get_phrase_pair())
 
     def get_phrase_pair(self):
         return tuple(sorted([self.phrase1, self.phrase2]))
 
     def has_response(self):
-        return self.response != None
+        return self.response != None and self.response > 0
+
 
 class Survey:
     def __init__(self):
@@ -163,6 +187,7 @@ class Survey:
         self.read_log()
         self.read_invites()
         self.build_users()
+        self.build_pair_means()
 
     def read_cleaned(self):
         self.cleaned = {}
@@ -185,11 +210,37 @@ class Survey:
             self.invites[line.strip()] = 'in'
 
     def build_users(self):
-        users = {}
         keyfn = lambda r: r.user_id
         records = sorted(self.records, key=keyfn)
         for uid, urecords in itertools.groupby(records, keyfn):
             self.users[uid] = User(list(urecords))
+        
+    def build_pair_means(self):
+        sums = collections.defaultdict(float)
+        counts = collections.defaultdict(int)
+        for u in self.users.values():
+            for r in u.rated:
+                if r.has_response():
+                    sums[r.pair_id] += r.response
+                    counts[r.pair_id] += 1
+
+        for u in self.users.values():
+            for r in u.rated:
+                s = sums[r.pair_id]
+                n = counts[r.pair_id]
+                if r.has_response():
+                    r.mean = 1.0 * (s - r.response) / (n - 1)
+                else:
+                    r.mean = 1.0 * s / n
+        
+def clean_gender(g):
+    g = g.strip().lower()
+    if g == 'no_response':
+        return None
+    elif 'f' in g:
+        return 'female'
+    else:
+        return 'male'
 
 def mean(X):
     if X:

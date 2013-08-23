@@ -4,6 +4,7 @@ from utils import *
 
 def summarize_users(survey, users):
     print '\ttotal users who clicked link: %d users' % len([u for u in users if u.responded()])
+    print '\ttotal users who were invalid : %d users' % len([u for u in users if not u.valid()])
     print '\ttotal ratings: %d' % sum([u.num_ratings() for u in users])
     for n in (1, 10, 25, 50, 69, 100):
         print '\tusers with >= %d ratings: %d' % (n, len([u for u in users if u.num_ratings() >= n]))
