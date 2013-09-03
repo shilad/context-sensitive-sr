@@ -7,7 +7,6 @@ class FinishController {
     def show() {
         Person p = personService.getForSession(session)
         int maxRound = p.survey.questions*.round.max()
-        println("maxRound is " + maxRound)
         render(view: "show", model: [person:p])
     }
 
@@ -22,8 +21,13 @@ class FinishController {
             redirect(controller : 'rating', action : 'show')
         } else {
             loggingService.append(p, request, 'finished')
-            render(view: "thanks")
+            render(view: "thanks", model: [person: p])
         }
+    }
+
+    // for testing only
+    def thanks() {
+        render(view: "thanks")
     }
 }
 

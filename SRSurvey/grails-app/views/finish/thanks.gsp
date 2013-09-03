@@ -15,6 +15,14 @@
         Over the coming months we will analyze the data you have provided to determine whether systematic differences exist in people's ratings.
         We believe this work will advance scholarly knowledge and improve Macademia.
     </p>
+
+    <g:if test="${person.mturk}">
+        <p>
+            Your Amazon Mechanical Turk participation code is <b style="font-weight: bold">${person.mturkCode}</b>
+            <br/>Please copy and paste this into the HIT to receive credit.
+        </p>
+    </g:if>
+
     <p>
         <input id="foo" type="checkbox" name="foo">&nbsp;&nbsp;Please email the results of this study when they are published. &nbsp;&nbsp;&nbsp;
         <span class="saved">Your response has been saved!</span>
@@ -33,6 +41,7 @@
     Front row: Zixiao Wang, Yulun Li, Margaret Giesel, Jesse Russell<br/>
     Back row: Matt Lesicko, Ari Wieland, Ben Hillman, Shilad Sen, Sam Naden, Rebecca Gold<br/>
     </p>
+
 </div>
 <r:script>
 $().ready(function() {

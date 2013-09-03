@@ -7,6 +7,12 @@ class Person {
 
     Boolean scholar
 
+    Boolean mturk = false
+    String mturkId
+    String mturkWorkerId
+    String mturkHitId
+    String mturkCode
+
     String email
     String firstName
     String lastName
@@ -38,6 +44,12 @@ class Person {
         primary nullable: true
         secondary nullable: true
         tertiary nullable: true
+
+        mturk nullable: true
+        mturkId  nullable: true
+        mturkWorkerId  nullable: true
+        mturkHitId  nullable: true
+        mturkCode  nullable: true
     }
 
     Person(String email, String firstName, String lastName, String title, String isRegistered){
