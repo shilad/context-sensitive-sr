@@ -33,7 +33,7 @@
 
     <p>
         Shilad Sen (<a href="mailto:ssen@macalester.edu">ssen@macalester.edu</a>)<br/>
-        Brent Hecht (<a href="mailto:ssen@macalester.edu">bhect@cs.umn.edu</a>)
+        Brent Hecht (<a href="mailto:bhecht@cs.umn.edu">bhecht@cs.umn.edu</a>)
     </p>
     <p>
         The Macademia Team:</br>

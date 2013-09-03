@@ -34,6 +34,9 @@ class ConsentController {
         p.save()
 
         loggingService.append(p, request, "consent")
+        if (p.mturk != null && p.mturk) {
+            loggingService.append(p, request, "mturk")
+        }
 
         redirect(controller: 'expertise', action: 'showCareer')
     }
