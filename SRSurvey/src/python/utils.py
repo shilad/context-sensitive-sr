@@ -12,6 +12,7 @@ GROUP_DESCRIPTION = {
     'history' : 'history researchers',
     'scholar' : 'researchers in a field other than biology, history, or psychology',
     'general' : 'people who are not researchers',
+    'mturk' : 'subjects recruited through mechanical turk',
 }
 
 class LogRecord:
@@ -60,6 +61,7 @@ class User:
         self.group1 = None
         self.group2 = None
         self.scholar = None
+        self.mturk = False
         self.shown = []
         self.rated = []   # a subset of shown
         self.records = records
@@ -73,6 +75,8 @@ class User:
                 self.scholar = r.params[0].lower() == 'true'
             if r.action == 'interests':
                 self.interests = r.params
+            if r.action == 'mturk':
+                self.mturk = True
             if r.action == 'groups':
                 self.condition = r.params[0]
                 self.group1 = r.params[1]
@@ -88,6 +92,9 @@ class User:
                 self.group1 = ratedGroups[0]
             if len(ratedGroups) > 1:
                 self.group1 = ratedGroups[1]
+
+    def has_consent(self):
+        return len([r for r in self.records if r.action == 'consent']) > 0
 
     def valid(self):
         correct = 0
@@ -143,8 +150,8 @@ class User:
 class Rating:
     def __init__(self, user, showRecord, rateRecord):
         self.user = user
-	self.showRecord = showRecord
-	self.rateRecord = rateRecord
+        self.showRecord = showRecord
+        self.rateRecord = rateRecord
         self.id = showRecord.params[0]
         self.round = showRecord.params[1]
         self.page = showRecord.params[2]
@@ -212,8 +219,22 @@ class Survey:
     def build_users(self):
         keyfn = lambda r: r.user_id
         records = sorted(self.records, key=keyfn)
+        no_consent = 0
         for uid, urecords in itertools.groupby(records, keyfn):
-            self.users[uid] = User(list(urecords))
+            u = User(list(urecords))
+            if not u.has_consent():
+                no_consent += 1
+                continue
+
+            if u.mturk:
+                if u.condition == 'general':
+                    u.condition = 'mturk'
+                else:
+                    warn('skipping turker %s in condition %s' % (u.email, u.condition))
+                    continue
+
+            self.users[uid] = u
+        warn('%d users total, %d did not consent' % (no_consent + len(self.users), no_consent))
         
     def build_pair_means(self):
         sums = collections.defaultdict(float)
@@ -254,3 +275,5 @@ def median(X):
     else:
         return 0
 
+def warn(message):
+    sys.stderr.write(message + '\n')

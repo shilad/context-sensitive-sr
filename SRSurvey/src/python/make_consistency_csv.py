@@ -25,7 +25,7 @@ print string.join([
 for u in s.users.values():
     if u.valid():
         for r in u.rated:
-            if r.field not in utils.FIELDS:
+            if r.field not in utils.FIELDS + ['general']:
                 continue
             tokens = [
                 r.user.email,

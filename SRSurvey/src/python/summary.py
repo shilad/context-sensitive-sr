@@ -38,7 +38,7 @@ def summary():
     summarize_users(survey, survey.users.values())
     print
 
-    for field in FIELDS + ['scholar', 'general']:
+    for field in FIELDS + ['scholar', 'general', 'mturk']:
         print 'summary of condition %s (%s)' % (field, GROUP_DESCRIPTION[field])
         summarize_users(survey, [u for u in survey.users.values() if u.condition == field])
 
