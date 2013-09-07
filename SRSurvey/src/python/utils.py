@@ -82,16 +82,20 @@ class User:
                 self.group1 = r.params[1]
                 self.group2 = r.params[2]
 
+        if not self.scholar:
+            self.condition = 'general'
+
         self.build_ratings()
 
         # work around: groups for non-scholars not logged
         if not self.scholar:
-            self.condition = 'general'
             ratedGroups = list(set([r.field for r in self.shown]).intersection(FIELDS))
             if len(ratedGroups) > 0:
                 self.group1 = ratedGroups[0]
             if len(ratedGroups) > 1:
                 self.group1 = ratedGroups[1]
+        if not self.condition:
+            warn('no condition for %s' % self.email)
 
     def has_consent(self):
         return len([r for r in self.records if r.action == 'consent']) > 0
@@ -162,6 +166,16 @@ class Rating:
         self.phrase2 = showRecord.params[6]
         self.pmi = float(showRecord.params[7])
         self.mean = 0.0 # mean of all OTHER ratings for this phrase pair
+        if user.mturk:
+            self.condition = 'mturk'
+        elif user.condition == 'general':
+            self.condition = 'general'
+        elif user.condition == 'scholar':
+            self.condition = 'scholar-out'
+        elif user.condition in FIELDS:
+            self.condition = 'scholar-in' if self.in_group else 'scholar-out'
+        else:
+            raise AssertionError, ('unknown condition: %s' % user.condition)
 
         if rateRecord:
             assert(showRecord.params[3] == rateRecord.params[2])
