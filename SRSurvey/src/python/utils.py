@@ -1,5 +1,6 @@
 import collections
 import itertools
+import math
 import re
 import sys
 
@@ -282,6 +283,16 @@ def mean(X):
         return 1.0 * sum(X) / len(X)
     else:
         return 0.0
+
+def dev(X):
+    if len(X) > 1:
+        m = mean(X)
+        return math.sqrt(
+                sum([(x - m) * (x - m) for x in X]) /
+                (len(X) - 1.0)
+            )
+    else:
+        return 1.0  # ????
 
 def median(X):
     if X:

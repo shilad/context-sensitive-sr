@@ -1,0 +1,102 @@
+question type: general
+	condition all, all
+		d unique pairs of users: 1422
+		spearman: mean=0.564, dev=0.365525506906
+		pearson: mean=0.570, dev=0.365808234836
+	condition all, mturk
+		d unique pairs of users: 433
+		spearman: mean=0.593, dev=0.379259665112
+		pearson: mean=0.587, dev=0.383005762841
+	condition all, scholar
+		d unique pairs of users: 1030
+		spearman: mean=0.595, dev=0.37227171204
+		pearson: mean=0.604, dev=0.36956934465
+	condition mturk, all
+		d unique pairs of users: 433
+		spearman: mean=0.592, dev=0.380767287972
+		pearson: mean=0.586, dev=0.384588252176
+	condition mturk, mturk
+		d unique pairs of users: 88
+		spearman: mean=0.609, dev=0.349801512207
+		pearson: mean=0.585, dev=0.37606120753
+	condition mturk, scholar
+		d unique pairs of users: 287
+		spearman: mean=0.537, dev=0.384702668958
+		pearson: mean=0.536, dev=0.382689665925
+	condition scholar, all
+		d unique pairs of users: 1030
+		spearman: mean=0.594, dev=0.372690451933
+		pearson: mean=0.603, dev=0.369540012385
+	condition scholar, mturk
+		d unique pairs of users: 287
+		spearman: mean=0.529, dev=0.384675135672
+		pearson: mean=0.529, dev=0.381003686153
+	condition scholar, scholar
+		d unique pairs of users: 622
+		spearman: mean=0.585, dev=0.359502520096
+		pearson: mean=0.597, dev=0.356179695875
+question type: specific
+	condition scholar-in, scholar-in
+		d unique pairs of users: 518
+		spearman: mean=0.567, dev=0.250252232968
+		pearson: mean=0.585, dev=0.253781435316
+	condition scholar-in, all
+		d unique pairs of users: 3209
+		spearman: mean=0.479, dev=0.270619791877
+		pearson: mean=0.486, dev=0.273149695355
+	condition scholar-in, mturk
+		d unique pairs of users: 1051
+		spearman: mean=0.425, dev=0.267205977297
+		pearson: mean=0.429, dev=0.26715113147
+	condition scholar-in, scholar
+		d unique pairs of users: 1338
+		spearman: mean=0.462, dev=0.261597638418
+		pearson: mean=0.468, dev=0.264973143467
+	condition all, scholar-in
+		d unique pairs of users: 3206
+		spearman: mean=0.479, dev=0.268961683138
+		pearson: mean=0.485, dev=0.271387740484
+	condition all, all
+		d unique pairs of users: 14111
+		spearman: mean=0.446, dev=0.258739819716
+		pearson: mean=0.450, dev=0.261064985971
+	condition all, mturk
+		d unique pairs of users: 4626
+		spearman: mean=0.441, dev=0.265306807842
+		pearson: mean=0.446, dev=0.267224106533
+	condition all, scholar
+		d unique pairs of users: 6840
+		spearman: mean=0.447, dev=0.267142847149
+		pearson: mean=0.452, dev=0.269871280347
+	condition mturk, scholar-in
+		d unique pairs of users: 1050
+		spearman: mean=0.429, dev=0.264945586531
+		pearson: mean=0.430, dev=0.265898377842
+	condition mturk, all
+		d unique pairs of users: 4625
+		spearman: mean=0.443, dev=0.262688099359
+		pearson: mean=0.448, dev=0.263424257681
+	condition mturk, mturk
+		d unique pairs of users: 1440
+		spearman: mean=0.456, dev=0.260195749358
+		pearson: mean=0.464, dev=0.25939185926
+	condition mturk, scholar
+		d unique pairs of users: 2254
+		spearman: mean=0.430, dev=0.270654470172
+		pearson: mean=0.434, dev=0.272364433896
+	condition scholar, scholar-in
+		d unique pairs of users: 1338
+		spearman: mean=0.469, dev=0.256724379788
+		pearson: mean=0.476, dev=0.258897330715
+	condition scholar, all
+		d unique pairs of users: 6841
+		spearman: mean=0.448, dev=0.265516597766
+		pearson: mean=0.453, dev=0.268558099109
+	condition scholar, mturk
+		d unique pairs of users: 2254
+		spearman: mean=0.427, dev=0.267936558549
+		pearson: mean=0.431, dev=0.268921626892
+	condition scholar, scholar
+		d unique pairs of users: 3000
+		spearman: mean=0.441, dev=0.267676886186
+		pearson: mean=0.445, dev=0.272360402757

@@ -1,0 +1,77 @@
+question type: general
+	condition all, all
+		pearson: 1.000
+		spearman: 1.000
+	condition all, mturk
+		pearson: 0.960
+		spearman: 0.958
+	condition all, scholar
+		pearson: 0.985
+		spearman: 0.980
+	condition mturk, all
+		pearson: 0.960
+		spearman: 0.958
+	condition mturk, mturk
+		pearson: 1.000
+		spearman: 1.000
+	condition mturk, scholar
+		pearson: 0.903
+		spearman: 0.897
+	condition scholar, all
+		pearson: 0.985
+		spearman: 0.980
+	condition scholar, mturk
+		pearson: 0.903
+		spearman: 0.897
+	condition scholar, scholar
+		pearson: 1.000
+		spearman: 1.000
+question type: specific
+	condition scholar-in, scholar-in
+		pearson: 1.000
+		spearman: 1.000
+	condition scholar-in, all
+		pearson: 0.868
+		spearman: 0.884
+	condition scholar-in, mturk
+		pearson: 0.732
+		spearman: 0.772
+	condition scholar-in, scholar
+		pearson: 0.804
+		spearman: 0.824
+	condition all, scholar-in
+		pearson: 0.868
+		spearman: 0.884
+	condition all, all
+		pearson: 1.000
+		spearman: 1.000
+	condition all, mturk
+		pearson: 0.935
+		spearman: 0.941
+	condition all, scholar
+		pearson: 0.969
+		spearman: 0.970
+	condition mturk, scholar-in
+		pearson: 0.732
+		spearman: 0.772
+	condition mturk, all
+		pearson: 0.935
+		spearman: 0.941
+	condition mturk, mturk
+		pearson: 1.000
+		spearman: 1.000
+	condition mturk, scholar
+		pearson: 0.860
+		spearman: 0.872
+	condition scholar, scholar-in
+		pearson: 0.804
+		spearman: 0.824
+	condition scholar, all
+		pearson: 0.969
+		spearman: 0.970
+	condition scholar, mturk
+		pearson: 0.860
+		spearman: 0.872
+	condition scholar, scholar
+		pearson: 1.000
+		spearman: 1.000

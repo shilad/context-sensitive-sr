@@ -1,0 +1,94 @@
+results for specific knowledge
+
+	results for conditions scholar-in, scholar-in
+		hit rate is 361933 of 1000000, mae=0.859
+		diffs: [36.1933, 45.1285, 15.538599999999999, 2.8382, 0.3014]
+		major disagreements on 18.678%
+
+	results for conditions scholar-in, mturk
+		hit rate is 280071 of 1000000, mae=1.154
+		diffs: [28.0071, 40.794799999999995, 21.270500000000002, 7.6589, 2.2687]
+		major disagreements on 31.198%
+
+	results for conditions scholar-in, scholar
+		hit rate is 324524 of 1000000, mae=0.968
+		diffs: [32.4524, 43.9408, 18.5601, 4.4707, 0.5760000000000001]
+		major disagreements on 23.607%
+
+	results for conditions all, all
+		hit rate is 312223 of 1000000, mae=1.029
+		diffs: [31.222299999999997, 42.489399999999996, 19.6208, 5.5265, 1.141]
+		major disagreements on 26.288%
+
+	results for conditions mturk, scholar-in
+		hit rate is 280220 of 1000000, mae=1.154
+		diffs: [28.022000000000002, 40.758100000000006, 21.2972, 7.6532, 2.2695]
+		major disagreements on 31.220%
+
+	results for conditions mturk, mturk
+		hit rate is 305785 of 1000000, mae=1.064
+		diffs: [30.5785, 41.2726, 20.5847, 6.2524999999999995, 1.3117]
+		major disagreements on 28.149%
+
+	results for conditions mturk, scholar
+		hit rate is 297054 of 1000000, mae=1.081
+		diffs: [29.705399999999997, 41.8098, 20.6257, 6.354799999999999, 1.5043000000000002]
+		major disagreements on 28.485%
+
+	results for conditions scholar, scholar-in
+		hit rate is 324577 of 1000000, mae=0.967
+		diffs: [32.4577, 43.9781, 18.524099999999997, 4.4674, 0.5727]
+		major disagreements on 23.564%
+
+	results for conditions scholar, mturk
+		hit rate is 297455 of 1000000, mae=1.081
+		diffs: [29.745500000000003, 41.7665, 20.624200000000002, 6.368, 1.4958]
+		major disagreements on 28.488%
+
+	results for conditions scholar, scholar
+		hit rate is 337570 of 1000000, mae=0.939
+		diffs: [33.757, 43.6317, 18.0579, 4.0147, 0.5387000000000001]
+		major disagreements on 22.611%
+
+results for general knowledge
+
+	results for conditions scholar-in, scholar-in
+		no data
+
+	results for conditions scholar-in, mturk
+		no data
+
+	results for conditions scholar-in, scholar
+		no data
+
+	results for conditions all, all
+		hit rate is 388244 of 1000000, mae=0.926
+		diffs: [38.8244, 38.230599999999995, 16.221, 4.9957, 1.7283]
+		major disagreements on 22.945%
+
+	results for conditions mturk, scholar-in
+		no data
+
+	results for conditions mturk, mturk
+		hit rate is 413714 of 1000000, mae=0.886
+		diffs: [41.3714, 36.3581, 15.966099999999999, 4.915, 1.3894]
+		major disagreements on 22.270%
+
+	results for conditions mturk, scholar
+		hit rate is 384187 of 1000000, mae=0.948
+		diffs: [38.4187, 37.666, 16.5755, 5.4136999999999995, 1.9261]
+		major disagreements on 23.915%
+
+	results for conditions scholar, scholar-in
+		no data
+
+	results for conditions scholar, mturk
+		hit rate is 384062 of 1000000, mae=0.948
+		diffs: [38.4062, 37.688300000000005, 16.5307, 5.4433, 1.9314999999999998]
+		major disagreements on 23.905%
+
+	results for conditions scholar, scholar
+		hit rate is 382868 of 1000000, mae=0.916
+		diffs: [38.2868, 39.5012, 16.1305, 4.4892, 1.5923]
+		major disagreements on 22.212%
+
