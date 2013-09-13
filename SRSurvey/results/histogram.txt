@@ -1,0 +1,42 @@
+condition general, all:
+	n: 1450
+	mean: 3.327
+	dev: 1.446
+	counts: 1=241 2=207 3=265 4=311 5=426
+	hist: 1=0.166 2=0.143 3=0.183 4=0.214 5=0.294
+condition general, mturk:
+	n: 461
+	mean: 3.236
+	dev: 1.474
+	counts: 1=85 2=71 3=87 4=86 5=132
+	hist: 1=0.184 2=0.154 3=0.189 4=0.187 5=0.286
+condition general, scholar:
+	n: 887
+	mean: 3.355
+	dev: 1.419
+	counts: 1=136 2=127 3=165 4=204 5=255
+	hist: 1=0.153 2=0.143 3=0.186 4=0.230 5=0.287
+condition specific, all:
+	n: 7119
+	mean: 3.328
+	dev: 1.287
+	counts: 1=798 2=1140 3=1684 4=1920 5=1577
+	hist: 1=0.112 2=0.160 3=0.237 4=0.270 5=0.222
+condition specific, mturk:
+	n: 2218
+	mean: 3.001
+	dev: 1.341
+	counts: 1=409 2=412 3=519 4=524 5=354
+	hist: 1=0.184 2=0.186 3=0.234 4=0.236 5=0.160
+condition specific, scholar:
+	n: 3086
+	mean: 3.422
+	dev: 1.245
+	counts: 1=263 2=494 3=741 4=855 5=733
+	hist: 1=0.085 2=0.160 3=0.240 4=0.277 5=0.238
+condition specific, scholar-in:
+	n: 1295
+	mean: 3.663
+	dev: 1.167
+	counts: 1=60 2=174 3=292 4=386 5=383
+	hist: 1=0.046 2=0.134 3=0.225 4=0.298 5=0.296

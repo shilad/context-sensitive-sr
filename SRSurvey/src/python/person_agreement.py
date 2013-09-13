@@ -42,9 +42,9 @@ for ktype in 'general', 'specific':
 
             ratings = []        # list of rating objects
             if ktype == 'general':
-                ratings = [r for r in u.rated if r.field == 'general']
+                ratings = [r for r in u.rated if r.field == 'general' if r.has_response()]
             else:
-                ratings = [r for r in u.rated if r.field in utils.FIELDS]
+                ratings = [r for r in u.rated if r.field in utils.FIELDS if r.has_response()]
 
             if condition == 'scholar-in':
                 ratings = [r for r in ratings if r.in_group]

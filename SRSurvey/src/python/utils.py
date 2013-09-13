@@ -6,6 +6,8 @@ import sys
 
 FIELDS = ['history', 'psychology', 'biology']
 IS_NUM = re.compile('^\d+$').match
+SPECIFICITIES = ('general', 'specific')
+CONDITIONS = ('all', 'mturk', 'scholar', 'scholar-in')
 
 GROUP_DESCRIPTION = {
     'biology' : 'biology researchers',
@@ -152,6 +154,7 @@ class User:
     def num_ratings(self):
         return len(self.rated)
 
+
 class Rating:
     def __init__(self, user, showRecord, rateRecord):
         self.user = user
@@ -205,6 +208,7 @@ class Survey:
         self.records = []   # list of Record objects in log
         self.users = {}     # user id to User
         self.cleaned = {}   # dirty phrase to cleaned phrase
+        self.ids_to_phrases = {}
         self.read_cleaned()
         self.read_log()
         self.read_invites()
@@ -250,7 +254,42 @@ class Survey:
 
             self.users[uid] = u
         warn('%d users total, %d did not consent' % (no_consent + len(self.users), no_consent))
+ 
+    def get_ratings_by_condition(self, specificity, condition):
+        """
+            Specificity is general or specific.
+            Condition is mturk, scholar, scholar-in or all
+            Returns map from pair_id to list of rating objects for that pair.
+        """
+        assert(specificity in SPECIFICITIES)
+        assert(condition in CONDITIONS)
+
+        pair_ratings = collections.defaultdict(list)
+        for u in self.users.values():
+            if not u.valid():
+                continue
+            elif condition in ('scholar', 'scholar-in') and not u.scholar:
+                continue
+            elif condition == 'mturk' and not u.mturk:
+                continue
         
+            ratings = [] 
+            if specificity == 'general':
+                ratings = [r for r in u.rated if r.field == 'general' and r.has_response()]
+            else:
+                ratings = [r for r in u.rated if r.field in FIELDS and r.has_response()]
+        
+            if condition == 'scholar-in':
+                ratings = [r for r in ratings if r.in_group]
+            elif condition == 'scholar':
+                ratings = [r for r in ratings if not r.in_group]
+
+            for r in ratings:
+                pair_ratings[r.pair_id].append(r)
+
+        return pair_ratings
+
+       
     def build_pair_means(self):
         sums = collections.defaultdict(float)
         counts = collections.defaultdict(int)
@@ -268,6 +307,10 @@ class Survey:
                     r.mean = 1.0 * (s - r.response) / (n - 1)
                 else:
                     r.mean = 1.0 * s / n
+                self.ids_to_phrases[r.pair_id] = (r.phrase1, r.phrase2)
+
+    def id_to_phrases(self, pair_id):
+        return self.ids_to_phrases[pair_id]
         
 def clean_gender(g):
     g = g.strip().lower()

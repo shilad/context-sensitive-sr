@@ -1,0 +1,142 @@
+total invitations: 1266
+
+
+summary of all users:
+	total users who clicked link: 155 users
+	total users who were invalid : 35 users
+	total ratings: 10352
+	users with >= 1 ratings: 145
+	users with >= 10 ratings: 145
+	users with >= 25 ratings: 137
+	users with >= 50 ratings: 133
+	users with >= 69 ratings: 127
+	users with >= 100 ratings: 14
+
+summary of condition history (history researchers)
+	total users who clicked link: 20 users
+	total users who were invalid : 7 users
+	total ratings: 1417
+	users with >= 1 ratings: 19
+	users with >= 10 ratings: 19
+	users with >= 25 ratings: 18
+	users with >= 50 ratings: 17
+	users with >= 69 ratings: 16
+	users with >= 100 ratings: 3
+summary of condition psychology (psychology researchers)
+	total users who clicked link: 14 users
+	total users who were invalid : 4 users
+	total ratings: 1092
+	users with >= 1 ratings: 13
+	users with >= 10 ratings: 13
+	users with >= 25 ratings: 13
+	users with >= 50 ratings: 13
+	users with >= 69 ratings: 13
+	users with >= 100 ratings: 3
+summary of condition biology (biology researchers)
+	total users who clicked link: 20 users
+	total users who were invalid : 2 users
+	total ratings: 1385
+	users with >= 1 ratings: 20
+	users with >= 10 ratings: 20
+	users with >= 25 ratings: 19
+	users with >= 50 ratings: 19
+	users with >= 69 ratings: 18
+	users with >= 100 ratings: 1
+summary of condition scholar (researchers in a field other than biology, history, or psychology)
+	total users who clicked link: 38 users
+	total users who were invalid : 8 users
+	total ratings: 2618
+	users with >= 1 ratings: 37
+	users with >= 10 ratings: 37
+	users with >= 25 ratings: 34
+	users with >= 50 ratings: 33
+	users with >= 69 ratings: 32
+	users with >= 100 ratings: 4
+summary of condition general (people who are not researchers)
+	total users who clicked link: 15 users
+	total users who were invalid : 5 users
+	total ratings: 783
+	users with >= 1 ratings: 13
+	users with >= 10 ratings: 13
+	users with >= 25 ratings: 12
+	users with >= 50 ratings: 10
+	users with >= 69 ratings: 9
+	users with >= 100 ratings: 0
+summary of condition mturk (subjects recruited through mechanical turk)
+	total users who clicked link: 46 users
+	total users who were invalid : 7 users
+	total ratings: 3057
+	users with >= 1 ratings: 43
+	users with >= 10 ratings: 43
+	users with >= 25 ratings: 41
+	users with >= 50 ratings: 41
+	users with >= 69 ratings: 39
+	users with >= 100 ratings: 3
+
+
+summary of ALL ratings
+	204 pairs rated by 145 distinct users
+	viewer distribution: min=25 median=51 mean=48.02 max=139
+	rater distribution: min=23 median=48 mean=46.23 max=138
+
+breaking of ratings for validation:
+	4 pairs rated by 142 distinct users
+	viewer distribution: min=139 median=139 mean=139.00 max=139
+	rater distribution: min=136 median=137 mean=136.75 max=138
+
+breaking of ratings for general:
+	50 pairs rated by 145 distinct users
+	viewer distribution: min=25 median=31 mean=30.78 max=37
+	rater distribution: min=23 median=30 mean=30.06 max=37
+
+breaking of ratings for history:
+
+	summary of ALL history ratings
+	50 pairs rated by 100 distinct users
+	viewer distribution: min=47 median=53 mean=52.90 max=57
+	rater distribution: min=47 median=51 mean=51.70 max=56
+
+	summary of history IN group ratings
+	50 pairs rated by 19 distinct users
+	viewer distribution: min=7 median=10 mean=10.44 max=14
+	rater distribution: min=7 median=10 mean=10.22 max=14
+
+	summary of history OUT group ratings
+	50 pairs rated by 81 distinct users
+	viewer distribution: min=38 median=42 mean=42.46 max=46
+	rater distribution: min=36 median=41 mean=41.48 max=46
+
+breaking of ratings for psychology:
+
+	summary of ALL psychology ratings
+	50 pairs rated by 91 distinct users
+	viewer distribution: min=43 median=49 mean=48.52 max=54
+	rater distribution: min=38 median=46 mean=45.88 max=53
+
+	summary of psychology IN group ratings
+	50 pairs rated by 13 distinct users
+	viewer distribution: min=6 median=8 mean=8.02 max=10
+	rater distribution: min=6 median=8 mean=8.00 max=10
+
+	summary of psychology OUT group ratings
+	50 pairs rated by 78 distinct users
+	viewer distribution: min=34 median=40 mean=40.50 max=45
+	rater distribution: min=30 median=38 mean=37.88 max=43
+
+breaking of ratings for biology:
+
+	summary of ALL biology ratings
+	50 pairs rated by 99 distinct users
+	viewer distribution: min=46 median=53 mean=52.62 max=59
+	rater distribution: min=35 median=50 mean=50.04 max=57
+
+	summary of biology IN group ratings
+	50 pairs rated by 20 distinct users
+	viewer distribution: min=9 median=10 mean=10.20 max=11
+	rater distribution: min=9 median=10 mean=10.10 max=11
+
+	summary of biology OUT group ratings
+	50 pairs rated by 79 distinct users
+	viewer distribution: min=36 median=42 mean=42.42 max=48
+	rater distribution: min=24 median=40 mean=39.94 max=46
+

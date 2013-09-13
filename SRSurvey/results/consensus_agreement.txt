@@ -1,77 +1,327 @@
-question type: general
-	condition all, all
-		pearson: 1.000
-		spearman: 1.000
-	condition all, mturk
-		pearson: 0.960
-		spearman: 0.958
-	condition all, scholar
-		pearson: 0.985
-		spearman: 0.980
-	condition mturk, all
-		pearson: 0.960
-		spearman: 0.958
-	condition mturk, mturk
-		pearson: 1.000
-		spearman: 1.000
-	condition mturk, scholar
-		pearson: 0.903
-		spearman: 0.897
-	condition scholar, all
-		pearson: 0.985
-		spearman: 0.980
-	condition scholar, mturk
-		pearson: 0.903
-		spearman: 0.897
-	condition scholar, scholar
-		pearson: 1.000
-		spearman: 1.000
 question type: specific
 	condition scholar-in, scholar-in
 		pearson: 1.000
 		spearman: 1.000
+			evolution, biology: 5.00 to 5.00
+			history, medieval history: 5.00 to 5.00
+			feminism, gender: 4.89 to 4.89
+			European history, Irish history: 4.86 to 4.86
+			18th century, French history: 4.86 to 4.86
+			international relations, modern European history: 4.86 to 4.86
+			biodiversity, evolutionary biology: 4.80 to 4.80
+			biology, developmental biology: 4.75 to 4.75
+			plant biology, biological sciences: 4.73 to 4.73
+			statistics, bioinformatics: 4.73 to 4.73
 	condition scholar-in, all
-		pearson: 0.868
-		spearman: 0.884
+		pearson: 0.888
+		spearman: 0.905
+			sexuality, historical memory: 3.50 to 1.92
+			sexuality, African history: 3.80 to 2.32
+			South Asia, popular religion: 3.70 to 2.55
+			collective memory, women: 3.92 to 2.77
+			cognition, acculturation: 3.83 to 2.73
+			gardens, identity: 2.75 to 1.68
+			identity, slavery: 4.17 to 3.10
+			environmental history, African American history: 3.82 to 2.77
+			race, intellectual history: 3.92 to 2.90
+			modern European history, women: 4.62 to 3.62
 	condition scholar-in, mturk
-		pearson: 0.732
-		spearman: 0.772
+		pearson: 0.774
+		spearman: 0.810
+			sexuality, African history: 3.80 to 1.66
+			sexuality, historical memory: 3.50 to 1.40
+			cognition, acculturation: 3.83 to 1.80
+			environmental history, African American history: 3.82 to 1.85
+			modern European history, women: 4.62 to 2.71
+			race, intellectual history: 3.92 to 2.22
+			collective memory, women: 3.92 to 2.25
+			identity, slavery: 4.17 to 2.50
+			slavery, environmental history: 3.33 to 1.70
+			gardens, identity: 2.75 to 1.12
 	condition scholar-in, scholar
-		pearson: 0.804
-		spearman: 0.824
+		pearson: 0.832
+		spearman: 0.841
+			South Asia, popular religion: 3.70 to 2.25
+			sexuality, historical memory: 3.50 to 2.12
+			modern European history, women: 4.62 to 3.26
+			sexuality, African history: 3.80 to 2.44
+			sustainability, infectious diseases: 2.00 to 3.29
+			collective memory, women: 3.92 to 2.68
+			gardens, identity: 2.75 to 1.55
+			sustainability, evolution: 2.45 to 3.63
+			cognition, acculturation: 3.83 to 2.68
+			animal behavior, sustainability: 2.00 to 3.05
 	condition all, scholar-in
-		pearson: 0.868
-		spearman: 0.884
+		pearson: 0.888
+		spearman: 0.905
+			sexuality, historical memory: 1.92 to 3.50
+			sexuality, African history: 2.32 to 3.80
+			South Asia, popular religion: 2.55 to 3.70
+			collective memory, women: 2.77 to 3.92
+			cognition, acculturation: 2.73 to 3.83
+			gardens, identity: 1.68 to 2.75
+			identity, slavery: 3.10 to 4.17
+			environmental history, African American history: 2.77 to 3.82
+			race, intellectual history: 2.90 to 3.92
+			modern European history, women: 3.62 to 4.62
 	condition all, all
 		pearson: 1.000
 		spearman: 1.000
+			history, medieval history: 4.82 to 4.82
+			evolution, biology: 4.72 to 4.72
+			plant biology, biology: 4.64 to 4.64
+			biology, developmental biology: 4.62 to 4.62
+			plant biology, biological sciences: 4.62 to 4.62
+			biodiversity, evolutionary biology: 4.59 to 4.59
+			cognitive neuroscience, learning: 4.52 to 4.52
+			genetics, cell biology: 4.51 to 4.51
+			cognitive psychology, learning: 4.50 to 4.50
+			biological sciences, biochemistry: 4.50 to 4.50
 	condition all, mturk
-		pearson: 0.935
-		spearman: 0.941
+		pearson: 0.941
+		spearman: 0.943
+			statistics, bioinformatics: 4.25 to 3.21
+			statistics, environmental science: 3.42 to 2.37
+			introductory biology, statistics: 2.78 to 1.76
+			biology, C. elegans: 4.01 to 3.00
+			cognition, acculturation: 2.73 to 1.80
+			psychophysiology, aging: 3.40 to 2.48
+			environmental history, African American history: 2.77 to 1.85
+			modern European history, women: 3.62 to 2.71
+			molecular evolution, biological sciences: 4.25 to 3.35
+			psychology, social change: 3.38 to 2.52
 	condition all, scholar
-		pearson: 0.969
-		spearman: 0.970
+		pearson: 0.967
+		spearman: 0.966
+			sustainability, infectious diseases: 2.55 to 3.29
+			psychophysiology, aging: 3.40 to 4.00
+			sustainability, evolution: 3.05 to 3.63
+			biology, botany: 4.05 to 4.62
+			cognitive psychology, psychophysiology: 3.23 to 3.78
+			bilingualism, stereotyping: 2.25 to 2.80
+			animal behavior, sustainability: 2.51 to 3.05
+			behavioral ecology, biology: 3.52 to 4.01
+			evolution, human physiology: 4.03 to 4.50
+			electrophysiology, assessment: 1.76 to 1.30
 	condition mturk, scholar-in
-		pearson: 0.732
-		spearman: 0.772
+		pearson: 0.774
+		spearman: 0.810
+			sexuality, African history: 1.66 to 3.80
+			sexuality, historical memory: 1.40 to 3.50
+			cognition, acculturation: 1.80 to 3.83
+			environmental history, African American history: 1.85 to 3.82
+			modern European history, women: 2.71 to 4.62
+			race, intellectual history: 2.22 to 3.92
+			collective memory, women: 2.25 to 3.92
+			identity, slavery: 2.50 to 4.17
+			slavery, environmental history: 1.70 to 3.33
+			gardens, identity: 1.12 to 2.75
 	condition mturk, all
-		pearson: 0.935
-		spearman: 0.941
+		pearson: 0.941
+		spearman: 0.943
+			statistics, bioinformatics: 3.21 to 4.25
+			statistics, environmental science: 2.37 to 3.42
+			introductory biology, statistics: 1.76 to 2.78
+			biology, C. elegans: 3.00 to 4.01
+			cognition, acculturation: 1.80 to 2.73
+			psychophysiology, aging: 2.48 to 3.40
+			environmental history, African American history: 1.85 to 2.77
+			modern European history, women: 2.71 to 3.62
+			molecular evolution, biological sciences: 3.35 to 4.25
+			psychology, social change: 2.52 to 3.38
 	condition mturk, mturk
 		pearson: 1.000
 		spearman: 1.000
+			biology, developmental biology: 4.66 to 4.66
+			psychology, history of psychology: 4.65 to 4.65
+			feminism, gender: 4.57 to 4.57
+			colonialism, U.S. History: 4.55 to 4.55
+			European history, Irish history: 4.54 to 4.54
+			plant biology, biology: 4.47 to 4.47
+			genetics, cell biology: 4.47 to 4.47
+			cultural history, race: 4.46 to 4.46
+			cognitive psychology, learning: 4.46 to 4.46
+			plant ecology, biology: 4.40 to 4.40
 	condition mturk, scholar
-		pearson: 0.860
-		spearman: 0.872
+		pearson: 0.891
+		spearman: 0.894
+			psychophysiology, aging: 2.48 to 4.00
+			bilingualism, stereotyping: 1.43 to 2.80
+			environmental history, African American history: 1.85 to 3.21
+			introductory biology, statistics: 1.76 to 3.06
+			statistics, environmental science: 2.37 to 3.62
+			biology, botany: 3.38 to 4.62
+			sustainability, infectious diseases: 2.05 to 3.29
+			cognitive psychology, psychophysiology: 2.60 to 3.78
+			slavery, environmental history: 1.70 to 2.86
+			statistics, bioinformatics: 3.21 to 4.35
 	condition scholar, scholar-in
-		pearson: 0.804
-		spearman: 0.824
+		pearson: 0.832
+		spearman: 0.841
+			South Asia, popular religion: 2.25 to 3.70
+			sexuality, historical memory: 2.12 to 3.50
+			modern European history, women: 3.26 to 4.62
+			sexuality, African history: 2.44 to 3.80
+			sustainability, infectious diseases: 3.29 to 2.00
+			collective memory, women: 2.68 to 3.92
+			gardens, identity: 1.55 to 2.75
+			sustainability, evolution: 3.63 to 2.45
+			cognition, acculturation: 2.68 to 3.83
+			animal behavior, sustainability: 3.05 to 2.00
 	condition scholar, all
-		pearson: 0.969
-		spearman: 0.970
+		pearson: 0.967
+		spearman: 0.966
+			sustainability, infectious diseases: 3.29 to 2.55
+			psychophysiology, aging: 4.00 to 3.40
+			sustainability, evolution: 3.63 to 3.05
+			biology, botany: 4.62 to 4.05
+			cognitive psychology, psychophysiology: 3.78 to 3.23
+			bilingualism, stereotyping: 2.80 to 2.25
+			animal behavior, sustainability: 3.05 to 2.51
+			behavioral ecology, biology: 4.01 to 3.52
+			evolution, human physiology: 4.50 to 4.03
+			electrophysiology, assessment: 1.30 to 1.76
 	condition scholar, mturk
-		pearson: 0.860
-		spearman: 0.872
+		pearson: 0.891
+		spearman: 0.894
+			psychophysiology, aging: 4.00 to 2.48
+			bilingualism, stereotyping: 2.80 to 1.43
+			environmental history, African American history: 3.21 to 1.85
+			introductory biology, statistics: 3.06 to 1.76
+			statistics, environmental science: 3.62 to 2.37
+			biology, botany: 4.62 to 3.38
+			sustainability, infectious diseases: 3.29 to 2.05
+			cognitive psychology, psychophysiology: 3.78 to 2.60
+			slavery, environmental history: 2.86 to 1.70
+			statistics, bioinformatics: 4.35 to 3.21
 	condition scholar, scholar
 		pearson: 1.000
 		spearman: 1.000
+			biodiversity, evolutionary biology: 4.88 to 4.88
+			plant biology, biology: 4.82 to 4.82
+			plant biology, biological sciences: 4.81 to 4.81
+			biology, developmental biology: 4.76 to 4.76
+			genetics, cell biology: 4.74 to 4.74
+			cognitive psychology, learning: 4.73 to 4.73
+			immunology, microbiology: 4.72 to 4.72
+			evolution, biology: 4.69 to 4.69
+			biology, botany: 4.62 to 4.62
+			history, medieval history: 4.62 to 4.62
+question type: general
+	condition all, all
+		pearson: 1.000
+		spearman: 1.000
+			currency, money: 4.97 to 4.97
+			coast, shore: 4.94 to 4.94
+			lawyer, law: 4.91 to 4.91
+			telephone, communication: 4.80 to 4.80
+			animal, tiger: 4.80 to 4.80
+			bird, crane: 4.77 to 4.77
+			FBI, investigation: 4.65 to 4.65
+			drink, cup: 4.65 to 4.65
+			problem, challenge: 4.63 to 4.63
+			calculation, computation: 4.59 to 4.59
+	condition all, mturk
+		pearson: 0.955
+		spearman: 0.952
+			Arafat, peace: 2.72 to 1.33
+			energy, consumer: 3.16 to 2.09
+			hardware, network: 3.60 to 2.75
+			plane, car: 3.44 to 2.71
+			image, surface: 2.63 to 2.11
+			recovery, treatment: 4.17 to 4.62
+			physics, proton: 4.29 to 3.88
+			dollar, yen: 4.29 to 3.89
+			minority, peace: 2.38 to 2.00
+			earning, investor: 4.43 to 4.08
+	condition all, scholar
+		pearson: 0.980
+		spearman: 0.971
+			hardware, network: 3.60 to 4.35
+			Arafat, peace: 2.72 to 3.29
+			dollar, yen: 4.29 to 4.73
+			architecture, observation: 2.12 to 2.52
+			artifact, cup: 2.70 to 3.05
+			minority, peace: 2.38 to 2.72
+			hospital, infrastructure: 2.86 to 2.52
+			FBI, investigation: 4.65 to 4.33
+			image, surface: 2.63 to 2.93
+			energy, consumer: 3.16 to 3.45
+	condition mturk, all
+		pearson: 0.955
+		spearman: 0.952
+			Arafat, peace: 1.33 to 2.72
+			energy, consumer: 2.09 to 3.16
+			hardware, network: 2.75 to 3.60
+			plane, car: 2.71 to 3.44
+			image, surface: 2.11 to 2.63
+			recovery, treatment: 4.62 to 4.17
+			physics, proton: 3.88 to 4.29
+			dollar, yen: 3.89 to 4.29
+			minority, peace: 2.00 to 2.38
+			earning, investor: 4.08 to 4.43
+	condition mturk, mturk
+		pearson: 1.000
+		spearman: 1.000
+			telephone, communication: 5.00 to 5.00
+			currency, money: 5.00 to 5.00
+			bird, crane: 5.00 to 5.00
+			animal, tiger: 5.00 to 5.00
+			lawyer, law: 4.89 to 4.89
+			problem, challenge: 4.83 to 4.83
+			FBI, investigation: 4.80 to 4.80
+			coast, shore: 4.78 to 4.78
+			psychology, depression: 4.71 to 4.71
+			star, planet: 4.67 to 4.67
+	condition mturk, scholar
+		pearson: 0.898
+		spearman: 0.894
+			Arafat, peace: 1.33 to 3.29
+			hardware, network: 2.75 to 4.35
+			energy, consumer: 2.09 to 3.45
+			plane, car: 2.71 to 3.70
+			dollar, yen: 3.89 to 4.73
+			image, surface: 2.11 to 2.93
+			minority, peace: 2.00 to 2.72
+			doctor, personnel: 2.78 to 2.22
+			delay, racism: 1.12 to 1.68
+			death, row: 2.20 to 2.74
+	condition scholar, all
+		pearson: 0.980
+		spearman: 0.971
+			hardware, network: 4.35 to 3.60
+			Arafat, peace: 3.29 to 2.72
+			dollar, yen: 4.73 to 4.29
+			architecture, observation: 2.52 to 2.12
+			artifact, cup: 3.05 to 2.70
+			minority, peace: 2.72 to 2.38
+			hospital, infrastructure: 2.52 to 2.86
+			FBI, investigation: 4.33 to 4.65
+			image, surface: 2.93 to 2.63
+			energy, consumer: 3.45 to 3.16
+	condition scholar, mturk
+		pearson: 0.898
+		spearman: 0.894
+			Arafat, peace: 3.29 to 1.33
+			hardware, network: 4.35 to 2.75
+			energy, consumer: 3.45 to 2.09
+			plane, car: 3.70 to 2.71
+			dollar, yen: 4.73 to 3.89
+			image, surface: 2.93 to 2.11
+			minority, peace: 2.72 to 2.00
+			doctor, personnel: 2.22 to 2.78
+			delay, racism: 1.68 to 1.12
+			death, row: 2.74 to 2.20
+	condition scholar, scholar
+		pearson: 1.000
+		spearman: 1.000
+			coast, shore: 5.00 to 5.00
+			lawyer, law: 4.93 to 4.93
+			currency, money: 4.91 to 4.91
+			bird, crane: 4.74 to 4.74
+			dollar, yen: 4.73 to 4.73
+			drink, cup: 4.69 to 4.69
+			animal, tiger: 4.63 to 4.63
+			problem, challenge: 4.59 to 4.59
+			calculation, computation: 4.58 to 4.58
+			telephone, communication: 4.57 to 4.57

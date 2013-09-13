@@ -7,6 +7,7 @@
 
 import random
 import collections
+import string
 
 import utils
 import correlation
@@ -23,38 +24,12 @@ def write(message):
 
 consensus = {}
 
-# Build up user data structure
-#
-# ktype ->
-#   condition ->
-#       list of
-#           { pair_id -> rating }
-for ktype in 'general', 'specific':
+pair_min_counts = collections.defaultdict(lambda: 100000)
+
+for ktype in utils.SPECIFICITIES:
     consensus[ktype] = {}
-    for condition in ('mturk', 'scholar', 'scholar-in', 'all'):
-        pair_ratings = collections.defaultdict(list)
-
-        for u in s.users.values():
-            if not u.valid():
-                continue
-            elif condition in ('scholar', 'scholar-in') and not u.scholar:
-                continue
-            elif condition == 'mturk' and not u.mturk:
-                continue
-
-            ratings = []        # list of rating objects
-            if ktype == 'general':
-                ratings = [r for r in u.rated if r.field == 'general']
-            else:
-                ratings = [r for r in u.rated if r.field in utils.FIELDS]
-
-            if condition == 'scholar-in':
-                ratings = [r for r in ratings if r.in_group]
-            elif condition == 'scholar':
-                ratings = [r for r in ratings if not r.in_group]
-
-            for r in ratings:
-                pair_ratings[r.pair_id].append(r.response)
+    for condition in utils.CONDITIONS:
+        pair_ratings = s.get_ratings_by_condition(ktype, condition)
 
         warn('condition %s, %s has %s pairs with %s ratings' %  (
                 ktype, condition,
@@ -62,14 +37,23 @@ for ktype in 'general', 'specific':
                 sum([len(r) for r in pair_ratings.values()])
         ))
 
+
         for (pair_id, ratings) in pair_ratings.items():
-            pair_ratings[pair_id] = utils.mean(ratings)
+            pair_min_counts[pair_id] = min(pair_min_counts[pair_id], len(ratings))
+            pair_ratings[pair_id] = [r.response for r in ratings]
 
         consensus[ktype][condition] = pair_ratings
 
+for ktype in consensus.keys():
+    for condition in consensus[ktype].keys():
+        for (pair_id, ratings) in consensus[ktype][condition].items():
+            n = 10
+            total = 0
+            for i in range(n):
+                total += utils.mean(random.sample(ratings, pair_min_counts[pair_id]))
+            consensus[ktype][condition][pair_id] = 1.0 * total / n
 
-
-for ktype in 'general', 'specific':
+for ktype in consensus.keys():
     write('question type: %s' % ktype)
     for (condition1, consensus1) in consensus[ktype].items():
         for (condition2, consensus2) in consensus[ktype].items():
@@ -81,5 +65,12 @@ for ktype in 'general', 'specific':
             X = [consensus1[pid] for pid in common_ids]
             Y = [consensus2[pid] for pid in common_ids]
 
+            diffs = [(abs(x - y), x, y, pid) for (pid, x, y) in zip(common_ids, X, Y)]
+            diffs.sort()
+            diffs.reverse()
+
             write('\t\tpearson: %.3f' % (correlation.pearson_rho(X, Y)))
             write('\t\tspearman: %.3f' % (correlation.spearman_rho_tr(X, Y)))
+            for (d, x, y, pid) in diffs[:10]:
+                pair = s.id_to_phrases(pid)
+                write('\t\t\t%s, %s: %.2f to %.2f' % (pair[0], pair[1], x, y))
