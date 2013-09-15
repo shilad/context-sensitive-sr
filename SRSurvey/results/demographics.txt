@@ -1,0 +1,15 @@
+gender:
+	male: 47: 39.2
+	female: 73: 60.8
+education distribution for all subjects:
+	high school G.E.D or equivalent: 13: 10.8
+	degree from two-year college: 4: 3.3
+	degree from four-year college: 22: 18.3
+	graduate degree: 81: 67.5
+education distribution for mturk subjects:
+	high school G.E.D or equivalent: 11: 28.2
+	degree from two-year college: 4: 10.3
+	degree from four-year college: 19: 48.7
+	graduate degree: 5: 12.8
+education distribution for scholar subjects:
+	graduate degree: 71: 100.0

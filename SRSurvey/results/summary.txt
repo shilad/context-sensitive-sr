@@ -140,3 +140,38 @@ breaking of ratings for biology:
 	viewer distribution: min=36 median=42 mean=42.42 max=48
 	rater distribution: min=24 median=40 mean=39.94 max=46
 
+summary of general,all ratings (n=1450)
+	50 pairs rated by 120 distinct users
+	viewer distribution: min=20 median=27 mean=26.72 max=34
+	rater distribution: min=20 median=27 mean=26.72 max=34
+
+summary of general,mturk ratings (n=461)
+	50 pairs rated by 39 distinct users
+	viewer distribution: min=6 median=8 mean=8.38 max=12
+	rater distribution: min=6 median=8 mean=8.38 max=12
+
+summary of general,scholar ratings (n=887)
+	50 pairs rated by 71 distinct users
+	viewer distribution: min=12 median=16 mean=16.40 max=22
+	rater distribution: min=12 median=16 mean=16.40 max=22
+
+summary of specific,all ratings (n=7119)
+	150 pairs rated by 120 distinct users
+	viewer distribution: min=29 median=44 mean=43.77 max=52
+	rater distribution: min=29 median=44 mean=43.77 max=52
+
+summary of specific,mturk ratings (n=2218)
+	150 pairs rated by 39 distinct users
+	viewer distribution: min=7 median=14 mean=13.69 max=17
+	rater distribution: min=7 median=14 mean=13.69 max=17
+
+summary of specific,scholar ratings (n=3086)
+	150 pairs rated by 71 distinct users
+	viewer distribution: min=9 median=19 mean=18.90 max=25
+	rater distribution: min=9 median=19 mean=18.90 max=25
+
+summary of specific,scholar-in ratings (n=1295)
+	150 pairs rated by 41 distinct users
+	viewer distribution: min=5 median=8 mean=7.99 max=11
+	rater distribution: min=5 median=8 mean=7.99 max=11
+

@@ -75,5 +75,14 @@ def summary():
         summarize_ratings(survey, out_ratings)
         print
 
+    for spec in SPECIFICITIES:
+        for condition in CONDITIONS:
+            pair_ratings = survey.get_ratings_by_condition(spec, condition)
+            if pair_ratings:
+                ratings = sum(pair_ratings.values(), [])    # flatten list of lists
+                print 'summary of %s,%s ratings (n=%d)' % (spec, condition, len(ratings))
+                summarize_ratings(survey, ratings)
+                print
+
 if __name__ == '__main__':
     summary()

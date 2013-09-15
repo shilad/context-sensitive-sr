@@ -1,6 +1,7 @@
 import collections
 import itertools
 import math
+import random
 import re
 import sys
 
@@ -343,5 +344,14 @@ def median(X):
     else:
         return 0
 
+def sample_with_replacement(population, n):
+    return [random.choice(population) for i in range(n)]
+
 def warn(message):
     sys.stderr.write(message + '\n')
+
+def group_by(collection, key_fn):
+    grouped = collections.defaultdict(list)
+    for x in collection:
+        grouped[key_fn(x)].append(x)
+    return grouped

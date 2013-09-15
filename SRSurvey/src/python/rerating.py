@@ -9,6 +9,11 @@ s = utils.Survey()
 deltas = collections.defaultdict(list)
 spearmans = collections.defaultdict(list)
 
+f = open('results/rerating.txt', 'w')
+def write(message):
+    f.write(message + '\n')
+    print(message)
+
 for u in s.users.values():
     if u.valid():
         ratings = {}
@@ -29,23 +34,29 @@ for u in s.users.values():
         if len(X) == len(Y) == 5 and len(set(X)) > 1 and len(set(Y)) > 1:
             rho = correlation.spearman_rho_tr(X, Y)
             spearmans['all'].append(rho)
-            if u.mturk:
+            if u.mturk and not u.scholar:
                 spearmans['mturk'].append(rho)
-            if u.scholar:
-                spearmans['scholar-out'].append(rho)
+            if u.scholar and not u.mturk:
+                spearmans['scholar'].append(rho)
 
-
-f = open('results/rerating.txt', 'w')
-for (c, abs_diff) in deltas.items():
-    corrs = spearmans[c]
-    hist = [0.0] * 4
-    for d in abs_diff:
-        hist[d] += 100.0 / len(abs_diff)
-    s = '%s n_users=%s mean_spearman=%.3f n_ratings=%s mae=%.3f %s' % (
+write('intra-rater spearman correlations:')
+for c in spearmans:
+    write('\t%s: %.3f n=%d, dev=%.3f' % (
             c,
-            len(spearmans[c]), utils.mean(spearmans[c]),
-            len(abs_diff), utils.mean(abs_diff), hist
-        )
-    f.write(s + '\n')
-    print(s)
+            utils.mean(spearmans[c]),
+            len(spearmans[c]),
+            utils.dev(spearmans[c])
+        ))
+
+for spec in utils.SPECIFICITIES:
+    write('mean absolute errors for %s questions:' % spec)
+    for c in utils.CONDITIONS:
+        diffs = []
+        for (pair_id, ratings) in s.get_ratings_by_condition(spec, c).items():
+            for reratings in utils.group_by(ratings, lambda r: r.user).values():
+                if len(reratings) >= 2:
+                    diffs.append(abs(reratings[0].response - reratings[1].response))
+        if diffs:
+            write('\tcondition %s: mae=%.3f, n=%d, dev=%.3f' %
+                ( c, utils.mean(diffs), len(diffs), utils.dev(diffs)))
 f.close()
