@@ -50,4 +50,10 @@ for c in education:
     for (e, n) in education[c].items():
         write('\t%s: %d: %.1f' % (e, n, 100.0*n/total))
 
+for u in s.users.values():
+    if u.scholar and u.interests:
+        in_groups = [i for i in u.interests if i.lower() in utils.FIELDS]
+        if len(in_groups) > 1:
+            print in_groups
+
 f.close()

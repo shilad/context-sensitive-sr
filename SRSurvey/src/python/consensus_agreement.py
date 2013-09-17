@@ -9,6 +9,8 @@ import random
 import collections
 import string
 
+from scipy import stats
+
 import utils
 import correlation
 
@@ -22,54 +24,57 @@ def write(message):
     print message
     f.write(message + '\n')
 
-consensus = {}
+pair_ratings = {}
 
 pair_min_counts = collections.defaultdict(lambda: 100000)
 
 for ktype in utils.SPECIFICITIES:
-    consensus[ktype] = {}
+    pair_ratings[ktype] = {}
     for condition in utils.CONDITIONS:
-        pair_ratings = s.get_ratings_by_condition(ktype, condition)
+        cratings = s.get_ratings_by_condition(ktype, condition)
 
         warn('condition %s, %s has %s pairs with %s ratings' %  (
                 ktype, condition,
-                len(pair_ratings),
-                sum([len(r) for r in pair_ratings.values()])
+                len(cratings),
+                sum([len(r) for r in    cratings.values()])
         ))
 
 
-        for (pair_id, ratings) in pair_ratings.items():
+        for (pair_id, ratings) in cratings.items():
             pair_min_counts[pair_id] = min(pair_min_counts[pair_id], len(ratings))
-            pair_ratings[pair_id] = [r.response for r in ratings]
+            cratings[pair_id] = [r.response for r in ratings]
 
-        consensus[ktype][condition] = pair_ratings
+        pair_ratings[ktype][condition] = cratings
 
-for ktype in consensus.keys():
+pair_means = {}
+for ktype in pair_ratings.keys():
     write('question type: %s' % ktype)
-    for condition in consensus[ktype].keys():
+    pair_means[ktype] = {}
+    for condition in pair_ratings[ktype].keys():
+        pair_means[ktype][condition] = {}
         n = 10
-        pair_means = [[] for i in range(n)]
-        for (pair_id, ratings) in consensus[ktype][condition].items():
+        means = [[] for i in range(n)]
+        for (pair_id, ratings) in pair_ratings[ktype][condition].items():
             total = 0
             for i in range(n):
                 pm = pair_min_counts[pair_id]
-                pair_means[i].append(utils.mean(utils.sample_with_replacement(ratings, pm)))
+                means[i].append(utils.mean(utils.sample_with_replacement(ratings, pm)))
                 total += utils.mean(random.sample(ratings, pm))
-            consensus[ktype][condition][pair_id] = 1.0 * total / n
+            pair_means[ktype][condition][pair_id] = 1.0 * total / n
 
-        if pair_means:
+        if means:
             spearmans = []
-            for X in pair_means:
-                for Y in pair_means:
+            for X in means:
+                for Y in means:
                     if len(set(X)) >= 1 and len(set(Y)) >= 1:
                         spearmans.append(correlation.spearman_rho_tr(X, Y))
             write('\t%s, %s: bootstrapped spearman: %.3f (dev=%.3f)' %
                 (condition, condition, utils.mean(spearmans), utils.dev(spearmans)))
 
-for ktype in consensus.keys():
+for ktype in pair_means.keys():
     write('question type: %s' % ktype)
-    for (condition1, consensus1) in consensus[ktype].items():
-        for (condition2, consensus2) in consensus[ktype].items():
+    for (condition1, consensus1) in pair_means[ktype].items():
+        for (condition2, consensus2) in pair_means[ktype].items():
             if not consensus1 or not consensus2 or condition1 == condition2 or condition1 == 'all' or condition2 == 'all':
                 continue
             write('\tcondition %s, %s' % (condition1, condition2))
@@ -86,4 +91,8 @@ for ktype in consensus.keys():
             write('\t\tspearman: %.3f' % (correlation.spearman_rho_tr(X, Y)))
             for (d, x, y, pid) in diffs[:10]:
                 pair = s.id_to_phrases(pid)
-                write('\t\t\t%s, %s: %.2f to %.2f' % (pair[0], pair[1], x, y))
+                ratings1 = pair_ratings[ktype][condition1][pid]
+                ratings2 = pair_ratings[ktype][condition2][pid]
+                (t, p) = stats.ttest_ind(ratings1, ratings2)
+                
+                write('\t\t\t%s, %s: %.2f to %.2f (ttest t=%.5f, p=%.5f)' % (pair[0], pair[1], x, y, t, p))

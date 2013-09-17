@@ -1,4 +1,4 @@
-unknown: 143/9192 (1.6%)
+overall percent unknown: 1.556
 1. C. elegans: 17 (37.0%)
 2. positive psychology: 11 (16.2%)
 3. psychophysiology: 7 (9.5%)
