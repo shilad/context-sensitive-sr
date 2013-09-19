@@ -25,6 +25,7 @@ def write(message):
     f.write(message + '\n')
 
 pair_ratings = {}
+pair_ids = set()
 
 pair_min_counts = collections.defaultdict(lambda: 100000)
 
@@ -43,8 +44,39 @@ for ktype in utils.SPECIFICITIES:
         for (pair_id, ratings) in cratings.items():
             pair_min_counts[pair_id] = min(pair_min_counts[pair_id], len(ratings))
             cratings[pair_id] = [r.response for r in ratings]
+            pair_ids.add(pair_id)
 
         pair_ratings[ktype][condition] = cratings
+
+
+g = open('results/pair_summaries.tsv', 'w')
+g.write(string.join([
+        'pair_id',
+        'concept1',
+        'concept2',
+        'all_n',
+        'all_mean',
+        'mturk_n',
+        'mturk_mean',
+        'scholar_n',
+        'scholar_mean',
+        'scholar-in_n',
+        'scholar-in_mean',
+    ] , '\t') + '\n')
+for pid in pair_ids:
+    pair = s.id_to_phrases(pid)
+    tokens = [pid, pair[0], pair[1]]
+    for c in ('all', 'mturk', 'scholar', 'scholar-in'):
+        ratings = None
+        ratings = pair_ratings['general'].get(c, {}).get(pid)
+        if not ratings:
+            ratings = pair_ratings['specific'].get(c, {}).get(pid)
+        if ratings:
+            tokens.extend([len(ratings), utils.mean(ratings)])
+        else:
+            tokens.extend([0, 0.0])
+    g.write(string.join([str(t) for t in tokens], '\t') + '\n')
+g.close()
 
 pair_means = {}
 for ktype in pair_ratings.keys():
