@@ -1,54 +1,104 @@
 results for specific knowledge
 
 	results for conditions scholar-in, scholar-in
-		hit rate is 361933 of 1000000, mae=0.859
-		diffs: [36.1933, 45.1285, 15.538599999999999, 2.8382, 0.3014]
-		major disagreements on 18.678%
+		num pairs is 11765, total ratings is 2590, min ratings is 1295
+		mae=0.861 95%cis=[0.848,0.872673]
+		diffs of 0=36.079 95%cis=[35.410,36.812580]
+		diffs of 1=45.209 95%cis=[44.471,45.924352]
+		diffs of 2=15.587 95%cis=[15.019,16.149596]
+		diffs of 3=2.829 95%cis=[2.592,3.093923]
+		diffs of 4=0.297 95%cis=[0.221,0.382490]
+		major_disagreements=18.415 95%cis=[17.799,19.031024]
 
 	results for conditions scholar-in, mturk
-		hit rate is 280071 of 1000000, mae=1.154
-		diffs: [28.0071, 40.794799999999995, 21.270500000000002, 7.6589, 2.2687]
-		major disagreements on 31.198%
+		num pairs is 19162, total ratings is 3513, min ratings is 1289
+		mae=1.154 95%cis=[1.143,1.166110]
+		diffs of 0=27.989 95%cis=[27.419,28.540862]
+		diffs of 1=40.801 95%cis=[40.236,41.368333]
+		diffs of 2=21.279 95%cis=[20.775,21.787914]
+		diffs of 3=7.662 95%cis=[7.327,7.984553]
+		diffs of 4=2.269 95%cis=[2.103,2.442334]
+		major_disagreements=28.941 95%cis=[28.358,29.485440]
 
 	results for conditions scholar-in, scholar
-		hit rate is 324524 of 1000000, mae=0.968
-		diffs: [32.4524, 43.9408, 18.5601, 4.4707, 0.5760000000000001]
-		major disagreements on 23.607%
+		num pairs is 26604, total ratings is 4381, min ratings is 1295
+		mae=0.967 95%cis=[0.958,0.975643]
+		diffs of 0=32.485 95%cis=[32.025,32.953691]
+		diffs of 1=43.943 95%cis=[43.460,44.406856]
+		diffs of 2=18.543 95%cis=[18.178,18.929484]
+		diffs of 3=4.457 95%cis=[4.251,4.675989]
+		diffs of 4=0.572 95%cis=[0.504,0.650278]
+		major_disagreements=23.000 95%cis=[22.609,23.406255]
 
 	results for conditions all, all
-		hit rate is 312223 of 1000000, mae=1.029
-		diffs: [31.222299999999997, 42.489399999999996, 19.6208, 5.5265, 1.141]
-		major disagreements on 26.288%
+		num pairs is 293575, total ratings is 13198, min ratings is 6599
+		mae=1.029 95%cis=[1.026,1.031576]
+		diffs of 0=31.197 95%cis=[31.063,31.336796]
+		diffs of 1=42.519 95%cis=[42.366,42.667461]
+		diffs of 2=19.629 95%cis=[19.517,19.740782]
+		diffs of 3=5.508 95%cis=[5.441,5.575747]
+		diffs of 4=1.147 95%cis=[1.114,1.178234]
+		major_disagreements=25.137 95%cis=[25.011,25.267478]
 
 	results for conditions mturk, scholar-in
-		hit rate is 280220 of 1000000, mae=1.154
-		diffs: [28.022000000000002, 40.758100000000006, 21.2972, 7.6532, 2.2695]
-		major disagreements on 31.220%
+		num pairs is 19162, total ratings is 3513, min ratings is 1289
+		mae=1.154 95%cis=[1.143,1.166371]
+		diffs of 0=27.997 95%cis=[27.466,28.525206]
+		diffs of 1=40.782 95%cis=[40.236,41.352677]
+		diffs of 2=21.287 95%cis=[20.833,21.787914]
+		diffs of 3=7.660 95%cis=[7.348,7.984553]
+		diffs of 4=2.274 95%cis=[2.103,2.457990]
+		major_disagreements=28.946 95%cis=[28.442,29.469784]
 
 	results for conditions mturk, mturk
-		hit rate is 305785 of 1000000, mae=1.064
-		diffs: [30.5785, 41.2726, 20.5847, 6.2524999999999995, 1.3117]
-		major disagreements on 28.149%
+		num pairs is 33474, total ratings is 4436, min ratings is 2218
+		mae=1.063 95%cis=[1.056,1.071100]
+		diffs of 0=30.625 95%cis=[30.229,31.009141]
+		diffs of 1=41.247 95%cis=[40.817,41.698034]
+		diffs of 2=20.588 95%cis=[20.216,20.944614]
+		diffs of 3=6.240 95%cis=[6.014,6.449782]
+		diffs of 4=1.300 95%cis=[1.204,1.404075]
+		major_disagreements=26.829 95%cis=[26.444,27.224114]
 
 	results for conditions mturk, scholar
-		hit rate is 297054 of 1000000, mae=1.081
-		diffs: [29.705399999999997, 41.8098, 20.6257, 6.354799999999999, 1.5043000000000002]
-		major disagreements on 28.485%
+		num pairs is 45951, total ratings is 5304, min ratings is 2213
+		mae=1.082 95%cis=[1.074,1.088834]
+		diffs of 0=29.717 95%cis=[29.360,30.097278]
+		diffs of 1=41.763 95%cis=[41.359,42.140541]
+		diffs of 2=20.645 95%cis=[20.326,20.965811]
+		diffs of 3=6.368 95%cis=[6.185,6.552632]
+		diffs of 4=1.508 95%cis=[1.421,1.597354]
+		major_disagreements=27.012 95%cis=[26.665,27.361755]
 
 	results for conditions scholar, scholar-in
-		hit rate is 324577 of 1000000, mae=0.967
-		diffs: [32.4577, 43.9781, 18.524099999999997, 4.4674, 0.5727]
-		major disagreements on 23.564%
+		num pairs is 26604, total ratings is 4381, min ratings is 1295
+		mae=0.967 95%cis=[0.958,0.975868]
+		diffs of 0=32.492 95%cis=[32.018,32.953691]
+		diffs of 1=43.957 95%cis=[43.441,44.463239]
+		diffs of 2=18.532 95%cis=[18.114,18.929484]
+		diffs of 3=4.449 95%cis=[4.251,4.653436]
+		diffs of 4=0.571 95%cis=[0.500,0.646519]
+		major_disagreements=22.981 95%cis=[22.530,23.421290]
 
 	results for conditions scholar, mturk
-		hit rate is 297455 of 1000000, mae=1.081
-		diffs: [29.745500000000003, 41.7665, 20.624200000000002, 6.368, 1.4958]
-		major disagreements on 28.488%
+		num pairs is 45951, total ratings is 5304, min ratings is 2213
+		mae=1.082 95%cis=[1.075,1.089313]
+		diffs of 0=29.711 95%cis=[29.368,30.060282]
+		diffs of 1=41.759 95%cis=[41.388,42.127484]
+		diffs of 2=20.644 95%cis=[20.335,20.954930]
+		diffs of 3=6.375 95%cis=[6.202,6.556985]
+		diffs of 4=1.511 95%cis=[1.421,1.601706]
+		major_disagreements=27.019 95%cis=[26.696,27.337816]
 
 	results for conditions scholar, scholar
-		hit rate is 337570 of 1000000, mae=0.939
-		diffs: [33.757, 43.6317, 18.0579, 4.0147, 0.5387000000000001]
-		major disagreements on 22.611%
+		num pairs is 64902, total ratings is 6172, min ratings is 3086
+		mae=0.940 95%cis=[0.935,0.945672]
+		diffs of 0=33.704 95%cis=[33.413,33.994330]
+		diffs of 1=43.659 95%cis=[43.342,43.970910]
+		diffs of 2=18.078 95%cis=[17.825,18.335336]
+		diffs of 3=4.006 95%cis=[3.880,4.126221]
+		diffs of 4=0.553 95%cis=[0.502,0.599365]
+		major_disagreements=22.084 95%cis=[21.813,22.366029]
 
 results for general knowledge
 
@@ -62,33 +112,58 @@ results for general knowledge
 		no data
 
 	results for conditions all, all
-		hit rate is 388244 of 1000000, mae=0.926
-		diffs: [38.8244, 38.230599999999995, 16.221, 4.9957, 1.7283]
-		major disagreements on 22.945%
+		num pairs is 36934, total ratings is 2696, min ratings is 1348
+		mae=0.927 95%cis=[0.918,0.935209]
+		diffs of 0=38.768 95%cis=[38.349,39.205069]
+		diffs of 1=38.236 95%cis=[37.830,38.650024]
+		diffs of 2=16.268 95%cis=[15.950,16.594466]
+		diffs of 3=5.002 95%cis=[4.811,5.193047]
+		diffs of 4=1.725 95%cis=[1.619,1.835707]
+		major_disagreements=21.270 95%cis=[20.913,21.638599]
 
 	results for conditions mturk, scholar-in
 		no data
 
 	results for conditions mturk, mturk
-		hit rate is 413714 of 1000000, mae=0.886
-		diffs: [41.3714, 36.3581, 15.966099999999999, 4.915, 1.3894]
-		major disagreements on 22.270%
+		num pairs is 4389, total ratings is 922, min ratings is 461
+		mae=0.887 95%cis=[0.863,0.909091]
+		diffs of 0=41.342 95%cis=[40.077,42.538164]
+		diffs of 1=36.343 95%cis=[35.202,37.525632]
+		diffs of 2=16.026 95%cis=[15.152,16.997038]
+		diffs of 3=4.894 95%cis=[4.329,5.445432]
+		diffs of 4=1.395 95%cis=[1.116,1.686033]
+		major_disagreements=20.920 95%cis=[19.913,21.918432]
 
 	results for conditions mturk, scholar
-		hit rate is 384187 of 1000000, mae=0.948
-		diffs: [38.4187, 37.666, 16.5755, 5.4136999999999995, 1.9261]
-		major disagreements on 23.915%
+		num pairs is 8170, total ratings is 1348, min ratings is 461
+		mae=0.947 95%cis=[0.929,0.965116]
+		diffs of 0=38.464 95%cis=[37.564,39.314565]
+		diffs of 1=37.671 95%cis=[36.805,38.543452]
+		diffs of 2=16.510 95%cis=[15.851,17.184823]
+		diffs of 3=5.410 95%cis=[4.994,5.838433]
+		diffs of 4=1.945 95%cis=[1.701,2.203182]
+		major_disagreements=21.921 95%cis=[21.175,22.717258]
 
 	results for conditions scholar, scholar-in
 		no data
 
 	results for conditions scholar, mturk
-		hit rate is 384062 of 1000000, mae=0.948
-		diffs: [38.4062, 37.688300000000005, 16.5307, 5.4433, 1.9314999999999998]
-		major disagreements on 23.905%
+		num pairs is 8170, total ratings is 1348, min ratings is 461
+		mae=0.948 95%cis=[0.930,0.964871]
+		diffs of 0=38.420 95%cis=[37.528,39.302326]
+		diffs of 1=37.697 95%cis=[36.805,38.555692]
+		diffs of 2=16.528 95%cis=[15.863,17.184823]
+		diffs of 3=5.417 95%cis=[4.994,5.838433]
+		diffs of 4=1.938 95%cis=[1.689,2.190942]
+		major_disagreements=21.945 95%cis=[21.224,22.680539]
 
 	results for conditions scholar, scholar
-		hit rate is 382868 of 1000000, mae=0.916
-		diffs: [38.2868, 39.5012, 16.1305, 4.4892, 1.5923]
-		major disagreements on 22.212%
+		num pairs is 16205, total ratings is 1774, min ratings is 887
+		mae=0.915 95%cis=[0.902,0.927430]
+		diffs of 0=38.394 95%cis=[37.760,39.024992]
+		diffs of 1=39.394 95%cis=[38.778,40.037026]
+		diffs of 2=16.116 95%cis=[15.637,16.618328]
+		diffs of 3=4.496 95%cis=[4.233,4.763962]
+		diffs of 4=1.599 95%cis=[1.438,1.758716]
+		major_disagreements=20.613 95%cis=[20.062,21.166307]
 

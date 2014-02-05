@@ -5,6 +5,7 @@
     Results are grouped by question type (general, specific) and condition (mturk, scholar, scholar-in, all)
 """
 
+from multiprocessing import Pool
 import random
 import utils
 import collections
@@ -53,22 +54,54 @@ for ktype in by_pair.keys():
             keys = set(pairs1.keys()).intersection(pairs2.keys())
             keys = list(keys)   # order it
     
-            n = 1000000
             k = 0
-            diff_counts = [0] * 5
-            mae = 0.0
-            for i in xrange(n):
-                pair_id = random.choice(keys)
-                if c1 == c2:
-                    (x, y) = random.sample(pairs1[pair_id], 2)
-                else:
-                    x = random.choice(pairs1[pair_id])
-                    y = random.choice(pairs2[pair_id])
-                if x == y:
-                    k += 1
-                diff_counts[abs(x-y)] += 1
-                mae += abs(x - y)
-            f.write('\t\thit rate is %s of %s, mae=%.3f\n' % (k, n, mae/n))
-            f.write('\t\tdiffs: %s\n' % ([1.0 * d / n * 100.0 for d in diff_counts]))
-            f.write('\t\tmajor disagreements on %.3f%%\n' % (100.0 * sum(diff_counts[2:]) / n))
+            maes = []
+            num_ratings = sum([len(pairs1[k]) + len(pairs2[k]) for k in keys])
+            min_ratings = sum([min(len(pairs1[k]), len(pairs2[k])) for k in keys])
+            num_pairs = sum([len(pairs1[k]) * len(pairs2[k]) for k in keys])
+
+            # a single boottrapping run
+            def g(x):
+                diff_counts = [0] * 5
+                if x % 100 == 0:
+                    print('doing %s, %s' % (ktype, x))
+                mae_sum = 0.0
+                for j in xrange(num_pairs):
+                    pair_id = random.choice(keys)
+                    if c1 == c2:
+                        (x, y) = random.sample(pairs1[pair_id], 2)
+                    else:
+                        x = random.choice(pairs1[pair_id])
+                        y = random.choice(pairs2[pair_id])
+                    delta = abs(x - y)
+                    mae_sum += delta
+                    diff_counts[delta] += 1
+                return (mae_sum / num_pairs, [100.0 * d / num_pairs for d in diff_counts])
+
+            n = 1000
+            p = Pool(8)
+            maes = []
+            majors = []
+            diff_counts = [[] for i in range(5)]
+            for (m, dc) in p.map(g, range(n)):
+                maes.append(m)
+                for i in range(len(dc)):
+                    diff_counts[i].append(dc[i])
+                majors.append(sum(dc[2:4]))
+
+            majors.sort()
+            maes.sort()
+            for dcs in diff_counts:
+                dcs.sort()
+            p5 = int(n * 5 / 100)
+            p95 = int(n * 95 / 100)
+
+            f.write('\t\tnum pairs is %d, total ratings is %d, min ratings is %d\n' % (num_pairs, num_ratings, min_ratings))
+            f.write('\t\tmae=%.3f 95%%cis=[%.3f,%3f]\n' % (utils.mean(maes), maes[p5], maes[p95]))
+            for i in range(len(diff_counts)):
+                dcs = diff_counts[i]
+                f.write('\t\tdiffs of %d=%.3f 95%%cis=[%.3f,%3f]\n' % (i, utils.mean(dcs), dcs[p5], dcs[p95]))
+            f.write('\t\tmajor_disagreements=%.3f 95%%cis=[%.3f,%3f]\n' % (utils.mean(majors), majors[p5], majors[p95]))
+                
+            f.flush()
     f.write('\n')
